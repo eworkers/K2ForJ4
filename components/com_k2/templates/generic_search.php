@@ -1,0 +1,23 @@
+<?php
+/**
+ * @version    2.11.x
+ * @package    K2
+ * @author     JoomlaWorks https://www.joomlaworks.net
+ * @copyright  Copyright (c) 2006 - 2022 JoomlaWorks Ltd. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+ */
+
+// no direct access
+defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
+
+?>
+
+<?php if (isset($this->items) && count($this->items)): ?>
+    <ul class="liveSearchResults">
+        <?php foreach ($this->items as $item): ?>
+            <li><a href="<?php echo $item->link; ?>"><?php echo $item->title; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

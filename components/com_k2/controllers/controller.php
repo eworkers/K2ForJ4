@@ -1,0 +1,41 @@
+<?php
+/**
+ * @version    2.11.x
+ * @package    K2
+ * @author     JoomlaWorks https://www.joomlaworks.net
+ * @copyright  Copyright (c) 2006 - 2022 JoomlaWorks Ltd. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
+ */
+
+defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\MVC\Controller\BaseController;
+
+jimport('joomla.application.component.controller');
+
+if (version_compare(JVERSION, '3.0', 'ge')) {
+    class K2Controller extends BaseController
+    {
+        public function display($cachable = false, $urlparams = array())
+        {
+            parent::display($cachable, $urlparams);
+        }
+    }
+} elseif (version_compare(JVERSION, '2.5', 'ge')) {
+    class K2Controller extends JController
+    {
+        public function display($cachable = false, $urlparams = false)
+        {
+            parent::display($cachable, $urlparams);
+        }
+    }
+} else {
+    class K2Controller extends JController
+    {
+        public function display($cachable = false)
+        {
+            parent::display($cachable);
+        }
+    }
+}
