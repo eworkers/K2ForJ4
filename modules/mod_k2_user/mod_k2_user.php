@@ -20,7 +20,6 @@ use Joomla\CMS\Helper\ModuleHelper;
 
 $language = Factory::getLanguage();
 $language->load('com_k2.dates', JPATH_ADMINISTRATOR, null, true);
-require_once JPATH_SITE . '/components/com_users/helpers/route.php';
 
 require_once(dirname(__FILE__) . '/helper.php');
 
@@ -67,15 +66,17 @@ if ($user->guest) {
 
     // Define some variables depending on Joomla version
     $passwordFieldName = 'password';
-    $resetLink = Route::_('index.php?option=com_users&view=reset&Itemid=' . UsersHelperRoute::getResetRoute());
-    $remindLink = Route::_('index.php?option=com_users&view=remind&Itemid=' . UsersHelperRoute::getRemindRoute());
-    $registrationLink = Route::_('index.php?option=com_users&view=registration&Itemid=' . UsersHelperRoute::getRegistrationRoute());
+    $itemId = Factory::getApplication()->getMenu()->getActive()->id;
+    $resetLink = Route::_('index.php?option=com_users&view=reset&Itemid=' . $itemId, false);
+    $remindLink = Route::_('index.php?option=com_users&view=remind&Itemid=' . $itemId, false);
+    $registrationLink = Route::_('index.php?option=com_users&view=registration&Itemid=' . $itemId, false);
 
     $option = 'com_users';
     $task = 'user.login';
 
     require(ModuleHelper::getLayoutPath('mod_k2_user', 'login'));
 } else {
+    $itemId = Factory::getApplication()->getMenu()->getActive()->id;
     $user->profile = modK2UserHelper::getProfile($params);
     $user->numOfComments = modK2UserHelper::countUserComments($user->id);
     $menu = modK2UserHelper::getMenu($params);
@@ -84,7 +85,7 @@ if ($user->guest) {
         $addItemLink = $user->profile->addLink;
     }
     $viewProfileLink = Route::_(K2HelperRoute::getUserRoute($user->id));
-    $editProfileLink = Route::_('index.php?option=com_users&view=profile&layout=edit&Itemid=' . UsersHelperRoute::getProfileRoute());
+    $editProfileLink = Route::_('index.php?option=com_users&view=profile&layout=edit&Itemid=' . $itemId, false);
     $profileLink = $editProfileLink; // B/C
     $editCommentsLink = Route::_('index.php?option=com_k2&view=comments&tmpl=component&template=system&context=modalselector');
 
