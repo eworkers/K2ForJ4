@@ -339,7 +339,7 @@ class modK2ToolsHelper
         }
 
         $db->setQuery($query);
-        // since J4 compatiblity
+        /* since J4 compatibility */
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
@@ -410,7 +410,7 @@ class modK2ToolsHelper
         $query .= " ORDER BY {$orderby}";
 
         $db->setQuery($query);
-        // since J4 compatiblity
+        /* since J4 compatibility */
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
@@ -473,7 +473,7 @@ class modK2ToolsHelper
         $query .= " ORDER BY ordering";
 
         $db->setQuery($query);
-        // since J4 compatiblity
+        /* since J4 compatibility */
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
@@ -555,7 +555,7 @@ class modK2ToolsHelper
                     }
                     $query = "SELECT * FROM #__k2_items  WHERE id={$id} AND published=1 AND trash=0 AND access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ") {$languageCheck} AND EXISTS (SELECT * FROM #__k2_categories WHERE #__k2_categories.id= #__k2_items.catid AND published=1 AND access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")  {$languageCheck} )";
                     $db->setQuery($query);
-                    // since J4 compatiblity
+                    /* since J4 compatibility */
                     try {
                         $row = $db->loadObject();
                     } catch (Exception $e) {
@@ -595,7 +595,7 @@ class modK2ToolsHelper
                         }
 
                         $db->setQuery($query);
-                        // since J4 compatiblity
+                        /* since J4 compatibility */
                         try {
                             $row = $db->loadObject();
                         } catch (Exception $e) {
@@ -666,7 +666,7 @@ class modK2ToolsHelper
         }
 
         $db->setQuery($query);
-        // since J4 compatiblity
+        /* since J4 compatibility */
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
@@ -700,7 +700,7 @@ class modK2ToolsHelper
         $query .= " ORDER BY ordering ";
 
         $db->setQuery($query);
-        // since J4 compatiblity
+        /* since J4 compatibility */
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
@@ -847,8 +847,8 @@ class modK2ToolsHelper
             $output = $params->get('customCode');
         }
         if ($document->getType() != 'feed') {
-// since J4 compatiblity
-// JDispatcher removed in J4
+            /* since J4 compatibility */
+            /* JDispatcher removed in J4 */
             /*
                         $dispatcher = JDispatcher::getInstance();
             */
@@ -856,7 +856,7 @@ class modK2ToolsHelper
                 PluginHelper::importPlugin('content');
                 $row = new stdClass;
                 $row->text = $output;
-                // since J4 compatiblity
+                /* since J4 compatibility */
                 Factory::getApplication()->triggerEvent('onContentPrepare', array(
                     'mod_k2_tools',
                     &$row,
@@ -868,7 +868,7 @@ class modK2ToolsHelper
                 PluginHelper::importPlugin('k2');
                 $row = new stdClass;
                 $row->text = $output;
-// since J4 compatiblity
+                /* since J4 compatibility */
                 Factory::getApplication()->triggerEvent('onK2PrepareContent', array(
                     &$row,
                     &$params
@@ -916,7 +916,7 @@ class MyCalendar extends Calendar
             $query .= ' GROUP BY day';
 
             $db->setQuery($query);
-            // since J4 compatiblity
+            /* since J4 compatibility */
             try {
                 $objects = $db->loadObjectList();
             } catch (Exception $e) {
