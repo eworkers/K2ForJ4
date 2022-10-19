@@ -390,44 +390,56 @@ class Com_K2InstallerScript
         $db->setQuery($query);
         $db->execute();
 
-        /*
-        // TO DO: Use the following info to remove FULLTEXT attributes from the items & tags tables
-        $query = "SHOW INDEX FROM #__k2_items";
+        // J4 MySQL drivers complains regarding STRICT_TRANS_TABLES
+        // attachments
+        $query = "ALTER TABLE #__k2_attachments CHANGE `itemID` `itemID` INT(11) NOT NULL DEFAULT '0'";
         $db->setQuery($query);
-        $indexes = $db->loadObjectList();
-        $indexExists = false;
-        foreach ($indexes as $index) {
-            if ($index->Key_name == 'search') {
-                $indexExists = true;
-            }
-        }
+        $db->execute();
 
-        if (!$indexExists) {
-            $query = "ALTER TABLE #__k2_items ADD FULLTEXT `search` (`title`,`introtext`,`fulltext`,`extra_fields_search`,`image_caption`,`image_credits`,`video_caption`,`video_credits`,`metadesc`,`metakey`)";
-            $db->setQuery($query);
-            $db->execute();
-
-            $query = "ALTER TABLE #__k2_items ADD FULLTEXT (`title`)";
-            $db->setQuery($query);
-            $db->execute();
-        }
-
-        $query = "SHOW INDEX FROM #__k2_tags";
+        // categories
+        $query = "ALTER TABLE #__k2_categories CHANGE `extraFieldsGroup` `extraFieldsGroup` INT(11) NOT NULL DEFAULT '0'";
         $db->setQuery($query);
-        $indexes = $db->loadObjectList();
-        $indexExists = false;
-        foreach ($indexes as $index) {
-            if ($index->Key_name == 'name') {
-                $indexExists = true;
-            }
-        }
+        $db->execute();
 
-        if (!$indexExists) {
-            $query = "ALTER TABLE #__k2_tags ADD FULLTEXT (`name`)";
-            $db->setQuery($query);
-            $db->execute();
-        }
-        */
+        $query = "ALTER TABLE #__k2_categories CHANGE `image` `image` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''";
+        $db->setQuery($query);
+        $db->execute();
+
+        // items
+        $query = "ALTER TABLE #__k2_items CHANGE `checked_out` `checked_out` INT(10) NOT NULL DEFAULT '0'";
+        $db->setQuery($query);
+        $db->execute();
+
+        $query = "ALTER TABLE #__k2_items CHANGE `hits` `hits` INT(10) NOT NULL DEFAULT '0'";
+        $db->setQuery($query);
+        $db->execute();
+
+        $query = "ALTER TABLE #__k2_items CHANGE `image_credits` `image_credits` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''";
+        $db->setQuery($query);
+        $db->execute();
+
+        $query = "ALTER TABLE #__k2_items CHANGE `video_credits` `video_credits` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''";
+        $db->setQuery($query);
+        $db->execute();
+
+        // tags
+        // mysql5.6 key compatibility
+        $query = "ALTER TABLE #__k2_tags CHANGE `name` `name` VARCHAR(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL";
+        $db->setQuery($query);
+        $db->execute();
+
+        // user_groups
+        // mysql5.6 key compatibility
+        $query = "ALTER TABLE #__k2_user_groups CHANGE `name` `name` VARCHAR(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL";
+        $db->setQuery($query);
+        $db->execute();
+
+        // users
+        // mysql5.6 key compatibility
+        $query = "ALTER TABLE #__k2_users CHANGE `userName` `userName` VARCHAR(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL";
+        $db->setQuery($query);
+        $db->execute();
+
     }
 
     private function installationResults($status)
