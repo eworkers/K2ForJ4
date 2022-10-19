@@ -274,8 +274,8 @@ class modK2ContentHelper
         if ($params->get('K2Plugins', 1)) {
             PluginHelper::importPlugin('k2');
         }
-// since J4 compatiblity
-// JDispatcher removed in J4
+        /* since J4 compatibility */
+        /* JDispatcher removed in J4 */
         /*
                 $dispatcher = JDispatcher::getInstance();
         */
@@ -317,7 +317,7 @@ class modK2ContentHelper
                 // Tags
                 if ($params->get('itemTags')) {
                     $tags = $model->getItemTags($item->id);
-                    for ($i = 0; $i < count($tags); $i++) {
+                    for ($i = 0, $iMax = count($tags); $i < $iMax; $i++) {
                         $tags[$i]->link = Route::_(K2HelperRoute::getTagRoute($tags[$i]->name));
                     }
                     $item->tags = $tags;
@@ -383,7 +383,7 @@ class modK2ContentHelper
                     $mediaTempText = new stdClass;
                     $mediaTempText->text = $item->video;
                     if ($params->get('CMSPlugins', 1)) {
-                        // since J4 compatiblity
+                        /* since J4 compatibility */
                         Factory::getApplication()->triggerEvent('onContentPrepare', array(
                             'mod_k2_content.item-media',
                             &$mediaTempText,
@@ -392,7 +392,7 @@ class modK2ContentHelper
                         ));
                     }
                     if ($params->get('K2Plugins', 1)) {
-// since J4 compatiblity
+                        /* since J4 compatibility */
                         Factory::getApplication()->triggerEvent('onK2PrepareContent', array(
                             &$mediaTempText,
                             &$params,
@@ -414,7 +414,7 @@ class modK2ContentHelper
                                 $extraFieldTempText = new stdClass;
                                 $extraFieldTempText->text = $extraField->value;
                                 if ($params->get('CMSPlugins', 1)) {
-                                    // since J4 compatiblity
+                                    /* since J4 compatibility */
                                     Factory::getApplication()->triggerEvent('onContentPrepare', array(
                                         'mod_k2_content.item-extrafields',
                                         &$extraFieldTempText,
@@ -423,7 +423,7 @@ class modK2ContentHelper
                                     ));
                                 }
                                 if ($params->get('K2Plugins', 1)) {
-// since J4 compatiblity
+                                    /* since J4 compatibility */
                                     Factory::getApplication()->triggerEvent('onK2PrepareContent', array(
                                         &$extraFieldTempText,
                                         &$params,
@@ -460,28 +460,23 @@ class modK2ContentHelper
 
                     // Joomla Plugins
                     if ($params->get('CMSPlugins', 1)) {
-// since J4 compatiblity
-                        $results = Factory::getApplication()->triggerEvent('onBeforeDisplay', array(&$item, &$params, $limitstart));
-                        $item->event->BeforeDisplay = trim(implode("\n", $results));
 
-// since J4 compatiblity
-                        $results = Factory::getApplication()->triggerEvent('onAfterDisplay', array(&$item, &$params, $limitstart));
-                        $item->event->AfterDisplay = trim(implode("\n", $results));
-
-// since J4 compatiblity
-                        $results = Factory::getApplication()->triggerEvent('onAfterDisplayTitle', array(&$item, &$params, $limitstart));
+                        $item->event->BeforeDisplay = '';
+                        $item->event->AfterDisplay = '';
+                        /* since J4 compatibility */
+                        $results = Factory::getApplication()->triggerEvent('onContentAfterTitle', array('mod_k2_content', &$item, &$params, $limitstart));
                         $item->event->AfterDisplayTitle = trim(implode("\n", $results));
 
-// since J4 compatiblity
-                        $results = Factory::getApplication()->triggerEvent('onBeforeDisplayContent', array(&$item, &$params, $limitstart));
+                        /* since J4 compatibility */
+                        $results = Factory::getApplication()->triggerEvent('onContentBeforeDisplay', array('mod_k2_content', &$item, &$params, $limitstart));
                         $item->event->BeforeDisplayContent = trim(implode("\n", $results));
 
-// since J4 compatiblity
-                        $results = Factory::getApplication()->triggerEvent('onAfterDisplayContent', array(&$item, &$params, $limitstart));
+                        /* since J4 compatibility */
+                        $results = Factory::getApplication()->triggerEvent('onContentAfterDisplay', array('mod_k2_content', &$item, &$params, $limitstart));
                         $item->event->AfterDisplayContent = trim(implode("\n", $results));
 
-// since J4 compatiblity
-                        Factory::getApplication()->triggerEvent('onPrepareContent', array(&$item, &$params, $limitstart));
+                        /* since J4 compatibility */
+                        Factory::getApplication()->triggerEvent('onContentPrepare', array('mod_k2_content', &$item, &$params, $limitstart));
                     }
 
                     // Initialize K2 plugin events
@@ -494,31 +489,31 @@ class modK2ContentHelper
 
                     // K2 Plugins
                     if ($params->get('K2Plugins', 1)) {
-// since J4 compatiblity
+                        /* since J4 compatibility */
                         $results = Factory::getApplication()->triggerEvent('onK2BeforeDisplay', array(&$item, &$params, $limitstart));
                         $item->event->K2BeforeDisplay = trim(implode("\n", $results));
 
-// since J4 compatiblity
+                        /* since J4 compatibility */
                         $results = Factory::getApplication()->triggerEvent('onK2AfterDisplay', array(&$item, &$params, $limitstart));
                         $item->event->K2AfterDisplay = trim(implode("\n", $results));
 
-// since J4 compatiblity
+                        /* since J4 compatibility */
                         $results = Factory::getApplication()->triggerEvent('onK2AfterDisplayTitle', array(&$item, &$params, $limitstart));
                         $item->event->K2AfterDisplayTitle = trim(implode("\n", $results));
 
-// since J4 compatiblity
+                        /* since J4 compatibility */
                         $results = Factory::getApplication()->triggerEvent('onK2BeforeDisplayContent', array(&$item, &$params, $limitstart));
                         $item->event->K2BeforeDisplayContent = trim(implode("\n", $results));
 
-// since J4 compatiblity
+                        /* since J4 compatibility */
                         $results = Factory::getApplication()->triggerEvent('onK2AfterDisplayContent', array(&$item, &$params, $limitstart));
                         $item->event->K2AfterDisplayContent = trim(implode("\n", $results));
 
-// since J4 compatiblity
+                        /* since J4 compatibility */
                         Factory::getApplication()->triggerEvent('onK2PrepareContent', array(&$item, &$params, $limitstart));
 
                         if ($params->get('itemCommentsCounter')) {
-// since J4 compatiblity
+                            /* since J4 compatibility */
                             $results = Factory::getApplication()->triggerEvent('onK2CommentsCounter', array(&$item, &$params, $limitstart));
                             $item->event->K2CommentsCounter = trim(implode("\n", $results));
                         }
