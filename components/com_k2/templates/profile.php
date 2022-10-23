@@ -186,9 +186,6 @@ use Joomla\CMS\Form\Form;
                                     <tr>
                                         <td class="key">
                                             <?php echo $field->label; ?>
-                                            <?php if (!$field->required && $field->type != 'Spacer'): ?>
-                                                <span class="optional"><?php echo Text::_('COM_USERS_OPTIONAL'); ?></span>
-                                            <?php endif; ?>
                                         </td>
                                         <td><?php echo $field->input; ?></td>
                                     </tr>
