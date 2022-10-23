@@ -17,7 +17,6 @@ use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Filter\OutputFilter;
@@ -405,7 +404,7 @@ class plgSystemK2 extends CMSPlugin
             K2HelperHTML::loadHeadIncludes();
         }
 
-
+        $app = Factory::getApplication();
         if ($app->isClient('administrator')) {
             return;
         }
@@ -459,10 +458,20 @@ class plgSystemK2 extends CMSPlugin
                 $app->redirect(JURI::root());
                 $app->close();
             }
-            require_once(JPATH_SITE . '/components/com_users/controller.php');
-            $controller = new UsersController;
+            if (version_compare(JVERSION, '4.0.0-dev', 'ge'))
+            {
 
-            $view = $controller->getView($view, 'html');
+                $view = new Joomla\Component\Users\Site\View\Registration\HtmlView();
+                $view->setModel( new Joomla\Component\Users\Site\Model\RegistrationModel(), true);
+                $view->document = Factory::getApplication()->getDocument();
+            }
+            else
+            {
+                require_once(JPATH_SITE . '/components/com_users/controller.php');
+                $controller = new UsersController;
+                $view = $controller->getView($view, 'html');
+            }
+
             $view->addTemplatePath(JPATH_SITE . '/components/com_k2/templates');
             $view->addTemplatePath(JPATH_SITE . '/templates/' . $app->getTemplate() . '/html/com_k2/templates');
             $view->addTemplatePath(JPATH_SITE . '/templates/' . $app->getTemplate() . '/html/com_k2');
@@ -491,7 +500,7 @@ class plgSystemK2 extends CMSPlugin
             } else {
                 $editor = '<textarea id="description" class="k2-plain-text-editor" name="description"></textarea>';
             }
-            $this->editor = $editor;
+            $view->editor = $editor;
 
             $lists = array();
             $genderOptions[] = JHTML::_('select.option', 'n', Text::_('K2_NOT_SPECIFIED'));
@@ -499,36 +508,36 @@ class plgSystemK2 extends CMSPlugin
             $genderOptions[] = JHTML::_('select.option', 'f', Text::_('K2_FEMALE'));
             $lists['gender'] = JHTML::_('select.radiolist', $genderOptions, 'gender', '', 'value', 'text', $K2User->gender);
 
-            $this->lists = $lists;
-            $this->K2Params = $params;
-            $this->recaptchaClass = $recaptchaClass;
+            $view->lists = $lists;
+            $view->K2Params = $params;
+            $view->recaptchaClass = $recaptchaClass;
 
             /* since J4 compatibility */
             $K2Plugins = Factory::getApplication()->triggerEvent('onRenderAdminForm', array(
                 &$K2User,
                 'user'
             ));
-            $this->K2Plugins = $K2Plugins;
+            $view->K2Plugins = $K2Plugins;
 
-            $this->K2User = $K2User;
-            $this->user = $user;
+            $view->K2User = $K2User;
+            $view->user = $user;
             $pathway = $app->getPathway();
             $pathway->setPathway(null);
 
             $nameFieldName = 'jform[name]';
-            $this->nameFieldName = $nameFieldName;
+            $view->nameFieldName = $nameFieldName;
             $usernameFieldName = 'jform[username]';
-            $this->usernameFieldName = $usernameFieldName;
+            $view->usernameFieldName = $usernameFieldName;
             $emailFieldName = 'jform[email1]';
-            $this->emailFieldName = $emailFieldName;
+            $view->emailFieldName = $emailFieldName;
             $passwordFieldName = 'jform[password1]';
-            $this->passwordFieldName = $passwordFieldName;
+            $view->passwordFieldName = $passwordFieldName;
             $passwordVerifyFieldName = 'jform[password2]';
-            $this->passwordVerifyFieldName = $passwordVerifyFieldName;
+            $view->passwordVerifyFieldName = $passwordVerifyFieldName;
             $optionValue = 'com_users';
-            $this->optionValue = $optionValue;
+            $view->optionValue = $optionValue;
             $taskValue = 'registration.register';
-            $this->taskValue = $taskValue;
+            $view->taskValue = $taskValue;
             ob_start();
             $view->display();
             $contents = ob_get_clean();
@@ -544,10 +553,21 @@ class plgSystemK2 extends CMSPlugin
                 $app->redirect(Route::_($url, false));
             }
 
-            require_once(JPATH_SITE . '/components/com_users/controller.php');
-            $controller = new UsersController;
 
-            $view = $controller->getView($view, 'html');
+            if (version_compare(JVERSION, '4.0.0-dev', 'ge'))
+            {
+
+                $view = new Joomla\Component\Users\Site\View\Profile\HtmlView();
+                $view->setModel( new Joomla\Component\Users\Site\Model\ProfileModel(), true);
+                $view->document = Factory::getApplication()->getDocument();
+            }
+            else
+            {
+                require_once(JPATH_SITE . '/components/com_users/controller.php');
+                $controller = new UsersController;
+                $view = $controller->getView($view, 'html');
+            }
+
             $view->addTemplatePath(JPATH_SITE . '/components/com_k2/templates');
             $view->addTemplatePath(JPATH_SITE . '/templates/' . $app->getTemplate() . '/html/com_k2/templates');
             $view->addTemplatePath(JPATH_SITE . '/templates/' . $app->getTemplate() . '/html/com_k2');
@@ -579,7 +599,7 @@ class plgSystemK2 extends CMSPlugin
             } else {
                 $editor = '<textarea id="description" class="k2-plain-text-editor" name="description"></textarea>';
             }
-            $this->editor = $editor;
+            $view->editor = $editor;
 
             $lists = array();
             $genderOptions[] = JHTML::_('select.option', 'n', Text::_('K2_NOT_SPECIFIED'));
@@ -587,42 +607,44 @@ class plgSystemK2 extends CMSPlugin
             $genderOptions[] = JHTML::_('select.option', 'f', Text::_('K2_FEMALE'));
             $lists['gender'] = JHTML::_('select.radiolist', $genderOptions, 'gender', '', 'value', 'text', $K2User->gender);
 
-            $this->lists = $lists;
+            $view->lists = $lists;
 
             /* since J4 compatibility */
             $K2Plugins = Factory::getApplication()->triggerEvent('onRenderAdminForm', array(
                 &$K2User,
                 'user'
             ));
-            $this->K2Plugins = $K2Plugins;
 
-            $this->K2User = $K2User;
-            $this->K2Params = $params;
+            $view->K2Plugins = $K2Plugins;
+
+            $view->K2User = $K2User;
+            $view->K2Params = $params;
 
             // Asssign some variables depending on Joomla version
             $nameFieldName = 'jform[name]';
-            $this->nameFieldName = $nameFieldName;
+            $view->nameFieldName = $nameFieldName;
             $emailFieldName = 'jform[email1]';
-            $this->emailFieldName = $emailFieldName;
+            $view->emailFieldName = $emailFieldName;
             $passwordFieldName = 'jform[password1]';
-            $this->passwordFieldName = $passwordFieldName;
+            $view->passwordFieldName = $passwordFieldName;
             $passwordVerifyFieldName = 'jform[password2]';
-            $this->passwordVerifyFieldName = $passwordVerifyFieldName;
+            $view->passwordVerifyFieldName = $passwordVerifyFieldName;
             $usernameFieldName = 'jform[username]';
-            $this->usernameFieldName = $usernameFieldName;
+            $view->usernameFieldName = $usernameFieldName;
             $idFieldName = 'jform[id]';
-            $this->idFieldName = $idFieldName;
+            $view->idFieldName = $idFieldName;
             $optionValue = 'com_users';
-            $this->optionValue = $optionValue;
+            $view->optionValue = $optionValue;
             $taskValue = 'profile.save';
-            $this->taskValue = $taskValue;
+            $view->taskValue = $taskValue;
 
             ob_start();
             $active = Factory::getApplication()->getMenu()->getActive();
             if (isset($active->query['layout']) && $active->query['layout'] != 'profile') {
                 $active->query['layout'] = 'profile';
             }
-            $this->user = $user;
+            $view->user = $user;
+
             $view->display();
             $contents = ob_get_clean();
             $document->setBuffer($contents, 'component');
