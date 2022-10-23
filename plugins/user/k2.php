@@ -65,8 +65,9 @@ class plgUserK2 extends CMSPlugin
             Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_k2/tables');
             $row = Table::getInstance('K2User', 'Table');
             $k2id = $this->getK2UserID($user['id']);
-            Factory::getApplication()->input->set('id', $k2id, 'post');
+
             $row->bind(Factory::getApplication()->input->getArray($_POST));
+            $row->set('id', $k2id);
             $row->set('userID', $user['id']);
             $row->set('userName', $user['name']);
             $row->set('ip', $_SERVER['REMOTE_ADDR']);
