@@ -11,9 +11,20 @@
 defined('_JEXEC') or die;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Router\Router;
 
 class K2Router extends JComponentRouterBase
 {
+    public function __construct($app = null)
+    {
+
+        parent::__construct($app);
+
+        $router = $app->getRouter();
+        $router->attachParseRule(array($this, 'parseRule'), Router::PROCESS_AFTER);
+    }
+
     public function build(&$query)
     {
         if (!empty(ComponentHelper::getParams('com_k2')->get('k2Sef'))) {
@@ -435,11 +446,6 @@ class K2Router extends JComponentRouterBase
         if ($segments[0] == 'comments' && isset($segments[1]) && $segments[1] == 'reportSpammer') {
             $vars['id'] = $segments[2];
         }
-        /* remove unparsed segments in joomla 4 */
-        if (version_compare(JVERSION, '4.0.0-dev', 'ge'))
-        {
-            $segments = [];
-        }
 
         return $vars;
     }
@@ -458,6 +464,23 @@ class K2Router extends JComponentRouterBase
         $mTask = (empty($menuItem->query['task'])) ? null : $menuItem->query['task'];
         $mId = (empty($menuItem->query['id'])) ? null : $menuItem->query['id'];
         $mTag = (empty($menuItem->query['tag'])) ? null : $menuItem->query['tag'];
+
+        // make sure that k2 menu item has no query suffix at its root
+        /* Checking if the view is the same as the menu item and if it is, it will unset the view. */
+        if ($menuItem && isset($query['view']) && $menuItem->query['view'] === $query['view'])
+        {
+            $unsetView = true;
+
+            if (isset($query['task']))
+            {
+                $unsetView = false;
+            }
+
+            if ($unsetView)
+            {
+                unset($query['view']);
+            }
+        }
 
         if (isset($query['layout'])) {
             unset($query['layout']);
@@ -674,6 +697,14 @@ class K2Router extends JComponentRouterBase
             return $this->getCategoryPath($parent, $path);
         } else {
             return $path;
+        }
+    }
+
+    public function parseRule(&$router, Uri &$uri)
+    {
+        if (\strlen($uri->getPath()) > 0)
+        {
+            $uri->setPath('');
         }
     }
 }
