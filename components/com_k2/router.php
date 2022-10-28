@@ -289,7 +289,7 @@ class K2Router extends JComponentRouterBase
         }
 
         // Return reordered segments array
-        return ($segments);
+        return $segments;
     }
 
     function K2CustomSefParseRoute(&$segments)
@@ -371,7 +371,7 @@ class K2Router extends JComponentRouterBase
         if ($segments[0] == 'itemlist') {
             switch ($segments[1]) {
                 case 'category':
-                    if (isset($segments[2]) && empty($segments[3])) {
+                    if (isset($segments[2]) && (empty($segments[3]) || $params->get('k2SefItemIdTitleAliasSep') == 'slash')) {
                         // Re-insert category id to the category slug
                         if (!$params->get('k2SefInsertCatId')) {
                             $segments[2] = str_replace(':', '-', $segments[2]);
