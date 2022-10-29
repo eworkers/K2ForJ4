@@ -13,7 +13,6 @@ use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Factory;
-use Joomla\Data\DataObject;
 
 jimport('joomla.application.component.helper');
 
@@ -137,7 +136,11 @@ class plgFinderK2 extends FinderIndexerAdapter
         // Build the necessary route and path information.
         $item->url = $this->getURL($item->id, $this->extension, $this->layout);
         $item->route = K2HelperRoute::getItemRoute($item->slug, $item->catslug);
-        $item->path = FinderIndexerHelper::getContentPath($item->route);
+
+        if (version_compare(JVERSION, '4.0.0-dev', 'lt'))
+        {
+            $item->path = FinderIndexerHelper::getContentPath($item->route);
+        }
 
         // Get the menu title if it exists.
         $title = $this->getItemMenuTitle($item->url);
@@ -186,11 +189,11 @@ class plgFinderK2 extends FinderIndexerAdapter
         // Get content extras.
         FinderIndexerHelper::getContentExtras($item);
 
-        // Index the item.
         if (method_exists('FinderIndexer', 'getInstance')) {
-            FinderIndexer::getInstance()->index($item);
+            $this->indexer->getInstance()->index($item);
         } else {
-            FinderIndexer::index($item);
+            //Indexer::index($item);
+            $this->indexer->index($item);
         }
     }
 
