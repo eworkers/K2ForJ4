@@ -68,13 +68,16 @@ class K2Router extends JComponentRouterBase
 
         // make sure that k2 menu item has no query suffix at its root
         /* Checking if the view is the same as the menu item and if it is, it will unset the view. */
-        if ($menuItem && isset($query['view']) && $menuItem->query['view'] === $query['view'])
+        if ($menuItem && isset($query['view']) && $menuItem->query['view'] === @$query['view'])
         {
             $unsetView = true;
 
-            if (isset($query['task']))
+            if ((isset($query['task']) && @$query['task'] != '') || isset($query['Itemid']))
             {
                 $unsetView = false;
+                if(@$query['view'] === 'itemlist' && @$query['layout'] === 'category'){
+                    $unsetView = true;
+                }
             }
 
             if ($unsetView)
@@ -467,13 +470,16 @@ class K2Router extends JComponentRouterBase
 
         // make sure that k2 menu item has no query suffix at its root
         /* Checking if the view is the same as the menu item and if it is, it will unset the view. */
-        if ($menuItem && isset($query['view']) && $menuItem->query['view'] === $query['view'])
+        if ($menuItem && isset($query['view']) && $menuItem->query['view'] === @$query['view'])
         {
             $unsetView = true;
 
-            if (isset($query['task']))
+            if ((isset($query['task']) && @$query['task'] != '') || isset($query['Itemid']))
             {
                 $unsetView = false;
+                if(@$query['view'] === 'itemlist' && @$query['layout'] === 'category'){
+                    $unsetView = true;
+                }
             }
 
             if ($unsetView)
@@ -708,4 +714,3 @@ class K2Router extends JComponentRouterBase
         }
     }
 }
-
