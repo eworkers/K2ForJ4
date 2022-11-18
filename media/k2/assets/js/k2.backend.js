@@ -678,7 +678,10 @@ $K2(document).ready(function() {
             var checkBoxes = $('input[id^=cb]');
             checkBoxes.prop('checked', !checkBoxes.prop('checked'));
             $(this).prop('checked', checkBoxes.is(':checked'));
-            $('input[name=boxchecked]').val($('input[id^=cb]:checked').length);
+            Joomla.isChecked(false);
+            if($('input[name=boxchecked]').val($('input[id^=cb]:checked').length)){
+                Joomla.isChecked(this.checked);
+            }
         });
 
         // True Toggler
