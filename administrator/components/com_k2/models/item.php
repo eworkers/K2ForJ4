@@ -90,7 +90,7 @@ class K2ModelItem extends K2Model
         }
 
         if ($params->get('mergeEditors')) {
-            $text = Factory::getApplication()->input->getVar('text', '', 'post', 'string', 2);
+            $text = Factory::getApplication()->input->post->getRaw('text', '');
             if ($params->get('xssFiltering')) {
                 $filter = new InputFilter(array(), array(), 1, 1, 0);
                 $text = $filter->clean($text);
@@ -104,8 +104,8 @@ class K2ModelItem extends K2Model
                 list($row->introtext, $row->fulltext) = preg_split($pattern, $text, 2);
             }
         } else {
-            $row->introtext = Factory::getApplication()->input->getVar('introtext', '', 'post', 'string', 2);
-            $row->fulltext = Factory::getApplication()->input->getVar('fulltext', '', 'post', 'string', 2);
+            $row->introtext = Factory::getApplication()->input->post->getRaw('introtext', '');
+            $row->fulltext = Factory::getApplication()->input->post->getRaw('fulltext', '');
             if ($params->get('xssFiltering')) {
                 $filter = new InputFilter(array(), array(), 1, 1, 0);
                 $row->introtext = $filter->clean($row->introtext);
