@@ -321,10 +321,13 @@ class K2HelperHTML
                         $whichTaggingSystem = ($params->get('taggingSystem')) ? 'free' : 'selection';
                         $params->set('taggingSystem', $whichTaggingSystem);
                     }
-                    if ($view == 'item' && $params->get('taggingSystem') == 'selection') {
-                        HTMLHelper::_('formbehavior.chosen', 'select:not(#selectedTags, #tags)');
-                    } else {
-                        HTMLHelper::_('formbehavior.chosen', 'select');
+                    // avoid chosen css conflicts on joomla 4
+                    if (version_compare(JVERSION, '4.0.0-dev', 'lt')){
+                        if ($view == 'item' && $params->get('taggingSystem') == 'selection') {
+                            HTMLHelper::_('formbehavior.chosen', 'select:not(#selectedTags, #tags)');
+                        } else {
+                            HTMLHelper::_('formbehavior.chosen', 'select');
+                        }
                     }
                 }
 
