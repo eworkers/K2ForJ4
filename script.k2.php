@@ -440,10 +440,6 @@ class Com_K2InstallerScript
         $db->setQuery($query);
         $db->execute();
 
-        $query = "ALTER TABLE #__k2_users CHANGE `notes` `notes` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''";
-        $db->setQuery($query);
-        $db->execute();
-
     }
 
     private function installationResults($status)
