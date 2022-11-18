@@ -559,8 +559,8 @@ class K2ModelItem extends K2Model
         }
 
         // Embed
-        if (Factory::getApplication()->input->getVar('embedVideo', '', 'post', 'string', JREQUEST_ALLOWRAW)) {
-            $row->video = Factory::getApplication()->input->getVar('embedVideo', '', 'post', 'string', JREQUEST_ALLOWRAW);
+        if (Factory::getApplication()->input->post->get('embedVideo', null, 'raw')) {
+            $row->video = Factory::getApplication()->input->post->get('embedVideo', null, 'raw');
         }
 
         // Third-party Media Service
