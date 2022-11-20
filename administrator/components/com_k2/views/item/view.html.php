@@ -21,6 +21,8 @@ use Joomla\CMS\Table\Table;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Form\Form;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Toolbar\Toolbar;
 
 jimport('joomla.application.component.view');
 
@@ -501,12 +503,6 @@ class K2ViewItem extends K2View
             // Toolbar
             JToolBarHelper::title($title, 'k2.png');
 
-            JToolBarHelper::apply();
-            JToolBarHelper::save();
-            $saveNewIcon = version_compare(JVERSION, '2.5.0', 'ge') ? 'save-new.png' : 'save.png';
-            JToolBarHelper::custom('saveAndNew', $saveNewIcon, 'save_f2.png', 'K2_SAVE_AND_NEW', false);
-            JToolBarHelper::cancel();
-
             // Tabs
             $this->params->set('showImageTab', true);
             $this->params->set('showImageGalleryTab', true);
@@ -602,6 +598,34 @@ class K2ViewItem extends K2View
             }
         }
 
+        $this->addToolbar($item);
         parent::display($tpl);
+    }
+
+    protected function addToolbar($item): void
+    {
+
+        // Get the toolbar object instance
+        $toolbar = Toolbar::getInstance('toolbar');
+
+        $toolbar->apply('apply');
+        $toolbar->save('save');
+        $toolbar->standardButton('add', 'K2_SAVE_AND_NEW', 'saveAndNew');
+        $toolbar->cancel('cancel', 'JTOOLBAR_CANCEL');
+
+        if ($item->id) {
+            JLoader::register('K2HelperRoute', JPATH_SITE . '/components/com_k2/helpers/route.php');
+            $url = urldecode(K2HelperRoute::getItemRoute($item->id . ':' . $item->alias, $item->catid));
+            $toolbar->preview(Route::link('site', $url, true, 0, true).'/?', 'JGLOBAL_PREVIEW')
+            ->bodyHeight(80)
+            ->modalWidth(90);
+
+            if (PluginHelper::isEnabled('system', 'jooa11y')) {
+                $toolbar->jooa11y(Route::link('site', $url . '&jooa11y=1', true, 0, true).'/?', 'JGLOBAL_JOOA11Y')
+                    ->bodyHeight(80)
+                    ->modalWidth(90);
+            }
+        }
+
     }
 }
