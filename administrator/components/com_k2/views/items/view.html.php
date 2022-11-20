@@ -19,6 +19,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Pagination\Pagination;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Table\Table;
+use Joomla\CMS\Toolbar\Toolbar;
 
 jimport('joomla.application.component.view');
 
@@ -240,35 +241,12 @@ class K2ViewItems extends K2View
         $this->columns = $columns;
 
         // Toolbar
-        $toolbar = JToolBar::getInstance('toolbar');
         JToolBarHelper::title(Text::_('K2_ITEMS'), 'k2.png');
 
         if ($filter_trash == 1) {
             JToolBarHelper::deleteList('K2_ARE_YOU_SURE_YOU_WANT_TO_DELETE_SELECTED_ITEMS', 'remove', 'K2_DELETE');
             JToolBarHelper::custom('restore', 'publish.png', 'publish_f2.png', 'K2_RESTORE', true);
-        } else {
-            JToolBarHelper::addNew();
-            JToolBarHelper::editList();
-            JToolBarHelper::custom('featured', 'featured.png', 'featured_f2.png', 'K2_TOGGLE_FEATURED_STATE', true);
-            JToolBarHelper::publishList();
-            JToolBarHelper::unpublishList();
-            JToolBarHelper::trash('trash');
-            JToolBarHelper::custom('copy', 'copy.png', 'copy_f2.png', 'K2_COPY', true);
-            // Batch button in modal
-            $batchButton = '<a id="K2BatchButton" class="btn btn-small" href="#"><i class="icon-edit"></i>' . Text::_('K2_BATCH') . '</a>';
-            $toolbar->appendButton('Custom', $batchButton);
-
-            // Display import button for Joomla content
-            if ($user->gid > 23 && !$params->get('hideImportButton')) {
-                $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=items&amp;task=import';
-                $buttonText = Text::_('K2_IMPORT_JOOMLA_CONTENT');
-                $button = '<a id="K2ImportContentButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive"></i>' . $buttonText . '</a>';
-                $toolbar->appendButton('Custom', $button);
-            }
         }
-
-        // Preferences (Parameters/Settings)
-        JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
 
         $this->loadHelper('html');
         K2HelperHTML::subMenu();
@@ -307,7 +285,46 @@ class K2ViewItems extends K2View
                     Joomla.tableOrdering(order, dirn, "");
                 }
             ');
-
+        $this->addToolbar();
         parent::display($tpl);
+    }
+
+    protected function addToolbar(): void
+    {
+        $user  = Factory::getApplication()->getIdentity();
+
+        // Get the toolbar object instance
+        $toolbar = Toolbar::getInstance('toolbar');
+
+        $toolbar->addNew('add');
+        $toolbar->edit('edit')->listCheck(true);
+
+        $dropdown = $toolbar->dropdownButton('status-group')
+            ->text('JTOOLBAR_CHANGE_STATUS')
+            ->toggleSplit(false)
+            ->icon('icon-ellipsis-h')
+            ->buttonClass('btn btn-action')
+            ->listCheck(true);
+
+        $childBar = $dropdown->getChildToolbar();
+        $childBar->publish('publish')->listCheck(true);
+        $childBar->unpublish('unpublish')->listCheck(true);
+        $childBar->standardButton('featured', 'K2_TOGGLE_FEATURED_STATE', 'featured')->listCheck(true);
+        $childBar->trash('trash')->listCheck(true);
+        $childBar->standardButton('copy', 'K2_COPY', 'copy')->listCheck(true);
+
+        $batchButton = '<joomla-toolbar-button id="toolbar-batch"><button id="K2BatchButton" class="btn btn-small" href="#"><i class="icon-edit"></i>' . Text::_('K2_BATCH') . '</button></joomla-toolbar-button>';
+
+        $toolbar->customButton('batch')->html($batchButton);
+
+        if ($user->authorise('core.admin', 'com_k2') || $user->authorise('core.options', 'com_k2')) {
+            $toolbar->preferences('com_k2', 'K2_SETTINGS');
+            if ($user->gid > 23 && !$this->params->get('hideImportButton')) {
+                $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=items&amp;task=import';
+                $buttonText = Text::_('K2_IMPORT_JOOMLA_CONTENT');
+                $button = '<joomla-toolbar-button id="toolbar-import-content"><a id="K2ImportContentButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive"></i>' . $buttonText . '</a></joomla-toolbar-button>';
+                $toolbar->customButton('Import')->html($button);
+            }
+        }
     }
 }
