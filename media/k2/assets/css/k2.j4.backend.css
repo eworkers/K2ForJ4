@@ -1,0 +1,308 @@
+#k2AdminContainer {
+    display:block;
+    min-height:auto
+}
+
+#k2AdminContainer .adminlist tbody tr td {
+    font-size:13px;
+    padding:.5rem
+}
+
+#k2AdminContainer .adminlist tfoot tr td {
+    padding-bottom:unset
+}
+
+#k2ContentView .k2AdminTableFiltersSearch {
+    padding-left:20px
+}
+
+#k2ContentView .k2AdminTableFiltersSelects {
+    padding:10px 10px 5px 0
+}
+
+#k2ContentView .k2AdminTableFiltersSelects select {
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    appearance:none;
+    background-color:#f0f4fb;
+    background-image:url(/media/templates/administrator/atum/images/select-bg.svg);
+    background-position:right 0 center;
+    background-repeat:no-repeat;
+    background-size:70rem;
+    border:1px solid #cdcdcd;
+    border-radius:.25rem;
+    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+
+#k2ContentView .k2AdminTableFiltersSelects select,select#limit.form-select {
+    font-size:13px;
+    height:unset;
+    max-width:100%;
+    min-height:unset;
+    padding:.15rem 1rem;
+    padding-right:50px;
+    width:auto
+}
+
+#k2ContentView > form .k2AdminTableData {
+    padding-top:5px!important
+}
+
+#k2ContentView > form .k2AdminTableFilters {
+    left:0;
+    position:unset;
+    width:100%
+}
+
+#k2ContentView > form select {
+    -moz-appearance:none;
+    -moz-padding-start:calc(1rem - 3px);
+    -webkit-appearance:none;
+    appearance:none;
+    background-image:url(/media/templates/administrator/atum/images/select-bg.svg);
+    background-position:right 1rem center;
+    background-repeat:no-repeat;
+    background-size:116rem;
+    border:1px solid #cdcdcd;
+    border-radius:.25rem;
+    color:#212529;
+    font-family:inherit;
+    font-size:inherit;
+    font-size:1rem;
+    font-weight:400;
+    line-height:inherit;
+    line-height:1.5;
+    margin:0;
+    padding:.5rem 3rem .5rem 1rem;
+    text-transform:none;
+    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    word-wrap:normal
+}
+
+#k2ContentView > form select:disabled {
+    opacity:1
+}
+
+#k2FormTopNav ul.k2NavTabs li.ui-tabs-selected a:before {
+    bottom:-20px;
+    margin-left:-5px
+}
+
+#k2ResetButton.btn {
+    -moz-border-radius:0 .25rem .25rem 0;
+    -webkit-border-radius:0 .25rem .25rem 0;
+    border-radius:0 .25rem .25rem 0
+}
+
+#k2ResetButton.btn,#k2SubmitButton.btn {
+    font-size:13px;
+    height:28px;
+    line-height:1px
+}
+
+#k2Sidebar {
+    display:none
+}
+
+#k2SubmitButton.btn,.isJ30 #k2ContentView > form .xmlParamsFields ul li .paramValue input[type="radio"] + label:last-child,.k2ui-button-set input[type="radio"]:first-child + label {
+    border-radius:0
+}
+
+.content {
+    padding-left:16px;
+    padding-right:16px;
+    padding-top:0
+}
+
+.form-check {
+    display:inline;
+    margin-bottom:.125rem;
+    margin-right:unset;
+    padding-left:unset
+}
+
+.isJ30 #k2AdminContainer #k2ContentView div.k2ScrollingContent {
+    margin-left:312px
+}
+
+.isJ30 #k2AdminContainer #k2ContentView ul.k2ScrollSpyMenu {
+    top:139px;
+    width:312px
+}
+
+.isJ30 #k2ContentView > form .xmlParamsFields ul li .paramValue select {
+    line-height:unset
+}
+
+.isJ30 #k2FormTopNav ul.k2NavTabs li.ui-tabs-selected a:before {
+    bottom:-20px
+}
+
+.isJ30 .com_k2 .subhead {
+    margin-bottom:.5rem!important
+}
+
+.isJ30 .input-append .btn {
+    background-color:#f3f3f3;
+    border-color:#b3b3b3;
+    margin-left:-10px!important;
+    margin-top:-3px
+}
+
+.isJ30 .input-append .btn:hover {
+    background-color:#e6e6e6
+}
+
+.isJ30 .k2Selector {
+    height:unset;
+    line-height:25px
+}
+
+.isJ30 div#toolbar {
+    padding:0
+}
+
+.isJ30 table.adminlist tfoot tr td .pagination {
+    margin:0;
+    margin-bottom:0!important;
+    margin-left:auto!important;
+    margin-right:auto!important
+}
+
+.itemAdditionalField .itemAdditionalData > input[type="button"] {
+    height:42px
+}
+
+.k2AdminTableFilters.table tbody tr:hover {
+    background-color:unset
+}
+
+.k2AdminTableFiltersSelects {
+    background-color:#fff;
+    gap:8px;
+    padding:10px
+}
+
+.k2TabsContent {
+    float:unset
+}
+
+.page-item.active .page-link {
+    background-color:#F0F0F0;
+    border-color:#ddd;
+    color:#999
+}
+
+.page-link {
+    padding:1px 10px
+}
+
+::-moz-focus-inner {
+    border-style:none;
+    padding:0
+}
+
+form input[name="search"] {
+    padding:1px 10px!important
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .form-select {
+        transition:none
+    }
+}
+
+#k2ContentView > form select {
+    background:url(/media/templates/administrator/atum/images/select-bg.svg) no-repeat 100%/116rem;
+    background-color:var(--template-bg-light);
+    border:1px solid var(--template-bg-dark-20);
+    cursor:pointer;
+    max-width:100%
+}
+
+#k2ContentView > form select option {
+    background-color:#fff;
+    color:#0a0e14
+}
+
+#k2ContentView > form select:-moz-focusring {
+    color:transparent;
+    text-shadow:0 0 0 #212529
+}
+
+#k2ContentView > form select:disabled {
+    background:#e8e8e8;
+    background-color:#e8e8e8;
+    border:0;
+    box-shadow:none;
+    cursor:default
+}
+
+#k2ContentView > form select:focus {
+    border-color:#95b4db;
+    border-color:#39f;
+    box-shadow:0 0 0 .25rem rgba(42,105,183,.25);
+    box-shadow:0 0 0 .2rem #eaeaea;
+    outline:0
+}
+
+.k2ui-field-value input[id="search-field"],.k2ui-field-value input[id="search-field"]:focus {
+    border:0;
+    box-shadow:unset;
+    height:auto;
+    margin:5px 10px 10px;
+    padding:unset
+}
+input#search-field.ui-autocomplete-input{
+    padding: unset;
+    border: 0;
+    box-shadow: unset;
+}
+ul.tags li span.tagRemove{
+    padding: 6px 0;
+}
+.itemAdditionalField .itemAdditionalData label{
+    font-size: unset;
+}
+.k2ui-field-value select#access,.k2ui-field-value select#language {
+    width:100%
+}
+
+.k2ui-field-value.k2ui-category select {
+    min-width:30%
+}
+
+.modal-scrollfix.modal-scrollfix {
+    overflow-y:hidden
+}
+
+form input.text_area {
+    background-color:#fff;
+    border:1px solid var(--template-bg-dark-20);
+    border-radius:.25rem
+}
+
+form input.text_area,.k2ui-field-value input[type="text"] {
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    appearance:none;
+    background-clip:padding-box;
+    border:1px solid #cdcdcd;
+    color:#212529;
+    font-size:1rem;
+    font-weight:400;
+    line-height:1.5;
+    padding:.5rem 1rem;
+    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+
+form input.text_area:focus,.k2ui-field-value input[type="text"]:focus {
+    background-color:#fff;
+    border:solid 1px var(--template-bg-dark-20);
+    border-color:#39f;
+    border-color:#95b4db;
+    border-radius:.25rem;
+    box-shadow:0 0 0 .2rem #eaeaea;
+    color:#212529;
+    outline:0
+}
