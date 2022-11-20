@@ -49,11 +49,15 @@ if ($commenterAvatarWidthSelect == 'inherit') {
 switch ($module_usage) {
     case '0':
         $comments = modK2CommentsHelper::getLatestComments($params);
-        require(ModuleHelper::getLayoutPath('mod_k2_comments', 'comments'));
+        if (count((array)$comments)) {
+            require(ModuleHelper::getLayoutPath('mod_k2_comments', 'comments'));
+        }
         break;
 
     case '1':
         $commenters = modK2CommentsHelper::getTopCommenters($params);
-        require(ModuleHelper::getLayoutPath('mod_k2_comments', 'commenters'));
+        if (count((array)$commenters)) {
+            require(ModuleHelper::getLayoutPath('mod_k2_comments', 'commenters'));
+        }
         break;
 }

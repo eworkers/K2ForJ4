@@ -19,7 +19,6 @@ use Joomla\CMS\Router\Route;
 
 <div id="k2ModuleBox<?php echo $module->id; ?>"
      class="k2LatestCommentsBlock<?php if ($params->get('moduleclass_sfx')) echo ' ' . $params->get('moduleclass_sfx'); ?>">
-    <?php if (count($comments)): ?>
         <ul>
             <?php foreach ($comments as $key => $comment): ?>
                 <li class="<?php echo ($key % 2) ? "odd" : "even";
@@ -81,7 +80,6 @@ use Joomla\CMS\Router\Route;
             <?php endforeach; ?>
             <li class="clearList"></li>
         </ul>
-    <?php endif; ?>
 
     <?php if ($params->get('feed')): ?>
         <div class="k2FeedIcon">

@@ -18,7 +18,6 @@ use Joomla\CMS\Language\Text;
 
 <div id="k2ModuleBox<?php echo $module->id; ?>"
      class="k2TopCommentersBlock<?php if ($params->get('moduleclass_sfx')) echo ' ' . $params->get('moduleclass_sfx'); ?>">
-    <?php if (count($commenters)): ?>
         <ul>
             <?php foreach ($commenters as $key => $commenter): ?>
                 <li class="<?php echo ($key % 2) ? "odd" : "even";
@@ -55,5 +54,4 @@ use Joomla\CMS\Language\Text;
             <?php endforeach; ?>
             <li class="clearList"></li>
         </ul>
-    <?php endif; ?>
 </div>

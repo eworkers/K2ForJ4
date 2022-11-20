@@ -41,7 +41,7 @@ $app = Factory::getApplication();
 switch ($module_usage) {
     case '0':
         $months = modK2ToolsHelper::getArchive($params);
-        if (count($months)) {
+        if (count((array)$months)) {
             require(ModuleHelper::getLayoutPath('mod_k2_tools', 'archive'));
         }
         break;
@@ -87,7 +87,7 @@ switch ($module_usage) {
 
     case '7':
         $tags = modK2ToolsHelper::tagCloud($params);
-        if (count($tags)) {
+        if (count((array)$tags)) {
             require(ModuleHelper::getLayoutPath('mod_k2_tools', 'tags'));
         }
         break;
@@ -100,7 +100,7 @@ switch ($module_usage) {
     case '9':
         $selectedTags = (array)$params->get('selectedTags');
         $selectedTagsLimit = (int)$params->get('selectedTagsLimit', 0);
-        if (count($selectedTags)) {
+        if (count((array)$selectedTags)) {
             require(ModuleHelper::getLayoutPath('mod_k2_tools', 'selected_tags'));
         }
         break;
