@@ -275,7 +275,7 @@ $K2(document).ready(function() {
 });
 
 // Equal block heights for the "default" view
-$K2(window).load(function() {
+$K2(window).on('load', function() {
     var blocks = $K2('.subCategory, .k2EqualHeights');
     var maxHeight = 0;
     blocks.each(function() {
