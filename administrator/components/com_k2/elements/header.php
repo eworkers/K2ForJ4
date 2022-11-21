@@ -19,11 +19,7 @@ class K2ElementHeader extends K2Element
 {
     public function fetchElement($name, $value, &$node, $control_name)
     {
-        if (version_compare(JVERSION, '2.5.0', 'ge')) {
-            return '<div class="jwHeaderContainer"><div class="jwHeaderContent">' . Text::_($value) . '</div><div class="jwHeaderClr"></div></div>';
-        } else {
-            return '<div class="jwHeaderContainer15"><div class="jwHeaderContent">' . Text::_($value) . '</div><div class="jwHeaderClr"></div></div>';
-        }
+        return '<div class="jwHeaderContainer"><div class="jwHeaderContent">' . Text::_($value) . '</div><div class="jwHeaderClr"></div></div>';
     }
 
     public function fetchTooltip($label, $description, &$node, $control_name, $name)

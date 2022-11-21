@@ -20,7 +20,7 @@ use Joomla\CMS\Form\Form;
 <!-- K2 user register form -->
 <?php if (isset($this->message)) $this->display('message'); ?>
 
-<form action="<?php echo version_compare(JVERSION, '3.0', 'ge') ? Route::_('index.php?option=com_users&task=registration.register') : JURI::root(true) . '/index.php'; ?>"
+<form action="<?php echo Route::_('index.php?option=com_users&task=registration.register'); ?>"
       enctype="multipart/form-data" method="post" id="josForm" name="josForm" class="form-validate">
     <?php if ($this->params->def('show_page_title', 1)): ?>
         <div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
@@ -67,18 +67,16 @@ use Joomla\CMS\Form\Form;
                     *
                 </td>
             </tr>
-            <?php if (version_compare(JVERSION, '1.6', 'ge')): ?>
-                <tr>
-                    <td class="key">
-                        <label id="email2msg" for="email2"><?php echo Text::_('K2_CONFIRM_EMAIL'); ?></label>
-                    </td>
-                    <td>
-                        <input type="text" id="email2" name="jform[email2]" size="40" value=""
-                               class="inputbox required validate-email" maxlength="100"/>
-                        *
-                    </td>
-                </tr>
-            <?php endif; ?>
+            <tr>
+                <td class="key">
+                    <label id="email2msg" for="email2"><?php echo Text::_('K2_CONFIRM_EMAIL'); ?></label>
+                </td>
+                <td>
+                    <input type="text" id="email2" name="jform[email2]" size="40" value=""
+                           class="inputbox required validate-email" maxlength="100"/>
+                    *
+                </td>
+            </tr>
             <tr>
                 <td class="key">
                     <label id="pwmsg" for="password"><?php echo Text::_('K2_PASSWORD'); ?></label>

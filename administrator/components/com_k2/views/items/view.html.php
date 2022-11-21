@@ -185,24 +185,20 @@ class K2ViewItems extends K2View
             $lists['tag'] = JHTML::_('select.genericlist', $options, 'tag', '', 'id', 'name', $tag);
         }
 
-        if (version_compare(JVERSION, '1.6.0', 'ge')) {
-            $languages = JHTML::_('contentlanguage.existing', true, true);
-            array_unshift($languages, JHTML::_('select.option', '', Text::_('K2_SELECT_LANGUAGE')));
-            $lists['language'] = JHTML::_('select.genericlist', $languages, 'language', '', 'value', 'text', $language);
-        }
+        $languages = JHTML::_('contentlanguage.existing', true, true);
+        array_unshift($languages, JHTML::_('select.option', '', Text::_('K2_SELECT_LANGUAGE')));
+        $lists['language'] = JHTML::_('select.genericlist', $languages, 'language', '', 'value', 'text', $language);
 
         // Batch Operations
         $categoriesModel = K2Model::getInstance('Categories', 'K2Model');
         $categories = $categoriesModel->categoriesTree(null, true, false);
         array_unshift($categories, HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -'));
         $lists['batchCategories'] = JHTML::_('select.genericlist', $categories, 'batchCategory', '', 'value', 'text');
-        $lists['batchAccess'] = version_compare(JVERSION, '2.5', 'ge') ? JHTML::_('access.level', 'batchAccess', null, '', array(HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -'))) : str_replace('size="3"', "", JHTML::_('list.accesslevel', $item));
+        $lists['batchAccess'] = JHTML::_('access.level', 'batchAccess', null, '', array(HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -')));
 
-        if (version_compare(JVERSION, '2.5.0', 'ge')) {
-            $languages = JHTML::_('contentlanguage.existing', true, true);
-            array_unshift($languages, HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -'));
-            $lists['batchLanguage'] = JHTML::_('select.genericlist', $languages, 'batchLanguage', '', 'value', 'text', null);
-        }
+        $languages = JHTML::_('contentlanguage.existing', true, true);
+        array_unshift($languages, HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -'));
+        $lists['batchLanguage'] = JHTML::_('select.genericlist', $languages, 'batchLanguage', '', 'value', 'text', null);
 
         $model = $this->getModel('items');
         $authors = $model->getItemsAuthors();

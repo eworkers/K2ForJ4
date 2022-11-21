@@ -49,13 +49,7 @@ class K2ModelItemlist extends K2Model
 
         $jnow = Factory::getDate();
         $now = $jnow->toSql();
-        /*
-        if (version_compare(JVERSION, '3.3', 'ge')) {
-            $now = $jnow->format('%Y-%m-%d %H:%M:00');
-        } else {
-            $now = $jnow->toFormat('%Y-%m-%d %H:%M:00');
-        }
-        */
+
         $nullDate = $db->getNullDate();
 
         $query = "/* Frontend / K2 / Items */ SELECT SQL_CALC_FOUND_ROWS i.*,";

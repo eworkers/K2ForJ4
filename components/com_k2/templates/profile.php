@@ -59,19 +59,17 @@ use Joomla\CMS\Form\Form;
                            class="inputbox required validate-email" maxlength="100"/>
                 </td>
             </tr>
-            <?php if (version_compare(JVERSION, '2.5', 'ge')): ?>
-                <tr>
-                    <td class="key">
-                        <label id="email2msg" for="email2"><?php echo Text::_('K2_CONFIRM_EMAIL'); ?></label>
-                    </td>
-                    <td>
-                        <input type="text" id="email2" name="jform[email2]" size="40"
-                               value="<?php echo $this->escape($this->user->get('email')); ?>"
-                               class="inputbox required validate-email" maxlength="100"/>
-                        *
-                    </td>
-                </tr>
-            <?php endif; ?>
+            <tr>
+                <td class="key">
+                    <label id="email2msg" for="email2"><?php echo Text::_('K2_CONFIRM_EMAIL'); ?></label>
+                </td>
+                <td>
+                    <input type="text" id="email2" name="jform[email2]" size="40"
+                           value="<?php echo $this->escape($this->user->get('email')); ?>"
+                           class="inputbox required validate-email" maxlength="100"/>
+                    *
+                </td>
+            </tr>
             <tr>
                 <td class="key">
                     <label id="pwmsg" for="password"><?php echo Text::_('K2_PASSWORD'); ?></label>
@@ -151,18 +149,6 @@ use Joomla\CMS\Form\Form;
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>
-            <?php endif; ?>
-            <?php if (isset($this->params) && version_compare(JVERSION, '1.6', 'lt')): ?>
-                <tr>
-                    <th colspan="2" class="k2ProfileHeading">
-                        <?php echo Text::_('K2_ADMINISTRATIVE_DETAILS'); ?>
-                    </th>
-                </tr>
-                <tr>
-                    <td colspan="2" id="userAdminParams">
-                        <?php echo $this->params->render('params'); ?>
-                    </td>
-                </tr>
             <?php endif; ?>
             <!-- Joomla 3.x Form implementation -->
             <?php if (isset($this->form)): ?>

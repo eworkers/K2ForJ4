@@ -16,70 +16,36 @@ use Joomla\CMS\Form\FormField;
 K2HelperHTML::loadHeadIncludes(true, true, false, true);
 
 jimport('joomla.form.formfield');
-if (version_compare(JVERSION, '3.5.0', 'ge')) {
-    class K2Element extends FormField
+class K2Element extends FormField
+{
+    public function getInput()
     {
-        public function getInput()
-        {
-            /*
-            if (method_exists($this,'fetchElement')) { // BC
-               return $this->fetchElement($this->name, $this->value, $this->element, $this->options['control']);
-            }
-            return $this->fetchElementValue($this->name, $this->value, $this->element, $this->options['control']);
-            */
-            $controls = (!empty($this->options['control'])) ? $this->options['control'] : array();
-            return $this->fetchElement($this->name, $this->value, $this->element, $controls);
+        /*
+        if (method_exists($this,'fetchElement')) { // BC
+           return $this->fetchElement($this->name, $this->value, $this->element, $this->options['control']);
         }
-
-        public function getLabel()
-        {
-            /*
-            if (method_exists($this, 'fetchElementName')) {
-                return $this->fetchElementName($this->element['label'], $this->description, $this->element, $this->options['control'], $this->element['name'] = '');
-            }
-            */
-            if (method_exists($this, 'fetchTooltip')) { // BC
-                $controls = (!empty($this->options['control'])) ? $this->options['control'] : array();
-                return $this->fetchTooltip($this->element['label'], $this->description, $this->element, $controls, $this->element['name'] = '');
-            }
-            return parent::getLabel();
-        }
-
-        public function render($layoutId, $data = array())
-        {
-            return $this->getInput();
-        }
+        return $this->fetchElementValue($this->name, $this->value, $this->element, $this->options['control']);
+        */
+        $controls = (!empty($this->options['control'])) ? $this->options['control'] : array();
+        return $this->fetchElement($this->name, $this->value, $this->element, $controls);
     }
-} else {
-    class K2Element extends FormField
+
+    public function getLabel()
     {
-        public function getInput()
-        {
-            /*
-            if (method_exists($this, 'fetchElement')) { // BC
-                return $this->fetchElement($this->name, $this->value, $this->element, $this->options['control']);
-            }
-            return $this->fetchElementValue($this->name, $this->value, $this->element, $this->options['control']);
-            */
-            return $this->fetchElement($this->name, $this->value, $this->element, $this->options['control']);
+        /*
+        if (method_exists($this, 'fetchElementName')) {
+            return $this->fetchElementName($this->element['label'], $this->description, $this->element, $this->options['control'], $this->element['name'] = '');
         }
+        */
+        if (method_exists($this, 'fetchTooltip')) { // BC
+            $controls = (!empty($this->options['control'])) ? $this->options['control'] : array();
+            return $this->fetchTooltip($this->element['label'], $this->description, $this->element, $controls, $this->element['name'] = '');
+        }
+        return parent::getLabel();
+    }
 
-        public function getLabel()
-        {
-            if (method_exists($this, 'fetchTooltip')) { // BC
-                return $this->fetchTooltip($this->element['label'], $this->description, $this->element, $this->options['control'], $this->element['name'] = '');
-            }
-            /*
-            if (method_exists($this, 'fetchElementName')) {
-                return $this->fetchElementName($this->element['label'], $this->description, $this->element, $this->options['control'], $this->element['name'] = '');
-            }
-            */
-            return parent::getLabel();
-        }
-
-        public function render()
-        {
-            return $this->getInput();
-        }
+    public function render($layoutId, $data = array())
+    {
+        return $this->getInput();
     }
 }

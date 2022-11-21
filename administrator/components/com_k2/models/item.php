@@ -882,7 +882,7 @@ class K2ModelItem extends K2Model
         if ($app->isClient('site')) {
             $token = Factory::getApplication()->input->getVar('id');
             $check = StringHelper::substr($token, StringHelper::strpos($token, '_') + 1);
-            $hash = version_compare(JVERSION, '3.0', 'ge') ? JApplicationHelper::getHash($id) : Utility::getHash($id);
+            $hash = JApplicationHelper::getHash($id);
             if ($check != $hash) {
                 JFactory::getApplication()->enqueueMessage(Text::_('K2_NOT_FOUND'), 'ERROR');
             }
@@ -949,7 +949,7 @@ class K2ModelItem extends K2Model
         $db->setQuery("SELECT * FROM #__k2_attachments WHERE itemID=" . (int)$itemID);
         $rows = $db->loadObjectList();
         foreach ($rows as $row) {
-            $hash = version_compare(JVERSION, '3.0', 'ge') ? JApplicationHelper::getHash($row->id) : Utility::getHash($row->id);
+            $hash = JApplicationHelper::getHash($row->id);
             $row->link = Route::_('index.php?option=com_k2&view=item&task=download&id=' . $row->id . '_' . $hash);
         }
         return $rows;
@@ -1088,45 +1088,7 @@ class K2ModelItem extends K2Model
 
     public function cleanText($text)
     {
-        if (version_compare(JVERSION, '2.5.0', 'ge')) {
-            $text = ComponentHelper::filterText($text);
-        } elseif (version_compare(JVERSION, '2.5.0', 'lt') && version_compare(JVERSION, '1.6.0', 'ge')) {
-            JLoader::register('ContentHelper', JPATH_ADMINISTRATOR . '/components/com_content/helpers/content.php');
-            $text = ContentHelper::filterText($text);
-        } else {
-            $config = ComponentHelper::getParams('com_content');
-            $user = Factory::getUser();
-            $gid = $user->get('gid');
-            $filterGroups = $config->get('filter_groups');
-
-            // Convert to array if one group is selected
-            if ((!is_array($filterGroups) && (int)$filterGroups > 0)) {
-                $filterGroups = array($filterGroups);
-            }
-
-            if (is_array($filterGroups) && in_array($gid, $filterGroups)) {
-                $filterType = $config->get('filter_type');
-                $filterTags = preg_split('#[,\s]+#', trim($config->get('filter_tags')));
-                $filterAttrs = preg_split('#[,\s]+#', trim($config->get('filter_attritbutes')));
-                switch ($filterType) {
-                    case 'NH':
-                        $filter = new InputFilter();
-                        break;
-                    case 'WL':
-                        $filter = new InputFilter($filterTags, $filterAttrs, 0, 0, 0);
-                        break;
-                    case 'BL':
-                    default:
-                        $filter = new InputFilter($filterTags, $filterAttrs, 1, 1);
-                        break;
-                }
-                $text = $filter->clean($text);
-            } elseif (empty($filterGroups) && $gid != '25') {
-                // No default filtering for super admin (gid=25)
-                $filter = new InputFilter(array(), array(), 1, 1);
-                $text = $filter->clean($text);
-            }
-        }
+        $text = ComponentHelper::filterText($text);
 
         return $text;
     }

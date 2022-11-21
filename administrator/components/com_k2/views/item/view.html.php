@@ -113,11 +113,7 @@ class K2ViewItem extends K2View
         }
 
         $lists = array();
-        if (version_compare(JVERSION, '1.6.0', 'ge')) {
-            $dateFormat = 'Y-m-d H:i:s';
-        } else {
-            $dateFormat = '%Y-%m-%d %H:%M:%S';
-        }
+        $dateFormat = 'Y-m-d H:i:s';
 
         // Date/time
         $created = $item->created;
@@ -172,10 +168,10 @@ class K2ViewItem extends K2View
         // Publishing
         $lists['published'] = JHTML::_('select.booleanlist', 'published', 'class="inputbox"', $item->published);
         $lists['featured'] = JHTML::_('select.booleanlist', 'featured', 'class="inputbox"', $item->featured);
-        $lists['access'] = version_compare(JVERSION, '2.5', 'ge') ? JHTML::_('access.level', 'access', $item->access, '', false) : str_replace('size="3"', "", JHTML::_('list.accesslevel', $item));
+        $lists['access'] = JHTML::_('access.level', 'access', $item->access, '', false);
 
         $query = "SELECT ordering AS value, title AS text FROM #__k2_items WHERE catid={$item->catid}";
-        $lists['ordering'] = version_compare(JVERSION, '3.0', 'ge') ? null : JHTML::_('list.specificordering', $item, $item->id, $query);
+        $lists['ordering'] = null;
 
         if (!$item->id) {
             $item->catid = $app->getUserStateFromRequest('com_k2itemsfilter_category', 'catid', 0, 'int');
@@ -186,10 +182,8 @@ class K2ViewItem extends K2View
         $categories = $categoriesModel->categoriesTree();
         $lists['catid'] = JHTML::_('select.genericlist', $categories, 'catid', 'class="inputbox"', 'value', 'text', $item->catid);
 
-        if (version_compare(JVERSION, '1.6.0', 'ge')) {
-            $languages = JHTML::_('contentlanguage.existing', true, true);
-            $lists['language'] = JHTML::_('select.genericlist', $languages, 'language', '', 'value', 'text', $item->language);
-        }
+        $languages = JHTML::_('contentlanguage.existing', true, true);
+        $lists['language'] = JHTML::_('select.genericlist', $languages, 'language', '', 'value', 'text', $item->language);
 
         $lists['checkSIG'] = $model->checkSIG();
         $lists['checkAllVideos'] = $model->checkAllVideos();
@@ -473,15 +467,11 @@ class K2ViewItem extends K2View
         $this->K2PluginsItemOther = $K2PluginsItemOther;
 
         // Parameters
-        if (version_compare(JVERSION, '1.6.0', 'ge')) {
-            jimport('joomla.form.form');
-            $form = Form::getInstance('itemForm', JPATH_COMPONENT_ADMINISTRATOR . '/models/item.xml');
-            $values = array('params' => json_decode($item->params));
-            $form->bind($values);
-        } else {
-            $form = new JParameter('', JPATH_COMPONENT_ADMINISTRATOR . '/models/item.xml');
-            $form->loadINI($item->params);
-        }
+        jimport('joomla.form.form');
+        $form = Form::getInstance('itemForm', JPATH_COMPONENT_ADMINISTRATOR . '/models/item.xml');
+        $values = array('params' => json_decode($item->params));
+        $form->bind($values);
+
         $this->form = $form;
 
         $nullDate = $db->getNullDate();
@@ -632,8 +622,7 @@ class K2ViewItem extends K2View
 
             JToolBarHelper::apply();
             JToolBarHelper::save();
-            $saveNewIcon = version_compare(JVERSION, '2.5.0', 'ge') ? 'save-new.png' : 'save.png';
-            JToolBarHelper::custom('saveAndNew', $saveNewIcon, 'save_f2.png', 'K2_SAVE_AND_NEW', false);
+            JToolBarHelper::custom('saveAndNew', 'save-new.png', 'save_f2.png', 'K2_SAVE_AND_NEW', false);
             JToolBarHelper::cancel();
         }
     }

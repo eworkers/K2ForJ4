@@ -199,7 +199,7 @@ class K2ControllerItems extends K2Controller
         $status = Factory::getApplication()->input->getInt('status');
         $response = Factory::getApplication()->input->getString('response');
         $date = Factory::getDate();
-        $now = version_compare(JVERSION, '2.5', 'ge') ? $date->toSql() : $date->toMySQL();
+        $now = $date->toSql();
         $db = Factory::getDbo();
 
         $query = 'DELETE FROM #__k2_log';

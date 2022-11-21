@@ -185,7 +185,6 @@ use Joomla\CMS\Language\Text;
                 <h3><?php echo Text::_('K2_METADATA_INFORMATION'); ?></h3>
                 <fieldset class="panelform">
                     <ul class="adminformlist">
-                        <?php if (version_compare(JVERSION, '1.6.0', 'ge')): ?>
                             <?php foreach ($this->form->getFieldset('category-metadata-information') as $field): ?>
                                 <li<?php if ($field->type == 'header') echo ' class="headerElement"'; ?>>
                                     <?php if ($field->type == 'header'): ?>
@@ -200,19 +199,6 @@ use Joomla\CMS\Language\Text;
                                     <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
-                        <?php else: ?>
-                            <?php foreach ($this->form->getParams('params', 'category-metadata-information') as $param): ?>
-                                <li>
-                                    <?php if ((string)$param[1] == '' || $param[5] == ''): ?>
-                                        <div class="paramValueHeader"><?php echo $param[1]; ?></div>
-                                    <?php else: ?>
-                                        <div class="paramLabel"><?php echo $param[0]; ?></div>
-                                        <div class="paramValue"><?php echo $param[1]; ?></div>
-                                        <div class="clr"></div>
-                                    <?php endif; ?>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
                     </ul>
                 </fieldset>
             </div>
@@ -238,7 +224,6 @@ use Joomla\CMS\Language\Text;
                 <h3 id="catLayoutOptions"><?php echo Text::_('K2_CATEGORY_ITEM_LAYOUT'); ?></h3>
                 <fieldset class="panelform">
                     <ul class="adminformlist">
-                        <?php if (version_compare(JVERSION, '1.6.0', 'ge')): ?>
                             <?php foreach ($this->form->getFieldset('category-item-layout') as $field): ?>
                                 <li<?php if ($field->type == 'header') echo ' class="headerElement"'; ?>>
                                     <?php if ($field->type == 'header'): ?>
@@ -253,26 +238,12 @@ use Joomla\CMS\Language\Text;
                                     <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
-                        <?php else: ?>
-                            <?php foreach ($this->form->getParams('params', 'category-item-layout') as $param): ?>
-                                <li<?php if ($field->type == 'header') echo ' class="headerElement"'; ?>>
-                                    <?php if ((string)$param[1] == '' || $param[5] == ''): ?>
-                                        <div class="paramValueHeader"><?php echo $param[1]; ?></div>
-                                    <?php else: ?>
-                                        <div class="paramLabel"><?php echo $param[0]; ?></div>
-                                        <div class="paramValue"><?php echo $param[1]; ?></div>
-                                        <div class="clr"></div>
-                                    <?php endif; ?>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
                     </ul>
                 </fieldset>
 
                 <h3 id="catViewOptions"><?php echo Text::_('K2_CATEGORY_VIEW_OPTIONS'); ?></h3>
                 <fieldset class="panelform">
                     <ul class="adminformlist">
-                        <?php if (version_compare(JVERSION, '1.6.0', 'ge')): ?>
                             <?php foreach ($this->form->getFieldset('category-view-options') as $field): ?>
                                 <li<?php if ($field->type == 'header') echo ' class="headerElement"'; ?>>
                                     <?php if ($field->type == 'header'): ?>
@@ -287,26 +258,12 @@ use Joomla\CMS\Language\Text;
                                     <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
-                        <?php else: ?>
-                            <?php foreach ($this->form->getParams('params', 'category-view-options') as $param): ?>
-                                <li>
-                                    <?php if ((string)$param[1] == '' || $param[5] == ''): ?>
-                                        <div class="paramValueHeader"><?php echo $param[1]; ?></div>
-                                    <?php else: ?>
-                                        <div class="paramLabel"><?php echo $param[0]; ?></div>
-                                        <div class="paramValue"><?php echo $param[1]; ?></div>
-                                        <div class="clr"></div>
-                                    <?php endif; ?>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
                     </ul>
                 </fieldset>
 
                 <h3 id="catImageOptions"><?php echo Text::_('K2_ITEM_IMAGE_OPTIONS'); ?></h3>
                 <fieldset class="panelform">
                     <ul class="adminformlist">
-                        <?php if (version_compare(JVERSION, '1.6.0', 'ge')): ?>
                             <?php foreach ($this->form->getFieldset('item-image-options') as $field): ?>
                                 <li<?php if ($field->type == 'header') echo ' class="headerElement"'; ?>>
                                     <?php if ($field->type == 'header'): ?>
@@ -321,26 +278,12 @@ use Joomla\CMS\Language\Text;
                                     <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
-                        <?php else: ?>
-                            <?php foreach ($this->form->getParams('params', 'item-image-options') as $param): ?>
-                                <li>
-                                    <?php if ((string)$param[1] == '' || $param[5] == ''): ?>
-                                        <div class="paramValueHeader"><?php echo $param[1]; ?></div>
-                                    <?php else: ?>
-                                        <div class="paramLabel"><?php echo $param[0]; ?></div>
-                                        <div class="paramValue"><?php echo $param[1]; ?></div>
-                                        <div class="clr"></div>
-                                    <?php endif; ?>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
                     </ul>
                 </fieldset>
 
                 <h3 id="catItemsOptions"><?php echo Text::_('K2_ITEM_VIEW_OPTIONS_IN_CATEGORY_LISTINGS'); ?></h3>
                 <fieldset class="panelform">
                     <ul class="adminformlist">
-                        <?php if (version_compare(JVERSION, '1.6.0', 'ge')): ?>
                             <?php foreach ($this->form->getFieldset('item-view-options-listings') as $field): ?>
                                 <li<?php if ($field->type == 'header') echo ' class="headerElement"'; ?>>
                                     <?php if ($field->type == 'header'): ?>
@@ -355,26 +298,12 @@ use Joomla\CMS\Language\Text;
                                     <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
-                        <?php else: ?>
-                            <?php foreach ($this->form->getParams('params', 'item-view-options-listings') as $param): ?>
-                                <li>
-                                    <?php if ((string)$param[1] == '' || $param[5] == ''): ?>
-                                        <div class="paramValueHeader"><?php echo $param[1]; ?></div>
-                                    <?php else: ?>
-                                        <div class="paramLabel"><?php echo $param[0]; ?></div>
-                                        <div class="paramValue"><?php echo $param[1]; ?></div>
-                                        <div class="clr"></div>
-                                    <?php endif; ?>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
                     </ul>
                 </fieldset>
 
                 <h3 id="catItemOptions"><?php echo Text::_('K2_ITEM_VIEW_OPTIONS'); ?></h3>
                 <fieldset class="panelform">
                     <ul class="adminformlist">
-                        <?php if (version_compare(JVERSION, '1.6.0', 'ge')): ?>
                             <?php foreach ($this->form->getFieldset('item-view-options') as $field): ?>
                                 <li<?php if ($field->type == 'header') echo ' class="headerElement"'; ?>>
                                     <?php if ($field->type == 'header'): ?>
@@ -389,19 +318,6 @@ use Joomla\CMS\Language\Text;
                                     <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
-                        <?php else: ?>
-                            <?php foreach ($this->form->getParams('params', 'item-view-options') as $param): ?>
-                                <li>
-                                    <?php if ((string)$param[1] == '' || $param[5] == ''): ?>
-                                        <div class="paramValueHeader"><?php echo $param[1]; ?></div>
-                                    <?php else: ?>
-                                        <div class="paramLabel"><?php echo $param[0]; ?></div>
-                                        <div class="paramValue"><?php echo $param[1]; ?></div>
-                                        <div class="clr"></div>
-                                    <?php endif; ?>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
                     </ul>
                 </fieldset>
             </div>

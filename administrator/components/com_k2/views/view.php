@@ -14,32 +14,26 @@ use Joomla\CMS\MVC\View\HtmlView;
 
 jimport('joomla.application.component.view');
 
-if (version_compare(JVERSION, '3.0', 'ge')) {
-    class K2View extends HtmlView
+class K2View extends HtmlView
+{
+    public function display($tpl = null)
     {
-        public function display($tpl = null)
-        {
-            // Allow for YOOtheme PRO Integration
-            $app = \Joomla\CMS\Factory::getApplication();
+        // Allow for YOOtheme PRO Integration
+        $app = \Joomla\CMS\Factory::getApplication();
 
-            // Only in YOOtheme PRO
-            if ($app->isClient('site') && stripos($app->getTemplate(), 'yootheme') === 0) {
+        // Only in YOOtheme PRO
+        if ($app->isClient('site') && stripos($app->getTemplate(), 'yootheme') === 0) {
 
-                // Trigger the custom YOOtheme Pro event
-                $app->triggerEvent('onLoadTemplate', [$this, $tpl]);
+            // Trigger the custom YOOtheme Pro event
+            $app->triggerEvent('onLoadTemplate', [$this, $tpl]);
 
-                // If the event overrode the output, print that output and don't display anything else
-                if ($this->_output) {
-                    echo $this->_output;
-                    return;
-                }
+            // If the event overrode the output, print that output and don't display anything else
+            if ($this->_output) {
+                echo $this->_output;
+                return;
             }
-
-            return parent::display($tpl);
         }
-    }
-} else {
-    class K2View extends JView
-    {
+
+        return parent::display($tpl);
     }
 }

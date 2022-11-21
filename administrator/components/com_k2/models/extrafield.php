@@ -278,18 +278,15 @@ class K2ModelExtraField extends K2Model
                 break;
 
             case 'select':
-                $attributes .= ' id="K2ExtraField_' . $extraField->id . '"';
                 $arrayAttributes['id'] = 'K2ExtraField_' . $extraField->id;
-                $attrs = version_compare(JVERSION, '3.2', 'ge') ? $arrayAttributes : $attributes;
+                $attrs = $arrayAttributes;
                 $output = JHTML::_('select.genericlist', $defaultValues, 'K2ExtraField_' . $extraField->id, $attrs, 'value', 'name', $active);
                 break;
 
             case 'multipleSelect':
-
-                $attributes .= ' id="K2ExtraField_' . $extraField->id . '" multiple="multiple"';
                 $arrayAttributes['id'] = 'K2ExtraField_' . $extraField->id;
                 $arrayAttributes['multiple'] = "multiple";
-                $attrs = version_compare(JVERSION, '3.2', 'ge') ? $arrayAttributes : $attributes;
+                $attrs = $arrayAttributes;
                 $output = JHTML::_('select.genericlist', $defaultValues, 'K2ExtraField_' . $extraField->id . '[]', $attrs, 'value', 'name', $active);
                 break;
 
@@ -297,7 +294,7 @@ class K2ModelExtraField extends K2Model
                 if (!$active && isset($defaultValues[0])) {
                     $active = $defaultValues[0]->value;
                 }
-                $attrs = version_compare(JVERSION, '3.2', 'ge') ? $arrayAttributes : $attributes;
+                $attrs = $arrayAttributes;
                 $output = JHTML::_('select.radiolist', $defaultValues, 'K2ExtraField_' . $extraField->id, $attrs, 'value', 'name', $active);
                 break;
 

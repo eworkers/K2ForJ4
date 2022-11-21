@@ -42,9 +42,6 @@ class K2ElementK2Category extends K2Element
         $option = Factory::getApplication()->input->getCmd('option');
         $prefix = ($option == 'com_joomfish') ? 'refField_' : '';
         if ($name == 'categories' || $name == 'jform[params][categories]') {
-            if (version_compare(JVERSION, '3.5', 'ge')) {
-                // removed in j4 HTMLHelper::_('behavior.framework');
-            }
             $doc = Factory::getDocument();
             $js = "
                 /* Mootools Snippet */

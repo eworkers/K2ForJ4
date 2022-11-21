@@ -426,7 +426,6 @@ use Joomla\CMS\Plugin\PluginHelper;
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                <?php if (version_compare(JVERSION, '2.5.0', 'ge')): ?>
                                     <tr>
                                         <td><strong>Finder - K2</strong></td>
                                         <td>
@@ -443,7 +442,6 @@ use Joomla\CMS\Plugin\PluginHelper;
                                             <?php endif; ?>
                                         </td>
                                     </tr>
-                                <?php endif; ?>
                                 <tr>
                                     <td><strong>Search - K2</strong></td>
                                     <td>

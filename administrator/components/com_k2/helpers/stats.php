@@ -20,16 +20,9 @@ class K2HelperStats
     public static function getScripts()
     {
         $data = self::getData();
-        $token = version_compare(JVERSION, '2.5', 'ge') ? Session::getFormToken() : Utility::getToken();
+        $token = Session::getFormToken();
 
-        if (version_compare(JVERSION, '1.6.0', 'ge')) {
-            // removed in j4 HTMLHelper::_('behavior.framework');
-        } else {
-            JHTML::_('behavior.mootools');
-        }
-        if (version_compare(JVERSION, '3.0.0', 'ge')) {
-            HTMLHelper::_('jquery.framework');
-        }
+        HTMLHelper::_('jquery.framework');
 
         $document = Factory::getDocument();
 
@@ -89,7 +82,7 @@ class K2HelperStats
     public static function getIdentifier()
     {
         $configuration = Factory::getConfig();
-        $secret = version_compare(JVERSION, '2.5', 'ge') ? $configuration->get('secret') : $configuration->getValue('config.secret');
+        $secret = $configuration->get('secret');
         return md5($secret . $_SERVER['SERVER_ADDR']);
     }
 
@@ -101,7 +94,7 @@ class K2HelperStats
     public static function getDbType()
     {
         $configuration = Factory::getConfig();
-        $type = version_compare(JVERSION, '2.5', 'ge') ? $configuration->get('dbtype') : $configuration->getValue('config.dbtype');
+        $type = $configuration->get('dbtype');
         if ($type == 'mysql' || $type == 'mysqli' || $type == 'pdomysql') {
             $db = Factory::getDbo();
             $query = 'SELECT version();';
@@ -144,13 +137,13 @@ class K2HelperStats
     public static function getCaching()
     {
         $configuration = Factory::getConfig();
-        return version_compare(JVERSION, '2.5', 'ge') ? $configuration->get('caching') : $configuration->getValue('config.caching');
+        return $configuration->get('caching');
     }
 
     public static function getCachingDriver()
     {
         $configuration = Factory::getConfig();
-        return version_compare(JVERSION, '2.5', 'ge') ? $configuration->get('cache_handler') : $configuration->getValue('config.cache_handler');
+        return $configuration->get('cache_handler');
     }
 
     public static function shouldLog()

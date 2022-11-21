@@ -20,9 +20,6 @@ class K2ElementItemForm extends K2Element
 {
     public function fetchElement($name, $value, &$node, $control_name)
     {
-        if (version_compare(JVERSION, '3.5', 'ge')) {
-            // removed in j4 HTMLHelper::_('behavior.framework');
-        }
         $document = Factory::getDocument();
         $document->addScriptDeclaration("
         	/* Mootools Snippet */

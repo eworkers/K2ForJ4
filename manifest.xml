@@ -9,8 +9,6 @@
     <version>2.11.0</version>
     <license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
     <description>Thank you for installing K2 by JoomlaWorks, the powerful content extension for Joomla</description>
-    <installfile>install.k2.php</installfile>
-    <uninstallfile>uninstall.k2.php</uninstallfile>
     <install>
         <sql>
             <file driver="mysqli" charset="utf8">install.mysql.sql</file>

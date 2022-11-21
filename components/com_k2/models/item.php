@@ -1352,7 +1352,7 @@ class K2ModelItem extends K2Model
         $db->setQuery($query);
         $rows = $db->loadObjectList();
         foreach ($rows as $row) {
-            $hash = version_compare(JVERSION, '3.0', 'ge') ? JApplicationHelper::getHash($row->id) : Utility::getHash($row->id);
+            $hash = JApplicationHelper::getHash($row->id);
             $row->link = Route::_('index.php?option=com_k2&view=item&task=download&id=' . $row->id . '_' . $hash);
         }
         $K2ItemAttachmentsInstances[$itemID] = $rows;

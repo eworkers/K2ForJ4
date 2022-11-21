@@ -33,12 +33,7 @@ class K2ControllerMedia extends K2Controller
     {
         // Check token
         $method = ($_POST) ? 'post' : 'get';
-        if (version_compare(JVERSION, '2.5', 'ge')) {
-            Session::checkToken($method) or jexit(Text::_('JINVALID_TOKEN'));
-        } else {
-            /* since J4 compatibility */;
-            JSession::checkToken($method) or jexit(Text::_('JINVALID_TOKEN'));
-        }
+        Session::checkToken($method) or jexit(Text::_('JINVALID_TOKEN'));
 
         $app = Factory::getApplication();
         $params = ComponentHelper::getParams('com_media');

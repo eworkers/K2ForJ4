@@ -94,7 +94,7 @@ class Com_K2InstallerScript
             $status->modules[] = array('name' => $name, 'client' => $client, 'result' => $result);
 
             if ($client == 'administrator' && !$k2AlreadyInstalled) {
-                $position = (version_compare(JVERSION, '3.0', '<') && $name == 'mod_k2_quickicons') ? 'icon' : 'cpanel';
+                $position = 'cpanel';
                 $db->setQuery("UPDATE #__modules SET `position`=".$db->quote($position).", `published`='1' WHERE `module`=".$db->quote($name));
                 $db->execute();
 
@@ -132,15 +132,6 @@ class Com_K2InstallerScript
             }
 
             $status->plugins[] = array('name' => $name, 'group' => $group, 'result' => $result);
-        }
-
-
-        // Install JoomFish elements
-        if (version_compare(JVERSION, '3.0', 'lt') && Folder::exists(JPATH_ADMINISTRATOR.'/components/com_joomfish/contentelements')) {
-            $elements = $manifest->xpath('joomfish/file');
-            foreach ($elements as $element) {
-                File::copy($src.'/administrator/components/com_joomfish/contentelements/'.$element->data(), JPATH_ADMINISTRATOR.'/components/com_joomfish/contentelements/'.$element->data());
-            }
         }
 
         // File Cleanups
@@ -238,18 +229,6 @@ class Com_K2InstallerScript
                     $result = $installer->uninstall('plugin', $id);
                 }
                 $status->plugins[] = array('name' => $name, 'group' => $group, 'result' => $result);
-            }
-        }
-
-        // Remove JoomFish elements
-        if (version_compare(JVERSION, '3.0', 'lt') && Folder::exists(JPATH_ADMINISTRATOR.'/components/com_joomfish/contentelements')) {
-            $elements = $manifest('joomfish/file');
-            if (is_array($elements)) {
-                foreach ($elements as $element) {
-                    if (File::exists(JPATH_ADMINISTRATOR.'/components/com_joomfish/contentelements/'.$element->data())) {
-                        File::delete(JPATH_ADMINISTRATOR.'/components/com_joomfish/contentelements/'.$element->data());
-                    }
-                }
             }
         }
 

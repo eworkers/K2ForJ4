@@ -950,7 +950,6 @@ $app = Factory::getApplication();
                         <div class="xmlParamsFields">
                             <fieldset class="panelform">
                                 <ul class="adminformlist">
-                                    <?php if (version_compare(JVERSION, '1.6.0', 'ge')): ?>
                                         <?php foreach ($this->form->getFieldset('item-view-options-listings') as $field): ?>
                                             <li<?php if ($field->type == 'header') echo ' class="headerElement"'; ?>>
                                                 <?php if ($field->type == 'header'): ?>
@@ -965,19 +964,6 @@ $app = Factory::getApplication();
                                                 <?php endif; ?>
                                             </li>
                                         <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <?php foreach ($this->form->getParams('params', 'item-view-options-listings') as $param): ?>
-                                            <li<?php if ((string)$param[1] == '' || $param[5] == '') echo ' class="headerElement"'; ?>>
-                                                <?php if ((string)$param[1] == '' || $param[5] == ''): ?>
-                                                    <div class="paramValueHeader"><?php echo $param[1]; ?></div>
-                                                <?php else: ?>
-                                                    <div class="paramLabel"><?php echo $param[0]; ?></div>
-                                                    <div class="paramValue"><?php echo $param[1]; ?></div>
-                                                    <div class="clr"></div>
-                                                <?php endif; ?>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
                                 </ul>
                             </fieldset>
                         </div>
@@ -986,7 +972,6 @@ $app = Factory::getApplication();
                         <div class="xmlParamsFields">
                             <fieldset class="panelform">
                                 <ul class="adminformlist">
-                                    <?php if (version_compare(JVERSION, '1.6.0', 'ge')): ?>
                                         <?php foreach ($this->form->getFieldset('item-view-options') as $field): ?>
                                             <li<?php if ($field->type == 'header') echo ' class="headerElement"'; ?>>
                                                 <?php if ($field->type == 'header'): ?>
@@ -1001,19 +986,6 @@ $app = Factory::getApplication();
                                                 <?php endif; ?>
                                             </li>
                                         <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <?php foreach ($this->form->getParams('params', 'item-view-options') as $param): ?>
-                                            <li<?php if ((string)$param[1] == '' || $param[5] == '') echo ' class="headerElement"'; ?>>
-                                                <?php if ((string)$param[1] == '' || $param[5] == ''): ?>
-                                                    <div class="paramValueHeader"><?php echo $param[1]; ?></div>
-                                                <?php else: ?>
-                                                    <div class="paramLabel"><?php echo $param[0]; ?></div>
-                                                    <div class="paramValue"><?php echo $param[1]; ?></div>
-                                                    <div class="clr"></div>
-                                                <?php endif; ?>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
                                 </ul>
                             </fieldset>
                         </div>

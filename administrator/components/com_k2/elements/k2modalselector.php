@@ -25,33 +25,21 @@ class K2ElementK2modalselector extends K2Element
 
         // Attributes
         $fieldID = 'fieldID_' . md5($name);
-        if (version_compare(JVERSION, '1.6.0', 'ge')) {
-            if ($node->attributes()->scope) {
-                $scope = $node->attributes()->scope;
+        if ($node->attributes()->scope) {
+            $scope = $node->attributes()->scope;
+        } else {
+            $scope = 'items';
+        }
+        if ($scope == 'items' || $scope == 'categories' || $scope == 'users' || $scope == 'tags') {
+            if (defined('K2_PLUGIN_API')) {
+                $fieldName = 'plugins[' . $name . '][]';
             } else {
-                $scope = 'items';
-            }
-            if ($scope == 'items' || $scope == 'categories' || $scope == 'users' || $scope == 'tags') {
-                if (defined('K2_PLUGIN_API')) {
-                    $fieldName = 'plugins[' . $name . '][]';
-                } else {
-                    $fieldName = $name . '[]';
-                }
-            } else {
-                $fieldName = $name;
+                $fieldName = $name . '[]';
             }
         } else {
-            if ($node->attributes('scope')) {
-                $scope = $node->attributes('scope');
-            } else {
-                $scope = 'items';
-            }
-            if ($scope == 'items' || $scope == 'categories' || $scope == 'users' || $scope == 'tags') {
-                $fieldName = $control_name . '[' . $name . '][]';
-            } else {
-                $fieldName = $control_name . '[' . $name . ']';
-            }
+            $fieldName = $name;
         }
+        
         if (!$value) {
             $value = '';
         }
