@@ -500,8 +500,6 @@ class K2ViewItem extends K2View
         Factory::getApplication()->input->set('hidemainmenu', 1);
 
         if ($app->isClient('administrator')) {
-            // Toolbar
-            JToolBarHelper::title($title, 'k2.png');
 
             // Tabs
             $this->params->set('showImageTab', true);
@@ -598,34 +596,45 @@ class K2ViewItem extends K2View
             }
         }
 
-        $this->addToolbar($item);
+        $this->addToolbar();
         parent::display($tpl);
     }
 
-    protected function addToolbar($item): void
+    protected function addToolbar(): void
     {
 
         // Get the toolbar object instance
         $toolbar = Toolbar::getInstance('toolbar');
+        // Toolbar
+        JToolBarHelper::title($this->title, 'k2.png');
 
-        $toolbar->apply('apply');
-        $toolbar->save('save');
-        $toolbar->standardButton('add', 'K2_SAVE_AND_NEW', 'saveAndNew');
-        $toolbar->cancel('cancel', 'JTOOLBAR_CANCEL');
+        if (version_compare(JVERSION, '4.0.0-dev', 'ge')) {
+            $toolbar->apply('apply');
+            $toolbar->save('save');
+            $toolbar->standardButton('add', 'K2_SAVE_AND_NEW', 'saveAndNew');
+            $toolbar->cancel('cancel', 'JTOOLBAR_CANCEL');
 
-        if ($item->id) {
-            JLoader::register('K2HelperRoute', JPATH_SITE . '/components/com_k2/helpers/route.php');
-            $url = urldecode(K2HelperRoute::getItemRoute($item->id . ':' . $item->alias, $item->catid));
-            $toolbar->preview(Route::link('site', $url, true, 0, true).'/?', 'JGLOBAL_PREVIEW')
-            ->bodyHeight(80)
-            ->modalWidth(90);
-
-            if (PluginHelper::isEnabled('system', 'jooa11y')) {
-                $toolbar->jooa11y(Route::link('site', $url . '&jooa11y=1', true, 0, true).'/?', 'JGLOBAL_JOOA11Y')
+            if ($this->row->id) {
+                JLoader::register('K2HelperRoute', JPATH_SITE . '/components/com_k2/helpers/route.php');
+                $url = urldecode(K2HelperRoute::getItemRoute($this->row->id . ':' . $this->row->alias, $this->row->catid));
+                $toolbar->preview(Route::link('site', $url, true, 0, true) . '/?', 'JGLOBAL_PREVIEW')
                     ->bodyHeight(80)
                     ->modalWidth(90);
+
+                if (PluginHelper::isEnabled('system', 'jooa11y')) {
+                    $toolbar->jooa11y(Route::link('site', $url . '&jooa11y=1', true, 0, true) . '/?', 'JGLOBAL_JOOA11Y')
+                        ->bodyHeight(80)
+                        ->modalWidth(90);
+                }
             }
         }
+        else{
 
+            JToolBarHelper::apply();
+            JToolBarHelper::save();
+            $saveNewIcon = version_compare(JVERSION, '2.5.0', 'ge') ? 'save-new.png' : 'save.png';
+            JToolBarHelper::custom('saveAndNew', $saveNewIcon, 'save_f2.png', 'K2_SAVE_AND_NEW', false);
+            JToolBarHelper::cancel();
+        }
     }
 }
