@@ -19,6 +19,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Pagination\Pagination;
 use Joomla\CMS\Table\Table;
+use Joomla\CMS\Toolbar\Toolbar;
 
 jimport('joomla.application.component.view');
 
@@ -140,33 +141,9 @@ class K2ViewUsers extends K2View
                 });
             ");
 
-            // Toolbar
-            $toolbar = JToolBar::getInstance('toolbar');
-            JToolBarHelper::title(Text::_('K2_USERS'), 'k2.png');
-
-            JToolBarHelper::editList();
-            JToolBarHelper::publishList('enable', 'K2_ENABLE');
-            JToolBarHelper::unpublishList('disable', 'K2_DISABLE');
-            JToolBarHelper::deleteList('K2_WARNING_YOU_ARE_ABOUT_TO_DELETE_THE_SELECTED_USERS_PERMANENTLY_FROM_THE_SYSTEM', 'delete', 'K2_DELETE');
-            JToolBarHelper::deleteList('K2_ARE_YOU_SURE_YOU_WANT_TO_RESET_SELECTED_USERS', 'remove', 'K2_RESET_USER_DETAILS');
-            JToolBarHelper::custom('move', 'move.png', 'move_f2.png', 'K2_MOVE', true);
-
-            $canImport = false;
-            $canImport = $user->authorise('core.admin', 'com_k2');
-            if ($canImport) {
-                if (!$params->get('hideImportButton')) {
-                    $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=users&amp;task=import';
-                    $buttonText = Text::_('K2_IMPORT_JOOMLA_USERS');
-                    $button = '<a id="K2ImportUsersButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive "></i>' . $buttonText . '</a>';
-                    $toolbar->appendButton('Custom', $button);
-                }
-            }
-
             $this->loadHelper('html');
             K2HelperHTML::subMenu();
 
-            // Preferences (Parameters/Settings)
-            JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
         }
         $isAdmin = $app->isClient('administrator');
         $this->isAdmin = $isAdmin;
@@ -179,6 +156,7 @@ class K2ViewUsers extends K2View
             $document->addStyleSheet(JURI::root(true) . '/templates/system/css/system.css');
         }
 
+        $this->addUsersToolbar();
         parent::display($tpl);
     }
 
@@ -227,4 +205,51 @@ class K2ViewUsers extends K2View
 
         parent::display();
     }
+
+    protected function addUsersToolbar(): void
+    {
+        $user = Factory::getApplication()->getIdentity();
+
+        // Get the toolbar object instance
+        $toolbar = Toolbar::getInstance('toolbar');
+        JToolBarHelper::title(Text::_('K2_USERS'), 'k2.png');
+
+        if (version_compare(JVERSION, '4.0.0-dev', 'ge')) {
+
+            $toolbar->edit('edit')->listCheck(true);
+            $toolbar->publish('publish', 'K2_ENABLE')->listCheck(true);
+            $toolbar->standardButton('unfeatured', 'K2_DISABLE', 'unpublish')->listCheck(true);
+            JToolBarHelper::deleteList('K2_WARNING_YOU_ARE_ABOUT_TO_DELETE_THE_SELECTED_USERS_PERMANENTLY_FROM_THE_SYSTEM', 'delete', 'K2_DELETE');
+            JToolBarHelper::deleteList('K2_ARE_YOU_SURE_YOU_WANT_TO_RESET_SELECTED_USERS', 'remove', 'K2_RESET_USER_DETAILS');
+            $toolbar->standardButton('move', 'K2_MOVE', 'move')->listCheck(true);
+            if ($user->authorise('core.admin', 'com_k2')) {
+                $toolbar->preferences('com_k2', 'K2_SETTINGS');
+                if (!$this->params->get('hideImportButton')) {
+                    $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=users&amp;task=import';
+                    $buttonText = Text::_('K2_IMPORT_JOOMLA_USERS');
+                    $button = '<joomla-toolbar-button id="toolbar-import-content"><a id="K2ImportUsersButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive"></i>' . $buttonText . '</a></joomla-toolbar-button>';
+                    $toolbar->customButton('Import')->html($button);
+                }
+            }
+        }
+        else {
+            JToolBarHelper::editList();
+            JToolBarHelper::publishList('enable', 'K2_ENABLE');
+            JToolBarHelper::unpublishList('disable', 'K2_DISABLE');
+            JToolBarHelper::deleteList('K2_WARNING_YOU_ARE_ABOUT_TO_DELETE_THE_SELECTED_USERS_PERMANENTLY_FROM_THE_SYSTEM', 'delete', 'K2_DELETE');
+            JToolBarHelper::deleteList('K2_ARE_YOU_SURE_YOU_WANT_TO_RESET_SELECTED_USERS', 'remove', 'K2_RESET_USER_DETAILS');
+            JToolBarHelper::custom('move', 'move.png', 'move_f2.png', 'K2_MOVE', true);
+            if ($user->authorise('core.admin', 'com_k2')) {
+                JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
+                if (!$this->params->get('hideImportButton')) {
+                    $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=users&amp;task=import';
+                    $buttonText = Text::_('K2_IMPORT_JOOMLA_USERS');
+                    $button = '<joomla-toolbar-button id="toolbar-import-content"><a id="K2ImportUsersButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive"></i>' . $buttonText . '</a></joomla-toolbar-button>';
+                    $toolbar->appendButton('Import', $button);
+
+                }
+            }
+        }
+    }
+
 }
