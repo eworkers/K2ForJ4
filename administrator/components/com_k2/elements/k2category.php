@@ -40,7 +40,6 @@ class K2ElementK2Category extends K2Element
         $list = JHTML::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0);
         $mitems = array();
         $option = Factory::getApplication()->input->getCmd('option');
-        $prefix = ($option == 'com_joomfish') ? 'refField_' : '';
         if ($name == 'categories' || $name == 'jform[params][categories]') {
             $doc = Factory::getDocument();
             $js = "

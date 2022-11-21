@@ -271,12 +271,4 @@
         <plugin plugin="k2" group="system" />
         <plugin plugin="k2" group="user" />
     </plugins>
-    <joomfish>
-        <file>k2_attachments.xml</file>
-        <file>k2_categories.xml</file>
-        <file>k2_extra_fields.xml</file>
-        <file>k2_items.xml</file>
-        <file>k2_tags.xml</file>
-        <file>k2_users.xml</file>
-    </joomfish>
 </install>

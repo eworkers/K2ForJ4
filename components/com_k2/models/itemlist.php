@@ -188,20 +188,6 @@ class K2ModelItemlist extends K2Model
 
                 jimport('joomla.filesystem.file');
 
-                if (File::exists(JPATH_ADMINISTRATOR . '/components/com_joomfish/joomfish.php') && $task == 'tag') {
-                    $lang = $config->get('jflang');
-
-                    $sql = "SELECT reference_id
-                        FROM #__jf_content AS jfc
-                        LEFT JOIN #__languages AS jfl ON jfc.language_id = jfl." . K2_JF_ID . "
-                        WHERE jfc.value = " . $db->Quote($tag) . "
-                            AND jfc.reference_table = 'k2_tags'
-                            AND jfc.reference_field = 'name'
-                            AND jfc.published=1";
-                    $db->setQuery($sql, 0, 1);
-                    $result = $db->loadResult();
-                }
-
                 if (File::exists(JPATH_ADMINISTRATOR . '/components/com_falang/falang.php') && $task == 'tag') {
                     $lang = $config->get('jflang');
 
@@ -687,106 +673,13 @@ class K2ModelItemlist extends K2Model
             $type = 'any';
         }
 
-        if (File::exists(JPATH_ADMINISTRATOR . '/components/com_joomfish/joomfish.php') && $currentLang != $defaultLang) {
-            $conditions = array();
-            $search_ignore = array();
+        if ($type == 'exact') {
+            $search = StringHelper::trim($search, '"');
 
-            $ignoreFile = $language->getLanguagePath() . '/' . $currentLang . '/' . $currentLang . '.ignore.php';
+            $escaped = $db->escape($search, true);
+            $quoted = $db->Quote('%' . $escaped . '%', false);
 
-            if (File::exists($ignoreFile)) {
-                include $ignoreFile;
-            }
-
-            if ($type == 'exact') {
-                $word = StringHelper::substr($search, 1, $length - 2);
-
-                if (StringHelper::strlen($word) > 3 && !in_array($word, $search_ignore)) {
-                    $escaped = $db->escape($word, true);
-                    $langField = 'lang_code';
-                    $word = $db->Quote('%' . $escaped . '%', false);
-
-                    $jfQuery = "SELECT reference_id
-                        FROM #__jf_content AS jfc
-                        LEFT JOIN #__languages AS jfl ON jfc.language_id = jfl." . K2_JF_ID . "
-                        WHERE jfc.reference_table = 'k2_items'
-                            AND jfl." . $langField . " = " . $db->Quote($currentLang) . "
-                            AND jfc.published = 1
-                            AND jfc.value LIKE " . $word . "
-                            AND (
-                                jfc.reference_field = 'title'
-                                OR jfc.reference_field = 'introtext'
-                                OR jfc.reference_field = 'fulltext'
-                                OR jfc.reference_field = 'image_caption'
-                                OR jfc.reference_field = 'image_credits'
-                                OR jfc.reference_field = 'video_caption'
-                                OR jfc.reference_field = 'video_credits'
-                                OR jfc.reference_field = 'extra_fields_search'
-                                OR jfc.reference_field = 'metadesc'
-                                OR jfc.reference_field = 'metakey'
-                            )";
-                    $db->setQuery($jfQuery);
-                    $result = $db->loadColumn();
-                    $result = @array_unique($result);
-                    ArrayHelper::toInteger($result);
-                    if (count($result)) {
-                        $conditions[] = "i.id IN(" . implode(',', $result) . ")";
-                    }
-                }
-            } else {
-                $search = explode(' ', StringHelper::strtolower($search));
-                foreach ($search as $searchword) {
-                    if (StringHelper::strlen($searchword) > 3 && !in_array($searchword, $search_ignore)) {
-                        $escaped = $db->escape($searchword, true);
-                        $word = $db->Quote('%' . $escaped . '%', false);
-                        $langField = 'lang_code';
-
-                        $jfQuery = "SELECT reference_id
-                            FROM #__jf_content AS jfc
-                            LEFT JOIN #__languages AS jfl ON jfc.language_id = jfl." . K2_JF_ID . "
-                            WHERE jfc.reference_table = 'k2_items'
-                                AND jfl." . $langField . " = " . $db->Quote($currentLang) . "
-                                AND jfc.published = 1
-                                AND jfc.value LIKE " . $word . "
-                                AND (
-                                    jfc.reference_field = 'title'
-                                    OR jfc.reference_field = 'introtext'
-                                    OR jfc.reference_field = 'fulltext'
-                                    OR jfc.reference_field = 'image_caption'
-                                    OR jfc.reference_field = 'image_credits'
-                                    OR jfc.reference_field = 'video_caption'
-                                    OR jfc.reference_field = 'video_credits'
-                                    OR jfc.reference_field = 'extra_fields_search'
-                                    OR jfc.reference_field = 'metadesc'
-                                    OR jfc.reference_field = 'metakey'
-                                )";
-                        $db->setQuery($jfQuery);
-                        $result = $db->loadColumn();
-                        $result = @array_unique($result);
-                        foreach ($result as $id) {
-                            $allIDs[] = $id;
-                        }
-
-                        if (File::exists(JPATH_ADMINISTRATOR . '/components/com_joomfish/joomfish.php') && $currentLang != $defaultLang) {
-                            if (isset($allIDs) && count($allIDs)) {
-                                ArrayHelper::toInteger($allIDs);
-                                $conditions[] = "i.id IN(" . implode(',', $allIDs) . ")";
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (count($conditions)) {
-                $sql .= " AND (" . implode(" OR ", $conditions) . ")";
-            }
-        } else {
-            if ($type == 'exact') {
-                $search = StringHelper::trim($search, '"');
-
-                $escaped = $db->escape($search, true);
-                $quoted = $db->Quote('%' . $escaped . '%', false);
-
-                $sql .= " AND (
+            $sql .= " AND (
                     LOWER(i.title) LIKE " . $quoted . " OR
                     LOWER(i.introtext) LIKE " . $quoted . " OR
                     LOWER(i.`fulltext`) LIKE " . $quoted . " OR
@@ -798,21 +691,21 @@ class K2ModelItemlist extends K2Model
                     LOWER(i.metadesc) LIKE " . $quoted . " OR
                     LOWER(i.metakey) LIKE " . $quoted . "
                 )";
+        } else {
+            $search = strtolower(trim(preg_replace('/[^\p{L}\p{N}\s\-_]/u', '', $search)));
+
+            $searchwords = explode(' ', $search);
+            if (count($searchwords)) {
             } else {
-                $search = strtolower(trim(preg_replace('/[^\p{L}\p{N}\s\-_]/u', '', $search)));
+                $searchwords = [$search];
+            }
 
-                $searchwords = explode(' ', $search);
-                if (count($searchwords)) {
-                } else {
-                    $searchwords = [$search];
-                }
+            foreach ($searchwords as $searchword) {
+                if (strlen($searchword) > 2) {
+                    $escaped = $db->escape($searchword, true);
+                    $quoted = $db->Quote('%' . $escaped . '%', false);
 
-                foreach ($searchwords as $searchword) {
-                    if (strlen($searchword) > 2) {
-                        $escaped = $db->escape($searchword, true);
-                        $quoted = $db->Quote('%' . $escaped . '%', false);
-
-                        $sql .= " AND (
+                    $sql .= " AND (
                             LOWER(i.title) LIKE " . $quoted . " OR
                             LOWER(i.introtext) LIKE " . $quoted . " OR
                             LOWER(i.`fulltext`) LIKE " . $quoted . " OR
@@ -824,7 +717,6 @@ class K2ModelItemlist extends K2Model
                             LOWER(i.metadesc) LIKE " . $quoted . " OR
                             LOWER(i.metakey) LIKE " . $quoted . "
                         )";
-                    }
                 }
             }
         }

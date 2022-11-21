@@ -194,25 +194,10 @@ class K2ModelItem extends K2Model
         /* since J4 compatibility */
         Factory::getApplication()->triggerEvent('onFinderBeforeSave', array('com_k2.item', $row, $isNew));
 
-        // JoomFish front-end editing compatibility
-        if ($app->isClient('site') && File::exists(JPATH_ADMINISTRATOR . '/components/com_joomfish/joomfish.php')) {
-            if (version_compare(phpversion(), '5.0') < 0) {
-                $tmpRow = $row;
-            } else {
-                $tmpRow = clone($row);
-            }
-        }
 
         if (!$row->store()) {
             $app->enqueueMessage($row->getError(), 'error');
             $app->redirect('index.php?option=com_k2&view=items');
-        }
-
-        // JoomFish front-end editing compatibility
-        if ($app->isClient('site') && File::exists(JPATH_ADMINISTRATOR . '/components/com_joomfish/joomfish.php')) {
-            $itemID = $row->id;
-            $row = $tmpRow;
-            $row->id = $itemID;
         }
 
         if (!$params->get('disableCompactOrdering')) {

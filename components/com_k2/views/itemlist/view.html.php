@@ -276,11 +276,6 @@ class K2ViewItemlist extends K2View
                     if (!$tag || !$tag->id) {
                         jimport('joomla.filesystem.file');
 
-                        if (File::exists(JPATH_ADMINISTRATOR . '/components/com_joomfish/joomfish.php')) {
-                            $db->setQuery('SELECT id, value FROM #__jf_content WHERE value = ' . $db->quote($tag));
-                            $tag = $db->loadObject();
-                        }
-
                         if (File::exists(JPATH_ADMINISTRATOR . '/components/com_falang/falang.php')) {
                             $db->setQuery('SELECT id, value FROM #__falang_content WHERE value = ' . $db->quote($tag));
                             $tag = $db->loadObject();
