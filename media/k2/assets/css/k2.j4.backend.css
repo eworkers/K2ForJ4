@@ -159,7 +159,7 @@
 }
 
 .isJ30 div#toolbar {
-    padding:0
+    padding: 0px 12px 0px calc(10% + 12px);
 }
 
 .isJ30 table.adminlist tfoot tr td .pagination {
