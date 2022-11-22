@@ -954,7 +954,7 @@ function extraFieldsImage() {
                 {
                     type:'iframe',
                     items: {
-                        src: K2BasePath + href,
+                        src: href,
                     },
                     overflowY:'hidden',
                     mainClass:'k2-j4-iframe-scaler',
