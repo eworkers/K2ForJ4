@@ -380,7 +380,7 @@ class Com_K2InstallerScript
         $db->setQuery($query);
         $db->execute();
 
-        $query = "ALTER TABLE #__k2_categories CHANGE `image` `image` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''";
+        $query = "ALTER TABLE #__k2_categories CHANGE `image` `image` VARCHAR(255) NOT NULL DEFAULT ''";
         $db->setQuery($query);
         $db->execute();
 
@@ -393,29 +393,29 @@ class Com_K2InstallerScript
         $db->setQuery($query);
         $db->execute();
 
-        $query = "ALTER TABLE #__k2_items CHANGE `image_credits` `image_credits` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''";
+        $query = "ALTER TABLE #__k2_items CHANGE `image_credits` `image_credits` VARCHAR(255) NOT NULL DEFAULT ''";
         $db->setQuery($query);
         $db->execute();
 
-        $query = "ALTER TABLE #__k2_items CHANGE `video_credits` `video_credits` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''";
+        $query = "ALTER TABLE #__k2_items CHANGE `video_credits` `video_credits` VARCHAR(255) NOT NULL DEFAULT ''";
         $db->setQuery($query);
         $db->execute();
 
         // tags
         // mysql5.6 key compatibility
-        $query = "ALTER TABLE #__k2_tags CHANGE `name` `name` VARCHAR(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL";
+        $query = "ALTER TABLE #__k2_tags CHANGE `name` `name` VARCHAR(191) NOT NULL";
         $db->setQuery($query);
         $db->execute();
 
         // user_groups
         // mysql5.6 key compatibility
-        $query = "ALTER TABLE #__k2_user_groups CHANGE `name` `name` VARCHAR(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL";
+        $query = "ALTER TABLE #__k2_user_groups CHANGE `name` `name` VARCHAR(191) NOT NULL";
         $db->setQuery($query);
         $db->execute();
 
         // users
         // mysql5.6 key compatibility
-        $query = "ALTER TABLE #__k2_users CHANGE `userName` `userName` VARCHAR(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL";
+        $query = "ALTER TABLE #__k2_users CHANGE `userName` `userName` VARCHAR(191) NOT NULL";
         $db->setQuery($query);
         $db->execute();
 
