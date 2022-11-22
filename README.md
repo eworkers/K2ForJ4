@@ -1,9 +1,13 @@
-# K2 for Joomla4
+# unofficial version of K2 for J39+ & Joomla4
 
-:bangbang: | This is an unfinished work, barely a start. It was an attempt to make K2 joomla4 compatible until the official JoomlaWorks version is out. Do not use it in production! (at least not its state)
-:---: | :---  
-
-### :warning: This attempt ends here because, it has generated unwanted inconveniences for some, but it might be useful to others to overflow it with confronted issues. Many features were broken while we were working on the attempt and many others has not been tested yet, so again: PLEASE! do not use it in production unless you found your way to fix these issues.
+### Instructions
+***
+1. Update K2 to the latest official version
+2. Update Joomla to the latest J3 version (Joomla! 3.10.11)
+3. Take a full backup (it is always a good idea).
+4. Download and install this K2 version.
+5. Upgrade Joomla3 to Joomla4
+6. Finally, we kindly ask you to test and report!
 
 ![K2](https://getk2.org/downloads/logo/k2_logo.png)
 ***  
