@@ -306,3 +306,8 @@ form input.text_area:focus,.k2ui-field-value input[type="text"]:focus {
     color:#212529;
     outline:0
 }
+
+.k2-j4-iframe-scaler .mfp-iframe-holder .mfp-content{
+    max-width: 95%;
+    max-height: 90%;
+}

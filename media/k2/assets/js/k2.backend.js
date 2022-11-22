@@ -38,6 +38,20 @@ $K2(document).ready(function() {
         }
     }
 
+    // function to replace squeezbox popup iframe with mfp in J4
+    function j4mfpIframe(src) {
+        $K2.magnificPopup.open(
+            {
+                type:'iframe',
+                items: {
+                    src: src,
+                },
+                overflowY:'hidden',
+                mainClass:'k2-j4-iframe-scaler',
+                iframe: {markup: '<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe></div>'}}
+        );
+    }
+
     // Set the site root path
     K2SitePath = getUrlParams('k2.backend.js', 'sitepath');
 
@@ -358,6 +372,7 @@ $K2(document).ready(function() {
             $K2('.k2Tabs').tabs();
             $K2('#k2ImageBrowseServer').click(function(event) {
                 event.preventDefault();
+                if(typeof SqueezeBox === 'object'){
                 SqueezeBox.initialize();
                 SqueezeBox.fromElement(this, {
                     handler: 'iframe',
@@ -367,6 +382,10 @@ $K2(document).ready(function() {
                         y: (window.innerHeight) * 0.9
                     }
                 });
+            }
+                else{
+                    j4mfpIframe(K2BasePath + 'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=existingImageValue');
+                }
             });
             break;
 
@@ -505,44 +524,73 @@ $K2(document).ready(function() {
             });
             $K2('#k2ImageBrowseServer').click(function(event) {
                 event.preventDefault();
-                SqueezeBox.initialize();
-                SqueezeBox.fromElement(this, {
-                    handler: 'iframe',
-                    url: K2BasePath + 'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=existingImageValue',
-                    size: {
-                        x: (window.innerWidth) * 0.9,
-                        y: (window.innerHeight) * 0.9
-                    }
-                });
+                if(typeof SqueezeBox === 'object'){
+                    SqueezeBox.initialize();
+                    SqueezeBox.fromElement(this, {
+                        handler: 'iframe',
+                        url: K2BasePath + 'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=existingImageValue',
+                        size: {
+                            x: (window.innerWidth) * 0.9,
+                            y: (window.innerHeight) * 0.9
+                        }
+                    });
+                }
+                else{
+                    j4mfpIframe(K2BasePath + 'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=existingImageValue');
+                }
             });
             $K2('#k2MediaBrowseServer').click(function(event) {
                 event.preventDefault();
-                SqueezeBox.initialize();
-                SqueezeBox.fromElement(this, {
-                    handler: 'iframe',
-                    url: K2BasePath + 'index.php?option=com_k2&view=media&type=video&tmpl=component&fieldID=remoteVideo',
-                    size: {
-                        x: (window.innerWidth) * 0.9,
-                        y: (window.innerHeight) * 0.9
-                    }
-                });
+                if(typeof SqueezeBox === 'object') {
+                    SqueezeBox.initialize();
+                    SqueezeBox.fromElement(this, {
+                        handler: 'iframe',
+                        url: K2BasePath + 'index.php?option=com_k2&view=media&type=video&tmpl=component&fieldID=remoteVideo',
+                        size: {
+                            x: (window.innerWidth) * 0.9,
+                            y: (window.innerHeight) * 0.9
+                        }
+                    });
+                }
+                else{
+                    j4mfpIframe(K2BasePath + 'index.php?option=com_k2&view=media&type=video&tmpl=component&fieldID=remoteVideo');
+                }
             });
             $K2('#itemAttachments').on('click', '.k2AttachmentBrowseServer', function(event) {
                 event.preventDefault();
                 var k2ActiveAttachmentField = $K2(this).prev();
                 k2ActiveAttachmentField.attr('id', 'k2ActiveAttachment');
-                SqueezeBox.initialize();
-                SqueezeBox.fromElement(this, {
-                    handler: 'iframe',
-                    url: K2BasePath + 'index.php?option=com_k2&view=media&type=attachment&tmpl=component&fieldID=k2ActiveAttachment',
-                    size: {
-                        x: (window.innerWidth) * 0.9,
-                        y: (window.innerHeight) * 0.9
-                    },
-                    onClose: function() {
-                        k2ActiveAttachmentField.removeAttr('id');
-                    }
-                });
+                if(typeof SqueezeBox === 'object') {
+                    SqueezeBox.initialize();
+                    SqueezeBox.fromElement(this, {
+                        handler: 'iframe',
+                        url: K2BasePath + 'index.php?option=com_k2&view=media&type=attachment&tmpl=component&fieldID=k2ActiveAttachment',
+                        size: {
+                            x: (window.innerWidth) * 0.9,
+                            y: (window.innerHeight) * 0.9
+                        },
+                        onClose: function () {
+                            k2ActiveAttachmentField.removeAttr('id');
+                        }
+                    });
+                }
+                else {
+                    $K2.magnificPopup.open(
+                        {
+                            type:'iframe',
+                            items: {
+                                src: K2BasePath + 'index.php?option=com_k2&view=media&type=attachment&tmpl=component&fieldID=k2ActiveAttachment',
+                            },
+                            overflowY:'hidden',
+                            mainClass:'k2-j4-iframe-scaler',
+                            callbacks: {
+                                afterClose: function() {
+                                    k2ActiveAttachmentField.removeAttr('id');
+                                }
+                            },
+                            iframe: {markup: '<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe></div>'}}
+                    );
+                }
             });
             $K2('.tagRemove').click(function(event) {
                 event.preventDefault();
@@ -890,15 +938,29 @@ function extraFieldsImage() {
     $K2('body').on('click', '.k2app-ef-image-button', function(event) {
         event.preventDefault();
         var href = $K2(this).attr('href');
-        SqueezeBox.initialize();
-        SqueezeBox.fromElement(this, {
-            handler: 'iframe',
-            url: K2BasePath + href,
-            size: {
-                x: (window.innerWidth) * 0.9,
-                y: (window.innerHeight) * 0.9
-            }
-        });
+        if(typeof SqueezeBox === 'object') {
+            SqueezeBox.initialize();
+            SqueezeBox.fromElement(this, {
+                handler: 'iframe',
+                url: K2BasePath + href,
+                size: {
+                    x: (window.innerWidth) * 0.9,
+                    y: (window.innerHeight) * 0.9
+                }
+            });
+        }
+    else {
+            $K2.magnificPopup.open(
+                {
+                    type:'iframe',
+                    items: {
+                        src: K2BasePath + href,
+                    },
+                    overflowY:'hidden',
+                    mainClass:'k2-j4-iframe-scaler',
+                    iframe: {markup: '<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe></div>'}}
+            );
+        }
     });
 }
 
@@ -1299,10 +1361,15 @@ function addAttachment() {
 // Media manager
 function elFinderUpdate(fieldID, value) {
     $K2('#' + fieldID).val(value);
-    if (typeof window.parent.SqueezeBox.close === 'function') {
-        SqueezeBox.close();
-    } else {
-        parent.$K2('#sbox-window').close();
+    if(typeof SqueezeBox === 'object') {
+        if (typeof window.parent.SqueezeBox.close === 'function') {
+            SqueezeBox.close();
+        } else {
+            parent.$K2('#sbox-window').close();
+        }
+    }
+    else {
+        $K2.magnificPopup.close();
     }
 }
 
