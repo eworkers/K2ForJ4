@@ -44,7 +44,7 @@ class K2ViewItem extends K2View
         jimport('joomla.html.pane');
 
         JHTML::_('behavior.keepalive');
-        // removed in j4 JHTML::_('behavior.modal');
+        if (version_compare(JVERSION, '4.0.0-dev', 'lt')) JHTML::_('behavior.modal');
 
         K2Model::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
         $model = K2Model::getInstance('Item', 'K2Model', array('table_path' => JPATH_COMPONENT_ADMINISTRATOR . '/tables'));

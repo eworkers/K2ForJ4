@@ -25,7 +25,7 @@ class K2ViewCategory extends K2View
     {
         $document = Factory::getDocument();
 
-        // removed in j4 JHTML::_('behavior.modal');
+        if (version_compare(JVERSION, '4.0.0-dev', 'lt')) JHTML::_('behavior.modal');
 
         $model = $this->getModel();
         $category = $model->getData();

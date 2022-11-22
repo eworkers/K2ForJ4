@@ -20,7 +20,7 @@ class K2ViewExtraField extends K2View
 {
     public function display($tpl = null)
     {
-        // removed in j4 JHTML::_('behavior.modal');
+        if (version_compare(JVERSION, '4.0.0-dev', 'lt')) JHTML::_('behavior.modal');
         JHTML::_('behavior.keepalive');
 
         $document = Factory::getDocument();
