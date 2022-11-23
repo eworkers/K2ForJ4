@@ -678,14 +678,25 @@ class K2ViewItemlist extends K2View
                 $hits = $items[$i]->hits;
                 $items[$i]->hits = 0;
                 Table::getInstance('K2Category', 'Table');
-                /* since J4 compatibility */
-                // workaround for removed call function
-                $args = array(array(
-                    $itemModel,
-                    'prepareItem'
-                ), $items[$i], $view, $task);
-                $callback = array_shift($args);
-                $items[$i] = $cache->get($callback, $args);
+                if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
+                    $key = ('k2_item' . $items[$i]->id . $items[$i]->alias);
+                    if ($cache->contains($key))
+                    {
+                        $items[$i] = $cache->get($key, 'com_k2_extended_j4');
+                    }
+                    else{
+                        $cache->store($items[$i], $key, 'com_k2_extended_j4', false);
+                    }
+                }
+                else{
+                    $args = array(array(
+                        $itemModel,
+                        'prepareItem'
+                    ), $items[$i], $view, $task);
+                    $callback = array_shift($args);
+                    $items[$i] = $cache->get($callback, $args);
+                }
+
                 $items[$i]->hits = $hits;
             } else {
                 $items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
