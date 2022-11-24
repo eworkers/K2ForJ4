@@ -553,7 +553,7 @@ class Com_K2InstallerScript
                 break;
             case 'php':
                 $php_err_msg = 'Your PHP version "'.PHP_VERSION. '" is not supported.\n This special version of K2 requires php"'.$this->minimumPHPVersion.'+" in order to run';
-                if (version_compare(PHP_VERSION, $this->minimumPHPVersion, 'l'))
+                if (version_compare(PHP_VERSION, $this->minimumPHPVersion, 'lt'))
                 {
                     $this->app->enqueueMessage(
                         JText::_($php_err_msg),
