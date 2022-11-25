@@ -60,7 +60,7 @@ class K2ControllerComments extends K2Controller
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
         if ($user->guest) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         K2Model::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
         $model = K2Model::getInstance('Comments', 'K2Model');
@@ -75,7 +75,7 @@ class K2ControllerComments extends K2Controller
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
         if ($user->guest) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         K2Model::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
         $model = K2Model::getInstance('Comments', 'K2Model');
@@ -90,7 +90,7 @@ class K2ControllerComments extends K2Controller
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
         if ($user->guest) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         K2Model::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
         $model = K2Model::getInstance('Comments', 'K2Model');
@@ -105,7 +105,7 @@ class K2ControllerComments extends K2Controller
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
         if ($user->guest) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         K2Model::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
         $model = K2Model::getInstance('Comments', 'K2Model');
@@ -120,7 +120,7 @@ class K2ControllerComments extends K2Controller
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
         if ($user->guest) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         K2Model::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
         $model = K2Model::getInstance('Comments', 'K2Model');
@@ -143,7 +143,7 @@ class K2ControllerComments extends K2Controller
         $params = K2HelperUtilities::getParams('com_k2');
         $user = Factory::getUser();
         if (!$params->get('comments') || !$params->get('commentsReporting') || ($params->get('commentsReporting') == '2' && $user->guest)) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         K2Model::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
         $model = K2Model::getInstance('Comments', 'K2Model');
@@ -166,7 +166,7 @@ class K2ControllerComments extends K2Controller
         $format = Factory::getApplication()->input->getVar('format');
         $errors = array();
         if (!$user->authorise('core.admin', 'com_k2')) {
-            $format == 'raw' ? die(Text::_('K2_ALERTNOTAUTH')) : JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            $format == 'raw' ? die(Text::_('K2_ALERTNOTAUTH')) : throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);;
         }
         K2Model::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_k2/models');
         $model = K2Model::getInstance('User', 'K2Model');

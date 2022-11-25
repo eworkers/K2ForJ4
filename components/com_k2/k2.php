@@ -66,7 +66,7 @@ if (File::exists(JPATH_COMPONENT.'/controllers/'.$controller.'.php'))
 }
 else
 {
-    JFactory::getApplication()->enqueueMessage(Text::_('K2_NOT_FOUND'), 'ERROR');
+    throw new \Exception(Text::_('K2_NOT_FOUND'), 404);
 }
 
 if (Factory::getApplication()->input->getCmd('format') != 'json')

@@ -153,7 +153,7 @@ class K2ControllerItem extends K2Controller
     {
         $user = Factory::getUser();
         if ($user->guest) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         require_once(JPATH_COMPONENT_ADMINISTRATOR . '/models/tag.php');
         $model = new K2ModelTag;
@@ -304,7 +304,7 @@ class K2ControllerItem extends K2Controller
         Factory::getApplication()->input->set('tmpl', 'component');
         $user = Factory::getUser();
         if ($user->guest) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         require_once(JPATH_COMPONENT_ADMINISTRATOR . '/controllers/media.php');
         $controller = new K2ControllerMedia();
@@ -318,11 +318,11 @@ class K2ControllerItem extends K2Controller
         $item = Table::getInstance('K2Item', 'Table');
         $item->load($itemID);
         if (!K2HelperPermissions::canAddItem() && !K2HelperPermissions::canEditItem($item->created_by, $item->catid)) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         $K2Permissions = K2Permissions::getInstance();
         if (!$K2Permissions->permissions->get('editAll')) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         Factory::getApplication()->input->set('tmpl', 'component');
         $app = Factory::getApplication();
