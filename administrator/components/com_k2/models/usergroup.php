@@ -48,8 +48,7 @@ class K2ModelUserGroup extends K2Model
             $app->redirect('index.php?option=com_k2&view=usergroups');
         }
 
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
 
         switch (Factory::getApplication()->input->getCmd('task')) {
             case 'apply':

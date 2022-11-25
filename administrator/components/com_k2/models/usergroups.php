@@ -72,8 +72,7 @@ class K2ModelUserGroups extends K2Model
             $row->load($id);
             $row->delete($id);
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $app->enqueueMessage(Text::_('K2_DELETE_COMPLETED'));
         $app->redirect('index.php?option=com_k2&view=usergroups');
     }
