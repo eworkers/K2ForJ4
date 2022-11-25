@@ -147,8 +147,7 @@ class K2ModelCategory extends K2Model
             $app->redirect('index.php?option=com_k2&view=categories');
         }
 
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
 
         // Trigger K2 plugins
         /* since J4 compatibility */

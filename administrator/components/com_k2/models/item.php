@@ -771,8 +771,7 @@ class K2ModelItem extends K2Model
 
         $row->checkin();
 
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
 
         // Trigger K2 plugins
         /* since J4 compatibility */
