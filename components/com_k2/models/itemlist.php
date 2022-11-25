@@ -732,7 +732,7 @@ class K2ModelItemlist extends K2Model
         $module = $db->loadObject();
         $format = Factory::getApplication()->input->getWord('format');
         if (is_null($module)) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_NOT_FOUND'), 'ERROR');
+            throw new \Exception(Text::_('K2_NOT_FOUND'), 404);
         } else {
             $params = class_exists('JParameter') ? new JParameter($module->params) : new Registry($module->params);
             switch ($module->module) {
@@ -745,7 +745,7 @@ class K2ModelItemlist extends K2Model
 
                 case 'mod_k2_comments':
                     if ($params->get('module_usage') == 1) {
-                        JFactory::getApplication()->enqueueMessage(Text::_('K2_NOT_FOUND'), 'ERROR');
+                        throw new \Exception(Text::_('K2_NOT_FOUND'), 404);
                     }
 
                     require_once(JPATH_SITE . '/modules/mod_k2_comments/helper.php');
@@ -761,7 +761,7 @@ class K2ModelItemlist extends K2Model
                     break;
 
                 default:
-                    JFactory::getApplication()->enqueueMessage(Text::_('K2_NOT_FOUND'), 'ERROR');
+                    throw new \Exception(Text::_('K2_NOT_FOUND'), 404);
             }
 
             $result = new stdClass;

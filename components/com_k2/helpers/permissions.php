@@ -130,7 +130,7 @@ class K2HelperPermissions
 
             case 'add':
                 if (!K2HelperPermissions::canAddItem()) {
-                    JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                    throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                 }
                 break;
 
@@ -149,7 +149,7 @@ class K2HelperPermissions
                             echo '<script>parent.location.href = "' . Uri::root() . '";</script>';
                             exit;
                         } else {
-                            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                         }
                     }
                 }
@@ -163,11 +163,11 @@ class K2HelperPermissions
                     $item->load($cid);
 
                     if (!K2HelperPermissions::canEditItem($item->created_by, $item->catid)) {
-                        JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                        throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                     }
                 } else {
                     if (!K2HelperPermissions::canAddItem()) {
-                        JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                        throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                     }
                 }
 
@@ -175,13 +175,13 @@ class K2HelperPermissions
 
             case 'tag':
                 if (!K2HelperPermissions::canAddTag()) {
-                    JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                    throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                 }
                 break;
 
             case 'extraFields':
                 if (!K2HelperPermissions::canRenderExtraFields()) {
-                    JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                    throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                 }
                 break;
         }
