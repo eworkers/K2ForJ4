@@ -60,7 +60,7 @@ class K2ControllerItem extends K2Controller
     {
         $user = Factory::getUser();
         if ($user->guest) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
         $model = $this->getModel('tag');
         $model->tags();

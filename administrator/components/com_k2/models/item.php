@@ -221,7 +221,7 @@ class K2ModelItem extends K2Model
 
         if ($params->get('taggingSystem') == 'free') {
             if ($user->gid < 24 && $params->get('lockTags')) {
-                JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
             }
 
             $tags = Factory::getApplication()->input->getVar('tags', null, 'POST', 'array');
@@ -869,7 +869,7 @@ class K2ModelItem extends K2Model
             $check = StringHelper::substr($token, StringHelper::strpos($token, '_') + 1);
             $hash = JApplicationHelper::getHash($id);
             if ($check != $hash) {
-                JFactory::getApplication()->enqueueMessage(Text::_('K2_NOT_FOUND'), 'ERROR');
+                throw new \Exception(Text::_('K2_NOT_FOUND'), 404);
             }
         }
         $attachment->load($id);
@@ -881,11 +881,11 @@ class K2ModelItem extends K2Model
             $category = Table::getInstance('K2Category', 'Table');
             $category->load($item->catid);
             if (!$item->id || !$category->id) {
-                JFactory::getApplication()->enqueueMessage(Text::_('K2_NOT_FOUND'), 'ERROR');
+                throw new \Exception(Text::_('K2_NOT_FOUND'), 404);
             }
 
             if ((!in_array($category->access, $user->getAuthorisedViewLevels()) || !in_array($item->access, $user->getAuthorisedViewLevels()))) {
-                JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
             }
         }
 

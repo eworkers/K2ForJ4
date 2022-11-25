@@ -45,7 +45,7 @@ if (
         $view=='usergroups'
     )
 ) {
-    JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+    throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
 }
 
 $document = Factory::getDocument();

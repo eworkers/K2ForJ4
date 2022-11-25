@@ -78,7 +78,7 @@ class K2ModelTag extends K2Model
         $user = Factory::getUser();
         $params = ComponentHelper::getParams('com_k2');
         if ($user->gid < 24 && $params->get('lockTags')) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
 
         $tag = Factory::getApplication()->input->getString('tag');

@@ -233,7 +233,7 @@ class K2ModelComments extends K2Model
                 $item = Table::getInstance('K2Item', 'Table');
                 $item->load($row->itemID);
                 if ($item->created_by != $user->id) {
-                    JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                    throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                     $app->close();
                 }
             }
@@ -265,7 +265,7 @@ class K2ModelComments extends K2Model
                 $item = Table::getInstance('K2Item', 'Table');
                 $item->load($row->itemID);
                 if ($item->created_by != $user->id) {
-                    JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                    throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                     $app->close();
                 }
             }
@@ -297,7 +297,7 @@ class K2ModelComments extends K2Model
                 $item = Table::getInstance('K2Item', 'Table');
                 $item->load($row->itemID);
                 if ($item->created_by != $user->id) {
-                    JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                    throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                     $app->close();
                 }
             }
@@ -362,7 +362,7 @@ class K2ModelComments extends K2Model
         if ($app->isClient('site')) {
             $item->load($row->itemID);
             if ($item->created_by != $user->id) {
-                JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
             }
         }
         $row->commentText = Factory::getApplication()->input->getVar('commentText', '', 'default', 'string', 4);
