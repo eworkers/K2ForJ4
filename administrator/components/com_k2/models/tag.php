@@ -49,8 +49,7 @@ class K2ModelTag extends K2Model
             $app->redirect('index.php?option=com_k2&view=tags');
         }
 
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
 
         switch (Factory::getApplication()->input->getCmd('task')) {
             case 'apply':
@@ -110,8 +109,7 @@ class K2ModelTag extends K2Model
         $row->published = 1;
         $row->store();
 
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
 
         $response->id = $row->id;
         $response->status = 'success';

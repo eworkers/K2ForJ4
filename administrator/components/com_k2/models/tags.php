@@ -102,8 +102,7 @@ class K2ModelTags extends K2Model
             $row->published = 1;
             $row->store();
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=tags&tmpl=component&context=modalselector');
         } else {
@@ -121,8 +120,7 @@ class K2ModelTags extends K2Model
             $row->published = 0;
             $row->store();
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=tags&tmpl=component&context=modalselector');
         } else {
@@ -140,8 +138,7 @@ class K2ModelTags extends K2Model
             $row->load($id);
             $row->delete($id);
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $app->enqueueMessage(Text::_('K2_DELETE_COMPLETED'));
         $app->redirect('index.php?option=com_k2&view=tags');
     }
