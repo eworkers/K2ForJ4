@@ -157,8 +157,7 @@ class K2ModelUsers extends K2Model
         $query = "DELETE FROM #__k2_users WHERE userID IN(" . implode(',', $cid) . ")";
         $db->setQuery($query);
         $db->execute();
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $app->enqueueMessage(Text::_('K2_USER_PROFILE_DELETED'));
         $app->redirect('index.php?option=com_k2&view=users');
     }
