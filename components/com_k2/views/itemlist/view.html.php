@@ -126,7 +126,8 @@ class K2ViewItemlist extends K2View
 
                     // State check
                     if (!$category->published || $category->trash) {
-                        JFactory::getApplication()->enqueueMessage(Text::_('K2_CATEGORY_NOT_FOUND'), 'ERROR');
+                        $app->setHeader('status', 404, true);
+                        throw new \Exception(Text::_('K2_CATEGORY_NOT_FOUND'), 404);
                     }
 
                     // Access check
@@ -137,7 +138,8 @@ class K2ViewItemlist extends K2View
                             $app->enqueueMessage(Text::_('K2_YOU_NEED_TO_LOGIN_FIRST'), 'notice');
                             $app->redirect(Route::_($url, false));
                         } else {
-                            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                            $app->setHeader('status', 403, true);
+                            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
                             return;
                         }
                     }
@@ -285,7 +287,8 @@ class K2ViewItemlist extends K2View
                             if ($document->getType() == 'feed' || $document->getType() == 'json') {
                                 $app->redirect(Uri::root());
                             } else {
-                                JFactory::getApplication()->enqueueMessage(Text::_('K2_NOT_FOUND'), 'ERROR');
+                                $app->setHeader('status', 404, true);
+                                throw new \Exception(Text::_('K2_NOT_FOUND'), 404);
                                 return false;
                             }
                         }
@@ -334,7 +337,8 @@ class K2ViewItemlist extends K2View
 
                     // Check user status
                     if ($userObject->block) {
-                        JFactory::getApplication()->enqueueMessage(Text::_('K2_USER_NOT_FOUND'), 'ERROR');
+                        $app->setHeader('status', 404, true);
+                        throw new \Exception(Text::_('K2_USER_NOT_FOUND'), 404);
                     }
 
                     // Get K2 user profile

@@ -28,11 +28,11 @@ class K2ViewComments extends K2View
         $row = Table::getInstance('K2Comment', 'Table');
         $row->load(Factory::getApplication()->input->getInt('commentID'));
         if (!$row->published) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_NOT_FOUND'), 'ERROR');
+            throw new \Exception(Text::_('K2_NOT_FOUND'), 404);
         }
 
         if (!$params->get('comments') || !$params->get('commentsReporting') || ($params->get('commentsReporting') == '2' && $user->guest)) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
 
         // B/C code for reCAPTCHA
