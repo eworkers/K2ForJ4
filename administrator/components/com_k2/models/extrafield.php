@@ -145,8 +145,7 @@ class K2ModelExtraField extends K2Model
             $row->reorder("`group` = " . (int)$row->group);
         }
 
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
 
         switch (Factory::getApplication()->input->getCmd('task')) {
             case 'apply':

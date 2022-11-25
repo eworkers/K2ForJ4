@@ -240,8 +240,7 @@ class K2ModelComments extends K2Model
             $row->published = 1;
             $row->store();
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         if (Factory::getApplication()->input->getCmd('format') == 'raw') {
             echo 'true';
             $app->close();
@@ -272,8 +271,7 @@ class K2ModelComments extends K2Model
             $row->published = 0;
             $row->store();
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=comments&tmpl=component&context=modalselector');
         } else {
@@ -303,8 +301,7 @@ class K2ModelComments extends K2Model
             }
             $row->delete($id);
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         if (Factory::getApplication()->input->getCmd('format') == 'raw') {
             echo 'true';
             $app->close();
@@ -340,8 +337,7 @@ class K2ModelComments extends K2Model
             $db->execute();
         }
 
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $app->enqueueMessage(Text::_('K2_DELETE_COMPLETED'));
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=comments&tmpl=component&context=modalselector');
@@ -367,8 +363,7 @@ class K2ModelComments extends K2Model
         }
         $row->commentText = Factory::getApplication()->input->getVar('commentText', '', 'default', 'string', 4);
         $row->store();
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $response = new stdClass;
         $response->comment = $row->commentText;
         $response->message = Text::_('K2_COMMENT_SAVED');

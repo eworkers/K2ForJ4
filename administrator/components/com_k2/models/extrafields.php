@@ -123,8 +123,7 @@ class K2ModelExtraFields extends K2Model
             $row->published = 1;
             $row->store();
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $app->redirect('index.php?option=com_k2&view=extrafields');
     }
 
@@ -138,8 +137,7 @@ class K2ModelExtraFields extends K2Model
             $row->published = 0;
             $row->store();
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $app->redirect('index.php?option=com_k2&view=extrafields');
     }
 
@@ -174,8 +172,7 @@ class K2ModelExtraFields extends K2Model
                 $row->reorder("`group` = " . (int)$group);
             }
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         return true;
     }
 
@@ -190,8 +187,7 @@ class K2ModelExtraFields extends K2Model
         if (!$params->get('disableCompactOrdering')) {
             $row->reorder("`group` = " . (int)$row->group);
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $msg = Text::_('K2_NEW_ORDERING_SAVED');
         $app->enqueueMessage($msg);
         $app->redirect('index.php?option=com_k2&view=extrafields');
@@ -208,8 +204,7 @@ class K2ModelExtraFields extends K2Model
         if (!$params->get('disableCompactOrdering')) {
             $row->reorder("`group` = " . (int)$row->group);
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $msg = Text::_('K2_NEW_ORDERING_SAVED');
         $app->enqueueMessage($msg);
         $app->redirect('index.php?option=com_k2&view=extrafields');
@@ -225,8 +220,7 @@ class K2ModelExtraFields extends K2Model
             $row->load($id);
             $row->delete($id);
         }
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $app->enqueueMessage(Text::_('K2_DELETE_COMPLETED'));
         $app->redirect('index.php?option=com_k2&view=extrafields');
     }
@@ -313,8 +307,7 @@ class K2ModelExtraFields extends K2Model
                 break;
         }
 
-        $cache = Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $app->enqueueMessage($msg);
         $app->redirect($link);
     }
@@ -333,8 +326,7 @@ class K2ModelExtraFields extends K2Model
             $db->execute();
             $row->delete($id);
         }
-        $cache = &Factory::getCache('com_k2');
-        $cache->clean();
+        parent::cleanCache('com_k2');
         $app->enqueueMessage(Text::_('K2_DELETE_COMPLETED'));
         $app->redirect('index.php?option=com_k2&view=extrafieldsgroups');
     }
