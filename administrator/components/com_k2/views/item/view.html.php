@@ -60,10 +60,10 @@ class K2ViewItem extends K2View
         if ($app->isClient('site')) {
             JLoader::register('K2HelperPermissions', JPATH_COMPONENT . '/helpers/permissions.php');
             if ($task == 'edit' && !K2HelperPermissions::canEditItem($item->created_by, $item->catid)) {
-                JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
             }
             if ($task == 'add' && !K2HelperPermissions::canAddItem()) {
-                JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
             }
 
             // Get user permissions
