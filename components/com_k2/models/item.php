@@ -798,15 +798,15 @@ class K2ModelItem extends K2Model
         // Access check
         $user = Factory::getUser();
         if (!in_array($item->access, $user->getAuthorisedViewLevels()) || !in_array($category->access, $user->getAuthorisedViewLevels())) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
         }
 
         // Published check
         if (!$item->published || $item->trash) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ITEM_NOT_FOUND'), 'ERROR');
+            throw new \Exception(Text::_('K2_ITEM_NOT_FOUND'), 404);
         }
         if (!$category->published || $category->trash) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ITEM_NOT_FOUND'), 'ERROR');
+            throw new \Exception(Text::_('K2_CATEGORY_NOT_FOUND'), 404);
         }
 
         $rate = Factory::getApplication()->input->getVar('user_rating', 0, '', 'int');
@@ -923,15 +923,15 @@ class K2ModelItem extends K2Model
 
         // Access check
         if (!in_array($item->access, $user->getAuthorisedViewLevels()) || !in_array($category->access, $user->getAuthorisedViewLevels())) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 404);
         }
 
         // Published check
         if (!$item->published || $item->trash) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ITEM_NOT_FOUND'), 'ERROR');
+            throw new \Exception(Text::_('K2_ITEM_NOT_FOUND'), 404);
         }
         if (!$category->published || $category->trash) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ITEM_NOT_FOUND'), 'ERROR');
+            throw new \Exception(Text::_('K2_CATEGORY_NOT_FOUND'), 404);
         }
 
         // Check permissions

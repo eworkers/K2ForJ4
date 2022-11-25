@@ -66,7 +66,8 @@ class K2ViewItem extends K2View
 
         // Check if item exists
         if (!is_object($item) || !$item->id) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ITEM_NOT_FOUND'), 'ERROR');
+            $app->setHeader('status', 404, true);
+            throw new \Exception(Text::_('K2_ITEM_NOT_FOUND'), 404);
         }
 
         // --- JSON Output [start] ---
@@ -138,10 +139,15 @@ class K2ViewItem extends K2View
             !$item->published ||
             $item->trash ||
             ($item->publish_up != $nullDate && $item->publish_up > $now) ||
-            ($item->publish_down != $nullDate && $item->publish_down < $now) ||
-            (!$item->category->published || $item->category->trash)
+            ($item->publish_down != $nullDate && $item->publish_down < $now)
         ) {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ITEM_NOT_FOUND'), 'ERROR');
+            $app->setHeader('status', 404, true);
+            throw new \Exception(Text::_('K2_ITEM_NOT_FOUND'), 404);
+        }
+
+        if (!$item->category->published || $item->category->trash) {
+            $app->setHeader('status', 404, true);
+            throw new \Exception(Text::_('K2_CATEGORY_NOT_FOUND'), 404);
         }
 
         // Increase item hits counter
