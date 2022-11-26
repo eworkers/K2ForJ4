@@ -132,11 +132,33 @@ class K2ViewLatest extends K2View
                             for ($i = 0; $i < count($category->items); $i++) {
                                 $hits = $category->items[$i]->hits;
                                 $category->items[$i]->hits = 0;
-                                /* since J4 compatibility */
-                                // workaround for removed call function
-                                $args = array(array($itemModel, 'prepareItem'), $category->items[$i], 'latest', '');
-                                $callback = array_shift($args);
-                                $category->items[$i] = $cache->get($callback, $args);
+                                if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
+                                    $key = ('k2_item_CatLatest' . $category->items[$i]->id . $category->items[$i]->alias);
+                                    if ($cache->contains($key))
+                                    {
+                                        $category->items[$i]= $cache->get($key, 'com_k2_extended');
+                                    }
+                                    else{
+                                        $category->items[$i] = $itemModel->prepareItem($category->items[$i], 'latest', '');
+                                        $store = $category->items[$i];
+                                        if (is_object($store)) {
+                                           $store = json_encode($store);
+                                           $store = json_decode(trim ($store, chr (239). chr (187). chr (191)), true );
+                                        }
+                                        try{
+                                            $cache->store($store, $key);
+                                        } catch (\Exception $e) {
+                                            // for the moment settle to miss caching the query returned object
+                                            // throw new \Exception(Text::_($e), 500);
+                                        }
+                                    }
+                                }
+                                else{
+                                    $args = array(array($itemModel, 'prepareItem'), $category->items[$i], 'latest', '');
+                                    $callback = array_shift($args);
+                                    $category->items[$i] = $cache->get($callback, $args);
+                                }
+
                                 $category->items[$i]->hits = $hits;
                                 $category->items[$i] = $itemModel->execPlugins($category->items[$i], 'latest', '');
 
@@ -194,11 +216,36 @@ class K2ViewLatest extends K2View
                             for ($i = 0; $i < count($userObject->items); $i++) {
                                 $hits = $userObject->items[$i]->hits;
                                 $userObject->items[$i]->hits = 0;
-                                /* since J4 compatibility */
-                                // workaround for removed call function
-                                $args = array(array($itemModel, 'prepareItem'), $userObject->items[$i], 'latest', '');
-                                $callback = array_shift($args);
-                                $userObject->items[$i] = $cache->get($callback, $args);
+
+                                if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
+                                    $key = ('k2_item_UserLatest' . $userObject->items[$i]->id . $userObject->items[$i]->alias);
+                                    if ($cache->contains($key))
+                                    {
+                                        $userObject->items[$i]= $cache->get($key, 'com_k2_extended');
+                                    }
+                                    else{
+                                        $userObject->items[$i] = $itemModel->prepareItem($userObject->items[$i], 'latest', '');
+                                        $UserStore = $userObject->items[$i];
+                                        if (is_object($UserStore)) {
+                                            $UserStore = json_encode($UserStore);
+                                            if(!empty($UserStore)){
+                                                $UserStore = json_decode(trim ($UserStore, chr (239). chr (187). chr (191)), true );
+                                                try{
+                                                    $cache->store($UserStore, $key);
+                                                } catch (\Exception $e) {
+                                                    // for the moment settle to miss caching the query returned object
+                                                    throw new \Exception(Text::_($e), 500);
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                                else{
+                                    $args = array(array($itemModel, 'prepareItem'), $userObject->items[$i], 'latest', '');
+                                    $callback = array_shift($args);
+                                    $userObject->items[$i] = $cache->get($callback, $args);
+                                }
                                 $userObject->items[$i]->hits = $hits;
 
                                 // Plugins

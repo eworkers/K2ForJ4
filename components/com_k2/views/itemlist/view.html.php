@@ -686,10 +686,10 @@ class K2ViewItemlist extends K2View
                     $key = ('k2_item' . $items[$i]->id . $items[$i]->alias);
                     if ($cache->contains($key))
                     {
-                        $items[$i] = $cache->get($key, 'com_k2_extended_j4');
+                        $items[$i] = $cache->get($key, 'com_k2_extended');
                     }
                     else{
-                        $cache->store($items[$i], $key, 'com_k2_extended_j4', false);
+                        $cache->store($items[$i], $key, 'com_k2_extended', false);
                     }
                 }
                 else{
