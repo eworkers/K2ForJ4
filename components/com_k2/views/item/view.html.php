@@ -410,12 +410,11 @@ class K2ViewItem extends K2View
         // --- B/C stuff [end] ---
 
         // Email link
-        /* since J4 compatibility */
-        // com_mailto is removed in joomla4 without replacement
-        /*
-            require_once(JPATH_SITE.'/components/com_mailto/helpers/mailto.php');
-            $item->emailLink = Route::_('index.php?option=com_mailto&tmpl=component&link='.MailToHelper::addLink($item->absoluteURL));
-        */
+        if (version_compare(JVERSION, '4.0.0-dev', 'lt'))
+        {
+            require_once(JPATH_SITE . '/components/com_mailto/helpers/mailto.php');
+            $item->emailLink = Route::_('index.php?option=com_mailto&tmpl=component&link=' . MailToHelper::addLink($item->absoluteURL));
+        }
 
         // Set pathway
         $pathway = $app->getPathWay();

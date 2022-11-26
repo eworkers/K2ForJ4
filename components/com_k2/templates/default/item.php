@@ -121,7 +121,7 @@ use Joomla\CMS\Factory;
                     </li>
                 <?php endif; ?>
 
-                <?php if ($this->item->params->get('itemEmailButton') && !Factory::getApplication()->input->getInt('print')): ?>
+                <?php if ($this->item->params->get('itemEmailButton') && !Factory::getApplication()->input->getInt('print') && version_compare(JVERSION, '4.0.0-dev', 'lt')): ?>
                     <!-- Email Button -->
                     <li>
                         <a class="itemEmailLink" rel="nofollow" href="<?php echo $this->item->emailLink; ?>"
