@@ -146,8 +146,8 @@ class K2ViewItem extends K2View
 
         // Editors
         /* since J4 compatibility */
-// get user editor
-        $editor = Factory::getUser()->getParam('editor', 'tinymce');
+	// get user editor
+        $editor = !empty(Factory::getUser()->getParam('editor')) ? Factory::getUser()->getParam('editor') : Factory::getConfig()->get('editor');
         $wysiwyg = JEditor::getInstance($editor);
         $onSave = '';
         if ($params->get("mergeEditors")) {
