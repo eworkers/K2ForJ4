@@ -419,6 +419,11 @@ class Com_K2InstallerScript
         $db->setQuery($query);
         $db->execute();
 
+        // comments
+        $query = "ALTER TABLE #__k2_comments CHANGE `commentURL` `commentURL` VARCHAR(255) NOT NULL DEFAULT ''";
+        $db->setQuery($query);
+        $db->execute();
+
     }
 
     private function installationResults($status)
