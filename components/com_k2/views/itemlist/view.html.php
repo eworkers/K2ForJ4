@@ -37,6 +37,7 @@ class K2ViewItemlist extends K2View
         $user = Factory::getUser();
         $view = Factory::getApplication()->input->getCmd('view');
         $task = Factory::getApplication()->input->getCmd('task');
+        $format = Factory::getApplication()->input->getCmd('format');
         $limitstart = Factory::getApplication()->input->getInt('limitstart', 0);
         $limit = Factory::getApplication()->input->getInt('limit', 10);
         $moduleID = Factory::getApplication()->input->getInt('moduleID');
@@ -683,13 +684,23 @@ class K2ViewItemlist extends K2View
                 $items[$i]->hits = 0;
                 Table::getInstance('K2Category', 'Table');
                 if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
-                    $key = ('k2_item' . $items[$i]->id . $items[$i]->alias);
+                    $key = ('k2_item' . $items[$i]->id . $items[$i]->alias .$task .$view .$format);
                     if ($cache->contains($key))
                     {
                         $items[$i] = $cache->get($key, 'com_k2_extended');
                     }
                     else{
-                        $cache->store($items[$i], $key, 'com_k2_extended', false);
+                        $store = $items[$i];
+                        if (is_object($store)) {
+                            $store = json_encode($store);
+                            $store = json_decode(trim ($store, chr (239). chr (187). chr (191)), true );
+                        }
+                        try{
+                            $cache->store($store, $key, 'com_k2_extended');
+                        } catch (\Exception $e) {
+                            // for the moment settle to miss caching the query returned object
+                            // throw new \Exception(Text::_($e), 500);
+                        }
                     }
                 }
                 else{
