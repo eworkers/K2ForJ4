@@ -311,3 +311,45 @@ form input.text_area:focus,.k2ui-field-value input[type="text"]:focus {
     max-width: 95%;
     max-height: 90%;
 }
+
+form input[readonly] {
+    background-color:#f0f2f2
+}
+
+@media screen and (max-width:1024px) {
+    .isJ30 #k2AdminContainer #k2ContentView div.k2ScrollingContent {
+        margin-left:0
+    }
+
+    .isJ30 #k2ContentView > form .xmlParamsFields > fieldset > ul > li {
+        display:inline-grid;
+        padding:10px;
+        width:48%
+    }
+
+    .isJ30 #k2ContentView > form .xmlParamsFields ul li .paramLabel {
+        display:flex
+    }
+
+    .isJ30 #k2ContentView > form .xmlParamsFields ul li .paramValue {
+        border:solid 1px #ebe8e8;
+        border-top:unset
+    }
+
+    .isJ30 #k2ContentView > form .xmlParamsFields ul li.headerElement {
+        display:block;
+        width:100%
+    }
+
+    form input,.k2ui-field-value input[type="textarea"],.k2ui-field-value input[type="text"],.k2ui-field-value ul.tags,.isJ30 #k2ContentView > form .xmlParamsFields ul li .paramValue > input:not([type="checkbox"]),.isJ30 #k2ContentView > form .xmlParamsFields ul li .paramValue > textarea {
+        min-width:100%!important;
+        width:100%!important
+    }
+}
+
+@media screen and (max-width:720px) {
+    .isJ30 #k2ContentView > form .xmlParamsFields > fieldset > ul > li {
+        display:block;
+        width:100%
+    }
+}
