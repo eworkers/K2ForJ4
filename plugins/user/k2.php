@@ -72,9 +72,7 @@ class plgUserK2 extends CMSPlugin
             $row->set('userName', $user['name']);
             $row->set('ip', $_SERVER['REMOTE_ADDR']);
             $row->set('hostname', gethostbyaddr($_SERVER['REMOTE_ADDR']));
-            if (isset($user['notes'])) {
-                $row->set('notes', $user['notes']);
-            }
+            $row->set('notes', Factory::getApplication()->input->post->get('notes', ''));
             if ($isnew) {
                 $row->set('group', $params->get('K2UserGroup', 1));
             } else {
@@ -92,7 +90,7 @@ class plgUserK2 extends CMSPlugin
             $row->url = StringHelper::str_ireplace('<', '', $row->url);
             $row->url = StringHelper::str_ireplace('>', '', $row->url);
             $row->url = StringHelper::str_ireplace('\'', '', $row->url);
-            $row->set('description', Factory::getApplication()->input->getVar('description', '', 'post', 'string', 4));
+            $row->set('description', Factory::getApplication()->input->post->getString('description', ''));
             if ($params->get('xssFiltering')) {
                 $filter = new InputFilter(array(), array(), 1, 1, 0);
                 $row->description = $filter->clean($row->description);
