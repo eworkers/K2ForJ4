@@ -330,12 +330,12 @@ class plgSystemK2 extends CMSPlugin
 
             if ($params->get('K2ProfileEditor')) {
                 /* since J4 compatibility */
-// get user editor
-                $editor = Factory::getUser()->getParam('editor', 'tinymce');
+                // get user editor
+                $editor = !empty(Factory::getUser()->getParam('editor')) ? Factory::getUser()->getParam('editor') : Factory::getConfig()->get('editor');
                 $wysiwyg = JEditor::getInstance($editor);
                 $editor = $wysiwyg->display('description', $K2User->description, '100%', '250px', '', '', false);
             } else {
-                $editor = '<textarea id="description" class="k2-plain-text-editor" name="description"></textarea>';
+                $editor = '<textarea id="description" class="k2-plain-text-editor" name="description">'.$K2User->description.'</textarea>';
             }
             $view->editor = $editor;
 
