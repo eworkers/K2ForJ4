@@ -166,7 +166,7 @@ class K2ControllerComments extends K2Controller
         $format = Factory::getApplication()->input->getVar('format');
         $errors = array();
         if (!$user->authorise('core.admin', 'com_k2')) {
-            $format == 'raw' ? die(Text::_('K2_ALERTNOTAUTH')) : throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);;
+            $format == 'raw' ? die(Text::_('K2_ALERTNOTAUTH')) : $app->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'notice');
         }
         K2Model::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_k2/models');
         $model = K2Model::getInstance('User', 'K2Model');
