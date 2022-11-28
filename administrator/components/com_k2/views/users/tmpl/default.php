@@ -170,12 +170,12 @@ $context = Factory::getApplication()->input->getCmd('context');
                             <td class="k2ui-center k2ui-hide-on-mobile">
                                 <?php if (!$row->block): ?>
                                     <?php if ($context == "modalselector"): ?>
-                                        <a class="k2ReportUserButton k2IsIcon"
+                                        <a id="k2ReportUserButtonBackend" class="k2ReportUserButton k2ReportUserButtonBackend k2IsIcon"
                                            href="<?php echo Route::_('index.php?option=com_k2&view=user&task=report&tmpl=component&context=modalselector&id=' . $row->id); ?>">
                                             <i class="fa fa-ban" aria-hidden="true"></i>
                                         </a>
                                     <?php else: ?>
-                                        <a class="k2ReportUserButton k2IsIcon"
+                                        <a id="k2ReportUserButtonBackend" class="k2ReportUserButton k2ReportUserButtonBackend k2IsIcon"
                                            href="<?php echo Route::_('index.php?option=com_k2&view=user&task=report&id=' . $row->id); ?>">
                                             <i class="fa fa-ban" aria-hidden="true"></i>
                                         </a>

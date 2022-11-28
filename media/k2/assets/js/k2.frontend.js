@@ -107,7 +107,7 @@ $K2(document).ready(function() {
         });
     });
 
-    $K2('.k2ReportUserButton').click(function(event) {
+    $K2('.k2ReportUserButtonFrontend').click(function(event) {
         event.preventDefault();
         if (confirm(K2Language[0])) {
             var element = $K2(this);

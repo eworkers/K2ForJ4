@@ -208,7 +208,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                             </td>
                             <td class="k2ui-center">
                                 <?php if ($row->reportUserLink): ?>
-                                    <a class="k2ReportUserButton k2IsIcon" href="<?php echo $row->reportUserLink; ?>"><i
+                                    <a id="k2ReportUserButtonBackend" class="k2ReportUserButton k2ReportUserButtonBackend k2IsIcon" href="<?php echo $row->reportUserLink; ?>"><i
                                                 class="fa fa-ban" aria-hidden="true"></i></a>
                                 <?php endif; ?>
                             </td>

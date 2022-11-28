@@ -689,7 +689,7 @@ use Joomla\CMS\Factory;
                                     <?php endif; ?>
 
                                     <?php if ($comment->reportUserLink): ?>
-                                        <a class="k2ReportUserButton"
+                                        <a id="k2ReportUserButtonFrontend" class="k2ReportUserButton k2ReportUserButtonFrontend"
                                            href="<?php echo $comment->reportUserLink; ?>"><?php echo Text::_('K2_FLAG_AS_SPAMMER'); ?></a>
                                     <?php endif; ?>
                 </span>

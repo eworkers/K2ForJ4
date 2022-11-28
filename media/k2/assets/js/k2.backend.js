@@ -121,7 +121,7 @@ $K2(document).ready(function() {
     }
 
     // Report user
-    $K2('.k2ReportUserButton').click(function(event) {
+    $K2('.k2ReportUserButtonBackend').click(function(event) {
         event.preventDefault();
         if (view == 'comments') {
             var alert = K2Language[2];
