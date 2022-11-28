@@ -294,7 +294,10 @@ class plgSystemK2 extends CMSPlugin
 
             if (version_compare(JVERSION, '4.0.0-dev', 'ge'))
             {
-
+                $uri = Uri::getInstance();
+                if($uri->getVar('task') == 'method.add'){
+                    return;
+                }
                 $view = new Joomla\Component\Users\Site\View\Profile\HtmlView();
                 $view->setModel( new Joomla\Component\Users\Site\Model\ProfileModel(), true);
                 $view->document = Factory::getApplication()->getDocument();
@@ -378,8 +381,16 @@ class plgSystemK2 extends CMSPlugin
 
             ob_start();
             $active = Factory::getApplication()->getMenu()->getActive();
-            if (isset($active->query['layout']) && $active->query['layout'] != 'profile') {
-                $active->query['layout'] = 'profile';
+            if (version_compare(JVERSION, '4.0.0-dev', 'ge'))
+            {
+                if (isset($active->query['layout']) && $active->query['layout'] != 'j4profile') {
+                    $active->query['layout'] = 'j4profile';
+                }
+            }
+            else{
+                if (isset($active->query['layout']) && $active->query['layout'] != 'profile') {
+                    $active->query['layout'] = 'profile';
+                }
             }
             $view->user = $user;
 
