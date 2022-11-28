@@ -12,13 +12,15 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Form\Form;
+use Joomla\CMS\Router\Route;
 
+$wa = $this->document->getWebAssetManager();
+$wa->useScript('keepalive')
+    ->useScript('form.validate');
 ?>
 
 <!-- K2 user profile form -->
-<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post" name="userform"
-      autocomplete="off" class="form-validate">
+<form id="member-profile" action="<?php echo Route::_('index.php?option=com_users'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
     <?php if ($this->params->def('show_page_title', 1)): ?>
         <div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
             <?php echo $this->escape($this->params->get('page_title')); ?>
