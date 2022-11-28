@@ -231,7 +231,7 @@ class K2HelperHTML
         $action = $row->$property ? Text::_($labels[1]) : Text::_($labels[0]);
         $class = 'k2Toggler';
         $status = $row->$property ? 'k2Active' : 'k2Inactive';
-        $href = '<a class="' . $class . ' ' . $status . '" href="javascript:void(0);" onclick="return listItemTask(\'cb' . $key . '\',\'' . $task . '\')" title="' . $action . '">' . $action . '</a>';
+        $href = '<a class="' . $class . ' ' . $status . '" href="javascript:void(0);" onclick="return Joomla.listItemTask(\'cb' . $key . '\',\'' . $task . '\')" title="' . $action . '">' . $action . '</a>';
         return $href;
     }
 
