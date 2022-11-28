@@ -941,8 +941,8 @@ class K2ModelItem extends K2Model
             $antispamProtection = $params->get('antispam', null);
             if (
                 $antispamProtection === null ||
-                (($antispamProtection == 'recaptcha' || $antispamProtection == 'both') && !$params->get('recaptcha_private_key')) ||
-                (($antispamProtection == 'akismet' || $antispamProtection == 'both') && !$params->get('akismetApiKey'))
+                (($antispamProtection == 'recaptcha' || $antispamProtection == 'both') && ((null !== $params->get('recaptcha_public_key') || $params->get('recaptcha_public_key') !== '') || (null !== $params->get('recaptcha_private_key') || $params->get('recaptcha_private_key') !== ''))) ||
+                (($antispamProtection == 'akismet' || $antispamProtection == 'both') && (null !== $params->get('akismetApiKey') || $params->get('akismetApiKey') !==''))
             ) {
                 $response->message = Text::_('K2_ANTISPAM_SETTINGS_ERROR');
                 $response->cssClass = 'k2FormLogError';
