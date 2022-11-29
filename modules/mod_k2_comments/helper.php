@@ -192,7 +192,7 @@ class modK2CommentsHelper
                     }
 
                     // User avatar
-                    if ($params->get('commentAvatar')) {
+                    if ($params->get('commenterAvatar')) {
                         $row->userImage = K2HelperUtilities::getAvatar($row->userID, $row->commentEmail, $componentParams->get('commenterImgWidth'));
                     }
 

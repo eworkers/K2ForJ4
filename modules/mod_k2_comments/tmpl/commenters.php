@@ -22,7 +22,7 @@ use Joomla\CMS\Language\Text;
             <?php foreach ($commenters as $key => $commenter): ?>
                 <li class="<?php echo ($key % 2) ? "odd" : "even";
                 if (count($commenters) == $key + 1) echo ' lastItem'; ?>">
-                    <?php if ($commenter->userImage): ?>
+                    <?php if (isset($commenter->userImage)): ?>
                         <a class="k2Avatar tcAvatar" rel="author" href="<?php echo $commenter->link; ?>">
                             <img src="<?php echo $commenter->userImage; ?>"
                                  alt="<?php echo OutputFilter::cleanText($commenter->userName); ?>"
