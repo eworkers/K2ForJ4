@@ -1574,8 +1574,11 @@ class K2ModelItem extends K2Model
     {
         $db = Factory::getDbo();
         if (is_null($id)) {
-            $id = Factory::getApplication()->input->getInt('id');
+            $id = Factory::getApplication()->input->getInt('id', 0);
         }
+		if(!$id){
+			return;
+		}
 
         static $K2UsersInstances = array();
         if (isset($K2UsersInstances[$id])) {
