@@ -78,6 +78,9 @@ class K2Router extends JComponentRouterBase
                 if(@$query['view'] === 'itemlist' && @$query['layout'] === 'category'){
                     $unsetView = true;
                 }
+                if(@$query['view'] === 'latest' && $menuItem == $this->menu->getItem($query['Itemid'])){
+                    $unsetView = true;
+                }
             }
 
             if ($unsetView)
@@ -478,6 +481,9 @@ class K2Router extends JComponentRouterBase
             {
                 $unsetView = false;
                 if(@$query['view'] === 'itemlist' && @$query['layout'] === 'category'){
+                    $unsetView = true;
+                }
+                if(@$query['view'] === 'latest' && $menuItem == $this->menu->getItem($query['Itemid'])){
                     $unsetView = true;
                 }
             }
