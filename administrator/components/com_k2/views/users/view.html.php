@@ -245,7 +245,7 @@ class K2ViewUsers extends K2View
                     $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=users&amp;task=import';
                     $buttonText = Text::_('K2_IMPORT_JOOMLA_USERS');
                     $button = '<joomla-toolbar-button id="toolbar-import-content"><a id="K2ImportUsersButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive"></i>' . $buttonText . '</a></joomla-toolbar-button>';
-                    $toolbar->appendButton('Import', $button);
+                    $toolbar->appendButton('Custom', $button);
 
                 }
             }
