@@ -14,9 +14,17 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
-$wa = $this->document->getWebAssetManager();
-$wa->useScript('keepalive')
-    ->useScript('form.validate');
+if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
+    $wa = $this->document->getWebAssetManager();
+    $wa->useScript('keepalive')
+        ->useScript('form.validate');
+}
+else{
+    JHtml::_('behavior.formvalidation');
+    JHtml::_('behavior.keepalive');
+}
+
+
 ?>
 
 <!-- K2 user profile form -->
