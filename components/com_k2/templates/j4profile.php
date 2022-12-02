@@ -166,10 +166,9 @@ $user = $this->getCurrentUser();
                     <?php endif; ?>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <!-- Joomla 3.x Form implementation -->
             <?php if (isset($this->form)): ?>
                 <?php foreach ($this->form->getFieldsets() as $fieldset): // Iterate through the form fieldsets and display each one.?>
-                    <?php if ($fieldset->name != 'core'): ?>
+                    <?php if ($fieldset->name !== 'core'): ?>
                         <?php $fields = $this->form->getFieldset($fieldset->name); ?>
                         <?php if (isset($fields) && count($fields)): ?>
                             <?php if (isset($fieldset->label)): // If the fieldset has a label set, display it as the legend.?>
@@ -197,12 +196,15 @@ $user = $this->getCurrentUser();
                     <?php endif; ?>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <?php if (Mfa::getConfigurationInterface($user)) : ?>
-                <fieldset class="com-users-profile__multifactor">
-                    <legend><?php echo Text::_('COM_USERS_PROFILE_MULTIFACTOR_AUTH'); ?></legend>
-                    <?php echo $this->mfaConfigurationUI ?>
-                </fieldset>
-            <?php endif; ?>
+            <?php try {
+                if (Mfa::getConfigurationInterface($user)) : ?>
+                    <fieldset class="com-users-profile__multifactor">
+                        <legend><?php echo Text::_('COM_USERS_PROFILE_MULTIFACTOR_AUTH'); ?></legend>
+                        <?php echo $this->mfaConfigurationUI ?>
+                    </fieldset>
+                <?php endif;
+            } catch (Exception $e) {
+            } ?>
             <div class="k2AccountPageUpdate">
                 <button class="button validate" type="submit" onclick="submitbutton( this.form );return false;">
                     <?php echo Text::_('K2_SAVE'); ?>
@@ -218,5 +220,4 @@ $user = $this->getCurrentUser();
     <input class="form-control" type="hidden" name="task" value="<?php echo $this->taskValue; ?>"/>
     <input class="form-control" type="hidden" name="K2UserForm" value="1"/>
     <?php echo JHTML::_('form.token'); ?>
-    </fieldset>
 </form>
