@@ -22,20 +22,23 @@ class K2ElementItemForm extends K2Element
     {
         $document = Factory::getDocument();
         $document->addScriptDeclaration("
-        	/* Mootools Snippet */
-			window.addEvent('domready', function() {
+        	var $ = jQuery.noConflict();
+			$(document).ready(function(){
 				if($('request-options')) {
-					$$('.panel')[0].setStyle('display', 'none');
-				}
+                    if($('.panel')[0])
+                        {
+                            $('.panel')[0].css('display', 'none');
+                        }
+                }
 				if($('jform_browserNav')) {
-					$('jform_browserNav').setProperty('value', 2);
-					$('jform_browserNav').getElements('option')[0].destroy();
+					$('#jform_browserNav').val(2);
+					$('#jform_browserNav').find('option').get(0).remove();
+					$('#jform_browserNav').trigger('liszt:updated');
 				}
 				if($('browserNav')) {
-					$('browserNav').setProperty('value', 2);
-					options = $('browserNav').getElements('option');
-					if(options.length == 3) {
-						options[0].remove();
+					$('#browserNav').val(2);
+					if($('#browserNav').length == 3) {
+						$('#browserNav').find('option').get(0).remove();
 					}
 				}
 			});
