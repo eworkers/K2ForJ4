@@ -41,8 +41,9 @@ class K2ElementK2Category extends K2Element
         $mitems = array();
         $option = Factory::getApplication()->input->getCmd('option');
         if ($name == 'categories' || $name == 'jform[params][categories]') {
-            $doc = Factory::getDocument();
-            $js = "
+            if (version_compare(JVERSION, '4.0.0-dev', 'lt')){
+                JHtml::_('behavior.framework');
+                $js = "
                 /* Mootools Snippet */
 				function disableParams(){
 					$('jform_params_num_leading_items').setProperty('disabled','disabled');
@@ -125,6 +126,78 @@ class K2ElementK2Category extends K2Element
 					setTask();
 				});
 				";
+            }
+            else{
+                HTMLHelper::_('jquery.framework');
+                $js = "
+                var $ = jQuery.noConflict();
+                var targetParams = [				
+                    '#jform_params_num_leading_items',
+					'#jform_params_num_leading_columns',
+					'#jform_params_leadingImgSize',
+					'#jform_params_num_primary_items',
+					'#jform_params_num_primary_columns',
+					'#jform_params_primaryImgSize',
+					'#jform_params_num_secondary_items',
+					'#jform_params_num_secondary_columns',
+					'#jform_params_secondaryImgSize',
+					'#jform_params_num_links',
+					'#jform_params_num_links_columns',
+					'#jform_params_linksImgSize',
+					'#jform_params_catCatalogMode',
+					'#jform_params_catFeaturedItems',
+					'#jform_params_catOrdering',
+					'#jform_params_catPagination',
+					'#jform_params_catPaginationResults0',
+					'#jform_params_catPaginationResults1',
+					'#jform_params_catFeedLink0',
+					'#jform_params_catFeedLink1',
+					'#jform_params_catFeedIcon0',
+					'#jform_params_catFeedIcon1',
+					'#jformparamstheme'
+					].join(', ');
+					
+				function disableParams(){
+                    $(targetParams).prop('disabled', true);
+                    $('.jwHeaderContainer').hide();
+                    $(targetParams).parents('.control-group').hide();
+				}
+
+				function enableParams(){
+                    $(targetParams).prop('disabled', false);
+                    $('.jwHeaderContainer').hide();
+                    $(targetParams).parents('.control-group').show();
+				}
+
+				function setTask() {
+					var counter=0;
+					var counter = $('#jformparamscategories :selected').length;
+					if (counter>1 || counter==0){
+						$('#jform_request_id').val('');
+						$('#jform_request_task').val('');
+						$('jform_params_singleCatOrdering').prop('disabled', true);
+						enableParams();
+					}
+					if (counter==1){
+						$('jform_request_id').val($('#jformparamscategories :selected').val());
+						$('jform_request_task').val('category');
+						$('jform_params_singleCatOrdering').prop('disabled', false);
+						disableParams();
+					}
+				}
+
+				$(document).ready(function($){
+                    if($('request-options')) {
+                        if($('.panel')[0])
+                            {
+                                $('.panel')[0].css('display', 'none');
+                            }
+                    }
+                    setTask();
+				});
+				";
+            }
+            $doc = Factory::getDocument();
 
             $doc->addScriptDeclaration($js);
         }
