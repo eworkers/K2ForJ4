@@ -44,5 +44,10 @@ if ($params->get('statistics', 1))
 {
 	$statistics = modK2StatsHelper::getStatistics();
 }
+if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
+    require ModuleHelper::getLayoutPath('mod_k2_stats', 'default_j4');
+}
+else{
+    require(ModuleHelper::getLayoutPath('mod_k2_stats'));
+}
 
-require(ModuleHelper::getLayoutPath('mod_k2_stats'));

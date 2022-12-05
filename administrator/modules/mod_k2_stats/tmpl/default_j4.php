@@ -33,10 +33,10 @@ $selector = 'k2StatsTabs'.$module->id;
 
 <div class="clr"></div>
 
-<?php echo JHtml::_('tabs.start'); ?>
 
+<?php echo HTMLHelper::_('uitab.startTabSet', $selector, ['active' => 'latestItemsTab', 'recall' => true]); ?>
 <?php if($params->get('latestItems', 1)): ?>
-    <?php echo JHtml::_('tabs.panel', Text::_('K2_LATEST_ITEMS'), 'latestItemsTab'); ?>
+    <?php echo HTMLHelper::_('uitab.addTab', $selector, 'latestItemsTab'.$module->id, Text::_('K2_LATEST_ITEMS')); ?>
     <table class="adminlist table table-striped">
         <thead>
         <tr>
@@ -55,10 +55,11 @@ $selector = 'k2StatsTabs'.$module->id;
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 <?php endif; ?>
 
 <?php if($params->get('popularItems', 1)): ?>
-    <?php echo JHtml::_('tabs.panel', Text::_('K2_POPULAR_ITEMS'), 'popularItemsTab'); ?>
+    <?php echo HTMLHelper::_('uitab.addTab', $selector, 'popularItemsTab'.$module->id, Text::_('K2_POPULAR_ITEMS')); ?>
     <table class="adminlist table table-striped">
         <thead>
         <tr>
@@ -79,10 +80,11 @@ $selector = 'k2StatsTabs'.$module->id;
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 <?php endif; ?>
 
 <?php if($params->get('mostCommentedItems', 1)): ?>
-    <?php echo JHtml::_('tabs.panel', Text::_('K2_MOST_COMMENTED_ITEMS'), 'mostCommentedItemsTab'); ?>
+    <?php echo HTMLHelper::_('uitab.addTab', $selector, 'mostCommentedItemsTab'.$module->id, Text::_('K2_MOST_COMMENTED_ITEMS')); ?>
     <table class="adminlist table table-striped">
         <thead>
         <tr>
@@ -103,10 +105,11 @@ $selector = 'k2StatsTabs'.$module->id;
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 <?php endif; ?>
 
 <?php if($params->get('latestComments', 1)): ?>
-    <?php echo JHtml::_('tabs.panel', Text::_('K2_LATEST_COMMENTS'), 'latestCommentsTab'); ?>
+    <?php echo HTMLHelper::_('uitab.addTab', $selector, 'latestCommentsTab'.$module->id, Text::_('K2_LATEST_COMMENTS')); ?>
     <table class="adminlist table table-striped">
         <thead>
         <tr>
@@ -125,10 +128,11 @@ $selector = 'k2StatsTabs'.$module->id;
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 <?php endif; ?>
 
 <?php if($params->get('statistics', 1)): ?>
-    <?php echo JHtml::_('tabs.panel', Text::_('K2_STATISTICS'), 'statsTab'); ?>
+    <?php echo HTMLHelper::_('uitab.addTab', $selector, 'statsTab'.$module->id, Text::_('K2_STATISTICS')); ?>
     <table class="adminlist table table-striped">
         <thead>
         <tr>
@@ -163,6 +167,6 @@ $selector = 'k2StatsTabs'.$module->id;
         </tr>
         </tbody>
     </table>
+    <?php echo HTMLHelper::_('uitab.endTab'); ?>
 <?php endif; ?>
-
-<?php echo JHtml::_('tabs.end'); ?>
+<?php echo HTMLHelper::_('uitab.endTabSet'); ?>
