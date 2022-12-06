@@ -1302,7 +1302,7 @@ class K2ViewItemlist extends K2View
                         $metaDesc = $params->get('menu-meta_description');
                     }
 
-                    $metaDesc = trim($metaDesc);
+                    $metaDesc = !empty($metaDesc) ? trim($metaDesc) : '';
                     $document->setDescription(K2HelperUtilities::characterLimit($metaDesc, $params->get('metaDescLimit', 150)));
 
                     // Set meta keywords
