@@ -336,7 +336,7 @@ class K2Router extends JComponentRouterBase
             }
             // Category path, without a prefix
             elseif (
-                $segments[0] == $this->getCategoryProps($segments[0])->alias &&
+                !empty($params->get('k2SefLabelItem')) && $segments[0] == $this->getCategoryProps($segments[0])->alias &&
                 str_replace(':', '-', array_reverse($segments)[0]) != @$this->getItemProps(str_replace(':', '-', array_reverse($segments)[0]))->alias
             ) {
                 if (count($segments) > 1) {
