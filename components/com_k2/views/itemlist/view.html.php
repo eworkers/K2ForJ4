@@ -37,6 +37,7 @@ class K2ViewItemlist extends K2View
         $user = Factory::getUser();
         $view = Factory::getApplication()->input->getCmd('view');
         $task = Factory::getApplication()->input->getCmd('task');
+        $item_id = Factory::getApplication()->input->getCmd('Itemid');
         $format = Factory::getApplication()->input->getCmd('format');
         $limitstart = Factory::getApplication()->input->getInt('limitstart', 0);
         $limit = Factory::getApplication()->input->getInt('limit', 10);
@@ -684,7 +685,7 @@ class K2ViewItemlist extends K2View
                 $items[$i]->hits = 0;
                 Table::getInstance('K2Category', 'Table');
                 if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
-                    $key = ('k2_item_' . $items[$i]->id .'_'. $items[$i]->alias .'_'. $task .'_'. $view .'_'. $format);
+                    $key = ('k2_item_' . $items[$i]->id .'_'. $items[$i]->alias .'_'. $task .'_'. $view .'_'. 'Itemid_' . $item_id .'_'. $format);
                     if ($cache->contains($key))
                     {
                         $items[$i] = $cache->get($key, 'com_k2_extended');
