@@ -684,7 +684,7 @@ class K2ViewItemlist extends K2View
                 $items[$i]->hits = 0;
                 Table::getInstance('K2Category', 'Table');
                 if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
-                    $key = ('k2_item' . $items[$i]->id . $items[$i]->alias .$task .$view .$format);
+                    $key = ('k2_item_' . $items[$i]->id .'_'. $items[$i]->alias .'_'. $task .'_'. $view .'_'. $format);
                     if ($cache->contains($key))
                     {
                         $items[$i] = $cache->get($key, 'com_k2_extended');
@@ -701,6 +701,8 @@ class K2ViewItemlist extends K2View
                             // for the moment settle to miss caching the query returned object
                             // throw new \Exception(Text::_($e), 500);
                         }
+                        // items are not in cache => prepareItems
+                        $items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
                     }
                 }
                 else{
@@ -716,7 +718,6 @@ class K2ViewItemlist extends K2View
             } else {
                 $items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
             }
-            $items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
             // Plugins
             $items[$i] = $itemModel->execPlugins($items[$i], $view, $task);
 
