@@ -652,7 +652,7 @@ class K2ViewItem extends K2View
                 // Prepare content snippets
                 $itemSD_SiteName = $config->get('sitename');
                 $itemSD_SiteName = ($params->get('k2SeoGsdOrgName')) ? $params->get('k2SeoGsdOrgName') : $itemSD_SiteName;
-                $itemSD_SiteLogo = JURI::root() . trim($params->get('k2SeoGsdOrgLogo'));
+                $itemSD_SiteLogo = !empty($params->get('k2SeoGsdOrgLogo')) ? JURI::root().trim($params->get('k2SeoGsdOrgLogo')) : '';
 
                 $itemSD_Description = str_replace($sdStrSearch, $sdStrReplace, strip_tags($item->introtext, $allowedTags));
                 $itemSD_ArticleBody = str_replace($sdStrSearch, $sdStrReplace, strip_tags($item->text, $allowedTags));
@@ -678,6 +678,7 @@ class K2ViewItem extends K2View
                     ],';
                 }
 
+                // todo set publisher logo more properly
                 // Output
                 $itemSD_LDJSON = '
                 {
