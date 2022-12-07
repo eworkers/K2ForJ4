@@ -695,6 +695,9 @@ class K2ViewItemlist extends K2View
                     if(!empty(Factory::getApplication()->input->getCmd('date'))){
                         $cSuffix .= '_'. Factory::getApplication()->input->getCmd('date');
                     }
+                    if(!empty(Factory::getApplication()->input->getCmd('start'))){
+                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('start');
+                    }
                     $key = ('k2_item_' . $cSuffix .'_'. $format);
                     if ($cache->contains($key))
                     {
