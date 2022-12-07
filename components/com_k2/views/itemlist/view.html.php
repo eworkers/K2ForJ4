@@ -685,7 +685,17 @@ class K2ViewItemlist extends K2View
                 $items[$i]->hits = 0;
                 Table::getInstance('K2Category', 'Table');
                 if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
-                    $key = ('k2_item_' . $items[$i]->id .'_'. $items[$i]->alias .'_'. $task .'_'. $view .'_'. 'Itemid_' . $item_id .'_'. $format);
+                    $cSuffix = $items[$i]->id .'_'. $items[$i]->title .'_' . $items[$i]->alias .'_'. $task .'_'. $view .'_'. 'Itemid_' . $item_id;
+                    if(!empty(Factory::getApplication()->input->getCmd('tag'))){
+                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('tag');
+                    }
+                    if(!empty(Factory::getApplication()->input->getCmd('search'))){
+                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('search');
+                    }
+                    if(!empty(Factory::getApplication()->input->getCmd('date'))){
+                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('date');
+                    }
+                    $key = ('k2_item_' . $cSuffix .'_'. $format);
                     if ($cache->contains($key))
                     {
                         $items[$i] = $cache->get($key, 'com_k2_extended');
