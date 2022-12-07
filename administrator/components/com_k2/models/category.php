@@ -148,6 +148,7 @@ class K2ModelCategory extends K2Model
         }
 
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
 
         // Trigger K2 plugins
         /* since J4 compatibility */

@@ -241,6 +241,7 @@ class K2ModelComments extends K2Model
             $row->store();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         if (Factory::getApplication()->input->getCmd('format') == 'raw') {
             echo 'true';
             $app->close();
@@ -272,6 +273,7 @@ class K2ModelComments extends K2Model
             $row->store();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=comments&tmpl=component&context=modalselector');
         } else {
@@ -302,6 +304,7 @@ class K2ModelComments extends K2Model
             $row->delete($id);
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         if (Factory::getApplication()->input->getCmd('format') == 'raw') {
             echo 'true';
             $app->close();
@@ -338,6 +341,7 @@ class K2ModelComments extends K2Model
         }
 
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->enqueueMessage(Text::_('K2_DELETE_COMPLETED'));
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=comments&tmpl=component&context=modalselector');
@@ -364,6 +368,7 @@ class K2ModelComments extends K2Model
         $row->commentText = Factory::getApplication()->input->getVar('commentText', '', 'default', 'string', 4);
         $row->store();
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $response = new stdClass;
         $response->comment = $row->commentText;
         $response->message = Text::_('K2_COMMENT_SAVED');

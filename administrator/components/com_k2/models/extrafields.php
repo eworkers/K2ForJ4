@@ -124,6 +124,7 @@ class K2ModelExtraFields extends K2Model
             $row->store();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->redirect('index.php?option=com_k2&view=extrafields');
     }
 
@@ -138,6 +139,7 @@ class K2ModelExtraFields extends K2Model
             $row->store();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->redirect('index.php?option=com_k2&view=extrafields');
     }
 
@@ -173,6 +175,7 @@ class K2ModelExtraFields extends K2Model
             }
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         return true;
     }
 
@@ -188,6 +191,7 @@ class K2ModelExtraFields extends K2Model
             $row->reorder("`group` = " . (int)$row->group);
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $msg = Text::_('K2_NEW_ORDERING_SAVED');
         $app->enqueueMessage($msg);
         $app->redirect('index.php?option=com_k2&view=extrafields');
@@ -205,6 +209,7 @@ class K2ModelExtraFields extends K2Model
             $row->reorder("`group` = " . (int)$row->group);
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $msg = Text::_('K2_NEW_ORDERING_SAVED');
         $app->enqueueMessage($msg);
         $app->redirect('index.php?option=com_k2&view=extrafields');
@@ -221,6 +226,7 @@ class K2ModelExtraFields extends K2Model
             $row->delete($id);
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->enqueueMessage(Text::_('K2_DELETE_COMPLETED'));
         $app->redirect('index.php?option=com_k2&view=extrafields');
     }
@@ -308,6 +314,7 @@ class K2ModelExtraFields extends K2Model
         }
 
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->enqueueMessage($msg);
         $app->redirect($link);
     }
@@ -327,6 +334,7 @@ class K2ModelExtraFields extends K2Model
             $row->delete($id);
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->enqueueMessage(Text::_('K2_DELETE_COMPLETED'));
         $app->redirect('index.php?option=com_k2&view=extrafieldsgroups');
     }

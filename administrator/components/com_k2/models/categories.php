@@ -283,6 +283,7 @@ class K2ModelCategories extends K2Model
         /* since J4 compatibility */
         Factory::getApplication()->triggerEvent('onFinderChangeState', array('com_k2.category', $cid, 1));
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=categories&tmpl=component&context=modalselector');
         } else {
@@ -309,6 +310,7 @@ class K2ModelCategories extends K2Model
         /* since J4 compatibility */
         Factory::getApplication()->triggerEvent('onFinderChangeState', array('com_k2.category', $cid, 0));
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=categories&tmpl=component&context=modalselector');
         } else {
@@ -348,6 +350,7 @@ class K2ModelCategories extends K2Model
             }
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         return true;
     }
 
@@ -363,6 +366,7 @@ class K2ModelCategories extends K2Model
             $row->reorder('parent = ' . (int)$row->parent . ' AND trash=0');
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $msg = Text::_('K2_NEW_ORDERING_SAVED');
         $app->enqueueMessage($msg);
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
@@ -384,6 +388,7 @@ class K2ModelCategories extends K2Model
             $row->reorder('parent = ' . (int)$row->parent . ' AND trash=0');
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $msg = Text::_('K2_NEW_ORDERING_SAVED');
         $app->enqueueMessage($msg);
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
@@ -408,6 +413,7 @@ class K2ModelCategories extends K2Model
             return $row->getError();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $msg = Text::_('K2_NEW_ACCESS_SETTING_SAVED');
         $app->enqueueMessage($msg);
         $app->redirect('index.php?option=com_k2&view=categories');
@@ -428,6 +434,7 @@ class K2ModelCategories extends K2Model
             return $row->getError();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $msg = Text::_('K2_NEW_ACCESS_SETTING_SAVED');
         $app->enqueueMessage($msg);
         $app->redirect('index.php?option=com_k2&view=categories');
@@ -448,6 +455,7 @@ class K2ModelCategories extends K2Model
             return $row->getError();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $msg = Text::_('K2_NEW_ACCESS_SETTING_SAVED');
         $app->enqueueMessage($msg);
         $app->redirect('index.php?option=com_k2&view=categories');
@@ -481,6 +489,7 @@ class K2ModelCategories extends K2Model
         /* since J4 compatibility */
         Factory::getApplication()->triggerEvent('onFinderChangeState', array('com_k2.category', $cid, 0));
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->enqueueMessage(Text::_('K2_CATEGORIES_MOVED_TO_TRASH'));
         $app->redirect('index.php?option=com_k2&view=categories');
     }
@@ -527,6 +536,7 @@ class K2ModelCategories extends K2Model
         /* since J4 compatibility */
         Factory::getApplication()->triggerEvent('onFinderChangeState', array('com_k2.category', $cid, 1));
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         if ($warning) {
             $app->enqueueMessage(Text::_('K2_SOME_OF_THE_CATEGORIES_HAVE_NOT_BEEN_RESTORED_BECAUSE_THEIR_PARENT_CATEGORY_IS_IN_TRASH'), 'notice');
         }
@@ -580,6 +590,7 @@ class K2ModelCategories extends K2Model
             }
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
 
         if ($warningItems) {
             $app->enqueueMessage(Text::_('K2_SOME_OF_THE_CATEGORIES_HAVE_NOT_BEEN_DELETED_BECAUSE_THEY_HAVE_ITEMS'), 'notice');
@@ -719,6 +730,7 @@ class K2ModelCategories extends K2Model
             $row->store();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->enqueueMessage(Text::_('K2_BATCH_COMPLETED'));
         $app->redirect('index.php?option=com_k2&view=categories');
     }

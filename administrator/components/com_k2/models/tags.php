@@ -103,6 +103,7 @@ class K2ModelTags extends K2Model
             $row->store();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=tags&tmpl=component&context=modalselector');
         } else {
@@ -121,6 +122,7 @@ class K2ModelTags extends K2Model
             $row->store();
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         if (Factory::getApplication()->input->getCmd('context') == "modalselector") {
             $app->redirect('index.php?option=com_k2&view=tags&tmpl=component&context=modalselector');
         } else {
@@ -139,6 +141,7 @@ class K2ModelTags extends K2Model
             $row->delete($id);
         }
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->enqueueMessage(Text::_('K2_DELETE_COMPLETED'));
         $app->redirect('index.php?option=com_k2&view=tags');
     }

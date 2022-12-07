@@ -49,6 +49,7 @@ class K2ModelUserGroup extends K2Model
         }
 
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
 
         switch (Factory::getApplication()->input->getCmd('task')) {
             case 'apply':

@@ -158,6 +158,7 @@ class K2ModelUsers extends K2Model
         $db->setQuery($query);
         $db->execute();
         parent::cleanCache('com_k2');
+        parent::cleanCache('com_k2_extended');
         $app->enqueueMessage(Text::_('K2_USER_PROFILE_DELETED'));
         $app->redirect('index.php?option=com_k2&view=users');
     }
