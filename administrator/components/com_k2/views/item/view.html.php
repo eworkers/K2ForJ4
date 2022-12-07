@@ -469,8 +469,10 @@ class K2ViewItem extends K2View
         // Parameters
         jimport('joomla.form.form');
         $form = Form::getInstance('itemForm', JPATH_COMPONENT_ADMINISTRATOR . '/models/item.xml');
-        $values = array('params' => json_decode($item->params));
-        $form->bind($values);
+        $values = array('params' => !empty($item->params) ? json_decode($item->params) : null);
+        if (!empty($item->params)) {
+            $form->bind($values);
+        }
 
         $this->form = $form;
 
