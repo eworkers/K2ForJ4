@@ -235,7 +235,7 @@ class K2ViewItem extends K2View
                     $limit = $params->get('commentsLimit');
                     $comments = $model->getItemComments($item->id, $limitstart, $limit, $commentsPublished);
 
-                    for ($i = 0; $i < count($comments); $i++) {
+                    for ($i = 0, $iTotal = count($comments); $i < $iTotal; $i++) {
                         $comments[$i]->commentText = nl2br($comments[$i]->commentText);
 
                         // Convert URLs to links properly
@@ -274,7 +274,7 @@ class K2ViewItem extends K2View
             $itemlistModel = $this->getModel('itemlist');
             $authorLatestItems = $itemlistModel->getAuthorLatest($item->id, $item->params->get('itemAuthorLatestLimit'), $item->created_by);
             if (count($authorLatestItems)) {
-                for ($i = 0; $i < count($authorLatestItems); $i++) {
+                for ($i = 0, $iTotal = count($authorLatestItems); $i < $iTotal; $i++) {
                     $authorLatestItems[$i]->link = urldecode(Route::_(K2HelperRoute::getItemRoute($authorLatestItems[$i]->id . ':' . urlencode($authorLatestItems[$i]->alias), $authorLatestItems[$i]->catid . ':' . urlencode($authorLatestItems[$i]->categoryalias))));
                 }
                 $this->authorLatestItems = $authorLatestItems;
@@ -286,7 +286,7 @@ class K2ViewItem extends K2View
             $itemlistModel = $this->getModel('itemlist');
             $relatedItems = $itemlistModel->getRelatedItems($item->id, $item->tags, $item->params);
             if (count($relatedItems)) {
-                for ($i = 0; $i < count($relatedItems); $i++) {
+                for ($i = 0, $iTotal = count($relatedItems); $i < $iTotal; $i++) {
                     $relatedItems[$i]->link = urldecode(Route::_(K2HelperRoute::getItemRoute($relatedItems[$i]->id . ':' . urlencode($relatedItems[$i]->alias), $relatedItems[$i]->catid . ':' . urlencode($relatedItems[$i]->categoryalias))));
                 }
                 $this->relatedItems = $relatedItems;
