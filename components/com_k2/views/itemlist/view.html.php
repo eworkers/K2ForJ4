@@ -589,7 +589,7 @@ class K2ViewItemlist extends K2View
 
         $rowsForJSON = array();
 
-        for ($i = 0; $i < count($items); $i++) {
+        for ($i = 0, $iTotal = count($items); $i < $iTotal; $i++) {
             // Ensure that all items have a group. Group-less items get assigned to the leading group
             $items[$i]->itemGroup = 'leading';
 

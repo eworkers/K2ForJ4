@@ -129,7 +129,7 @@ class K2ViewLatest extends K2View
                             Factory::getApplication()->input->set('view', 'latest');
                             Factory::getApplication()->input->set('task', '');
 
-                            for ($i = 0; $i < count($category->items); $i++) {
+                            for ($i = 0, $iTotal = count($category->items); $i < $iTotal; $i++) {
                                 $hits = $category->items[$i]->hits;
                                 $category->items[$i]->hits = 0;
                                 if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
