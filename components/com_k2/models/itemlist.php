@@ -629,7 +629,7 @@ class K2ModelItemlist extends K2Model
         $rows = $db->loadObjectList();
         K2Model::addIncludePath(JPATH_COMPONENT . '/models');
         $model = K2Model::getInstance('Item', 'K2Model');
-        for ($key = 0; $key < count($rows); $key++) {
+        for ($key = 0, $keyTotal = count($rows); $key < $keyTotal; $key++) {
             if (!$params->get('itemRelatedMedia')) {
                 $rows[$key]->video = null;
             }

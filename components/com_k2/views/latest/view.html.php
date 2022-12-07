@@ -213,7 +213,7 @@ class K2ViewLatest extends K2View
                         if ($limit) {
                             $userObject->items = $model->getAuthorLatest(0, $limit, $userID);
 
-                            for ($i = 0; $i < count($userObject->items); $i++) {
+                            for ($i = 0, $iTotal = count($userObject->items); $i < $iTotal; $i++) {
                                 $hits = $userObject->items[$i]->hits;
                                 $userObject->items[$i]->hits = 0;
 
