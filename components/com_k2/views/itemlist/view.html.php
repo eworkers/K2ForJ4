@@ -686,6 +686,9 @@ class K2ViewItemlist extends K2View
                 Table::getInstance('K2Category', 'Table');
                 if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
                     $cSuffix = $items[$i]->id .'_'. $items[$i]->title .'_' . $items[$i]->alias .'_'. $task .'_'. $view .'_'. 'Itemid_' . $item_id;
+                    if(!empty(Factory::getApplication()->input->getCmd('layout'))){
+                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('layout');
+                    }
                     if(!empty(Factory::getApplication()->input->getCmd('tag'))){
                         $cSuffix .= '_'. Factory::getApplication()->input->getCmd('tag');
                     }
