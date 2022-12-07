@@ -419,11 +419,11 @@ class K2HelperHTML
                     // k2.print.css
                     if (Factory::getApplication()->input->getInt('print') == 1) {
                         if (isset($template) && File::exists(JPATH_SITE . '/templates/' . $template . '/css/k2.print.css')) {
-                            $document->addStyleSheet(JURI::root(true) . '/templates/' . $template . '/css/k2.print.css?v=' . K2_CURRENT_VERSION, 'text/css', 'print');
+                            HTMLHelper::stylesheet(JURI::root() . '/templates/' . $template . '/css/k2.print.css', ['relative' => true, 'version' => K2_CURRENT_VERSION]);
                         } elseif (File::exists(JPATH_SITE . '/templates/' . $app->getTemplate() . '/css/k2.print.css')) {
-                            $document->addStyleSheet(JURI::root(true) . '/templates/' . $app->getTemplate() . '/css/k2.print.css?v=' . K2_CURRENT_VERSION, 'text/css', 'print');
+                            HTMLHelper::stylesheet(JURI::root() . '/templates/' . $app->getTemplate() . '/css/k2.print.css', ['relative' => true, 'version' => K2_CURRENT_VERSION]);
                         } else {
-                            $document->addStyleSheet(JURI::root(true) . '/components/com_k2/css/k2.print.css?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID, 'text/css', 'print');
+                            HTMLHelper::stylesheet(JURI::root() . 'components/com_k2/css/k2.print.css', ['relative' => true, 'version' => K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID]);
                         }
                     }
                 }
