@@ -255,7 +255,7 @@ class K2ModelExtraFields extends K2Model
         }
 
         $rows = $db->loadObjectList();
-        for ($i = 0; $i < count($rows); $i++) {
+        for ($i = 0, $iTotal = count($rows); $i < $iTotal; $i++) {
             $query = "SELECT name FROM #__k2_categories WHERE extraFieldsGroup = " . (int)$rows[$i]->id;
             $db->setQuery($query);
             $categories = $db->loadColumn();

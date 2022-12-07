@@ -69,7 +69,7 @@ class K2ModelExtraField extends K2Model
             $alias = '';
         }
         $lastOptionId = 1;
-        for ($i = 0; $i < count($values); $i++) {
+        for ($i = 0, $iTotal = count($values); $i < $iTotal; $i++) {
             $object = new stdClass;
             $object->name = $names[$i];
 
