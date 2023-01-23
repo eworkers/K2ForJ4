@@ -174,10 +174,8 @@ class K2HelperRoute
                 // Find K2 menu items pointing to multiple K2 categories
                 if (@$item->query['view'] == 'itemlist' && @$item->query['task'] == '') {
                     if (!isset(self::$cache['multicat_menu_items'][$item->id])) {
-                        /* since J4 compatibility */
-                        if (!empty($item->params)) {
-                            $menuparams = json_decode($item->params);
-                        }
+                        
+                        $menuparams = json_decode($item->getParams());
                         $item->K2Categories = isset($menuparams->categories) ? $menuparams->categories : array();
 
                         self::$cache['multicat_menu_items'][$item->id] = $item->K2Categories;
