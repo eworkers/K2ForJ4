@@ -18,8 +18,9 @@ use Joomla\CMS\Language\Text;
 
 <div id="k2ModuleBox<?php echo $module->id; ?>"
      class="k2TopCommentersBlock<?php if ($params->get('moduleclass_sfx')) echo ' ' . $params->get('moduleclass_sfx'); ?>">
-        <ul>
-            <?php foreach ($commenters as $key => $commenter): ?>
+    <ul>
+		<?php if(isset($commenters) && count($commenters)): ?>
+			<?php foreach ($commenters as $key => $commenter): ?>
                 <li class="<?php echo ($key % 2) ? "odd" : "even";
                 if (count($commenters) == $key + 1) echo ' lastItem'; ?>">
                     <?php if (isset($commenter->userImage)): ?>
@@ -51,7 +52,8 @@ use Joomla\CMS\Language\Text;
 
                     <div class="clr"></div>
                 </li>
-            <?php endforeach; ?>
-            <li class="clearList"></li>
-        </ul>
+			<?php endforeach; ?>
+		<?php endif;?>
+        <li class="clearList"></li>
+    </ul>
 </div>

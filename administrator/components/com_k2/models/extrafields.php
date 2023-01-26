@@ -322,7 +322,7 @@ class K2ModelExtraFields extends K2Model
     public function removeGroups()
     {
         $app = Factory::getApplication();
-        $db = &Factory::getDbo();
+        $db =  Factory::getDbo();
         $cid = Factory::getApplication()->input->getVar('cid');
         ArrayHelper::toInteger($cid);
         foreach ($cid as $id) {

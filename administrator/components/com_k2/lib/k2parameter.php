@@ -16,9 +16,12 @@ use Joomla\CMS\Language\Text;
 
 class K2Parameter
 {
-    public function __construct($data, $path = '', $namespace)
+	public $namespace = null;
+    public function __construct($data, $path, $namespace)
     {
-        $this->namespace = $namespace;
+	    if ($namespace) {
+		    $this->namespace = $namespace;
+	    }
         $this->values = new Registry($data);
     }
 
