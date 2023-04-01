@@ -1061,7 +1061,7 @@ class K2ModelItem extends K2Model
             }
 
             if ($commentURL == Text::_('K2_ENTER_YOUR_SITE_URL') || $commentURL == "") {
-                $row->commentURL = null;
+                $row->commentURL = '';
             } else {
                 if (substr(trim($commentURL), 0, 4) != 'http') {
                     $row->commentURL = 'http://' . $commentURL;
