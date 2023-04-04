@@ -341,8 +341,9 @@ class K2Router extends JComponentRouterBase
             elseif (
                 isset($this->getCategoryProps($segments[0])->alias) &&
                 $segments[0] == $this->getCategoryProps($segments[0])->alias &&
+                !isset($segments[1]) &&
                 (
-                    array_reverse($segments)[0] != @$this->getItemProps(array_reverse($segments)[0])->alias &&
+                    array_reverse($segments)[0] != @$this->getItemProps(array_reverse($segments)[0])->alias ||
                     array_reverse($segments)[0] != @$this->getItemProps((int) array_reverse($segments)[0])->id
                 )
             ) {
