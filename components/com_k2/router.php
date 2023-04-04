@@ -301,7 +301,6 @@ class K2Router extends JComponentRouterBase
         foreach ($segments as $segment) {
             $request_url_parts[] = str_replace(':', '-', $segment);
         }
-        $lastSegment = end($request_url_parts);
         $segments = $request_url_parts;
 
         $reservedViews = array('item', 'itemlist', 'media', 'users', 'comments', 'latest');
