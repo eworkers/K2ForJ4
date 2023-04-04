@@ -19,7 +19,11 @@ class K2ElementHeader extends K2Element
 {
     public function fetchElement($name, $value, &$node, $control_name)
     {
-        return '<div class="jwHeaderContainer"><div class="jwHeaderContent">' . Text::_($value) . '</div><div class="jwHeaderClr"></div></div>';
+        $additionalCssClass = '';
+        if ($node->attributes()->class) {
+            $additionalCssClass = ' '.$node->attributes()->class;
+        }
+        return '<div class="jwHeaderContainer'.$additionalCssClass.'"><div class="jwHeaderContent">'.JText::_($value).'</div><div class="jwHeaderClr"></div></div>';
     }
 
     public function fetchTooltip($label, $description, &$node, $control_name, $name)

@@ -166,33 +166,20 @@ class K2Router extends JComponentRouterBase
                 // Replace the item with the category slug
                 if ($params->get('k2SefLabelItem') == '1') {
                     if ($params->get('k2SefInsertCatId') == '0') {
+                        // Single category path
                         $segments[0] = $this->getItemProps($id, true)->slug;
 
-                        $slug = $segments[0];
-                        $slugs = array();
-                        $categories = $this->getCategoryPath($this->getCategoryProps($slug)->id);
-                        if (count($categories)) {
-                            $slugs[] = $slug;
-                            foreach ($categories as $catid) {
-                                $slugs[] = $this->getCategoryProps($catid)->alias;
-                            }
-                            $slug = implode('/', array_reverse($slugs));
-                        }
-                        $segments[0] = $slug;
                     } else {
-                        $segments[0] = $this->getItemProps($id, true)->catid.'-'.$this->getItemProps($id, true)->slug;
-
-                        $slug = $this->getItemProps($id, true)->slug;
-                        $slugs = array();
-                        $categories = $this->getCategoryPath($this->getCategoryProps($slug)->id);
-                        if (count($categories)) {
-                            $slugs[] = $slug;
-                            foreach ($categories as $catid) {
-                                $slugs[] = $this->getCategoryProps($catid)->id.'-'.$this->getCategoryProps($catid)->alias;
+                        // Single category path
+                        if ($params->get('k2SefUseCatTitleAlias')) {
+                            if ($params->get('k2SefCatIdTitleAliasSep') == 'slash') {
+                                $segments[0] = $this->getItemProps($id, true)->catid.'/'.$this->getItemProps($id, true)->slug;
+                            } else {
+                                $segments[0] = $this->getItemProps($id, true)->catid.'-'.$this->getItemProps($id, true)->slug;
                             }
-                            $slug = implode('/', array_reverse($slugs));
+                        } else {
+                            $segments[0] = $this->getItemProps($id, true)->catid;
                         }
-                        $segments[0] = $slug;
                     }
                 } else {
                     $segments[0] = $params->get('k2SefLabelItemCustomPrefix');
@@ -232,7 +219,11 @@ class K2Router extends JComponentRouterBase
             if (isset($segments[1])) {
                 switch ($segments[1]) {
                     case 'category':
-                        $segments[0] = $params->get('k2SefLabelCat', '');
+                        $k2SefLabelCat_fallback = 'category';
+                        if ($params->get('k2SefUseCatTitleAlias')) {
+                            $k2SefLabelCat_fallback = '';
+                        }
+                        $segments[0] = $params->get('k2SefLabelCat', $k2SefLabelCat_fallback);
 
                         unset($segments[1]);
 
@@ -243,11 +234,11 @@ class K2Router extends JComponentRouterBase
                         $slugs = array();
                         $categories = $this->getCategoryPath($catid);
                         if (count($categories)) {
-                            $slugs[] = $slug;
-                            foreach ($categories as $catid) {
-                                $slugs[] = $this->getCategoryProps($catid)->alias;
+                            foreach ($categories as $category) {
+                                $slugs[] = $category['alias'];
                             }
-                            $slug = implode('/', array_reverse($slugs));
+                            // Single category path
+                            $slug = end($slugs);
                         }
 
                         // Handle category id and alias
@@ -306,12 +297,24 @@ class K2Router extends JComponentRouterBase
 
         $params = ComponentHelper::getParams('com_k2');
 
+        $request_url_parts = [];
+        foreach ($segments as $segment) {
+            $request_url_parts[] = str_replace(':', '-', $segment);
+        }
+        $lastSegment = end($request_url_parts);
+        $segments = $request_url_parts;
+
         $reservedViews = array('item', 'itemlist', 'media', 'users', 'comments', 'latest');
         $categoryPath = '';
         if (!in_array($segments[0], $reservedViews)) {
             // Category view
             if ($segments[0] == $params->get('k2SefLabelCat')) {
                 $segments[0] = 'itemlist';
+                if (count($segments) > 1) {
+                    $categoryPath = implode('/', $segments);
+                } else {
+                    $categoryPath = $segments[0];
+                }
                 array_splice($segments, 1, 0, 'category');
             }
             // Tag view
@@ -336,8 +339,12 @@ class K2Router extends JComponentRouterBase
             }
             // Category path, without a prefix
             elseif (
-                !empty($params->get('k2SefLabelItem')) && $segments[0] == $this->getCategoryProps($segments[0])->alias &&
-                str_replace(':', '-', array_reverse($segments)[0]) != @$this->getItemProps(str_replace(':', '-', array_reverse($segments)[0]))->alias
+                isset($this->getCategoryProps($segments[0])->alias) &&
+                $segments[0] == $this->getCategoryProps($segments[0])->alias &&
+                (
+                    array_reverse($segments)[0] != @$this->getItemProps(array_reverse($segments)[0])->alias &&
+                    array_reverse($segments)[0] != @$this->getItemProps((int) array_reverse($segments)[0])->id
+                )
             ) {
                 if (count($segments) > 1) {
                     $categoryPath = implode('/', $segments);
@@ -703,13 +710,20 @@ class K2Router extends JComponentRouterBase
 
     function getCategoryPath($id, $path = array())
     {
-        $parent = $this->getCategoryProps($id)->parent;
-        if ($parent) {
-            $path[] = $parent;
-            return $this->getCategoryPath($parent, $path);
+        $category = $this->getCategoryProps($id);
+        if ($category->parent) {
+            $path[] = [
+                'id' => $id,
+                'alias' => $category->alias
+            ];
+            return $this->getCategoryPath($category->parent, $path);
         } else {
-            return $path;
+            $path[] = [
+                'id' => $id,
+                'alias' => $category->alias
+            ];
         }
+        return array_reverse($path);
     }
 
     public function parseRule(&$router, Uri &$uri)
