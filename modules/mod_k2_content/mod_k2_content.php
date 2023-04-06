@@ -16,7 +16,8 @@ use Joomla\CMS\Router\Route;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Helper\ModuleHelper;
 
-$language = Factory::getLanguage();
+$app = Factory::getApplication();
+$language = $app->getLanguage();
 $language->load('com_k2.dates', JPATH_ADMINISTRATOR, null, true);
 
 require_once(dirname(__FILE__) . '/helper.php');
@@ -39,13 +40,18 @@ if ($itemCustomLinkURL && $itemCustomLinkURL != 'http://' && $itemCustomLinkURL 
         $itemCustomLinkTitle = $itemCustomLinkURL;
     }
 } elseif ($itemCustomLinkMenuItem) {
-    $menu = AbstractMenu::getInstance('site');
+    $menu = $app->getMenu();
     $menuLink = $menu->getItem($itemCustomLinkMenuItem);
-    if (!empty($menuLink)) {
+	$ignoredTypes = ['heading', 'separator'];
+    if (!empty($menuLink) && (!in_array($menuLink->type, $ignoredTypes))) {
         if (!$itemCustomLinkTitle) {
             $itemCustomLinkTitle = $menuLink->title;
         }
-        $itemCustomLinkURL = Route::_('index.php?&Itemid=' . $menuLink->id);
+		if($menuLink->type == 'url'){
+			$itemCustomLinkURL = $menuLink->link;
+		}
+		else $itemCustomLinkURL = Route::_('index.php?&Itemid=' . $menuLink->id);
+
     } else {
         $itemCustomLinkTitle = '';
         $itemCustomLinkURL = '';
