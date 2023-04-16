@@ -514,14 +514,7 @@ class modK2ToolsHelper
             <input name="option" value="com_k2" type="hidden" />
             <input name="view" value="itemlist" type="hidden" />
             <input name="task" value="category" type="hidden" />
-            <input name="Itemid" value="' . Factory::getApplication()->input->getInt('Itemid') . '" type="hidden" />';
-
-            // For Joom!Fish compatibility
-            if (Factory::getApplication()->input->getCmd('lang')) {
-                echo '<input name="lang" value="' . Factory::getApplication()->input->getCmd('lang') . '" type="hidden" />';
-            }
-
-            echo '
+            <input name="Itemid" value="' . $app->input->getInt('Itemid') . '" type="hidden" />
     </form>
 </div>
             ';
