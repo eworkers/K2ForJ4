@@ -165,7 +165,7 @@ class K2ElementK2Category extends K2Element
 
 				function enableParams(){
                     $(targetParams).prop('disabled', false);
-                    $('.jwHeaderContainer').hide();
+                    $('.jwHeaderContainer').show();
                     $(targetParams).parents('.control-group').show();
 				}
 
@@ -215,7 +215,8 @@ class K2ElementK2Category extends K2Element
             $onChange = '';
         }
 
-        return JHTML::_('select.genericlist', $mitems, $fieldName, $onChange . ' class="inputbox" multiple="multiple" size="15"', 'value', 'text', $value);
+	echo "<joomla-field-fancy-select>";
+        return JHTML::_('select.genericlist', $mitems, $fieldName, $onChange . ' data-type="select-multiple" class="choices__input" multiple="multiple" size="15"', 'value', 'text', $value);
     }
 }
 
