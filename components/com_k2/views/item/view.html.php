@@ -312,11 +312,12 @@ class K2ViewItem extends K2View
                 $item->previousImageLarge = '';
                 $item->previousImageXLarge = '';
 
-                $imageTimestamp = '';
-                $dateModified = ((int)$previousItem->modified) ? $previousItem->modified : '';
-                if ($params->get('imageTimestamp', 1) && $dateModified) {
-                    $imageTimestamp = '?t=' . strftime("%Y%m%d_%H%M%S", strtotime($dateModified));
-                }
+				$imageTimestamp = '';
+				$dateModified = ((int)$previousItem->modified) ? $previousItem->modified : '';
+				if ($params->get('imageTimestamp', 1) && $dateModified) {
+					$dateTimeObj = new DateTime($dateModified);
+					$imageTimestamp = '?t=' . IntlDateFormatter::formatObject($dateTimeObj,'YMMdd_hhmmss');
+				}
 
                 $imageFilenamePrefix = md5("Image" . $previousItem->id);
                 $imagePathPrefix = Uri::base(true) . '/media/k2/items/cache/' . $imageFilenamePrefix;
@@ -353,11 +354,12 @@ class K2ViewItem extends K2View
                 $item->nextImageLarge = '';
                 $item->nextImageXLarge = '';
 
-                $imageTimestamp = '';
-                $dateModified = ((int)$nextItem->modified) ? $nextItem->modified : '';
-                if ($params->get('imageTimestamp', 1) && $dateModified) {
-                    $imageTimestamp = '?t=' . strftime("%Y%m%d_%H%M%S", strtotime($dateModified));
-                }
+				$imageTimestamp = '';
+				$dateModified = ((int)$nextItem->modified) ? $nextItem->modified : '';
+				if ($params->get('imageTimestamp', 1) && $dateModified) {
+					$dateTimeObj = new DateTime($dateModified);
+					$imageTimestamp = '?t=' . IntlDateFormatter::formatObject($dateTimeObj,'YMMdd_hhmmss');
+				}
 
                 $imageFilenamePrefix = md5("Image" . $nextItem->id);
                 $imagePathPrefix = Uri::base(true) . '/media/k2/items/cache/' . $imageFilenamePrefix;
@@ -459,8 +461,9 @@ class K2ViewItem extends K2View
         // --- Insert additional HTTP headers [start] ---
         JFactory::getApplication()->allowCache(true);
 
-        $itemCreatedOrModifiedDate = ((int)$item->modified) ? $item->modified : $item->created;
-        $itemCreatedOrModifiedDate = strftime("%a, %d %b %Y %H:%M:%S GMT", strtotime($itemCreatedOrModifiedDate));
+		$itemCreatedOrModifiedDate = ((int)$item->modified) ? $item->modified : $item->created;
+		$dateTimeObj = new DateTime($itemCreatedOrModifiedDate);
+		$itemCreatedOrModifiedDate = IntlDateFormatter::formatObject($dateTimeObj,'eee, d MMM y HH:mm:ss'). " GMT";
 
         // Last-Modified HTTP header
         JFactory::getApplication()->setHeader('Last-Modified', $itemCreatedOrModifiedDate);
