@@ -116,7 +116,7 @@ use Joomla\CMS\Language\Text;
                 <div class="k2TabsContent" id="k2TabContent">
                     <div class="k2ItemFormEditor">
                         <!--<span class="k2ItemFormEditorTitle"><?php echo Text::_('K2_CATEGORY_DESCRIPTION'); ?></span>-->
-                        <?php echo $this->editor; ?>
+                        <?php echo $this->catEditor; ?>
                         <div class="dummyHeight"></div>
                         <div class="clr"></div>
                     </div>

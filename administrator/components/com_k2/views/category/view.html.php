@@ -37,17 +37,13 @@ class K2ViewCategory extends K2View
 
         // Editor
         /* since J4 compatibility */
-// get user editor
-        $editor = Factory::getUser()->getParam('editor', 'tinymce');
-        $wysiwyg = JEditor::getInstance($editor);
-        $editor = $wysiwyg->display('description', $category->description, '100%', '250px', '', '', array('pagebreak', 'readmore'));
-        $this->editor = $editor;
-        $onSave = '';
-        /* since J4 compatibility */
-// JEditor save removed in J4
-        /*
-                    $onSave = $wysiwyg->save('description');
-        */
+		// get user editor
+	    $editor = !empty(Factory::getUser()->getParam('editor')) ? Factory::getUser()->getParam('editor') : Factory::getConfig()->get('editor');
+	    $wysiwyg = JEditor::getInstance($editor);
+	    $editor = $wysiwyg->display('description', $category->description, '100%', '250px', '', '', array('pagebreak', 'readmore'));
+	    $this->catEditor = $editor;
+	    $onSave = '';
+
         $this->onSave = $onSave;
 
         // JS
