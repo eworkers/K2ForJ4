@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `#__k2_items` (
     `image_credits` varchar(255) NOT NULL DEFAULT '',
     `video_caption` text NOT NULL,
     `video_credits` varchar(255) NOT NULL DEFAULT '',
-    `hits` int(10) NOT NULL DEFAULT '0',
+    `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
     `params` text NOT NULL,
     `metadesc` text NOT NULL,
     `metadata` text NOT NULL,
