@@ -66,29 +66,6 @@ class K2Router extends JComponentRouterBase
         $mId = (empty($menuItem->query['id'])) ? null : $menuItem->query['id'];
         $mTag = (empty($menuItem->query['tag'])) ? null : $menuItem->query['tag'];
 
-        // make sure that k2 menu item has no query suffix at its root
-        /* Checking if the view is the same as the menu item and if it is, it will unset the view. */
-        if ($menuItem && isset($query['view']) && $menuItem->query['view'] === @$query['view'])
-        {
-            $unsetView = true;
-
-            if ((isset($query['task']) && @$query['task'] != '') || isset($query['Itemid']))
-            {
-                $unsetView = false;
-                if(@$query['view'] === 'itemlist' && @$query['layout'] === 'category'){
-                    $unsetView = true;
-                }
-                if(@$query['view'] === 'latest' && $menuItem == $this->menu->getItem($query['Itemid'])){
-                    $unsetView = true;
-                }
-            }
-
-            if ($unsetView)
-            {
-                unset($query['view']);
-            }
-        }
-
         if (isset($query['layout'])) {
             unset($query['layout']);
         }
@@ -477,29 +454,6 @@ class K2Router extends JComponentRouterBase
         $mTask = (empty($menuItem->query['task'])) ? null : $menuItem->query['task'];
         $mId = (empty($menuItem->query['id'])) ? null : $menuItem->query['id'];
         $mTag = (empty($menuItem->query['tag'])) ? null : $menuItem->query['tag'];
-
-        // make sure that k2 menu item has no query suffix at its root
-        /* Checking if the view is the same as the menu item and if it is, it will unset the view. */
-        if ($menuItem && isset($query['view']) && $menuItem->query['view'] === @$query['view'])
-        {
-            $unsetView = true;
-
-            if ((isset($query['task']) && @$query['task'] != '') || isset($query['Itemid']))
-            {
-                $unsetView = false;
-                if(@$query['view'] === 'itemlist' && @$query['layout'] === 'category'){
-                    $unsetView = true;
-                }
-                if(@$query['view'] === 'latest' && $menuItem == $this->menu->getItem($query['Itemid'])){
-                    $unsetView = true;
-                }
-            }
-
-            if ($unsetView)
-            {
-                unset($query['view']);
-            }
-        }
 
         if (isset($query['layout'])) {
             unset($query['layout']);

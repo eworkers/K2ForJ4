@@ -179,8 +179,8 @@ class K2ElementK2Category extends K2Element
 						enableParams();
 					}
 					if (counter==1){
-						$('jform_request_id').val($('#jformparamscategories :selected').val());
-						$('jform_request_task').val('category');
+						$('#jform_request_id').val($('#jformparamscategories :selected').val());
+						$('#jform_request_task').val('category');
 						$('jform_params_singleCatOrdering').prop('disabled', false);
 						disableParams();
 					}
