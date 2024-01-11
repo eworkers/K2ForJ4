@@ -73,7 +73,7 @@ class K2ModelCategory extends K2Model
         /* since J4 compatibility */
         Factory::getApplication()->triggerEvent('onFinderBeforeSave', array('com_k2.category', $row, $isNew));
 
-        $row->description = Factory::getApplication()->input->getVar('description', '', 'post', 'string', 2);
+        $row->description = Factory::getApplication()->input->post->getRaw('description', '');
         if ($params->get('xssFiltering')) {
             $filter = new InputFilter(array(), array(), 1, 1, 0);
             $row->description = $filter->clean($row->description);
