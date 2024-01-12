@@ -33,6 +33,9 @@
     border-radius:.25rem;
     transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
+#k2ContentView .k2AdminTableFiltersSelects select:focus {
+    background-image:url(../images/backend/select-bg-active.svg);
+}
 
 #k2ContentView .k2AdminTableFiltersSelects select,select#limit.form-select {
     font-size:13px;
@@ -77,6 +80,9 @@
     text-transform:none;
     transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     word-wrap:normal
+}
+#k2ContentView > form select:focus {
+    background-image:url(../images/backend/select-bg-active.svg);
 }
 
 #k2ContentView > form select:disabled {
@@ -210,14 +216,6 @@ form input[name="search"] {
     .form-select {
         transition:none
     }
-}
-
-#k2ContentView > form select {
-    background:url(../images/backend/select-bg.svg) no-repeat 100%/116rem;
-    background-color:var(--template-bg-light);
-    border:1px solid var(--template-bg-dark-20);
-    cursor:pointer;
-    max-width:100%
 }
 
 #k2ContentView > form select option {
