@@ -188,7 +188,7 @@ class K2ModelItem extends K2Model
             }
         }
 
-        if ($item->params->get('catItemIntroTextWordLimit') && $task == 'category') {
+        if ($item->params->get('catItemIntroTextWordLimit') && $task == 'category' && $view != 'item') {
             $item->introtext = K2HelperUtilities::wordLimit($item->introtext, $item->params->get('catItemIntroTextWordLimit'));
         }
 
