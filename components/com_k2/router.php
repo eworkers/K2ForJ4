@@ -66,6 +66,25 @@ class K2Router extends JComponentRouterBase
         $mId = (empty($menuItem->query['id'])) ? null : $menuItem->query['id'];
         $mTag = (empty($menuItem->query['tag'])) ? null : $menuItem->query['tag'];
 
+	    if ($menuItem && isset($query['view']) && $menuItem->query['view'] === @$query['view']) {
+		    $unsetView = true;
+
+		    if ((isset($query['task']) && @$query['task'] != '') || isset($query['Itemid'])) {
+			    $unsetView = false;
+			    if (@$query['view'] === 'itemlist' && @$query['layout'] === 'category') {
+				    $unsetView = true;
+				    unset($query['task'], $query['id']);
+			    }
+			    if (@$query['view'] === 'latest' && $menuItem == $this->menu->getItem($query['Itemid'])) {
+				    $unsetView = true;
+			    }
+		    }
+
+		    if ($unsetView) {
+			    unset($query['view']);
+		    }
+	    }
+
         if (isset($query['layout'])) {
             unset($query['layout']);
         }
@@ -81,6 +100,10 @@ class K2Router extends JComponentRouterBase
             unset($query['task']);
             unset($query['tag']);
         }
+
+	    if (isset($query['tag']) && $query['task'] == 'tag' && @intval($query['id']) > 0) {
+		    unset($query['id']);
+	    }
 
         if (isset($query['view'])) {
             $segments[] = $query['view'];
@@ -455,6 +478,25 @@ class K2Router extends JComponentRouterBase
         $mId = (empty($menuItem->query['id'])) ? null : $menuItem->query['id'];
         $mTag = (empty($menuItem->query['tag'])) ? null : $menuItem->query['tag'];
 
+	    if ($menuItem && isset($query['view']) && $menuItem->query['view'] === @$query['view']) {
+		    $unsetView = true;
+
+		    if ((isset($query['task']) && @$query['task'] != '') || isset($query['Itemid'])) {
+			    $unsetView = false;
+			    if (@$query['view'] === 'itemlist' && @$query['layout'] === 'category') {
+				    $unsetView = true;
+				    unset($query['task'], $query['id']);
+			    }
+			    if (@$query['view'] === 'latest' && $menuItem == $this->menu->getItem($query['Itemid'])) {
+				    $unsetView = true;
+			    }
+		    }
+
+		    if ($unsetView) {
+			    unset($query['view']);
+		    }
+	    }
+
         if (isset($query['layout'])) {
             unset($query['layout']);
         }
@@ -470,6 +512,10 @@ class K2Router extends JComponentRouterBase
             unset($query['task']);
             unset($query['tag']);
         }
+
+	    if (isset($query['tag']) && $query['task'] == 'tag' && @intval($query['id']) > 0) {
+		    unset($query['id']);
+	    }
 
         if (isset($query['view'])) {
             $view = $query['view'];
