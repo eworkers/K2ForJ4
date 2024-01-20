@@ -684,52 +684,17 @@ class K2ViewItemlist extends K2View
                 $hits = $items[$i]->hits;
                 $items[$i]->hits = 0;
                 Table::getInstance('K2Category', 'Table');
-                if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
-                    $cSuffix = $items[$i]->id .'_'. $items[$i]->title .'_' . $items[$i]->alias .'_'. $task .'_'. $view .'_'. 'Itemid_' . $item_id;
-                    if(!empty(Factory::getApplication()->input->getCmd('layout'))){
-                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('layout');
-                    }
-                    if(!empty(Factory::getApplication()->input->getCmd('tag'))){
-                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('tag');
-                    }
-                    if(!empty(Factory::getApplication()->input->getCmd('search'))){
-                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('search');
-                    }
-                    if(!empty(Factory::getApplication()->input->getCmd('date'))){
-                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('date');
-                    }
-                    if(!empty(Factory::getApplication()->input->getCmd('start'))){
-                        $cSuffix .= '_'. Factory::getApplication()->input->getCmd('start');
-                    }
-                    $key = ('k2_item_' . $cSuffix .'_'. $format);
-                    if ($cache->contains($key))
-                    {
-                        $items[$i] = $cache->get($key, 'com_k2_extended');
-                    }
-                    else{
-                        $store = $items[$i];
-                        if (is_object($store)) {
-                            $store = json_encode($store);
-                            $store = json_decode(trim ($store, chr (239). chr (187). chr (191)), true );
-                        }
-                        try{
-                            $cache->store($store, $key, 'com_k2_extended');
-                        } catch (\Exception $e) {
-                            // for the moment settle to miss caching the query returned object
-                            // throw new \Exception(Text::_($e), 500);
-                        }
-                        // items are not in cache => prepareItems
-                        $items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
-                    }
-                }
-                else{
-                    $args = array(array(
-                        $itemModel,
-                        'prepareItem'
-                    ), $items[$i], $view, $task);
-                    $callback = array_shift($args);
-                    $items[$i] = $cache->get($callback, $args);
-                }
+
+	            try{
+		            $args = array(array(
+			            $itemModel,
+			            'prepareItem'
+		            ), $items[$i], $view, $task);
+		            $callback = array_shift($args);
+		            $items[$i] = $cache->get($callback, $args);
+	            } catch (\Exception $e) {
+		            // object not in cache
+	            }
 
                 $items[$i]->hits = $hits;
             } else {
