@@ -151,7 +151,7 @@ class K2ViewItem extends K2View
         $wysiwyg = JEditor::getInstance($editor);
         $onSave = '';
         if ($params->get("mergeEditors")) {
-            if (StringHelper::strlen($item->fulltext) > 1) {
+            if (isset($item->fulltext) && StringHelper::strlen($item->fulltext) > 1) {
                 $textValue = $item->introtext . "<hr id=\"system-readmore\" />" . $item->fulltext;
             } else {
                 $textValue = $item->introtext;
@@ -240,7 +240,7 @@ class K2ViewItem extends K2View
         */
 
         // For SIGPro
-        if (StringHelper::strpos($item->gallery, 'http://') || StringHelper::strpos($item->gallery, 'https://')) {
+        if (isset($item->gallery) && (StringHelper::strpos($item->gallery, 'http://') || StringHelper::strpos($item->gallery, 'https://'))) {
             $item->galleryType = 'flickr';
             $item->galleryValue = StringHelper::substr($item->gallery, 9);
             $item->galleryValue = StringHelper::substr($item->galleryValue, 0, -10);
@@ -263,7 +263,7 @@ class K2ViewItem extends K2View
         if (!$embedVideo) {
             $params->set('vfolder', 'media/k2/videos');
             $params->set('afolder', 'media/k2/audio');
-            if (StringHelper::strpos($item->video, 'remote}')) {
+            if (isset($item->video) && StringHelper::strpos($item->video, 'remote}')) {
                 preg_match("#}(.*?){/#s", $item->video, $matches);
                 if (StringHelper::substr($matches[1], 0, 7) != 'http://' || StringHelper::substr($matches[1], 0, 8) != 'https://') {
                     $item->video = str_replace($matches[1], JURI::root() . $matches[1], $item->video);

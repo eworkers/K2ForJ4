@@ -102,7 +102,8 @@ class K2ViewCategory extends K2View
 
         jimport('joomla.form.form');
         $form = Form::getInstance('categoryForm', JPATH_COMPONENT_ADMINISTRATOR . '/models/category.xml');
-        $values = array('params' => json_decode($category->params));
+		$cparams = isset($category->params) ? json_decode($category->params) : $category->params;
+        $values = array('params' => $cparams);
         $form->bind($values);
         $inheritFrom = (isset($values['params']->inheritFrom)) ? $values['params']->inheritFrom : 0;
         $this->form = $form;
