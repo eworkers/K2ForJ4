@@ -361,7 +361,7 @@ class K2ViewItemlist extends K2View
                             $limitstart
                         ));
                         $userObject->event->K2UserDisplay = trim(implode("\n", $results));
-                        $userObject->profile->url = htmlspecialchars($userObject->profile->url, ENT_QUOTES, 'utf-8');
+                        $userObject->profile->url = isset($userObject->profile->url) ? htmlspecialchars($userObject->profile->url, ENT_QUOTES, 'utf-8') : $userObject->profile->url;
                     }
                     $this->user = $userObject;
 
@@ -892,7 +892,7 @@ class K2ViewItemlist extends K2View
                         }
                     }
 
-                    $metaDesc = trim($metaDesc);
+                    $metaDesc = isset($metaDesc) ? trim($metaDesc) : '';
                     $document->setDescription(K2HelperUtilities::characterLimit($metaDesc, $params->get('metaDescLimit', 150)));
 
                     // Set meta keywords
@@ -1020,7 +1020,7 @@ class K2ViewItemlist extends K2View
                         }
                     }
 
-                    $metaDesc = trim($metaDesc);
+                    $metaDesc = isset($metaDesc) ? trim($metaDesc) : '';
                     $document->setDescription(K2HelperUtilities::characterLimit($metaDesc, $params->get('metaDescLimit', 150)));
 
                     // Set meta keywords
@@ -1122,7 +1122,7 @@ class K2ViewItemlist extends K2View
                         }
                     }
 
-                    $metaDesc = trim($metaDesc);
+                    $metaDesc = isset($metaDesc) ? trim($metaDesc) : '';
                     $document->setDescription(K2HelperUtilities::characterLimit($metaDesc, $params->get('metaDescLimit', 150)));
 
                     // Set meta keywords
@@ -1213,7 +1213,7 @@ class K2ViewItemlist extends K2View
 
                     // Set meta description
                     $metaDesc = ($document->getMetadata('description')) ? $document->getMetadata('description') : Text::_('K2_ITEMS_FILTERED_BY_DATE') . ' ' . $metaTitle;
-                    $metaDesc = trim($metaDesc);
+                    $metaDesc = isset($metaDesc) ? trim($metaDesc) : '';
                     $document->setDescription(K2HelperUtilities::characterLimit($metaDesc, $params->get('metaDescLimit', 150)));
 
                     // Set meta keywords
@@ -1263,7 +1263,7 @@ class K2ViewItemlist extends K2View
 
                     // Set meta description
                     $metaDesc = ($document->getMetadata('description')) ? $document->getMetadata('description') : Text::_('K2_SEARCH_RESULTS_FOR') . ' ' . $metaTitle;
-                    $metaDesc = trim($metaDesc);
+                    $metaDesc = isset($metaDesc) ? trim($metaDesc) : '';
                     $document->setDescription(K2HelperUtilities::characterLimit($metaDesc, $params->get('metaDescLimit', 150)));
 
                     // Set meta keywords
@@ -1319,7 +1319,7 @@ class K2ViewItemlist extends K2View
                         $metaDesc = $params->get('menu-meta_description');
                     }
 
-                    $metaDesc = !empty($metaDesc) ? trim($metaDesc) : '';
+                    $metaDesc = isset($metaDesc) ? trim($metaDesc) : '';
                     $document->setDescription(K2HelperUtilities::characterLimit($metaDesc, $params->get('metaDescLimit', 150)));
 
                     // Set meta keywords

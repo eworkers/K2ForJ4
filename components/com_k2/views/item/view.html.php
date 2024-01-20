@@ -114,8 +114,8 @@ class K2ViewItem extends K2View
                 &$params,
                 $limitstart
             ));
-            $item->event->K2UserDisplay = trim(implode("\n", $results));
-            $item->author->profile->url = htmlspecialchars($item->author->profile->url, ENT_QUOTES, 'UTF-8');
+	        $item->event->K2UserDisplay = trim(implode("\n", $results));
+            $item->author->profile->url =  isset($item->author->profile->url) ? htmlspecialchars($item->author->profile->url, ENT_QUOTES, 'UTF-8') : $item->author->profile->url;
         }
 
         // Access check

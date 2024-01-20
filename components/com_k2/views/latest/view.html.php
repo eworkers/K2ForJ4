@@ -203,7 +203,7 @@ class K2ViewLatest extends K2View
                             /* since J4 compatibility */
                             $results = Factory::getApplication()->triggerEvent('onK2UserDisplay', array(&$userObject->profile, &$params, $limitstart));
                             $userObject->event->K2UserDisplay = trim(implode("\n", $results));
-                            $userObject->profile->url = htmlspecialchars($userObject->profile->url, ENT_QUOTES, 'utf-8');
+                            $userObject->profile->url = isset($userObject->profile->url) ? htmlspecialchars($userObject->profile->url, ENT_QUOTES, 'utf-8') : $userObject->profile->url;
                         }
 
                         $link = K2HelperRoute::getUserRoute($userObject->id);
@@ -293,7 +293,7 @@ class K2ViewLatest extends K2View
                 $metaDesc = $params->get('menu-meta_description');
             }
 
-            $metaDesc = trim($metaDesc);
+            $metaDesc = isset($metaDesc) ? trim($metaDesc) : '';
             $document->setDescription(K2HelperUtilities::characterLimit($metaDesc, $params->get('metaDescLimit', 150)));
 
             // Set meta keywords

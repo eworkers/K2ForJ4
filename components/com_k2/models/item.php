@@ -350,19 +350,22 @@ class K2ModelItem extends K2Model
                 $mediaTempText = new stdClass;
                 $mediaTempText->text = $item->video;
                 /* since J4 compatibility */
-                Factory::getApplication()->triggerEvent('onContentPrepare', array(
-                    'com_k2.' . $view . '-media',
-                    &$mediaTempText,
-                    &$params,
-                    $limitstart
-                ));
-                /* since J4 compatibility */
-                Factory::getApplication()->triggerEvent('onK2PrepareContent', array(
-                    &$mediaTempText,
-                    &$params,
-                    $limitstart
-                ));
-                $item->description .= '<div class="K2FeedVideo">' . $mediaTempText->text . '</div>';
+	            if($mediaTempText->text)
+	            {
+		            Factory::getApplication()->triggerEvent('onContentPrepare', array(
+			            'com_k2.' . $view . '-media',
+			            &$mediaTempText,
+			            &$params,
+			            $limitstart
+		            ));
+		            /* since J4 compatibility */
+		            Factory::getApplication()->triggerEvent('onK2PrepareContent', array(
+			            &$mediaTempText,
+			            &$params,
+			            $limitstart
+		            ));
+		            $item->description .= '<div class="K2FeedVideo">' . $mediaTempText->text . '</div>';
+	            }
             }
         }
 
@@ -571,19 +574,22 @@ class K2ModelItem extends K2Model
                 $mediaTempText = new stdClass;
                 $mediaTempText->text = $item->video;
                 /* since J4 compatibility */
-                Factory::getApplication()->triggerEvent('onContentPrepare', array(
-                    'com_k2.' . $view . '-media',
-                    &$mediaTempText,
-                    &$params,
-                    $limitstart
-                ));
-                /* since J4 compatibility */
-                Factory::getApplication()->triggerEvent('onK2PrepareContent', array(
-                    &$mediaTempText,
-                    &$params,
-                    $limitstart
-                ));
-                $item->video = $mediaTempText->text;
+	            if($mediaTempText->text){
+		            Factory::getApplication()->triggerEvent('onContentPrepare', array(
+			            'com_k2.' . $view . '-media',
+			            &$mediaTempText,
+			            &$params,
+			            $limitstart
+		            ));
+		            /* since J4 compatibility */
+		            Factory::getApplication()->triggerEvent('onK2PrepareContent', array(
+			            &$mediaTempText,
+			            &$params,
+			            $limitstart
+		            ));
+		            $item->video = $mediaTempText->text;
+	            }
+
             }
         }
 

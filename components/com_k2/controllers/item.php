@@ -60,7 +60,7 @@ class K2ControllerItem extends K2Controller
                         \$K2('#userName').val(" . json_encode($user->name) . ").attr('disabled', 'disabled');
                         \$K2('#commentEmail').val('" . $user->email . "').attr('disabled', 'disabled');
                 ";
-                if (is_object($profile) && $profile->url) {
+                if (is_object($profile) && isset($profile->url)) {
                     $script .= "
                         \$K2('#commentURL').val('" . htmlspecialchars($profile->url, ENT_QUOTES, 'UTF-8') . "').attr('disabled', 'disabled');
                     ";
