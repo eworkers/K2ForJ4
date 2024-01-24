@@ -34,6 +34,7 @@ class K2ViewLatest extends K2View
 
         $limit = $params->get('latestItemsLimit');
         $limitstart = Factory::getApplication()->input->getInt('limitstart');
+	    $format = Factory::getApplication()->input->getCmd('format');
 
         $model = $this->getModel('itemlist');
         $itemModel = $this->getModel('item');
@@ -133,19 +134,35 @@ class K2ViewLatest extends K2View
                                 $hits = $category->items[$i]->hits;
                                 $category->items[$i]->hits = 0;
 
-	                            try{
-		                            $args = array(array(
-										$itemModel,
-			                            'prepareItem'
-		                            ), $category->items[$i], 'latest', '');
+	                            if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
+		                            $key = ('k2_item_CatLatest' . $category->items[$i]->id . $category->items[$i]->alias . '_' . $format);
+		                            if ($cache->contains($key))
+		                            {
+			                            $category->items[$i]= $cache->get($key, 'com_k2_extended');
+		                            }
+		                            else{
+			                            $category->items[$i] = $itemModel->prepareItem($category->items[$i], 'latest', '');
+			                            $store = $category->items[$i];
+			                            if (is_object($store)) {
+				                            $store = json_encode($store);
+				                            $store = json_decode(trim ($store, chr (239). chr (187). chr (191)), true );
+			                            }
+			                            try{
+				                            $cache->store($store, $key);
+			                            } catch (\Exception $e) {
+				                            // for the moment settle to miss caching the query returned object
+				                            // throw new \Exception(Text::_($e), 500);
+			                            }
+		                            }
+	                            }
+	                            else{
+		                            $args = array(array($itemModel, 'prepareItem'), $category->items[$i], 'latest', '');
 		                            $callback = array_shift($args);
 		                            $category->items[$i] = $cache->get($callback, $args);
-	                            } catch (\Exception $e) {
-		                            // object not in cache
 	                            }
 
                                 $category->items[$i]->hits = $hits;
-                                $category->items[$i] = $itemModel->execPlugins($category->items[$i], 'latest', '');
+                                $category->items[$i] = ($format !== 'feed') ?  $itemModel->execPlugins($category->items[$i], 'latest', '') : $category->items[$i];
 
                                 // Trigger comments counter event
                                 /* since J4 compatibility */

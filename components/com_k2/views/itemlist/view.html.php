@@ -680,32 +680,57 @@ class K2ViewItemlist extends K2View
             }
 
             // Prepare item
-            if ($cacheFlag) {
-                $hits = $items[$i]->hits;
-                $items[$i]->hits = 0;
-                Table::getInstance('K2Category', 'Table');
+	        if ($cacheFlag) {
+		        $hits = $items[$i]->hits;
+		        $items[$i]->hits = 0;
+		        Table::getInstance('K2Category', 'Table');
 
-	            try{
-		            $args = array(array(
-			            $itemModel,
-			            'prepareItem'
-		            ), $items[$i], $view, $task);
-		            $callback = array_shift($args);
-		            $items[$i] = $cache->get($callback, $args);
-	            } catch (\Exception $e) {
-		            // object not in cache
-	            }
+		        if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
+					if($format !=='feed'){
+						$key = $items[$i]->id .'_'. $items[$i]->title .'_' . $items[$i]->alias . '_' .$task . '_' .$item_id;
+						if ($cache->contains($key))
+						{
+							if (is_object($items[$i]))
+							{
+								$items[$i] = json_decode(json_encode($cache->get($key)));
+							}
+						}
+						else{
+							$store = $items[$i];
+							if (is_object($store)) {
+								$store = json_decode(trim (json_encode($store), chr (239). chr (187). chr (191)), true );
+							}
+							try {
+								$cache->store($store, $key);
+							} catch (\Exception $e) {
+								// for the moment settle to miss caching the query returned object
+								// throw new \Exception(Text::_($e), 500);
+							}
+							// items are not in cache => prepareItems
+							$items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
+						}
+					}
 
-                $items[$i]->hits = $hits;
-            } else {
-                $items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
-            }
+		        }
+		        else{
+			        $args = array(array(
+				        $itemModel,
+				        'prepareItem'
+			        ), $items[$i], $view, $task);
+			        $callback = array_shift($args);
+			        $items[$i] = $cache->get($callback, $args);
+		        }
+
+		        $items[$i]->hits = $hits;
+	        } else {
+		        $items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
+	        }
             // Plugins
-            $items[$i] = $itemModel->execPlugins($items[$i], $view, $task);
+	        $items[$i] = ($format !== 'feed') ? $itemModel->execPlugins($items[$i], $view, $task) : $items[$i];
 
             // Trigger comments counter event if needed
             if (
-                $params->get('catItemK2Plugins') &&
+                $params->get('catItemK2Plugins') && ($format !== 'feed') &&
                 ($params->get('catItemCommentsAnchor') || $params->get('itemCommentsAnchor') || $params->get('itemComments'))
             ) {
                 /* since J4 compatibility */
