@@ -687,7 +687,9 @@ class K2ViewItemlist extends K2View
 
 		        if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
 					if($format !=='feed'){
-						$key = $items[$i]->id .'_'. $items[$i]->title .'_' . $items[$i]->alias . '_' .$task . '_' .$item_id;
+						$task_pre = isset($task) ? '_'.$task : '';
+						$format_pre = isset($format) ? '_'.$format : '';
+						$key = $items[$i]->id .'_'. $items[$i]->title .'_' . $items[$i]->alias . $task_pre . $format_pre . $item_id;
 						if ($cache->contains($key))
 						{
 							if (is_object($items[$i]))
@@ -696,6 +698,8 @@ class K2ViewItemlist extends K2View
 							}
 						}
 						else{
+							// items are not in cache => prepareItems
+							$items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
 							$store = $items[$i];
 							if (is_object($store)) {
 								$store = json_decode(trim (json_encode($store), chr (239). chr (187). chr (191)), true );
@@ -709,6 +713,10 @@ class K2ViewItemlist extends K2View
 							// items are not in cache => prepareItems
 							$items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
 						}
+					}
+					else
+					{
+						$items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
 					}
 
 		        }
@@ -726,11 +734,11 @@ class K2ViewItemlist extends K2View
 		        $items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
 	        }
             // Plugins
-	        $items[$i] = ($format !== 'feed') ? $itemModel->execPlugins($items[$i], $view, $task) : $items[$i];
+	        $items[$i] = $itemModel->execPlugins($items[$i], $view, $task);
 
             // Trigger comments counter event if needed
             if (
-                $params->get('catItemK2Plugins') && ($format !== 'feed') &&
+                $params->get('catItemK2Plugins') &&
                 ($params->get('catItemCommentsAnchor') || $params->get('itemCommentsAnchor') || $params->get('itemComments'))
             ) {
                 /* since J4 compatibility */

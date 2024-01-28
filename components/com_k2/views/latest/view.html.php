@@ -135,7 +135,7 @@ class K2ViewLatest extends K2View
                                 $category->items[$i]->hits = 0;
 
 	                            if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
-		                            $key = ('k2_item_CatLatest' . $category->items[$i]->id . $category->items[$i]->alias . '_' . $format);
+		                            $key = ('k2_item_CatLatest' . $category->items[$i]->id . $category->items[$i]->alias);
 		                            if ($cache->contains($key))
 		                            {
 			                            $category->items[$i]= $cache->get($key, 'com_k2_extended');
@@ -162,7 +162,7 @@ class K2ViewLatest extends K2View
 	                            }
 
                                 $category->items[$i]->hits = $hits;
-                                $category->items[$i] = ($format !== 'feed') ?  $itemModel->execPlugins($category->items[$i], 'latest', '') : $category->items[$i];
+                                $category->items[$i] = $itemModel->execPlugins($category->items[$i], 'latest', '');
 
                                 // Trigger comments counter event
                                 /* since J4 compatibility */
