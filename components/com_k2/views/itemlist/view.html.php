@@ -689,7 +689,8 @@ class K2ViewItemlist extends K2View
 					if($format !=='feed'){
 						$task_pre = isset($task) ? '_'.$task : '';
 						$format_pre = isset($format) ? '_'.$format : '';
-						$key = $items[$i]->id .'_'. $items[$i]->title .'_' . $items[$i]->alias . $task_pre . $format_pre . $item_id;
+						$view_pre = isset($view) ? '_'.$view : '';
+						$key = $items[$i]->id .'_'. $items[$i]->title .'_' . $items[$i]->alias . $task_pre . $view_pre . $format_pre . $item_id;
 						if ($cache->contains($key))
 						{
 							if (is_object($items[$i]))
