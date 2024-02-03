@@ -71,8 +71,6 @@ class TableK2Category extends K2Table
 
         $query = 'SELECT *' . ' FROM ' . $this->_tbl . ' WHERE ' . $this->_tbl_key . ' = ' . $db->Quote($oid);
         $db->setQuery($query);
-        /* since J4 compatibility */
-        $result = $db->loadAssoc();
 
         try {
             $result = $db->loadAssoc();
