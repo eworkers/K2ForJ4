@@ -690,7 +690,11 @@ class K2ViewItemlist extends K2View
 						$task_pre = isset($task) ? '_'.$task : '';
 						$format_pre = isset($format) ? '_'.$format : '';
 						$view_pre = isset($view) ? '_'.$view : '';
-						$key = $items[$i]->id .'_'. $items[$i]->title .'_' . $items[$i]->alias . $task_pre . $view_pre . $format_pre . $item_id;
+						$tag_name = Factory::getApplication()->input->getString('tag');
+						$cLayout = $this->getLayout();
+						$layout_pre = isset($cLayout) ? '_'.$cLayout : '';
+						$tag_pre = isset($tag_name) ? '_'.$tag_name : '';
+						$key = $items[$i]->id .'_'. $items[$i]->alias . $task_pre . $view_pre . $format_pre . $tag_pre . $layout_pre. $item_id;
 						if ($cache->contains($key))
 						{
 							if (is_object($items[$i]))
