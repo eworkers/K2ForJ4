@@ -612,19 +612,19 @@ class K2ModelItem extends K2Model
 
         // === Extra fields ===
         if ($params->get('showExtraFieldsTab') || $app->isClient('administrator')) {
-            $objects = array();
-            $variables = Factory::getApplication()->input->getArray($_POST);
-            foreach ($variables as $key => $value) {
-                if (( bool )StringHelper::stristr($key, 'K2ExtraField_')) {
-                    $object = new stdClass();
-                    $object->id = substr($key, 13);
-                    if (is_string($value)) {
-                        $value = trim($value);
-                    }
-                    $object->value = $value;
-                    $objects[] = $object;
-                }
-            }
+			// todo: find a better way to get extrafield raw value
+	        $objects = [];
+	        $variables = Factory::getApplication()->input->getArray($_POST);
+	        foreach ($variables as $key => $value) {
+		        if (StringHelper::stristr($key, 'K2ExtraField_')) {
+			        $object = new stdClass();
+			        $object->id = substr($key, 13);
+			        $raw_value = Factory::getApplication()->input->post->getRaw($key, '');
+			        $value = is_string($raw_value) ? trim($raw_value) : $raw_value;
+			        $object->value = $value;
+			        $objects[] = $object;
+		        }
+	        }
 
             $csvFiles = Factory::getApplication()->input->files->getArray($_FILES);
             foreach ($csvFiles as $key => $file) {

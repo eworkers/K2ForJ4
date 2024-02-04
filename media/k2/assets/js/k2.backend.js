@@ -1264,8 +1264,8 @@ function initExtraFieldsEditor() {
             $K2(this).css('height', 400);
         }
         if (typeof tinymce != 'undefined') {
-            // Get Joomla 3.x TinyMCE editor options
-            if (K2JVersion === '30' && typeof Joomla.optionsStorage.plg_editor_tinymce !== 'undefined') {
+            // Get TinyMCE editor options
+            if ( typeof Joomla.optionsStorage.plg_editor_tinymce !== 'undefined') {
                 editorOptions = Joomla.optionsStorage.plg_editor_tinymce.tinyMCE.default;
             }
             // Get JCE editor options
@@ -1279,7 +1279,7 @@ function initExtraFieldsEditor() {
             if (tinyMCE.get(id)) {
                 tinymce.EditorManager.remove(tinyMCE.get(id));
             }
-            if (tinymce.majorVersion == 4) {
+            if (tinymce.majorVersion >= 4) {
                 tinymce.init(editorOptions);
                 tinymce.editors[id].show();
             } else {

@@ -54,7 +54,7 @@ class K2ModelExtraField extends K2Model
         }
 
         $objects = array();
-        $values = Factory::getApplication()->input->getVar('option_value', null, 'default', 'none', 4);
+        $values =  Factory::getApplication()->input->getRaw('option_value', '');
         $names = Factory::getApplication()->input->getVar('option_name');
         $target = Factory::getApplication()->input->getVar('option_target');
         $editor = Factory::getApplication()->input->getVar('option_editor');
