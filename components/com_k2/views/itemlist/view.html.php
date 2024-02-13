@@ -715,8 +715,6 @@ class K2ViewItemlist extends K2View
 								// for the moment settle to miss caching the query returned object
 								// throw new \Exception(Text::_($e), 500);
 							}
-							// items are not in cache => prepareItems
-							$items[$i] = $itemModel->prepareItem($items[$i], $view, $task);
 						}
 					}
 					else
