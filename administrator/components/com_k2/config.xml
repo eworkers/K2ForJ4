@@ -1185,6 +1185,13 @@
             <option value="1">K2_YES</option>
         </field>
     </fieldset>
+    <fieldset name="COM_K2_SETTINGS_MISC" label="K2_SETTINGS_MISC" addfieldpath="/libraries/joomla/form/fields">
+        <field menu="hide" name="" type="header" default="K2_MISC_CACHE" label="" description=""/>
+        <field menu="hide" name="enableExtendedCache" type="radio" default="0" label="K2_ENABLE_EXTENDED_CACHE" description="K2_ENABLE_EXTENDED_CACHE_DESC">
+            <option value="0">K2_NO</option>
+            <option value="1">K2_YES</option>
+        </field>
+    </fieldset>
     <fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC">
         <field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL" class="inputbox" validate="rules" filter="rules" component="com_k2" section="component"/>
     </fieldset>

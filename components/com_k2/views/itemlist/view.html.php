@@ -680,11 +680,13 @@ class K2ViewItemlist extends K2View
             }
 
             // Prepare item
-	        if ($cacheFlag) {
+	        if ($cacheFlag && $params->get('enableExtendedCache', 0)) {
 		        $hits = $items[$i]->hits;
 		        $items[$i]->hits = 0;
 		        Table::getInstance('K2Category', 'Table');
 
+                // todo: study deeply whether to remove this completely (com_k2_extended cache container)
+                // as it appears it has no effect on joomla > 3 except causing problems and increasing cache occupied storage
 		        if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
 					if($format !=='feed'){
 						$task_pre = isset($task) ? '_'.$task : '';
