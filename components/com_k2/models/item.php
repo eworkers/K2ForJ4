@@ -170,23 +170,31 @@ class K2ModelItem extends K2Model
 
         // Filtering
         if ($params->get('introTextCleanup')) {
-            $filterTags = preg_split('#[,\s]+#', trim($params->get('introTextCleanupExcludeTags')));
-            $filterAttrs = preg_split('#[,\s]+#', trim($params->get('introTextCleanupTagAttr')));
-            $filterAttrs = array_filter($filterAttrs);
-            $item->introtext = K2HelperUtilities::cleanTags($item->introtext, $filterTags);
-            if (isset($filterAttrs) && count($filterAttrs)) {
-                $item->introtext = K2HelperUtilities::cleanAttributes($item->introtext, $filterTags, $filterAttrs);
-            }
+			if(!empty($params->get('introTextCleanupExcludeTags'))){
+				$filterTags = preg_split('#[,\s]+#', trim($params->get('introTextCleanupExcludeTags')));
+				$item->introtext = K2HelperUtilities::cleanTags($item->introtext, $filterTags);
+			}
+	        if(!empty($params->get('introTextCleanupTagAttr'))){
+		        $filterAttrs = preg_split('#[,\s]+#', trim($params->get('introTextCleanupTagAttr')));
+		        $filterAttrs = array_filter($filterAttrs);
+		        if (isset($filterAttrs) && count($filterAttrs)) {
+			        $item->introtext = K2HelperUtilities::cleanAttributes($item->introtext, $filterTags, $filterAttrs);
+		        }
+	        }
         }
 
         if ($params->get('fullTextCleanup')) {
-            $filterTags = preg_split('#[,\s]+#', trim($params->get('fullTextCleanupExcludeTags')));
-            $filterAttrs = preg_split('#[,\s]+#', trim($params->get('fullTextCleanupTagAttr')));
-            $filterAttrs = array_filter($filterAttrs);
-            $item->fulltext = K2HelperUtilities::cleanTags($item->fulltext, $filterTags);
-            if (isset($filterAttrs) && count($filterAttrs)) {
-                $item->fulltext = K2HelperUtilities::cleanAttributes($item->fulltext, $filterTags, $filterAttrs);
-            }
+	        if(!empty($params->get('fullTextCleanupExcludeTags'))){
+		        $filterTags = preg_split('#[,\s]+#', trim($params->get('fullTextCleanupExcludeTags')));
+		        $item->fulltext = K2HelperUtilities::cleanTags($item->fulltext, $filterTags);
+	        }
+	        if(!empty($params->get('fullTextCleanupTagAttr'))){
+		        $filterAttrs = preg_split('#[,\s]+#', trim($params->get('fullTextCleanupTagAttr')));
+		        $filterAttrs = array_filter($filterAttrs);
+		        if (isset($filterAttrs) && count($filterAttrs)) {
+			        $item->fulltext = K2HelperUtilities::cleanAttributes($item->fulltext, $filterTags, $filterAttrs);
+		        }
+	        }
         }
 
         if ($item->params->get('catItemIntroTextWordLimit') && $task == 'category') {
@@ -254,15 +262,15 @@ class K2ModelItem extends K2Model
 
         // Filtering
         if ($params->get('introTextCleanup')) {
-            $filterTags = preg_split('#[,\s]+#', trim($params->get('introTextCleanupExcludeTags')));
-            $filterAttrs = preg_split('#[,\s]+#', trim($params->get('introTextCleanupTagAttr')));
+	        $filterTags = !empty($params->get('introTextCleanupExcludeTags')) ? preg_split('#[,\s]+#', trim($params->get('introTextCleanupExcludeTags'))) : '';
+	        $filterAttrs = !empty($params->get('introTextCleanupTagAttr')) ? preg_split('#[,\s]+#', trim($params->get('introTextCleanupTagAttr'))) : '';
             $filter = new InputFilter($filterTags, $filterAttrs, 0, 1);
             $item->introtext = $filter->clean($item->introtext);
         }
 
         if ($params->get('fullTextCleanup')) {
-            $filterTags = preg_split('#[,\s]+#', trim($params->get('fullTextCleanupExcludeTags')));
-            $filterAttrs = preg_split('#[,\s]+#', trim($params->get('fullTextCleanupTagAttr')));
+	        $filterTags = !empty($params->get('fullTextCleanupExcludeTags')) ? preg_split('#[,\s]+#', trim($params->get('fullTextCleanupExcludeTags'))) : '';
+	        $filterAttrs = !empty($params->get('fullTextCleanupTagAttr')) ? preg_split('#[,\s]+#', trim($params->get('fullTextCleanupTagAttr'))) : '';
             $filter = new InputFilter($filterTags, $filterAttrs, 0, 1);
             $item->fulltext = $filter->clean($item->fulltext);
         }
