@@ -388,7 +388,7 @@ class K2ModelItemlist extends K2Model
                 $query .= " AND published=1 AND trash=0";
                 $query .= " AND access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")";
                 if ($app->getLanguageFilter()) {
-                    $query .= " AND language IN(" . $db->Quote(JFactory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
+                    $query .= " AND language IN(" . $db->Quote(Factory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
                 }
             }
             $db->setQuery($query);
@@ -411,7 +411,7 @@ class K2ModelItemlist extends K2Model
 
         $query .= " AND access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ") ";
         if ($app->getLanguageFilter()) {
-            $query .= " AND language IN(" . $db->Quote(JFactory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
+            $query .= " AND language IN(" . $db->Quote(Factory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
         }
 
         switch ($ordering) {
@@ -444,7 +444,7 @@ class K2ModelItemlist extends K2Model
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
-            JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
         return $rows;
@@ -467,7 +467,7 @@ class K2ModelItemlist extends K2Model
 
         $query .= " AND access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")";
         if ($app->getLanguageFilter()) {
-            $query .= " AND language IN(" . $db->Quote(JFactory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
+            $query .= " AND language IN(" . $db->Quote(Factory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
         }
 
         $query .= " AND (publish_up = " . $db->Quote($nullDate) . " OR publish_up <= " . $db->Quote($now) . ") AND (publish_down = " . $db->Quote($nullDate) . " OR publish_down >= " . $db->Quote($now) . ")";
@@ -516,7 +516,7 @@ class K2ModelItemlist extends K2Model
 
         $query .= " AND i.access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")";
         if ($app->getLanguageFilter()) {
-            $query .= " AND i.language IN(" . $db->Quote(JFactory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
+            $query .= " AND i.language IN(" . $db->Quote(Factory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
         }
 
         $query .= " AND i.trash = 0
@@ -526,7 +526,7 @@ class K2ModelItemlist extends K2Model
 
         $query .= " AND c.access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")";
         if ($app->getLanguageFilter()) {
-            $query .= " AND c.language IN(" . $db->Quote(JFactory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
+            $query .= " AND c.language IN(" . $db->Quote(Factory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
         }
 
         $query .= " AND c.trash = 0
@@ -616,12 +616,12 @@ class K2ModelItemlist extends K2Model
 
         $query .= " AND i.access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")";
         if ($app->getLanguageFilter()) {
-            $query .= " AND i.language IN(" . $db->Quote(JFactory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
+            $query .= " AND i.language IN(" . $db->Quote(Factory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
         }
 
         $query .= " AND c.access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")";
         if ($app->getLanguageFilter()) {
-            $query .= " AND c.language IN(" . $db->Quote(JFactory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
+            $query .= " AND c.language IN(" . $db->Quote(Factory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
         }
 
         $query .= " AND c.published = 1 AND c.trash = 0 AND i.id IN({$sql}) ORDER BY i.id DESC";
@@ -787,7 +787,7 @@ class K2ModelItemlist extends K2Model
             $query .= " WHERE published=1 AND trash=0";
             $query .= " AND access IN(" . implode(',', $user->getAuthorisedViewLevels()) . ")";
             if ($app->getLanguageFilter()) {
-                $query .= " AND language IN(" . $db->Quote(JFactory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
+                $query .= " AND language IN(" . $db->Quote(Factory::getLanguage()->getTag()) . ", " . $db->Quote('*') . ")";
             }
         }
         $query .= " ORDER BY parent";

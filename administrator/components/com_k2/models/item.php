@@ -184,7 +184,7 @@ class K2ModelItem extends K2Model
         $result = Factory::getApplication()->triggerEvent('onBeforeK2Save', array(&$row, $isNew));
 
         if (in_array(false, $result, true)) {
-            JFactory::getApplication()->enqueueMessage($row->getError(), 'ERROR');
+            Factory::getApplication()->enqueueMessage($row->getError(), 'ERROR');
             return false;
         }
 
@@ -765,7 +765,7 @@ class K2ModelItem extends K2Model
         try {
             $db->execute();
         } catch (Exception $e) {
-            JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             $app->redirect('index.php?option=com_k2&view=items');
         }
 
@@ -912,15 +912,15 @@ class K2ModelItem extends K2Model
             $len = filesize($file);
             $filename = basename($file);
             ob_end_clean();
-            JFactory::getApplication()->clearHeaders();
-            JFactory::getApplication()->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true);
-            JFactory::getApplication()->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '";', true);
-            JFactory::getApplication()->setHeader('Content-Length', $len, true);
-            JFactory::getApplication()->setHeader('Content-Transfer-Encoding', 'binary', true);
-            JFactory::getApplication()->setHeader('Content-Type', 'application/octet-stream', true);
-            JFactory::getApplication()->setHeader('Expires', '0', true);
-            JFactory::getApplication()->setHeader('Pragma', 'public', true);
-            JFactory::getApplication()->sendHeaders();
+            Factory::getApplication()->clearHeaders();
+            Factory::getApplication()->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true);
+            Factory::getApplication()->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '";', true);
+            Factory::getApplication()->setHeader('Content-Length', $len, true);
+            Factory::getApplication()->setHeader('Content-Transfer-Encoding', 'binary', true);
+            Factory::getApplication()->setHeader('Content-Type', 'application/octet-stream', true);
+            Factory::getApplication()->setHeader('Expires', '0', true);
+            Factory::getApplication()->setHeader('Pragma', 'public', true);
+            Factory::getApplication()->sendHeaders();
             readfile($file);
         } else {
             echo Text::_('K2_FILE_DOES_NOT_EXIST');

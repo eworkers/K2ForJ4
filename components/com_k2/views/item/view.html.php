@@ -120,7 +120,7 @@ class K2ViewItem extends K2View
 
         // Access check
         if ($this->getLayout() == 'form') {
-            JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+            Factory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
         }
         if (!in_array($item->access, $user->getAuthorisedViewLevels()) || !in_array($item->category->access, $user->getAuthorisedViewLevels())) {
             if ($user->guest) {
@@ -129,7 +129,7 @@ class K2ViewItem extends K2View
                 $app->enqueueMessage(Text::_('K2_YOU_NEED_TO_LOGIN_FIRST'), 'notice');
                 $app->redirect(Route::_($url, false));
             } else {
-                JFactory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
+                Factory::getApplication()->enqueueMessage(Text::_('K2_ALERTNOTAUTH'), 'ERROR');
                 return;
             }
         }
@@ -459,17 +459,17 @@ class K2ViewItem extends K2View
         // --- JSON Output [finish] ---
 
         // --- Insert additional HTTP headers [start] ---
-        JFactory::getApplication()->allowCache(true);
+        Factory::getApplication()->allowCache(true);
 
 		$itemCreatedOrModifiedDate = ((int)$item->modified) ? $item->modified : $item->created;
 		$dateTimeObj = new DateTime($itemCreatedOrModifiedDate);
 		$itemCreatedOrModifiedDate = IntlDateFormatter::formatObject($dateTimeObj,'eee, d MMM y HH:mm:ss'). " GMT";
 
         // Last-Modified HTTP header
-        JFactory::getApplication()->setHeader('Last-Modified', $itemCreatedOrModifiedDate);
+        Factory::getApplication()->setHeader('Last-Modified', $itemCreatedOrModifiedDate);
 
         // Etag HTTP header
-        JFactory::getApplication()->setHeader('ETag', md5($item->id . '_' . $itemCreatedOrModifiedDate));
+        Factory::getApplication()->setHeader('ETag', md5($item->id . '_' . $itemCreatedOrModifiedDate));
 
         // Append as custom script tag to bypass Joomla cache shortcomings
         $caching = $config->get('caching');

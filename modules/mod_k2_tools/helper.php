@@ -344,7 +344,7 @@ class modK2ToolsHelper
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
-            JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
 
@@ -415,7 +415,7 @@ class modK2ToolsHelper
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
-            JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
 
@@ -478,7 +478,7 @@ class modK2ToolsHelper
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
-            JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
 
@@ -553,7 +553,7 @@ class modK2ToolsHelper
                     try {
                         $row = $db->loadObject();
                     } catch (Exception $e) {
-                        JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+                        Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
                         return false;
                     }
 
@@ -593,7 +593,7 @@ class modK2ToolsHelper
                         try {
                             $row = $db->loadObject();
                         } catch (Exception $e) {
-                            JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+                            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
                             return false;
                         }
                         $title = $row->name;
@@ -664,7 +664,7 @@ class modK2ToolsHelper
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
-            JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
 
@@ -698,7 +698,7 @@ class modK2ToolsHelper
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
-            JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
         foreach ($rows as $row) {
@@ -914,7 +914,7 @@ class MyCalendar extends Calendar
             try {
                 $objects = $db->loadObjectList();
             } catch (Exception $e) {
-                JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+                Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
                 return false;
             }
             foreach ($objects as $object) {

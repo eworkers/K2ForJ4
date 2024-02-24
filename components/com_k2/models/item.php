@@ -1438,7 +1438,7 @@ class K2ModelItem extends K2Model
 
         $languageCondition = '';
         if ($app->getLanguageFilter()) {
-            $languageCondition = "AND language IN (" . $db->quote(JFactory::getLanguage()->getTag()) . ", " . $db->quote('*') . ")";
+            $languageCondition = "AND language IN (" . $db->quote(Factory::getLanguage()->getTag()) . ", " . $db->quote('*') . ")";
         }
 
         if ($direction == 'prev') {
@@ -1490,7 +1490,7 @@ class K2ModelItem extends K2Model
 
         $languageCondition = '';
         if ($app->getLanguageFilter()) {
-            $languageCondition = "AND language IN (" . $db->quote(JFactory::getLanguage()->getTag()) . ", " . $db->quote('*') . ")";
+            $languageCondition = "AND language IN (" . $db->quote(Factory::getLanguage()->getTag()) . ", " . $db->quote('*') . ")";
         }
 
         $query = "SELECT *
@@ -1543,7 +1543,7 @@ class K2ModelItem extends K2Model
 
         $languageCondition = '';
         if ($app->getLanguageFilter()) {
-            $languageCondition = "AND language IN (" . $db->quote(JFactory::getLanguage()->getTag()) . ", " . $db->quote('*') . ")";
+            $languageCondition = "AND language IN (" . $db->quote(Factory::getLanguage()->getTag()) . ", " . $db->quote('*') . ")";
         }
 
         $query = "SELECT *

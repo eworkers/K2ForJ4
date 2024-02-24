@@ -29,7 +29,7 @@ class K2HelperPermissions
 
         // Generic access check
         if (!$user->authorise('core.manage', $option)) {
-            JFactory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'WARNING');
+            Factory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'WARNING');
             $app->redirect('index.php');
         }
 
@@ -69,7 +69,7 @@ class K2HelperPermissions
             // Check the determined action
             if ($action) {
                 if (!$user->authorise($action, $option)) {
-                    JFactory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'WARNING');
+                    Factory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'WARNING');
                     $app->redirect('index.php?option=com_k2');
                 }
             }

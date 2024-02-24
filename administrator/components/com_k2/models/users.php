@@ -306,7 +306,7 @@ class K2ModelUsers extends K2Model
             } else {
                 // Prune items that you can't change.
                 unset($cid[$key]);
-                JFactory::getApplication()->enqueueMessage(Text::_('JERROR_CORE_DELETE_NOT_PERMITTED'), 'WARNING');
+                Factory::getApplication()->enqueueMessage(Text::_('JERROR_CORE_DELETE_NOT_PERMITTED'), 'WARNING');
             }
         }
         $IDsToDelete = $cid;

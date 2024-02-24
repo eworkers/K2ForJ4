@@ -162,7 +162,7 @@ class K2ModelExtraFields extends K2Model
                 try {
                     $row->store();
                 } catch (Exception $e) {
-                    JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+                    Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
                 }
             }
         }

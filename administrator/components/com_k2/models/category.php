@@ -63,7 +63,7 @@ class K2ModelCategory extends K2Model
         $result = Factory::getApplication()->triggerEvent('onBeforeK2Save', array(&$row, $isNew));
 
         if (in_array(false, $result, true)) {
-            JFactory::getApplication()->enqueueMessage($row->getError(), 'ERROR');
+            Factory::getApplication()->enqueueMessage($row->getError(), 'ERROR');
             return false;
         }
 
