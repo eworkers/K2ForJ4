@@ -444,7 +444,7 @@ class K2ModelItemlist extends K2Model
         try {
             $rows = $db->loadObjectList();
         } catch (Exception $e) {
-            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
         return $rows;

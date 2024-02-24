@@ -79,7 +79,7 @@ class K2ViewCategories extends K2View
 
         $langs = LanguageHelper::getLanguages();
         $langsMapping = array();
-        $langsMapping['*'] = JText::_('K2_ALL');
+        $langsMapping['*'] = Text::_('K2_ALL');
         foreach ($langs as $lang) {
             $langsMapping[$lang->lang_code] = $lang->title;
         }

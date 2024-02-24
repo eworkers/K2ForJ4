@@ -765,7 +765,7 @@ class K2ModelItem extends K2Model
         try {
             $db->execute();
         } catch (Exception $e) {
-            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             $app->redirect('index.php?option=com_k2&view=items');
         }
 

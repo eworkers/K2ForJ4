@@ -189,7 +189,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                                    title="<?php echo JFilterOutput::cleanText($row->commentEmail); ?>"><i
                                             class="fa fa-envelope-o" aria-hidden="true"></i></a> <a target="_blank"
                                                                                                     href="https://hunter.io/email-verifier/<?php echo JFilterOutput::cleanText($row->commentEmail); ?>"
-                                                                                                    title="<?php echo JText::_('K2_TEST_EMAIL_ADRESS_VALID'); ?>: <?php echo JFilterOutput::cleanText($row->commentEmail); ?>"><i
+                                                                                                    title="<?php echo Text::_('K2_TEST_EMAIL_ADRESS_VALID'); ?>: <?php echo JFilterOutput::cleanText($row->commentEmail); ?>"><i
                                             class="fa fa-question-circle-o" aria-hidden="true"></i></a>
                             </td>
                             <td class="k2ui-wrap k2ui-hide-on-mobile">

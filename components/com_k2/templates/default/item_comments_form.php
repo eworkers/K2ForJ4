@@ -31,19 +31,19 @@ use Joomla\CMS\Uri\Uri;
 <?php endif; ?>
 
 <form action="<?php echo URI::root(true); ?>/index.php" method="post" id="comment-form" class="form-validate">
-    <label class="formComment" for="commentText"><?php echo JText::_('K2_MESSAGE'); ?> *</label>
+    <label class="formComment" for="commentText"><?php echo Text::_('K2_MESSAGE'); ?> *</label>
     <textarea rows="20" cols="10" class="inputbox"
               onblur="if(this.value=='') this.value='<?php echo Text::_('K2_ENTER_YOUR_MESSAGE_HERE'); ?>';"
               onfocus="if(this.value=='<?php echo Text::_('K2_ENTER_YOUR_MESSAGE_HERE'); ?>') this.value='';"
               name="commentText" id="commentText"><?php echo Text::_('K2_ENTER_YOUR_MESSAGE_HERE'); ?></textarea>
 
-    <label class="formName" for="userName"><?php echo JText::_('K2_NAME'); ?> *</label>
+    <label class="formName" for="userName"><?php echo Text::_('K2_NAME'); ?> *</label>
     <input class="inputbox" type="text" name="userName" id="userName"
            value="<?php echo Text::_('K2_ENTER_YOUR_NAME'); ?>"
            onblur="if(this.value=='') this.value='<?php echo Text::_('K2_ENTER_YOUR_NAME'); ?>';"
            onfocus="if(this.value=='<?php echo Text::_('K2_ENTER_YOUR_NAME'); ?>') this.value='';"/>
 
-    <label class="formEmail" for="commentEmail"><?php echo JText::_('K2_EMAIL'); ?> *</label>
+    <label class="formEmail" for="commentEmail"><?php echo Text::_('K2_EMAIL'); ?> *</label>
     <input class="inputbox" type="text" name="commentEmail" id="commentEmail"
            value="<?php echo Text::_('K2_ENTER_YOUR_EMAIL_ADDRESS'); ?>"
            onblur="if(this.value=='') this.value='<?php echo Text::_('K2_ENTER_YOUR_EMAIL_ADDRESS'); ?>';"

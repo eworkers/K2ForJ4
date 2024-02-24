@@ -337,7 +337,7 @@ class K2ModelCategories extends K2Model
                 try {
                     $row->store();
                 } catch (Exception $e) {
-                    Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+                    Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
                 }
             }
         }
@@ -649,10 +649,10 @@ class K2ModelCategories extends K2Model
         foreach ($list as $item) {
             $item->treename = StringHelper::str_ireplace('&#160;', '- ', $item->treename);
             if (!$item->published) {
-                $item->treename .= ' [**' . JText::_('K2_UNPUBLISHED_CATEGORY') . '**]';
+                $item->treename .= ' [**' . Text::_('K2_UNPUBLISHED_CATEGORY') . '**]';
             }
             if ($item->trash) {
-                $item->treename .= ' [**' . JText::_('K2_TRASHED_CATEGORY') . '**]';
+                $item->treename .= ' [**' . Text::_('K2_TRASHED_CATEGORY') . '**]';
             }
             $mitems[] = HTMLHelper::_('select.option', $item->id, $item->treename);
         }

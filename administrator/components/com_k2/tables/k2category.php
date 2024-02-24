@@ -80,7 +80,7 @@ class TableK2Category extends K2Table
                 return $this->bind($K2CategoriesInstances[$oid]);
             }
         } catch (Exception $e) {
-            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
     }

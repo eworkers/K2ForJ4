@@ -99,10 +99,10 @@ class K2ElementMenuItem extends K2Element
                     $disable = @strpos($node->attributes('disable'), $item->type) !== false ? true : false;
 
                     if ($item->published == 0) {
-                        $item->treename .= ' [**' . JText::_('K2_UNPUBLISHED') . '**]';
+                        $item->treename .= ' [**' . Text::_('K2_UNPUBLISHED') . '**]';
                     }
                     if ($item->published == -2) {
-                        $item->treename .= ' [**' . JText::_('K2_TRASHED') . '**]';
+                        $item->treename .= ' [**' . Text::_('K2_TRASHED') . '**]';
                     }
 
                     $options[] = HTMLHelper::_('select.option', $item->id, $item->treename, 'value', 'text', $disable);

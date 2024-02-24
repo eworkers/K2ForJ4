@@ -176,7 +176,7 @@ class TableK2Item extends K2Table
         try {
             $maxord = $this->_db->loadResult();
         } catch (Exception $e) {
-            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
         return $maxord + 1;
@@ -192,7 +192,7 @@ class TableK2Item extends K2Table
         try {
             $orders = $this->_db->loadObjectList();
         } catch (Exception $e) {
-            Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+            Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             return false;
         }
 
@@ -242,7 +242,7 @@ class TableK2Item extends K2Table
             try {
                 $this->_db->execute();
             } catch (Exception $e) {
-                Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+                Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             }
 
             $query = 'UPDATE ' . $this->_tbl . ' SET ' . $column . ' = ' . (int)$this->$column . ' WHERE ' . $this->_tbl_key . ' = ' . $this->_db->Quote($row->$k);
@@ -252,7 +252,7 @@ class TableK2Item extends K2Table
             try {
                 $this->_db->execute();
             } catch (Exception $e) {
-                Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+                Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             }
             $this->$column = $row->$column;
         } else {
@@ -263,7 +263,7 @@ class TableK2Item extends K2Table
             try {
                 $this->_db->execute();
             } catch (Exception $e) {
-                Factory::getApplication()->enqueueMessage(JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
+                Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $e->getCode(), $e->getMessage()), 'ERROR');
             }
         }
         return true;
