@@ -182,7 +182,6 @@ class K2ViewComments extends K2View
 
         if ($app->isClient('administrator')) {
             // Toolbar
-            $toolbar = JToolBar::getInstance('toolbar');
             ToolBarHelper::title(Text::_('K2_COMMENTS'), 'k2.png');
 
             ToolBarHelper::publishList();
