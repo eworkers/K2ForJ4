@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
@@ -89,17 +90,17 @@ class K2ViewTags extends K2View
         ");
 
         // Toolbar
-        JToolBarHelper::title(Text::_('K2_TAGS'), 'k2.png');
+        ToolBarHelper::title(Text::_('K2_TAGS'), 'k2.png');
 
-        JToolBarHelper::addNew();
-        JToolBarHelper::editList();
-        JToolBarHelper::publishList();
-        JToolBarHelper::unpublishList();
-        JToolBarHelper::deleteList('', 'remove', 'K2_DELETE');
-        JToolBarHelper::custom('removeOrphans', 'delete', 'delete', 'K2_DELETE_ORPHAN_TAGS', false);
+        ToolBarHelper::addNew();
+        ToolBarHelper::editList();
+        ToolBarHelper::publishList();
+        ToolBarHelper::unpublishList();
+        ToolBarHelper::deleteList('', 'remove', 'K2_DELETE');
+        ToolBarHelper::custom('removeOrphans', 'delete', 'delete', 'K2_DELETE_ORPHAN_TAGS', false);
 
         // Preferences (Parameters/Settings)
-        JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
+        ToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
 
         $this->loadHelper('html');
         K2HelperHTML::subMenu();

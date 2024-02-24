@@ -14,6 +14,7 @@ use Joomla\CMS\Filter\OutputFilter;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
 jimport('joomla.application.component.view');
 
@@ -38,12 +39,12 @@ class K2ViewTag extends K2View
 
         // Toolbar
         $title = (Factory::getApplication()->input->getInt('cid')) ? Text::_('K2_EDIT_TAG') : Text::_('K2_ADD_TAG');
-        JToolBarHelper::title($title, 'k2.png');
+        ToolBarHelper::title($title, 'k2.png');
 
-        JToolBarHelper::apply();
-        JToolBarHelper::save();
-        JToolBarHelper::custom('saveAndNew', 'save-new.png', 'save_f2.png', 'K2_SAVE_AND_NEW', false);
-        JToolBarHelper::cancel();
+        ToolBarHelper::apply();
+        ToolBarHelper::save();
+        ToolBarHelper::custom('saveAndNew', 'save-new.png', 'save_f2.png', 'K2_SAVE_AND_NEW', false);
+        ToolBarHelper::cancel();
 
         // JS
         $document = Factory::getDocument();

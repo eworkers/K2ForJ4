@@ -15,6 +15,7 @@ use Joomla\CMS\Form\Form;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
 jimport('joomla.application.component.view');
 
@@ -52,12 +53,12 @@ class K2ViewUserGroup extends K2View
 
         // Toolbar
         $title = (Factory::getApplication()->input->getInt('cid')) ? Text::_('K2_EDIT_USER_GROUP') : Text::_('K2_ADD_USER_GROUP');
-        JToolBarHelper::title($title, 'k2.png');
-        JToolBarHelper::apply();
-        JToolBarHelper::save();
+        ToolBarHelper::title($title, 'k2.png');
+        ToolBarHelper::apply();
+        ToolBarHelper::save();
         $saveNewIcon = 'save-new.png';
-        JToolBarHelper::custom('saveAndNew', $saveNewIcon, 'save_f2.png', 'K2_SAVE_AND_NEW', false);
-        JToolBarHelper::cancel();
+        ToolBarHelper::custom('saveAndNew', $saveNewIcon, 'save_f2.png', 'K2_SAVE_AND_NEW', false);
+        ToolBarHelper::cancel();
 
         // JS
         $document = Factory::getDocument();

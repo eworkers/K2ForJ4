@@ -14,6 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Pagination\Pagination;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
 jimport('joomla.application.component.view');
 
@@ -56,13 +57,13 @@ class K2ViewUserGroups extends K2View
         $this->lists = $lists;
 
         // Toolbar
-        JToolBarHelper::title(Text::_('K2_USER_GROUPS'), 'k2.png');
+        ToolBarHelper::title(Text::_('K2_USER_GROUPS'), 'k2.png');
 
-        JToolBarHelper::addNew();
-        JToolBarHelper::editList();
-        JToolBarHelper::deleteList('', 'remove', 'K2_DELETE');
+        ToolBarHelper::addNew();
+        ToolBarHelper::editList();
+        ToolBarHelper::deleteList('', 'remove', 'K2_DELETE');
 
-        JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
+        ToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
 
         $this->loadHelper('html');
         K2HelperHTML::subMenu();

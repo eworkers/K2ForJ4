@@ -14,6 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Filter\InputFilter;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Uri\Uri;
 
 jimport('joomla.application.component.view');
@@ -143,12 +144,12 @@ class K2ViewExtraField extends K2View
 
         // Toolbar
         $title = (Factory::getApplication()->input->getInt('cid')) ? Text::_('K2_EDIT_EXTRA_FIELD') : Text::_('K2_ADD_EXTRA_FIELD');
-        JToolBarHelper::title($title, 'k2.png');
+        ToolBarHelper::title($title, 'k2.png');
 
-        JToolBarHelper::apply();
-        JToolBarHelper::save();
-        JToolBarHelper::custom('saveAndNew', 'save-new.png', 'save_f2.png', 'K2_SAVE_AND_NEW', false);
-        JToolBarHelper::cancel();
+        ToolBarHelper::apply();
+        ToolBarHelper::save();
+        ToolBarHelper::custom('saveAndNew', 'save-new.png', 'save_f2.png', 'K2_SAVE_AND_NEW', false);
+        ToolBarHelper::cancel();
 
         parent::display($tpl);
     }

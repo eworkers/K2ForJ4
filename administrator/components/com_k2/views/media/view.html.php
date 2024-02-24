@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Utility\Utility;
 use Joomla\CMS\Session\Session;
 use Joomla\CMS\Language\Text;
@@ -42,8 +43,8 @@ class K2ViewMedia extends K2View
 
         if ($app->isClient('administrator')) {
             // Toolbar
-            JToolBarHelper::title(Text::_('K2_MEDIA_MANAGER'), 'k2.png');
-            JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
+            ToolBarHelper::title(Text::_('K2_MEDIA_MANAGER'), 'k2.png');
+            ToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
 
             $this->loadHelper('html');
             K2HelperHTML::subMenu();

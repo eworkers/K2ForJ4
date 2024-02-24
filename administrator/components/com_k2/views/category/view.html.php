@@ -18,6 +18,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Form\Form;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Uri\Uri;
 
 jimport('joomla.application.component.view');
@@ -121,13 +122,13 @@ class K2ViewCategory extends K2View
 
         // Toolbar
         (Factory::getApplication()->input->getInt('cid')) ? $title = Text::_('K2_EDIT_CATEGORY') : $title = Text::_('K2_ADD_CATEGORY');
-        JToolBarHelper::title($title, 'k2.png');
+        ToolBarHelper::title($title, 'k2.png');
 
-        JToolBarHelper::apply();
-        JToolBarHelper::save();
+        ToolBarHelper::apply();
+        ToolBarHelper::save();
         $saveNewIcon = 'save-new.png';
-        JToolBarHelper::custom('saveAndNew', $saveNewIcon, 'save_f2.png', 'K2_SAVE_AND_NEW', false);
-        JToolBarHelper::cancel();
+        ToolBarHelper::custom('saveAndNew', $saveNewIcon, 'save_f2.png', 'K2_SAVE_AND_NEW', false);
+        ToolBarHelper::cancel();
 
         parent::display($tpl);
     }

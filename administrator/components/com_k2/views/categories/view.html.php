@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
@@ -208,11 +209,11 @@ class K2ViewCategories extends K2View
 
         // Get the toolbar object instance
         $toolbar = Toolbar::getInstance('toolbar');
-        JToolBarHelper::title(Text::_('K2_CATEGORIES'), 'k2.png');
+        ToolBarHelper::title(Text::_('K2_CATEGORIES'), 'k2.png');
 
         if ($this->filter_trash == 1) {
-            JToolBarHelper::deleteList('K2_ARE_YOU_SURE_YOU_WANT_TO_DELETE_SELECTED_CATEGORIES', 'remove', 'K2_DELETE');
-            JToolBarHelper::custom('restore', 'publish.png', 'publish_f2.png', 'K2_RESTORE', true);
+            ToolBarHelper::deleteList('K2_ARE_YOU_SURE_YOU_WANT_TO_DELETE_SELECTED_CATEGORIES', 'remove', 'K2_DELETE');
+            ToolBarHelper::custom('restore', 'publish.png', 'publish_f2.png', 'K2_RESTORE', true);
         }
 
         if (version_compare(JVERSION, '4.0.0-dev', 'ge')) {
@@ -241,17 +242,17 @@ class K2ViewCategories extends K2View
             }
         }
         else {
-            JToolBarHelper::addNew();
-            JToolBarHelper::editList();
-            JToolBarHelper::publishList();
-            JToolBarHelper::unpublishList();
-            JToolBarHelper::trash('trash');
-            JToolBarHelper::custom('copy', 'copy.png', 'copy_f2.png', 'K2_COPY', true);
+            ToolBarHelper::addNew();
+            ToolBarHelper::editList();
+            ToolBarHelper::publishList();
+            ToolBarHelper::unpublishList();
+            ToolBarHelper::trash('trash');
+            ToolBarHelper::custom('copy', 'copy.png', 'copy_f2.png', 'K2_COPY', true);
             // Batch button in modal
             $batchButton = '<a id="K2BatchButton" class="btn btn-small" href="#"><i class="icon-edit"></i>' . Text::_('K2_BATCH') . '</a>';
             $toolbar->appendButton('Custom', $batchButton);
             if ($user->authorise('core.admin', 'com_k2') || $user->authorise('core.options', 'com_k2')) {
-                JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
+                ToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
             }
         }
     }

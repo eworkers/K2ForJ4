@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
@@ -182,15 +183,15 @@ class K2ViewComments extends K2View
         if ($app->isClient('administrator')) {
             // Toolbar
             $toolbar = JToolBar::getInstance('toolbar');
-            JToolBarHelper::title(Text::_('K2_COMMENTS'), 'k2.png');
+            ToolBarHelper::title(Text::_('K2_COMMENTS'), 'k2.png');
 
-            JToolBarHelper::publishList();
-            JToolBarHelper::unpublishList();
-            JToolBarHelper::deleteList('', 'remove', 'K2_DELETE');
-            JToolBarHelper::custom('deleteUnpublished', 'delete', 'delete', 'K2_DELETE_ALL_UNPUBLISHED', false);
+            ToolBarHelper::publishList();
+            ToolBarHelper::unpublishList();
+            ToolBarHelper::deleteList('', 'remove', 'K2_DELETE');
+            ToolBarHelper::custom('deleteUnpublished', 'delete', 'delete', 'K2_DELETE_ALL_UNPUBLISHED', false);
 
             // Preferences (Parameters/Settings)
-            JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
+            ToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
             K2HelperHTML::subMenu();
 
             $userEditLink = URI::base() . 'index.php?option=com_k2&view=user&cid=';

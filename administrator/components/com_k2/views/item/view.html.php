@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Editor\Editor;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
@@ -601,7 +602,7 @@ class K2ViewItem extends K2View
         // Get the toolbar object instance
         $toolbar = Toolbar::getInstance('toolbar');
         // Toolbar
-        JToolBarHelper::title($this->title, 'k2.png');
+        ToolBarHelper::title($this->title, 'k2.png');
 
         if (version_compare(JVERSION, '4.0.0-dev', 'ge')) {
             $toolbar->apply('apply');
@@ -625,10 +626,10 @@ class K2ViewItem extends K2View
         }
         else{
 
-            JToolBarHelper::apply();
-            JToolBarHelper::save();
-            JToolBarHelper::custom('saveAndNew', 'save-new.png', 'save_f2.png', 'K2_SAVE_AND_NEW', false);
-            JToolBarHelper::cancel();
+            ToolBarHelper::apply();
+            ToolBarHelper::save();
+            ToolBarHelper::custom('saveAndNew', 'save-new.png', 'save_f2.png', 'K2_SAVE_AND_NEW', false);
+            ToolBarHelper::cancel();
         }
     }
 }

@@ -13,6 +13,8 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Editor\Editor;
 use Joomla\CMS\Filter\OutputFilter;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Toolbar\Toolbar;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\User\User;
 use Joomla\CMS\Factory;
@@ -71,12 +73,12 @@ class K2ViewUser extends K2View
         Factory::getApplication()->input->set('hidemainmenu', 1);
 
         // Toolbar
-        $toolbar = JToolBar::getInstance('toolbar');
-        JToolBarHelper::title(Text::_('K2_USER'), 'k2.png');
+        $toolbar = ToolBar::getInstance('toolbar');
+        ToolBarHelper::title(Text::_('K2_USER'), 'k2.png');
 
-        JToolBarHelper::apply();
-        JToolBarHelper::save();
-        JToolBarHelper::cancel();
+        ToolBarHelper::apply();
+        ToolBarHelper::save();
+        ToolBarHelper::cancel();
 
         $editJoomlaUserButtonUrl = URI::base() . 'index.php?option=com_users&view=user&task=user.edit&id=' . $user->userID;
         $editJoomlaUserButton = '<a data-k2-modal="iframe" href="' . $editJoomlaUserButtonUrl . '" class="btn btn-small"><i class="icon-edit"></i>' . Text::_('K2_EDIT_JOOMLA_USER') . '</a>';

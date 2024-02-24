@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
 jimport('joomla.application.component.view');
 
@@ -52,9 +53,9 @@ class K2ViewInfo extends K2View
         $this->videos_folder_check = $videos_folder_check;
         $this->cache_folder_check = $cache_folder_check;
 
-        JToolBarHelper::title(Text::_('K2_INFORMATION'), 'k2.png');
+        ToolBarHelper::title(Text::_('K2_INFORMATION'), 'k2.png');
 
-        JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
+        ToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
 
         $this->loadHelper('html');
         K2HelperHTML::subMenu();
