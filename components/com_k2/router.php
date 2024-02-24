@@ -9,19 +9,24 @@
 
 // no direct access
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Application\SiteApplication;
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Component\Router\RouterBase;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Menu\AbstractMenu;
+use Joomla\CMS\Router\SiteRouter;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Router\Router;
 
-class K2Router extends JComponentRouterBase
+class K2Router extends RouterBase
 {
-    public function __construct($app = null)
+    public function __construct(SiteApplication $app, AbstractMenu $menu)
     {
 
-        parent::__construct($app);
+	    parent::__construct($app, $menu);
 
-        $router = $app->getRouter();
+        $router = Factory::getContainer()->get(SiteRouter::class);
         $router->attachParseRule(array($this, 'parseRule'), Router::PROCESS_AFTER);
     }
 
