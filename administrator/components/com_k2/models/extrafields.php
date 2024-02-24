@@ -19,7 +19,7 @@ use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.model');
 
-JTable::addIncludePath(JPATH_COMPONENT . '/tables');
+Table::addIncludePath(JPATH_COMPONENT . '/tables');
 
 class K2ModelExtraFields extends K2Model
 {

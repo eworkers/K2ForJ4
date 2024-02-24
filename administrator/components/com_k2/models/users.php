@@ -22,7 +22,7 @@ use Joomla\Registry\Registry;
 
 jimport('joomla.application.component.model');
 
-JTable::addIncludePath(JPATH_COMPONENT . '/tables');
+Table::addIncludePath(JPATH_COMPONENT . '/tables');
 
 class K2ModelUsers extends K2Model
 {

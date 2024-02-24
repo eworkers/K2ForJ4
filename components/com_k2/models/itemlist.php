@@ -22,7 +22,7 @@ use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.model');
 
-JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_k2/tables');
+Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_k2/tables');
 
 class K2ModelItemlist extends K2Model
 {

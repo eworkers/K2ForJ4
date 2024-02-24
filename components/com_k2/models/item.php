@@ -30,7 +30,7 @@ use Joomla\CMS\Utility\Utility;
 
 jimport('joomla.application.component.model');
 
-JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_k2/tables');
+Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_k2/tables');
 
 class K2ModelItem extends K2Model
 {

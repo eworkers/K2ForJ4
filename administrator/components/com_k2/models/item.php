@@ -26,7 +26,7 @@ use Joomla\CMS\Router\Route;
 
 jimport('joomla.application.component.model');
 
-JTable::addIncludePath(JPATH_COMPONENT . '/tables');
+Table::addIncludePath(JPATH_COMPONENT . '/tables');
 
 class K2ModelItem extends K2Model
 {

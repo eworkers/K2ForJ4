@@ -17,7 +17,7 @@ use Joomla\CMS\Component\ComponentHelper;
 
 jimport('joomla.application.component.model');
 
-JTable::addIncludePath(JPATH_COMPONENT . '/tables');
+Table::addIncludePath(JPATH_COMPONENT . '/tables');
 
 class K2ModelTag extends K2Model
 {
