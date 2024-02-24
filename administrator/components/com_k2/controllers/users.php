@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Session\Session;
 
 jimport('joomla.application.component.controller');
 
@@ -32,7 +33,7 @@ class K2ControllerUsers extends K2Controller
     public function remove()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('users');
         $model->remove();
     }
@@ -40,7 +41,7 @@ class K2ControllerUsers extends K2Controller
     public function enable()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('users');
         $model->enable();
     }
@@ -48,7 +49,7 @@ class K2ControllerUsers extends K2Controller
     public function disable()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('users');
         $model->disable();
     }
@@ -56,7 +57,7 @@ class K2ControllerUsers extends K2Controller
     public function delete()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('users');
         $model->delete();
     }
@@ -73,7 +74,7 @@ class K2ControllerUsers extends K2Controller
     public function saveMove()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('users');
         $model->saveMove();
     }
@@ -81,7 +82,7 @@ class K2ControllerUsers extends K2Controller
     public function cancelMove()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $app = Factory::getApplication();
         $app->redirect('index.php?option=com_k2&view=users');
     }

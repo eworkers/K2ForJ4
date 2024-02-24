@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Session\Session;
 
 jimport('joomla.application.component.controller');
 
@@ -26,7 +27,7 @@ class K2ControllerItems extends K2Controller
     public function publish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->publish();
     }
@@ -34,7 +35,7 @@ class K2ControllerItems extends K2Controller
     public function unpublish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->unpublish();
     }
@@ -42,7 +43,7 @@ class K2ControllerItems extends K2Controller
     public function saveorder()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $result = $model->saveorder();
         $document = Factory::getDocument();
@@ -57,7 +58,7 @@ class K2ControllerItems extends K2Controller
     public function orderup()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->orderup();
     }
@@ -65,7 +66,7 @@ class K2ControllerItems extends K2Controller
     public function orderdown()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->orderdown();
     }
@@ -73,7 +74,7 @@ class K2ControllerItems extends K2Controller
     public function savefeaturedorder()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $result = $model->savefeaturedorder();
         $document = Factory::getDocument();
@@ -88,7 +89,7 @@ class K2ControllerItems extends K2Controller
     public function featuredorderup()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->featuredorderup();
     }
@@ -96,7 +97,7 @@ class K2ControllerItems extends K2Controller
     public function featuredorderdown()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->featuredorderdown();
     }
@@ -104,7 +105,7 @@ class K2ControllerItems extends K2Controller
     public function accessregistered()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->accessregistered();
     }
@@ -112,7 +113,7 @@ class K2ControllerItems extends K2Controller
     public function accessspecial()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->accessspecial();
     }
@@ -120,7 +121,7 @@ class K2ControllerItems extends K2Controller
     public function accesspublic()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->accesspublic();
     }
@@ -128,7 +129,7 @@ class K2ControllerItems extends K2Controller
     public function featured()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->featured();
     }
@@ -136,7 +137,7 @@ class K2ControllerItems extends K2Controller
     public function trash()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->trash();
     }
@@ -144,7 +145,7 @@ class K2ControllerItems extends K2Controller
     public function restore()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->restore();
     }
@@ -152,7 +153,7 @@ class K2ControllerItems extends K2Controller
     public function remove()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->remove();
     }
@@ -173,7 +174,7 @@ class K2ControllerItems extends K2Controller
     public function copy()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->copy();
     }
@@ -187,7 +188,7 @@ class K2ControllerItems extends K2Controller
     public function saveBatch()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('items');
         $model->saveBatch();
     }
@@ -195,7 +196,7 @@ class K2ControllerItems extends K2Controller
     public function logStats()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $status = Factory::getApplication()->input->getInt('status');
         $response = Factory::getApplication()->input->getString('response');
         $date = Factory::getDate();

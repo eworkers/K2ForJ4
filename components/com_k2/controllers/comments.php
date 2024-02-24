@@ -9,6 +9,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Session\Session;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
@@ -55,7 +56,7 @@ class K2ControllerComments extends K2Controller
     public function publish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $language = Factory::getLanguage();
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
@@ -70,7 +71,7 @@ class K2ControllerComments extends K2Controller
     public function unpublish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $language = Factory::getLanguage();
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
@@ -85,7 +86,7 @@ class K2ControllerComments extends K2Controller
     public function remove()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $language = Factory::getLanguage();
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
@@ -100,7 +101,7 @@ class K2ControllerComments extends K2Controller
     public function deleteUnpublished()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $language = Factory::getLanguage();
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
@@ -115,7 +116,7 @@ class K2ControllerComments extends K2Controller
     public function saveComment()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $language = Factory::getLanguage();
         $language->load('com_k2', JPATH_ADMINISTRATOR);
         $user = Factory::getUser();
@@ -139,7 +140,7 @@ class K2ControllerComments extends K2Controller
     public function sendReport()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $params = K2HelperUtilities::getParams('com_k2');
         $user = Factory::getUser();
         if (!$params->get('comments') || !$params->get('commentsReporting') || ($params->get('commentsReporting') == '2' && $user->guest)) {

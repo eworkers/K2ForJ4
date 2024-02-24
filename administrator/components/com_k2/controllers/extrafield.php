@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Session\Session;
 
 jimport('joomla.application.component.controller');
 
@@ -30,7 +31,7 @@ class K2ControllerExtraField extends K2Controller
     public function save()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('extraField');
         $model->save();
     }

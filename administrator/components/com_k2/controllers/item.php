@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Session\Session;
 
 jimport('joomla.application.component.controller');
 
@@ -26,7 +27,7 @@ class K2ControllerItem extends K2Controller
     public function save()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('item');
         $model->save();
     }
@@ -39,7 +40,7 @@ class K2ControllerItem extends K2Controller
     public function cancel()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('item');
         $model->cancel();
     }
@@ -123,7 +124,7 @@ class K2ControllerItem extends K2Controller
     public function resetHits()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('item');
         $model->resetHits();
     }
@@ -131,7 +132,7 @@ class K2ControllerItem extends K2Controller
     public function resetRating()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('item');
         $model->resetRating();
     }

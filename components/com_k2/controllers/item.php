@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Session\Session;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
@@ -125,7 +126,7 @@ class K2ControllerItem extends K2Controller
     public function save()
     {
         $app = Factory::getApplication();/* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         Factory::getApplication()->input->set('tmpl', 'component');
         $language = Factory::getLanguage();
         $language->load('com_k2', JPATH_ADMINISTRATOR);
@@ -253,7 +254,7 @@ class K2ControllerItem extends K2Controller
     public function resetHits()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         Factory::getApplication()->input->set('tmpl', 'component');
         require_once(JPATH_COMPONENT_ADMINISTRATOR . '/models/item.php');
         $language = Factory::getLanguage();
@@ -265,7 +266,7 @@ class K2ControllerItem extends K2Controller
     public function resetRating()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         Factory::getApplication()->input->set('tmpl', 'component');
         require_once(JPATH_COMPONENT_ADMINISTRATOR . '/models/item.php');
         $language = Factory::getLanguage();

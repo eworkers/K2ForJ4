@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Session\Session;
 
 jimport('joomla.application.component.controller');
 
@@ -25,7 +26,7 @@ class K2ControllerSettings extends K2Controller
     public function save()
     {
         $app = Factory::getApplication();/* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('settings');
         $model->save();
         $app->redirect('index.php?option=com_k2&view=settings');

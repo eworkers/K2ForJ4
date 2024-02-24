@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Session\Session;
 
 jimport('joomla.application.component.controller');
 
@@ -26,7 +27,7 @@ class K2ControllerExtraFields extends K2Controller
     public function publish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('extraFields');
         $model->publish();
     }
@@ -34,7 +35,7 @@ class K2ControllerExtraFields extends K2Controller
     public function unpublish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('extraFields');
         $model->unpublish();
     }
@@ -42,7 +43,7 @@ class K2ControllerExtraFields extends K2Controller
     public function saveorder()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('extraFields');
         $model->saveorder();
         $document = Factory::getDocument();
@@ -57,7 +58,7 @@ class K2ControllerExtraFields extends K2Controller
     public function orderup()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('extraFields');
         $model->orderup();
     }
@@ -65,7 +66,7 @@ class K2ControllerExtraFields extends K2Controller
     public function orderdown()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('extraFields');
         $model->orderdown();
     }
@@ -73,7 +74,7 @@ class K2ControllerExtraFields extends K2Controller
     public function remove()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('extraFields');
         $model->remove();
     }

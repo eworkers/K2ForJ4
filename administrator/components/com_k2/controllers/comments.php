@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Session\Session;
 
 jimport('joomla.application.component.controller');
 
@@ -26,7 +27,7 @@ class K2ControllerComments extends K2Controller
     public function publish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('comments');
         $model->publish();
     }
@@ -34,7 +35,7 @@ class K2ControllerComments extends K2Controller
     public function unpublish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('comments');
         $model->unpublish();
     }
@@ -42,7 +43,7 @@ class K2ControllerComments extends K2Controller
     public function remove()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('comments');
         $model->remove();
     }
@@ -50,7 +51,7 @@ class K2ControllerComments extends K2Controller
     public function deleteUnpublished()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('comments');
         $model->deleteUnpublished();
     }
@@ -58,7 +59,7 @@ class K2ControllerComments extends K2Controller
     public function saveComment()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('comments');
         $model->save();
     }

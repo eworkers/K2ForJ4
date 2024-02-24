@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Session\Session;
 
 jimport('joomla.application.component.controller');
 
@@ -26,7 +27,7 @@ class K2ControllerCategories extends K2Controller
     public function publish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->publish();
     }
@@ -34,7 +35,7 @@ class K2ControllerCategories extends K2Controller
     public function unpublish()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->unpublish();
     }
@@ -42,7 +43,7 @@ class K2ControllerCategories extends K2Controller
     public function saveorder()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->saveorder();
         $document = Factory::getDocument();
@@ -57,7 +58,7 @@ class K2ControllerCategories extends K2Controller
     public function orderup()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->orderup();
     }
@@ -65,7 +66,7 @@ class K2ControllerCategories extends K2Controller
     public function orderdown()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->orderdown();
     }
@@ -73,7 +74,7 @@ class K2ControllerCategories extends K2Controller
     public function accessregistered()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->accessregistered();
     }
@@ -81,7 +82,7 @@ class K2ControllerCategories extends K2Controller
     public function accessspecial()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->accessspecial();
     }
@@ -89,7 +90,7 @@ class K2ControllerCategories extends K2Controller
     public function accesspublic()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->accesspublic();
     }
@@ -97,7 +98,7 @@ class K2ControllerCategories extends K2Controller
     public function trash()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->trash();
     }
@@ -105,7 +106,7 @@ class K2ControllerCategories extends K2Controller
     public function restore()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->restore();
     }
@@ -113,7 +114,7 @@ class K2ControllerCategories extends K2Controller
     public function remove()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->remove();
     }
@@ -141,7 +142,7 @@ class K2ControllerCategories extends K2Controller
     public function saveBatch()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->saveBatch();
     }
@@ -155,7 +156,7 @@ class K2ControllerCategories extends K2Controller
     public function copy()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('categories');
         $model->copy();
     }

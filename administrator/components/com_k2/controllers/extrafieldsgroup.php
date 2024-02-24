@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Session\Session;
 
 jimport('joomla.application.component.controller');
 
@@ -33,7 +34,7 @@ class K2ControllerExtraFieldsGroup extends K2Controller
     public function save()
     {
         /* since J4 compatibility */;
-        JSession::checkToken() or jexit('Invalid Token');
+        Session::checkToken() or jexit('Invalid Token');
         $model = $this->getModel('extraFields');
         $view = $this->getView('extrafieldsgroup', 'html');
         $view->setModel($model, true);
