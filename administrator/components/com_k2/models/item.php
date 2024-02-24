@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Factory;
@@ -867,7 +868,7 @@ class K2ModelItem extends K2Model
         if ($app->isClient('site')) {
             $token = Factory::getApplication()->input->getVar('id');
             $check = StringHelper::substr($token, StringHelper::strpos($token, '_') + 1);
-            $hash = JApplicationHelper::getHash($id);
+            $hash = ApplicationHelper::getHash($id);
             if ($check != $hash) {
                 throw new \Exception(Text::_('K2_NOT_FOUND'), 404);
             }
@@ -934,7 +935,7 @@ class K2ModelItem extends K2Model
         $db->setQuery("SELECT * FROM #__k2_attachments WHERE itemID=" . (int)$itemID);
         $rows = $db->loadObjectList();
         foreach ($rows as $row) {
-            $hash = JApplicationHelper::getHash($row->id);
+            $hash = ApplicationHelper::getHash($row->id);
             $row->link = Route::_('index.php?option=com_k2&view=item&task=download&id=' . $row->id . '_' . $hash);
         }
         return $rows;

@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Filter\OutputFilter;
@@ -89,7 +90,7 @@ class K2HelperRoute
         $needles = array('user' => (int)$userID);
         $user = Factory::getUser($userID);
         if (Factory::getConfig()->get('unicodeslugs') == 1) {
-            $alias = JApplicationHelper::stringURLSafe($user->name);
+            $alias = ApplicationHelper::stringURLSafe($user->name);
         } elseif (PluginHelper::isEnabled('system', 'unicodeslug') || PluginHelper::isEnabled('system', 'jw_unicodeSlugsExtended')) {
             $alias = OutputFilter::stringURLSafe($user->name);
         } else {

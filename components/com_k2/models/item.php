@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\String\StringHelper;
 use Joomla\Utilities\ArrayHelper;
@@ -1368,7 +1369,7 @@ class K2ModelItem extends K2Model
         $db->setQuery($query);
         $rows = $db->loadObjectList();
         foreach ($rows as $row) {
-            $hash = JApplicationHelper::getHash($row->id);
+            $hash = ApplicationHelper::getHash($row->id);
             $row->link = Route::_('index.php?option=com_k2&view=item&task=download&id=' . $row->id . '_' . $hash);
         }
         $K2ItemAttachmentsInstances[$itemID] = $rows;
