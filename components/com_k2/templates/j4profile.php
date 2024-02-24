@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
@@ -220,5 +221,5 @@ $user = $this->getCurrentUser();
     <input class="form-control" type="hidden" name="option" value="<?php echo $this->optionValue; ?>"/>
     <input class="form-control" type="hidden" name="task" value="<?php echo $this->taskValue; ?>"/>
     <input class="form-control" type="hidden" name="K2UserForm" value="1"/>
-    <?php echo JHTML::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

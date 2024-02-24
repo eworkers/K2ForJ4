@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Filter\OutputFilter;
 use Joomla\CMS\Form\Form;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 
@@ -21,7 +22,7 @@ class K2ViewUserGroup extends K2View
 {
     public function display($tpl = null)
     {
-        JHTML::_('bootstrap.tooltip');
+        HTMLHelper::_('bootstrap.tooltip');
 
         $model = $this->getModel();
         $userGroup = $model->getData();
@@ -42,8 +43,8 @@ class K2ViewUserGroup extends K2View
         require_once JPATH_ADMINISTRATOR . '/components/com_k2/models/categories.php';
         $categoriesModel = K2Model::getInstance('Categories', 'K2Model');
         $categories = $categoriesModel->categoriesTree(null, true);
-        $lists['categories'] = JHTML::_('select.genericlist', $categories, 'params[categories][]', 'multiple="multiple" size="15"', 'value', 'text', $appliedCategories);
-        $lists['inheritance'] = JHTML::_('select.booleanlist', 'params[inheritance]', null, $inheritance);
+        $lists['categories'] = HTMLHelper::_('select.genericlist', $categories, 'params[categories][]', 'multiple="multiple" size="15"', 'value', 'text', $appliedCategories);
+        $lists['inheritance'] = HTMLHelper::_('select.booleanlist', 'params[inheritance]', null, $inheritance);
         $this->lists = $lists;
 
         // Disable Joomla menu

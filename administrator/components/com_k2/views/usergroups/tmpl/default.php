@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Language\Text;
 
@@ -26,9 +27,9 @@ use Joomla\CMS\Language\Text;
                 <th class="k2ui-center"><input
                             id="k2<?php echo $this->params->get('backendListToggler', 'TogglerStandard'); ?>"
                             type="checkbox" name="toggle" value=""/></th>
-                <th class="title"><?php echo JHTML::_('grid.sort', 'K2_NAME', 'name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_USER_COUNT', 'numOfUsers', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_ID', 'id', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                <th class="title"><?php echo HTMLHelper::_('grid.sort', 'K2_NAME', 'name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_USER_COUNT', 'numOfUsers', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_ID', 'id', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
             </tr>
             </thead>
             <tfoot>
@@ -47,7 +48,7 @@ use Joomla\CMS\Language\Text;
                     <tr class="row<?php echo($key % 2); ?>">
                         <td class="k2ui-center k2ui-hide-on-mobile"><?php echo $key + 1; ?></td>
                         <td class="k2ui-center"><?php $row->checked_out = 0;
-                            echo @JHTML::_('grid.checkedout', $row, $key); ?></td>
+                            echo @HTMLHelper::_('grid.checkedout', $row, $key); ?></td>
                         <td>
                             <a href="<?php echo Route::_('index.php?option=com_k2&view=usergroup&cid=' . $row->id); ?>"><?php echo $row->name; ?></a>
                         </td>
@@ -74,5 +75,5 @@ use Joomla\CMS\Language\Text;
     <input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>"/>
     <input type="hidden" name="filter_order_Dir" value="<?php echo $this->lists['order_Dir']; ?>"/>
     <input type="hidden" name="boxchecked" value="0"/>
-    <?php echo JHTML::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

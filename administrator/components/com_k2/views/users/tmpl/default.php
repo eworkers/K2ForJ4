@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
@@ -67,20 +68,20 @@ $context = Factory::getApplication()->input->getCmd('context');
                     <th<?php echo ($context == "modalselector") ? ' class="k2ui-not-visible"' : ' class="k2ui-center"'; ?>>
                         <input id="k2<?php echo $this->params->get('backendListToggler', 'TogglerStandard'); ?>"
                                type="checkbox" name="toggle" value=""/></th>
-                    <th><?php echo JHTML::_('grid.sort', 'K2_NAME', 'juser.name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                    <th class="k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_USERNAME', 'juser.username', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th><?php echo HTMLHelper::_('grid.sort', 'K2_NAME', 'juser.name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th class="k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_USERNAME', 'juser.username', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
                     <th class="k2ui-center"><?php echo Text::_('K2_LOGGED_IN'); ?></th>
-                    <th class="k2ui-center"><?php echo JHTML::_('grid.sort', 'K2_ENABLED', 'juser.block', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th class="k2ui-center"><?php echo HTMLHelper::_('grid.sort', 'K2_ENABLED', 'juser.block', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
                     <th class="k2ui-hide-on-mobile">
                         <?php echo Text::_('K2_JOOMLA_GROUP'); ?>
                     </th>
-                    <th class="k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_GROUP', 'groupname', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                    <th class="k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_EMAIL', 'juser.email', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                    <th class="k2ui-center k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_LAST_VISIT', 'juser.lastvisitDate', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th class="k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_GROUP', 'groupname', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th class="k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_EMAIL', 'juser.email', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th class="k2ui-center k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_LAST_VISIT', 'juser.lastvisitDate', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
                     <th class="k2ui-center k2ui-hide-on-mobile">IP</th>
                     <th class="k2ui-center k2ui-hide-on-mobile"><?php echo Text::_('K2_IMAGE'); ?></th>
                     <th class="k2ui-center k2ui-hide-on-mobile"><?php echo Text::_('K2_FLAG_AS_SPAMMER'); ?></th>
-                    <th class="k2ui-center k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_ID', 'juser.id', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th class="k2ui-center k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_ID', 'juser.id', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
                 </tr>
                 </thead>
                 <?php
@@ -110,7 +111,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                             <td class="k2ui-hide-on-mobile"><?php echo $key + 1; ?></td>
                             <td class="k2ui-center<?php echo ($context == "modalselector") ? ' k2ui-not-visible' : ''; ?>">
                                 <?php $row->checked_out = 0;
-                                echo JHTML::_('grid.id', $key, $row->id); ?>
+                                echo HTMLHelper::_('grid.id', $key, $row->id); ?>
                             </td>
                             <td>
                                 <?php if ($context == "modalselector"): ?>
@@ -144,7 +145,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                             <td class="k2ui-hide-on-mobile"><?php echo $row->groupname; ?></td>
                             <td class="k2ui-hide-on-mobile"><?php echo $row->email; ?></td>
                             <td class="k2ui-center k2ui-nowrap k2ui-hide-on-mobile">
-                                <?php echo ($row->lvisit) ? JHTML::_('date', $row->lvisit, $this->dateFormat) : Text::_('K2_NEVER'); ?>
+                                <?php echo ($row->lvisit) ? HTMLHelper::_('date', $row->lvisit, $this->dateFormat) : Text::_('K2_NEVER'); ?>
                             </td>
                             <td class="k2ui-center k2ui-hide-on-mobile">
                                 <?php if ($row->ip): ?>
@@ -214,7 +215,7 @@ $context = Factory::getApplication()->input->getCmd('context');
             <input type="hidden" name="output"
                    value="<?php echo Factory::getApplication()->input->getCmd('output'); ?>"/>
         <?php endif; ?>
-        <?php echo JHTML::_('form.token'); ?>
+        <?php echo HTMLHelper::_('form.token'); ?>
     </form>
 
     <?php if ($app->isClient('site') || $context == "modalselector"): ?>

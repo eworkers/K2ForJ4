@@ -50,12 +50,12 @@ use Joomla\CMS\Router\Route;
                 <th class="k2ui-center"><input
                             id="k2<?php echo $this->params->get('backendListToggler', 'TogglerStandard'); ?>"
                             type="checkbox" name="toggle" value=""/></th>
-                <th class="k2ui-left"><?php echo JHTML::_('grid.sort', 'K2_NAME', 'name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_GROUP', 'groupname', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                <th><?php echo JHTML::_('grid.sort', 'K2_ORDER', 'ordering', @$this->lists['order_Dir'], @$this->lists['order']); ?><?php if ($this->ordering) echo JHTML::_('grid.order', $this->rows); ?></th>
-                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_TYPE', 'type', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                <th class="k2ui-center"><?php echo JHTML::_('grid.sort', 'K2_PUBLISHED', 'published', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_ID', 'exf.id', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                <th class="k2ui-left"><?php echo HTMLHelper::_('grid.sort', 'K2_NAME', 'name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_GROUP', 'groupname', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                <th><?php echo HTMLHelper::_('grid.sort', 'K2_ORDER', 'ordering', @$this->lists['order_Dir'], @$this->lists['order']); ?><?php if ($this->ordering) echo HTMLHelper::_('grid.order', $this->rows); ?></th>
+                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_TYPE', 'type', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                <th class="k2ui-center"><?php echo HTMLHelper::_('grid.sort', 'K2_PUBLISHED', 'published', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                <th class="k2ui-center k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_ID', 'exf.id', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
             </tr>
             </thead>
             <?php
@@ -83,7 +83,7 @@ use Joomla\CMS\Router\Route;
                                    value="<?php echo $row->ordering; ?>" class="width-20 text-area-order"/>
                         </td>
                         <td class="k2ui-center"><?php $row->checked_out = 0;
-                            echo @JHTML::_('grid.checkedout', $row, $key); ?></td>
+                            echo @HTMLHelper::_('grid.checkedout', $row, $key); ?></td>
                         <td>
                             <a href="<?php echo Route::_('index.php?option=com_k2&view=extrafield&cid=' . $row->id); ?>"><?php echo $row->name; ?></a>
                             <span class="k2AliasValue"><?php echo Text::_('K2_ALIAS'); ?>: <?php echo $row->alias; ?></span>
@@ -113,5 +113,5 @@ use Joomla\CMS\Router\Route;
     <input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>"/>
     <input type="hidden" name="filter_order_Dir" value="<?php echo $this->lists['order_Dir']; ?>"/>
     <input type="hidden" name="boxchecked" value="0"/>
-    <?php echo JHTML::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

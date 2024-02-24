@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Uri\Uri;
 
 require_once(JPATH_ADMINISTRATOR . '/components/com_k2/elements/base.php');
@@ -66,7 +67,7 @@ class K2ElementK2Users extends K2Element
             $options = $db->loadObjectList();
         }
 
-        return JHTML::_('select.genericlist', $options, $fieldName, 'class="k2UsersElement" multiple="multiple" size="15"', 'value', 'text', $value);
+        return HTMLHelper::_('select.genericlist', $options, $fieldName, 'class="k2UsersElement" multiple="multiple" size="15"', 'value', 'text', $value);
     }
 }
 

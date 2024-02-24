@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 
@@ -118,5 +119,5 @@ use Joomla\CMS\Uri\Uri;
     <input type="hidden" name="userID" value="<?php echo $this->row->userID; ?>"/>
     <input type="hidden" name="ip" value="<?php echo $this->row->ip; ?>"/>
     <input type="hidden" name="hostname" value="<?php echo $this->row->hostname; ?>"/>
-    <?php echo JHTML::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

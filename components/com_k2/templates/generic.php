@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
 ?>
@@ -51,7 +52,7 @@ use Joomla\CMS\Language\Text;
                         <?php if ($this->params->get('genericItemDateCreated')): ?>
                             <!-- Date created -->
                             <span class="genericItemDateCreated">
-                    <?php echo JHTML::_('date', $item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
+                    <?php echo HTMLHelper::_('date', $item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
                 </span>
                         <?php endif; ?>
 

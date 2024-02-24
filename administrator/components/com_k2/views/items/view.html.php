@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
@@ -92,7 +93,7 @@ class K2ViewItems extends K2View
 
         $langs = LanguageHelper::getLanguages();
         $langsMapping = array();
-        $langsMapping['*'] = JText::_('K2_ALL');
+        $langsMapping['*'] = Text::_('K2_ALL');
         foreach ($langs as $lang) {
             $langsMapping[$lang->lang_code] = $lang->title;
         }
@@ -143,38 +144,38 @@ class K2ViewItems extends K2View
         $lists['order_Dir'] = $filter_order_Dir;
         $lists['order'] = $filter_order;
 
-        $filter_trash_options[] = JHTML::_('select.option', 0, Text::_('K2_CURRENT'));
-        $filter_trash_options[] = JHTML::_('select.option', 1, Text::_('K2_TRASHED'));
-        $lists['trash'] = JHTML::_('select.genericlist', $filter_trash_options, 'filter_trash', '', 'value', 'text', $filter_trash);
+        $filter_trash_options[] = HTMLHelper::_('select.option', 0, Text::_('K2_CURRENT'));
+        $filter_trash_options[] = HTMLHelper::_('select.option', 1, Text::_('K2_TRASHED'));
+        $lists['trash'] = HTMLHelper::_('select.genericlist', $filter_trash_options, 'filter_trash', '', 'value', 'text', $filter_trash);
 
         require_once JPATH_ADMINISTRATOR . '/components/com_k2/models/categories.php';
         $categoriesModel = K2Model::getInstance('Categories', 'K2Model');
-        $categories_option[] = JHTML::_('select.option', 0, Text::_('K2_SELECT_CATEGORY'));
+        $categories_option[] = HTMLHelper::_('select.option', 0, Text::_('K2_SELECT_CATEGORY'));
         $categories = $categoriesModel->categoriesTree(null, true, false);
         $categories_options = @array_merge($categories_option, $categories);
-        $lists['categories'] = JHTML::_('select.genericlist', $categories_options, 'filter_category', '', 'value', 'text', $filter_category);
+        $lists['categories'] = HTMLHelper::_('select.genericlist', $categories_options, 'filter_category', '', 'value', 'text', $filter_category);
 
         $authors = $model->getItemsAuthors();
         $options = array();
-        $options[] = JHTML::_('select.option', 0, Text::_('K2_NO_USER'));
+        $options[] = HTMLHelper::_('select.option', 0, Text::_('K2_NO_USER'));
         foreach ($authors as $author) {
             $name = $author->name;
             if ($author->block) {
                 $name .= ' [' . Text::_('K2_USER_DISABLED') . ']';
             }
-            $options[] = JHTML::_('select.option', $author->id, $name);
+            $options[] = HTMLHelper::_('select.option', $author->id, $name);
         }
-        $lists['authors'] = JHTML::_('select.genericlist', $options, 'filter_author', '', 'value', 'text', $filter_author);
+        $lists['authors'] = HTMLHelper::_('select.genericlist', $options, 'filter_author', '', 'value', 'text', $filter_author);
 
-        $filter_state_options[] = JHTML::_('select.option', -1, Text::_('K2_SELECT_PUBLISHING_STATE'));
-        $filter_state_options[] = JHTML::_('select.option', 1, Text::_('K2_PUBLISHED'));
-        $filter_state_options[] = JHTML::_('select.option', 0, Text::_('K2_UNPUBLISHED'));
-        $lists['state'] = JHTML::_('select.genericlist', $filter_state_options, 'filter_state', '', 'value', 'text', $filter_state);
+        $filter_state_options[] = HTMLHelper::_('select.option', -1, Text::_('K2_SELECT_PUBLISHING_STATE'));
+        $filter_state_options[] = HTMLHelper::_('select.option', 1, Text::_('K2_PUBLISHED'));
+        $filter_state_options[] = HTMLHelper::_('select.option', 0, Text::_('K2_UNPUBLISHED'));
+        $lists['state'] = HTMLHelper::_('select.genericlist', $filter_state_options, 'filter_state', '', 'value', 'text', $filter_state);
 
-        $filter_featured_options[] = JHTML::_('select.option', -1, Text::_('K2_SELECT_FEATURED_STATE'));
-        $filter_featured_options[] = JHTML::_('select.option', 1, Text::_('K2_FEATURED'));
-        $filter_featured_options[] = JHTML::_('select.option', 0, Text::_('K2_NOT_FEATURED'));
-        $lists['featured'] = JHTML::_('select.genericlist', $filter_featured_options, 'filter_featured', '', 'value', 'text', $filter_featured);
+        $filter_featured_options[] = HTMLHelper::_('select.option', -1, Text::_('K2_SELECT_FEATURED_STATE'));
+        $filter_featured_options[] = HTMLHelper::_('select.option', 1, Text::_('K2_FEATURED'));
+        $filter_featured_options[] = HTMLHelper::_('select.option', 0, Text::_('K2_NOT_FEATURED'));
+        $lists['featured'] = HTMLHelper::_('select.genericlist', $filter_featured_options, 'filter_featured', '', 'value', 'text', $filter_featured);
 
         if ($params->get('showTagFilter')) {
             $tagsModel = K2Model::getInstance('Tags', 'K2Model');
@@ -183,36 +184,36 @@ class K2ViewItems extends K2View
             $option->id = 0;
             $option->name = Text::_('K2_SELECT_TAG');
             array_unshift($options, $option);
-            $lists['tag'] = JHTML::_('select.genericlist', $options, 'tag', '', 'id', 'name', $tag);
+            $lists['tag'] = HTMLHelper::_('select.genericlist', $options, 'tag', '', 'id', 'name', $tag);
         }
 
-        $languages = JHTML::_('contentlanguage.existing', true, true);
-        array_unshift($languages, JHTML::_('select.option', '', Text::_('K2_SELECT_LANGUAGE')));
-        $lists['language'] = JHTML::_('select.genericlist', $languages, 'language', '', 'value', 'text', $language);
+        $languages = HTMLHelper::_('contentlanguage.existing', true, true);
+        array_unshift($languages, HTMLHelper::_('select.option', '', Text::_('K2_SELECT_LANGUAGE')));
+        $lists['language'] = HTMLHelper::_('select.genericlist', $languages, 'language', '', 'value', 'text', $language);
 
         // Batch Operations
         $categoriesModel = K2Model::getInstance('Categories', 'K2Model');
         $categories = $categoriesModel->categoriesTree(null, true, false);
         array_unshift($categories, HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -'));
-        $lists['batchCategories'] = JHTML::_('select.genericlist', $categories, 'batchCategory', '', 'value', 'text');
-        $lists['batchAccess'] = JHTML::_('access.level', 'batchAccess', null, '', array(HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -')));
+        $lists['batchCategories'] = HTMLHelper::_('select.genericlist', $categories, 'batchCategory', '', 'value', 'text');
+        $lists['batchAccess'] = HTMLHelper::_('access.level', 'batchAccess', null, '', array(HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -')));
 
-        $languages = JHTML::_('contentlanguage.existing', true, true);
+        $languages = HTMLHelper::_('contentlanguage.existing', true, true);
         array_unshift($languages, HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -'));
-        $lists['batchLanguage'] = JHTML::_('select.genericlist', $languages, 'batchLanguage', '', 'value', 'text', null);
+        $lists['batchLanguage'] = HTMLHelper::_('select.genericlist', $languages, 'batchLanguage', '', 'value', 'text', null);
 
         $model = $this->getModel('items');
         $authors = $model->getItemsAuthors();
         $options = array();
-        $options[] = JHTML::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -');
+        $options[] = HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -');
         foreach ($authors as $author) {
             $name = $author->name;
             if ($author->block) {
                 $name .= ' [' . Text::_('K2_USER_DISABLED') . ']';
             }
-            $options[] = JHTML::_('select.option', $author->id, $name);
+            $options[] = HTMLHelper::_('select.option', $author->id, $name);
         }
-        $lists['batchAuthor'] = JHTML::_('select.genericlist', $options, 'batchAuthor', '', 'value', 'text', null);
+        $lists['batchAuthor'] = HTMLHelper::_('select.genericlist', $options, 'batchAuthor', '', 'value', 'text', null);
         $this->lists = $lists;
 
         // Pagination
@@ -284,11 +285,11 @@ class K2ViewItems extends K2View
 
         // Get the toolbar object instance
         $toolbar = Toolbar::getInstance('toolbar');
-        JToolBarHelper::title(Text::_('K2_ITEMS'), 'k2.png');
+        ToolBarHelper::title(Text::_('K2_ITEMS'), 'k2.png');
 
         if ($this->filter_trash == 1) {
-            JToolBarHelper::deleteList('K2_ARE_YOU_SURE_YOU_WANT_TO_DELETE_SELECTED_ITEMS', 'remove', 'K2_DELETE');
-            JToolBarHelper::custom('restore', 'publish.png', 'publish_f2.png', 'K2_RESTORE', true);
+            ToolBarHelper::deleteList('K2_ARE_YOU_SURE_YOU_WANT_TO_DELETE_SELECTED_ITEMS', 'remove', 'K2_DELETE');
+            ToolBarHelper::custom('restore', 'publish.png', 'publish_f2.png', 'K2_RESTORE', true);
         }
 
         if (version_compare(JVERSION, '4.0.0-dev', 'ge')) {
@@ -324,19 +325,19 @@ class K2ViewItems extends K2View
             }
         }
         else {
-            JToolBarHelper::addNew();
-            JToolBarHelper::editList();
-            JToolBarHelper::custom('featured', 'featured.png', 'featured_f2.png', 'K2_TOGGLE_FEATURED_STATE', true);
-            JToolBarHelper::publishList();
-            JToolBarHelper::unpublishList();
-            JToolBarHelper::trash('trash');
-            JToolBarHelper::custom('copy', 'copy.png', 'copy_f2.png', 'K2_COPY', true);
+            ToolBarHelper::addNew();
+            ToolBarHelper::editList();
+            ToolBarHelper::custom('featured', 'featured.png', 'featured_f2.png', 'K2_TOGGLE_FEATURED_STATE', true);
+            ToolBarHelper::publishList();
+            ToolBarHelper::unpublishList();
+            ToolBarHelper::trash('trash');
+            ToolBarHelper::custom('copy', 'copy.png', 'copy_f2.png', 'K2_COPY', true);
             // Batch button in modal
             $batchButton = '<a id="K2BatchButton" class="btn btn-small" href="#"><i class="icon-edit"></i>' . Text::_('K2_BATCH') . '</a>';
             $toolbar->appendButton('Custom', $batchButton);
             if ($user->authorise('core.admin', 'com_k2') || $user->authorise('core.options', 'com_k2')) {
                 // Preferences (Parameters/Settings)
-                JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
+                ToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
                 // Display import button for Joomla content
                 if ($user->gid > 23 && !$this->params->get('hideImportButton')) {
                     $buttonUrl = URI::base() . 'index.php?option=com_k2&amp;view=items&amp;task=import';

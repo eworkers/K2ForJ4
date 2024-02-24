@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\String\StringHelper;
 use Joomla\Utilities\ArrayHelper;
 use Joomla\CMS\Table\Table;
@@ -1183,7 +1184,7 @@ class K2ModelItem extends K2Model
                         if ($rows[$i]->type == 'date' && $value) {
                             $rawValue = $value;
                             $offset = null;
-                            $value = JHTML::_('date', $value, Text::_('K2_DATE_FORMAT_LC'), $offset);
+                            $value = HTMLHelper::_('date', $value, Text::_('K2_DATE_FORMAT_LC'), $offset);
                         }
                     } elseif ($rows[$i]->type == 'image') {
                         if ($object->value) {

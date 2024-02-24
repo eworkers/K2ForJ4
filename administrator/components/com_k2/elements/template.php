@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Form\FormField;
 
@@ -51,12 +52,12 @@ class K2ElementTemplate extends K2Element
             if (preg_match(chr(1) . $exclude . chr(1), $folder)) {
                 continue;
             }
-            $options[] = JHTML::_('select.option', $folder, $folder);
+            $options[] = HTMLHelper::_('select.option', $folder, $folder);
         }
 
-        array_unshift($options, JHTML::_('select.option', '', '-- ' . Text::_('K2_USE_DEFAULT') . ' --'));
+        array_unshift($options, HTMLHelper::_('select.option', '', '-- ' . Text::_('K2_USE_DEFAULT') . ' --'));
 
-        return JHTML::_('select.genericlist', $options, $fieldName, 'class="form-select"', 'value', 'text', $value);
+        return HTMLHelper::_('select.genericlist', $options, $fieldName, 'class="form-select"', 'value', 'text', $value);
     }
 }
 

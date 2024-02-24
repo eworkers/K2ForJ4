@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
@@ -133,7 +134,7 @@ use Joomla\CMS\Router\Route;
 
                     <?php if ($params->get('itemDateCreated')): ?>
                         <span class="moduleItemDateCreated">
-                <?php echo Text::_('K2_WRITTEN_ON'); ?><?php echo JHTML::_('date', $item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
+                <?php echo Text::_('K2_WRITTEN_ON'); ?><?php echo HTMLHelper::_('date', $item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
             </span>
                     <?php endif; ?>
 

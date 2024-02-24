@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Filter\OutputFilter;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 
@@ -29,7 +30,7 @@ class K2ViewTag extends K2View
         $this->row = $tag;
 
         $lists = array();
-        $lists['published'] = JHTML::_('select.booleanlist', 'published', 'class="inputbox"', $tag->published);
+        $lists['published'] = HTMLHelper::_('select.booleanlist', 'published', 'class="inputbox"', $tag->published);
         $this->lists = $lists;
 
         // Disable Joomla menu

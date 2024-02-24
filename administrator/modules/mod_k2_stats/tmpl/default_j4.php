@@ -49,7 +49,7 @@ $selector = 'k2StatsTabs'.$module->id;
         <?php foreach($latestItems as $latest): ?>
             <tr>
                 <td><a href="<?php echo Route::_('index.php?option=com_k2&view=item&cid='.$latest->id); ?>"><?php echo $latest->title; ?></a></td>
-                <td><?php echo JHTML::_('date', $latest->created , Text::_('K2_DATE_FORMAT')); ?></td>
+                <td><?php echo HTMLHelper::_('date', $latest->created , Text::_('K2_DATE_FORMAT')); ?></td>
                 <td><?php echo $latest->author; ?></td>
             </tr>
         <?php endforeach; ?>
@@ -74,7 +74,7 @@ $selector = 'k2StatsTabs'.$module->id;
             <tr>
                 <td><a href="<?php echo Route::_('index.php?option=com_k2&view=item&cid='.$popular->id); ?>"><?php echo $popular->title; ?></a></td>
                 <td><?php echo $popular->hits; ?></td>
-                <td><?php echo JHTML::_('date', $popular->created , Text::_('K2_DATE_FORMAT')); ?></td>
+                <td><?php echo HTMLHelper::_('date', $popular->created , Text::_('K2_DATE_FORMAT')); ?></td>
                 <td><?php echo $popular->author; ?></td>
             </tr>
         <?php endforeach; ?>
@@ -99,7 +99,7 @@ $selector = 'k2StatsTabs'.$module->id;
             <tr>
                 <td><a href="<?php echo Route::_('index.php?option=com_k2&view=item&cid='.$mostCommented->id); ?>"><?php echo $mostCommented->title; ?></a></td>
                 <td><?php echo $mostCommented->numOfComments; ?></td>
-                <td><?php echo JHTML::_('date', $mostCommented->created , Text::_('K2_DATE_FORMAT')); ?></td>
+                <td><?php echo HTMLHelper::_('date', $mostCommented->created , Text::_('K2_DATE_FORMAT')); ?></td>
                 <td><?php echo $mostCommented->author; ?></td>
             </tr>
         <?php endforeach; ?>
@@ -122,7 +122,7 @@ $selector = 'k2StatsTabs'.$module->id;
         <?php foreach($latestComments as $latest): ?>
             <tr>
                 <td><?php echo $latest->commentText; ?></td>
-                <td><?php echo JHTML::_('date', $latest->commentDate , Text::_('K2_DATE_FORMAT')); ?></td>
+                <td><?php echo HTMLHelper::_('date', $latest->commentDate , Text::_('K2_DATE_FORMAT')); ?></td>
                 <td><?php echo $latest->userName; ?></td>
             </tr>
         <?php endforeach; ?>

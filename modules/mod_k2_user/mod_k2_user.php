@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Language\Language;
 use Joomla\CMS\Language\Text;
@@ -58,7 +59,7 @@ if ($user->guest) {
 			JLanguage.NORMAL_LOGIN = '" . Text::_('K2_NORMAL_LOGIN') . "';
 			var modlogin = 1;
 		");
-        JHTML::_('script', 'openid.js');
+        HTMLHelper::_('script', 'openid.js');
     }
 
     // Get user stuff (do not edit)

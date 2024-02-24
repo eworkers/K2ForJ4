@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
@@ -91,6 +92,6 @@ use Joomla\CMS\Uri\Uri;
                 <input type="hidden" name="option" value="<?php echo $option; ?>"/>
                 <input type="hidden" name="task" value="<?php echo $task; ?>"/>
                 <input type="hidden" name="return" value="<?php echo $return; ?>"/>
-                <?php echo JHTML::_('form.token'); ?>
+                <?php echo HTMLHelper::_('form.token'); ?>
             </form>
 </div>

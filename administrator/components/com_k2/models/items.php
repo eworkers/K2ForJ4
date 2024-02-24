@@ -23,8 +23,6 @@ use Joomla\Registry\Registry;
 
 jimport('joomla.application.component.model');
 
-JTable::addIncludePath(JPATH_COMPONENT . '/tables');
-
 class K2ModelItems extends K2Model
 {
     private $getTotal;

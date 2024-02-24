@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
 ?>
@@ -126,5 +127,5 @@ use Joomla\CMS\Language\Text;
     <input type="hidden" name="view" value="<?php echo Factory::getApplication()->input->getVar('view'); ?>"/>
     <input type="hidden" name="task" value="<?php echo Factory::getApplication()->input->getVar('task'); ?>"/>
     <input type="hidden" id="value" name="value" value="<?php echo htmlentities($this->row->value); ?>"/>
-    <?php echo JHTML::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

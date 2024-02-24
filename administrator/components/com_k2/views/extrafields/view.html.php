@@ -70,34 +70,34 @@ class K2ViewExtraFields extends K2View
         $lists['search'] = $search;
         $lists['order_Dir'] = $filter_order_Dir;
         $lists['order'] = $filter_order;
-        $filter_state_options[] = JHTML::_('select.option', -1, Text::_('K2_SELECT_STATE'));
-        $filter_state_options[] = JHTML::_('select.option', 1, Text::_('K2_PUBLISHED'));
-        $filter_state_options[] = JHTML::_('select.option', 0, Text::_('K2_UNPUBLISHED'));
-        $lists['state'] = JHTML::_('select.genericlist', $filter_state_options, 'filter_state', '', 'value', 'text', $filter_state);
+        $filter_state_options[] = HTMLHelper::_('select.option', -1, Text::_('K2_SELECT_STATE'));
+        $filter_state_options[] = HTMLHelper::_('select.option', 1, Text::_('K2_PUBLISHED'));
+        $filter_state_options[] = HTMLHelper::_('select.option', 0, Text::_('K2_UNPUBLISHED'));
+        $lists['state'] = HTMLHelper::_('select.genericlist', $filter_state_options, 'filter_state', '', 'value', 'text', $filter_state);
 
         $extraFieldGroups = $model->getGroups(true);
-        $groups[] = JHTML::_('select.option', '0', Text::_('K2_SELECT_GROUP'));
+        $groups[] = HTMLHelper::_('select.option', '0', Text::_('K2_SELECT_GROUP'));
 
         foreach ($extraFieldGroups as $extraFieldGroup) {
-            $groups[] = JHTML::_('select.option', $extraFieldGroup->id, $extraFieldGroup->name);
+            $groups[] = HTMLHelper::_('select.option', $extraFieldGroup->id, $extraFieldGroup->name);
         }
-        $lists['group'] = JHTML::_('select.genericlist', $groups, 'filter_group', '', 'value', 'text', $filter_group);
+        $lists['group'] = HTMLHelper::_('select.genericlist', $groups, 'filter_group', '', 'value', 'text', $filter_group);
 
-        $typeOptions[] = JHTML::_('select.option', 0, Text::_('K2_SELECT_TYPE'));
+        $typeOptions[] = HTMLHelper::_('select.option', 0, Text::_('K2_SELECT_TYPE'));
 
-        $typeOptions[] = JHTML::_('select.option', 'textfield', Text::_('K2_TEXT_FIELD'));
-        $typeOptions[] = JHTML::_('select.option', 'textarea', Text::_('K2_TEXTAREA'));
-        $typeOptions[] = JHTML::_('select.option', 'select', Text::_('K2_DROPDOWN_SELECTION'));
-        $typeOptions[] = JHTML::_('select.option', 'multipleSelect', Text::_('K2_MULTISELECT_LIST'));
-        $typeOptions[] = JHTML::_('select.option', 'radio', Text::_('K2_RADIO_BUTTONS'));
-        $typeOptions[] = JHTML::_('select.option', 'link', Text::_('K2_LINK'));
-        $typeOptions[] = JHTML::_('select.option', 'csv', Text::_('K2_CSV_DATA'));
-        $typeOptions[] = JHTML::_('select.option', 'labels', Text::_('K2_SEARCHABLE_LABELS'));
-        $typeOptions[] = JHTML::_('select.option', 'date', Text::_('K2_DATE'));
-        $typeOptions[] = JHTML::_('select.option', 'image', Text::_('K2_IMAGE'));
-        $typeOptions[] = JHTML::_('select.option', 'header', Text::_('K2_HEADER'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'textfield', Text::_('K2_TEXT_FIELD'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'textarea', Text::_('K2_TEXTAREA'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'select', Text::_('K2_DROPDOWN_SELECTION'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'multipleSelect', Text::_('K2_MULTISELECT_LIST'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'radio', Text::_('K2_RADIO_BUTTONS'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'link', Text::_('K2_LINK'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'csv', Text::_('K2_CSV_DATA'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'labels', Text::_('K2_SEARCHABLE_LABELS'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'date', Text::_('K2_DATE'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'image', Text::_('K2_IMAGE'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'header', Text::_('K2_HEADER'));
 
-        $lists['type'] = JHTML::_('select.genericlist', $typeOptions, 'filter_type', '', 'value', 'text', $filter_type);
+        $lists['type'] = HTMLHelper::_('select.genericlist', $typeOptions, 'filter_type', '', 'value', 'text', $filter_type);
 
         $this->lists = $lists;
 

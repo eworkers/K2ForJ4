@@ -149,31 +149,31 @@ class K2ViewComments extends K2View
         $lists['order_Dir'] = $filter_order_Dir;
         $lists['order'] = $filter_order;
 
-        $filter_state_options[] = JHTML::_('select.option', -1, Text::_('K2_SELECT_STATE'));
-        $filter_state_options[] = JHTML::_('select.option', 1, Text::_('K2_PUBLISHED'));
-        $filter_state_options[] = JHTML::_('select.option', 0, Text::_('K2_UNPUBLISHED'));
-        $lists['state'] = JHTML::_('select.genericlist', $filter_state_options, 'filter_state', '', 'value', 'text', $filter_state);
+        $filter_state_options[] = HTMLHelper::_('select.option', -1, Text::_('K2_SELECT_STATE'));
+        $filter_state_options[] = HTMLHelper::_('select.option', 1, Text::_('K2_PUBLISHED'));
+        $filter_state_options[] = HTMLHelper::_('select.option', 0, Text::_('K2_UNPUBLISHED'));
+        $lists['state'] = HTMLHelper::_('select.genericlist', $filter_state_options, 'filter_state', '', 'value', 'text', $filter_state);
 
         require_once JPATH_ADMINISTRATOR . '/components/com_k2/models/categories.php';
         $categoriesModel = K2Model::getInstance('Categories', 'K2Model');
-        $categories_option[] = JHTML::_('select.option', 0, Text::_('K2_SELECT_CATEGORY'));
+        $categories_option[] = HTMLHelper::_('select.option', 0, Text::_('K2_SELECT_CATEGORY'));
         $categories = $categoriesModel->categoriesTree(null, true, false);
         $categories_options = @array_merge($categories_option, $categories);
-        $lists['categories'] = JHTML::_('select.genericlist', $categories_options, 'filter_category', '', 'value', 'text', $filter_category);
+        $lists['categories'] = HTMLHelper::_('select.genericlist', $categories_options, 'filter_category', '', 'value', 'text', $filter_category);
 
         require_once JPATH_ADMINISTRATOR . '/components/com_k2/models/items.php';
         $itemsModel = K2Model::getInstance('Items', 'K2Model');
         $authors = $itemsModel->getItemsAuthors();
         $options = array();
-        $options[] = JHTML::_('select.option', 0, Text::_('K2_NO_USER'));
+        $options[] = HTMLHelper::_('select.option', 0, Text::_('K2_NO_USER'));
         foreach ($authors as $author) {
             $name = $author->name;
             if ($author->block) {
                 $name .= ' [' . Text::_('K2_USER_DISABLED') . ']';
             }
-            $options[] = JHTML::_('select.option', $author->id, $name);
+            $options[] = HTMLHelper::_('select.option', $author->id, $name);
         }
-        $lists['authors'] = JHTML::_('select.genericlist', $options, 'filter_author', '', 'value', 'text', $filter_author);
+        $lists['authors'] = HTMLHelper::_('select.genericlist', $options, 'filter_author', '', 'value', 'text', $filter_author);
         $this->lists = $lists;
 
         $dateFormat = Text::_('K2_J16_DATE_FORMAT');

@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Form\Form;
@@ -210,5 +211,5 @@ use Joomla\CMS\Uri\Uri;
     <input type="hidden" name="id" value="0"/>
     <input type="hidden" name="gid" value="0"/>
     <input type="hidden" name="K2UserForm" value="1"/>
-    <?php echo JHTML::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

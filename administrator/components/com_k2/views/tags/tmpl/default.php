@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
@@ -62,10 +63,10 @@ $context = Factory::getApplication()->input->getCmd('context');
                     <th class="k2ui-center<?php if ($context == "modalselector") echo ' k2ui-not-visible'; ?>"><input
                                 id="k2<?php echo $this->params->get('backendListToggler', 'TogglerStandard'); ?>"
                                 type="checkbox" name="toggle" value=""/></th>
-                    <th><?php echo JHTML::_('grid.sort', 'K2_NAME', 'name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                    <th class="k2ui-center"><?php echo JHTML::_('grid.sort', 'K2_PUBLISHED', 'published', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                    <th class="k2ui-center k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_ITEMS', 'numOfItems', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
-                    <th class="k2ui-center k2ui-hide-on-mobile"><?php echo JHTML::_('grid.sort', 'K2_ID', 'id', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th><?php echo HTMLHelper::_('grid.sort', 'K2_NAME', 'name', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th class="k2ui-center"><?php echo HTMLHelper::_('grid.sort', 'K2_PUBLISHED', 'published', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th class="k2ui-center k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_ITEMS', 'numOfItems', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
+                    <th class="k2ui-center k2ui-hide-on-mobile"><?php echo HTMLHelper::_('grid.sort', 'K2_ID', 'id', @$this->lists['order_Dir'], @$this->lists['order']); ?></th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -84,7 +85,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                         <tr class="row<?php echo($key % 2); ?>">
                             <td class="k2ui-center k2ui-hide-on-mobile"><?php echo $key + 1; ?></td>
                             <td class="k2ui-center<?php if ($context == "modalselector") echo ' k2ui-not-visible'; ?>"><?php $row->checked_out = 0;
-                                echo @JHTML::_('grid.checkedout', $row, $key); ?></td>
+                                echo @HTMLHelper::_('grid.checkedout', $row, $key); ?></td>
                             <td>
                                 <?php if ($context == "modalselector"): ?>
                                     <?php
@@ -133,7 +134,7 @@ $context = Factory::getApplication()->input->getCmd('context');
             <input type="hidden" name="output"
                    value="<?php echo Factory::getApplication()->input->getCmd('output'); ?>"/>
         <?php endif; ?>
-        <?php echo JHTML::_('form.token'); ?>
+        <?php echo HTMLHelper::_('form.token'); ?>
     </form>
 
     <?php if ($app->isClient('site') || $context == "modalselector"): ?>

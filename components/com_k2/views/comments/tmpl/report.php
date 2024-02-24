@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 
@@ -46,6 +47,6 @@ use Joomla\CMS\Uri\Uri;
         <input type="hidden" name="task" value="sendReport"/>
         <input type="hidden" name="id" value="<?php echo $this->row->id; ?>"/>
         <input type="hidden" name="format" value="raw"/>
-        <?php echo JHTML::_('form.token'); ?>
+        <?php echo HTMLHelper::_('form.token'); ?>
     </form>
 </div>

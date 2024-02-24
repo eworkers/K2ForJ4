@@ -126,49 +126,49 @@ class K2ViewCategories extends K2View
         $lists['order_Dir'] = $filter_order_Dir;
         $lists['order'] = $filter_order;
 
-        $filter_trash_options[] = JHTML::_('select.option', 0, Text::_('K2_CURRENT'));
-        $filter_trash_options[] = JHTML::_('select.option', 1, Text::_('K2_TRASHED'));
-        $lists['trash'] = JHTML::_('select.genericlist', $filter_trash_options, 'filter_trash', '', 'value', 'text', $filter_trash);
+        $filter_trash_options[] = HTMLHelper::_('select.option', 0, Text::_('K2_CURRENT'));
+        $filter_trash_options[] = HTMLHelper::_('select.option', 1, Text::_('K2_TRASHED'));
+        $lists['trash'] = HTMLHelper::_('select.genericlist', $filter_trash_options, 'filter_trash', '', 'value', 'text', $filter_trash);
 
-        $filter_state_options[] = JHTML::_('select.option', -1, Text::_('K2_SELECT_STATE'));
-        $filter_state_options[] = JHTML::_('select.option', 1, Text::_('K2_PUBLISHED'));
-        $filter_state_options[] = JHTML::_('select.option', 0, Text::_('K2_UNPUBLISHED'));
-        $lists['state'] = JHTML::_('select.genericlist', $filter_state_options, 'filter_state', '', 'value', 'text', $filter_state);
+        $filter_state_options[] = HTMLHelper::_('select.option', -1, Text::_('K2_SELECT_STATE'));
+        $filter_state_options[] = HTMLHelper::_('select.option', 1, Text::_('K2_PUBLISHED'));
+        $filter_state_options[] = HTMLHelper::_('select.option', 0, Text::_('K2_UNPUBLISHED'));
+        $lists['state'] = HTMLHelper::_('select.genericlist', $filter_state_options, 'filter_state', '', 'value', 'text', $filter_state);
 
         require_once JPATH_ADMINISTRATOR . '/components/com_k2/models/categories.php';
         $categoriesModel = K2Model::getInstance('Categories', 'K2Model');
-        $categories_option[] = JHTML::_('select.option', 0, Text::_('K2_SELECT_CATEGORY'));
+        $categories_option[] = HTMLHelper::_('select.option', 0, Text::_('K2_SELECT_CATEGORY'));
         $categoriesFilter = $categoriesModel->categoriesTree(null, true, false);
         $categoriesTree = $categoriesFilter;
         $categories_options = @array_merge($categories_option, $categoriesFilter);
-        $lists['categories'] = JHTML::_('select.genericlist', $categories_options, 'filter_category', '', 'value', 'text', $filter_category);
+        $lists['categories'] = HTMLHelper::_('select.genericlist', $categories_options, 'filter_category', '', 'value', 'text', $filter_category);
 
         // Batch Operations
         $extraFieldsModel = K2Model::getInstance('ExtraFields', 'K2Model');
         $extraFieldsGroups = $extraFieldsModel->getGroups(true); // Fetch entire extra field group list
         $options = array();
-        $options[] = JHTML::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -');
-        $options[] = JHTML::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'));
+        $options[] = HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -');
+        $options[] = HTMLHelper::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'));
         foreach ($extraFieldsGroups as $extraFieldsGroup) {
             $name = $extraFieldsGroup->name;
-            $options[] = JHTML::_('select.option', $extraFieldsGroup->id, $name);
+            $options[] = HTMLHelper::_('select.option', $extraFieldsGroup->id, $name);
         }
-        $lists['batchExtraFieldsGroups'] = JHTML::_('select.genericlist', $options, 'batchExtraFieldsGroups', '', 'value', 'text', null);
+        $lists['batchExtraFieldsGroups'] = HTMLHelper::_('select.genericlist', $options, 'batchExtraFieldsGroups', '', 'value', 'text', null);
 
         array_unshift($categoriesTree, HTMLHelper::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS')));
         array_unshift($categoriesTree, HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -'));
 
-        $lists['batchCategories'] = JHTML::_('select.genericlist', $categoriesTree, 'batchCategory', '', 'value', 'text', null);
+        $lists['batchCategories'] = HTMLHelper::_('select.genericlist', $categoriesTree, 'batchCategory', '', 'value', 'text', null);
 
-        $lists['batchAccess'] = JHTML::_('access.level', 'batchAccess', null, '', array(HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -')));
+        $lists['batchAccess'] = HTMLHelper::_('access.level', 'batchAccess', null, '', array(HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -')));
 
-        $languages = JHTML::_('contentlanguage.existing', true, true);
+        $languages = HTMLHelper::_('contentlanguage.existing', true, true);
         array_unshift($languages, HTMLHelper::_('select.option', '', '- ' . Text::_('K2_LEAVE_UNCHANGED') . ' -'));
-        $lists['batchLanguage'] = JHTML::_('select.genericlist', $languages, 'batchLanguage', '', 'value', 'text', null);
+        $lists['batchLanguage'] = HTMLHelper::_('select.genericlist', $languages, 'batchLanguage', '', 'value', 'text', null);
 
-        $languages = JHTML::_('contentlanguage.existing', true, true);
-        array_unshift($languages, JHTML::_('select.option', '', Text::_('K2_SELECT_LANGUAGE')));
-        $lists['language'] = JHTML::_('select.genericlist', $languages, 'language', '', 'value', 'text', $language);
+        $languages = HTMLHelper::_('contentlanguage.existing', true, true);
+        array_unshift($languages, HTMLHelper::_('select.option', '', Text::_('K2_SELECT_LANGUAGE')));
+        $lists['language'] = HTMLHelper::_('select.genericlist', $languages, 'language', '', 'value', 'text', $language);
         $this->lists = $lists;
 
         $this->loadHelper('html');

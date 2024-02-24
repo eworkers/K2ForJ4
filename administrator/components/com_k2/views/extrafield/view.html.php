@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Filter\InputFilter;
 use Joomla\CMS\Uri\Uri;
@@ -21,8 +22,8 @@ class K2ViewExtraField extends K2View
 {
     public function display($tpl = null)
     {
-        if (version_compare(JVERSION, '4.0.0-dev', 'lt')) JHTML::_('behavior.modal');
-        JHTML::_('behavior.keepalive');
+        if (version_compare(JVERSION, '4.0.0-dev', 'lt')) HTMLHelper::_('behavior.modal');
+        HTMLHelper::_('behavior.keepalive');
 
         $document = Factory::getDocument();
         $document->addScriptDeclaration('
@@ -106,34 +107,34 @@ class K2ViewExtraField extends K2View
         $this->row = $extraField;
 
         $lists = array();
-        $lists['published'] = JHTML::_('select.booleanlist', 'published', 'class="inputbox"', $extraField->published);
+        $lists['published'] = HTMLHelper::_('select.booleanlist', 'published', 'class="inputbox"', $extraField->published);
 
         $extraFieldModel = K2Model::getInstance('ExtraFields', 'K2Model');
         $uniqueGroups = $extraFieldModel->getGroups(true);
 
-        $groups[] = JHTML::_('select.option', '', '- ' . Text::_('K2_PLEASE_SELECT_A_GROUP_OR_CREATE_A_NEW_ONE') . ' -');
+        $groups[] = HTMLHelper::_('select.option', '', '- ' . Text::_('K2_PLEASE_SELECT_A_GROUP_OR_CREATE_A_NEW_ONE') . ' -');
         foreach ($uniqueGroups as $group) {
-            $groups[] = JHTML::_('select.option', $group->id, $group->name);
+            $groups[] = HTMLHelper::_('select.option', $group->id, $group->name);
         }
-        $groups[] = JHTML::_('select.option', 0, Text::_('K2_CREATE_NEW_GROUP'));
+        $groups[] = HTMLHelper::_('select.option', 0, Text::_('K2_CREATE_NEW_GROUP'));
 
-        $lists['group'] = JHTML::_('select.genericlist', $groups, 'groups', '', 'value', 'text', $extraField->group);
+        $lists['group'] = HTMLHelper::_('select.genericlist', $groups, 'groups', '', 'value', 'text', $extraField->group);
 
-        $typeOptions[] = JHTML::_('select.option', 0, Text::_('K2_SELECT_TYPE'));
+        $typeOptions[] = HTMLHelper::_('select.option', 0, Text::_('K2_SELECT_TYPE'));
 
-        $typeOptions[] = JHTML::_('select.option', 'textfield', Text::_('K2_TEXT_FIELD'));
-        $typeOptions[] = JHTML::_('select.option', 'textarea', Text::_('K2_TEXTAREA'));
-        $typeOptions[] = JHTML::_('select.option', 'select', Text::_('K2_DROPDOWN_SELECTION'));
-        $typeOptions[] = JHTML::_('select.option', 'multipleSelect', Text::_('K2_MULTISELECT_LIST'));
-        $typeOptions[] = JHTML::_('select.option', 'radio', Text::_('K2_RADIO_BUTTONS'));
-        $typeOptions[] = JHTML::_('select.option', 'link', Text::_('K2_LINK'));
-        $typeOptions[] = JHTML::_('select.option', 'csv', Text::_('K2_CSV_DATA'));
-        $typeOptions[] = JHTML::_('select.option', 'labels', Text::_('K2_SEARCHABLE_LABELS'));
-        $typeOptions[] = JHTML::_('select.option', 'date', Text::_('K2_DATE'));
-        $typeOptions[] = JHTML::_('select.option', 'image', Text::_('K2_IMAGE'));
-        $typeOptions[] = JHTML::_('select.option', 'header', Text::_('K2_HEADER'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'textfield', Text::_('K2_TEXT_FIELD'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'textarea', Text::_('K2_TEXTAREA'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'select', Text::_('K2_DROPDOWN_SELECTION'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'multipleSelect', Text::_('K2_MULTISELECT_LIST'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'radio', Text::_('K2_RADIO_BUTTONS'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'link', Text::_('K2_LINK'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'csv', Text::_('K2_CSV_DATA'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'labels', Text::_('K2_SEARCHABLE_LABELS'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'date', Text::_('K2_DATE'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'image', Text::_('K2_IMAGE'));
+        $typeOptions[] = HTMLHelper::_('select.option', 'header', Text::_('K2_HEADER'));
 
-        $lists['type'] = JHTML::_('select.genericlist', $typeOptions, 'type', '', 'value', 'text', $extraField->type);
+        $lists['type'] = HTMLHelper::_('select.genericlist', $typeOptions, 'type', '', 'value', 'text', $extraField->type);
 
         $this->lists = $lists;
 

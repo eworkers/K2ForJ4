@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filter\OutputFilter;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Component\ComponentHelper;
@@ -26,7 +27,7 @@ class K2ViewCategory extends K2View
     {
         $document = Factory::getDocument();
 
-        if (version_compare(JVERSION, '4.0.0-dev', 'lt')) JHTML::_('behavior.modal');
+        if (version_compare(JVERSION, '4.0.0-dev', 'lt')) HTMLHelper::_('behavior.modal');
 
         $model = $this->getModel();
         $category = $model->getData();
@@ -65,26 +66,26 @@ class K2ViewCategory extends K2View
         ");
 
         $lists = array();
-        $lists['published'] = JHTML::_('select.booleanlist', 'published', 'class="inputbox"', $category->published);
-        $lists['access'] = JHTML::_('access.level', 'access', $category->access, '', false);
+        $lists['published'] = HTMLHelper::_('select.booleanlist', 'published', 'class="inputbox"', $category->published);
+        $lists['access'] = HTMLHelper::_('access.level', 'access', $category->access, '', false);
         $query = 'SELECT ordering AS value, name AS text FROM #__k2_categories ORDER BY ordering';
         $lists['ordering'] = null;
-        $categories[] = JHTML::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'));
+        $categories[] = HTMLHelper::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'));
 
         require_once JPATH_ADMINISTRATOR . '/components/com_k2/models/categories.php';
         $categoriesModel = K2Model::getInstance('Categories', 'K2Model');
         $tree = $categoriesModel->categoriesTree($category, true, false);
         $categories = array_merge($categories, $tree);
-        $lists['parent'] = JHTML::_('select.genericlist', $categories, 'parent', 'class="inputbox"', 'value', 'text', $category->parent);
+        $lists['parent'] = HTMLHelper::_('select.genericlist', $categories, 'parent', 'class="inputbox"', 'value', 'text', $category->parent);
 
         $extraFieldsModel = K2Model::getInstance('ExtraFields', 'K2Model');
         $groups = $extraFieldsModel->getGroups(true); // Fetch entire extra field group list
-        $group[] = JHTML::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'), 'id', 'name');
+        $group[] = HTMLHelper::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'), 'id', 'name');
         $group = array_merge($group, $groups);
-        $lists['extraFieldsGroup'] = JHTML::_('select.genericlist', $group, 'extraFieldsGroup', 'class="inputbox" size="1" ', 'id', 'name', $category->extraFieldsGroup);
+        $lists['extraFieldsGroup'] = HTMLHelper::_('select.genericlist', $group, 'extraFieldsGroup', 'class="inputbox" size="1" ', 'id', 'name', $category->extraFieldsGroup);
 
-        $languages = JHTML::_('contentlanguage.existing', true, true);
-        $lists['language'] = JHTML::_('select.genericlist', $languages, 'language', '', 'value', 'text', $category->language);
+        $languages = HTMLHelper::_('contentlanguage.existing', true, true);
+        $lists['language'] = HTMLHelper::_('select.genericlist', $languages, 'language', '', 'value', 'text', $category->language);
 
         // Plugin Events
         PluginHelper::importPlugin('k2');
@@ -109,8 +110,8 @@ class K2ViewCategory extends K2View
         $inheritFrom = (isset($values['params']->inheritFrom)) ? $values['params']->inheritFrom : 0;
         $this->form = $form;
 
-        $categories[0] = JHTML::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'));
-        $lists['inheritFrom'] = JHTML::_('select.genericlist', $categories, 'params[inheritFrom]', 'class="inputbox"', 'value', 'text', $inheritFrom);
+        $categories[0] = HTMLHelper::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'));
+        $lists['inheritFrom'] = HTMLHelper::_('select.genericlist', $categories, 'params[inheritFrom]', 'class="inputbox"', 'value', 'text', $inheritFrom);
 
         $this->lists = $lists;
 

@@ -96,28 +96,28 @@ class K2ViewUsers extends K2View
         $lists['order_Dir'] = $filter_order_Dir;
         $lists['order'] = $filter_order;
 
-        $filter_status_options[] = JHTML::_('select.option', -1, Text::_('K2_SELECT_STATE'));
-        $filter_status_options[] = JHTML::_('select.option', 0, Text::_('K2_ENABLED'));
-        $filter_status_options[] = JHTML::_('select.option', 1, Text::_('K2_BLOCKED'));
-        $lists['status'] = JHTML::_('select.genericlist', $filter_status_options, 'filter_status', '', 'value', 'text', $filter_status);
+        $filter_status_options[] = HTMLHelper::_('select.option', -1, Text::_('K2_SELECT_STATE'));
+        $filter_status_options[] = HTMLHelper::_('select.option', 0, Text::_('K2_ENABLED'));
+        $filter_status_options[] = HTMLHelper::_('select.option', 1, Text::_('K2_BLOCKED'));
+        $lists['status'] = HTMLHelper::_('select.genericlist', $filter_status_options, 'filter_status', '', 'value', 'text', $filter_status);
 
         $userGroups = $model->getUserGroups();
-        $groups[] = JHTML::_('select.option', '0', Text::_('K2_SELECT_JOOMLA_GROUP'));
+        $groups[] = HTMLHelper::_('select.option', '0', Text::_('K2_SELECT_JOOMLA_GROUP'));
 
         foreach ($userGroups as $userGroup) {
-            $groups[] = JHTML::_('select.option', $userGroup->value, $userGroup->text);
+            $groups[] = HTMLHelper::_('select.option', $userGroup->value, $userGroup->text);
         }
 
-        $lists['filter_group'] = JHTML::_('select.genericlist', $groups, 'filter_group', '', 'value', 'text', $filter_group);
+        $lists['filter_group'] = HTMLHelper::_('select.genericlist', $groups, 'filter_group', '', 'value', 'text', $filter_group);
 
         $K2userGroups = $model->getUserGroups('k2');
-        $K2groups[] = JHTML::_('select.option', '0', Text::_('K2_SELECT_K2_GROUP'));
+        $K2groups[] = HTMLHelper::_('select.option', '0', Text::_('K2_SELECT_K2_GROUP'));
 
         foreach ($K2userGroups as $K2userGroup) {
-            $K2groups[] = JHTML::_('select.option', $K2userGroup->id, $K2userGroup->name);
+            $K2groups[] = HTMLHelper::_('select.option', $K2userGroup->id, $K2userGroup->name);
         }
 
-        $lists['filter_group_k2'] = JHTML::_('select.genericlist', $K2groups, 'filter_group_k2', '', 'value', 'text', $filter_group_k2);
+        $lists['filter_group_k2'] = HTMLHelper::_('select.genericlist', $K2groups, 'filter_group_k2', '', 'value', 'text', $filter_group_k2);
 
         $this->lists = $lists;
 
@@ -178,23 +178,23 @@ class K2ViewUsers extends K2View
         $model = $this->getModel('users');
         $lists = array();
         $userGroups = $model->getUserGroups();
-        $groups[] = JHTML::_('select.option', '', Text::_('K2_DO_NOT_CHANGE'));
+        $groups[] = HTMLHelper::_('select.option', '', Text::_('K2_DO_NOT_CHANGE'));
         foreach ($userGroups as $userGroup) {
-            $groups[] = JHTML::_('select.option', $userGroup->value, Text::_($userGroup->text));
+            $groups[] = HTMLHelper::_('select.option', $userGroup->value, Text::_($userGroup->text));
         }
         $fieldName = 'group';
         $attributes = 'size="10"';
         $attributes .= 'multiple="multiple"';
         $fieldName .= '[]';
 
-        $lists['group'] = JHTML::_('select.genericlist', $groups, $fieldName, $attributes, 'value', 'text', '');
+        $lists['group'] = HTMLHelper::_('select.genericlist', $groups, $fieldName, $attributes, 'value', 'text', '');
 
         $K2userGroups = $model->getUserGroups('k2');
-        $K2groups[] = JHTML::_('select.option', '0', Text::_('K2_DO_NOT_CHANGE'));
+        $K2groups[] = HTMLHelper::_('select.option', '0', Text::_('K2_DO_NOT_CHANGE'));
         foreach ($K2userGroups as $K2userGroup) {
-            $K2groups[] = JHTML::_('select.option', $K2userGroup->id, $K2userGroup->name);
+            $K2groups[] = HTMLHelper::_('select.option', $K2userGroup->id, $K2userGroup->name);
         }
-        $lists['k2group'] = JHTML::_('select.genericlist', $K2groups, 'k2group', 'size="10"', 'value', 'text', 0);
+        $lists['k2group'] = HTMLHelper::_('select.genericlist', $K2groups, 'k2group', 'size="10"', 'value', 'text', 0);
 
         $this->lists = $lists;
 

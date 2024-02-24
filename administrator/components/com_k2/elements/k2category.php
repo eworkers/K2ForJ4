@@ -37,12 +37,12 @@ class K2ElementK2Category extends K2Element
             }
         }
 
-        $list = JHTML::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0);
+        $list = HTMLHelper::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0);
         $mitems = array();
         $option = Factory::getApplication()->input->getCmd('option');
         if ($name == 'categories' || $name == 'jform[params][categories]') {
             if (version_compare(JVERSION, '4.0.0-dev', 'lt')){
-                JHtml::_('behavior.framework');
+                HTMLHelper::_('behavior.framework');
                 $js = "
                 /* Mootools Snippet */
 				function disableParams(){
@@ -204,7 +204,7 @@ class K2ElementK2Category extends K2Element
 
         foreach ($list as $item) {
             $item->treename = StringHelper::str_ireplace('&#160;', '- ', $item->treename);
-            @$mitems[] = JHTML::_('select.option', $item->id, $item->treename);
+            @$mitems[] = HTMLHelper::_('select.option', $item->id, $item->treename);
         }
 
         $fieldName = $name . '[]';
@@ -216,7 +216,7 @@ class K2ElementK2Category extends K2Element
         }
 
 	echo "<joomla-field-fancy-select>";
-        return JHTML::_('select.genericlist', $mitems, $fieldName, $onChange . ' data-type="select-multiple" class="choices__input" multiple="multiple" size="15"', 'value', 'text', $value);
+        return HTMLHelper::_('select.genericlist', $mitems, $fieldName, $onChange . ' data-type="select-multiple" class="choices__input" multiple="multiple" size="15"', 'value', 'text', $value);
     }
 }
 

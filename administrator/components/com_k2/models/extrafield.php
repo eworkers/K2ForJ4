@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Factory;
@@ -281,14 +282,14 @@ class K2ModelExtraField extends K2Model
             case 'select':
                 $arrayAttributes['id'] = 'K2ExtraField_' . $extraField->id;
                 $attrs = $arrayAttributes;
-                $output = JHTML::_('select.genericlist', $defaultValues, 'K2ExtraField_' . $extraField->id, $attrs, 'value', 'name', $active);
+                $output = HTMLHelper::_('select.genericlist', $defaultValues, 'K2ExtraField_' . $extraField->id, $attrs, 'value', 'name', $active);
                 break;
 
             case 'multipleSelect':
                 $arrayAttributes['id'] = 'K2ExtraField_' . $extraField->id;
                 $arrayAttributes['multiple'] = "multiple";
                 $attrs = $arrayAttributes;
-                $output = JHTML::_('select.genericlist', $defaultValues, 'K2ExtraField_' . $extraField->id . '[]', $attrs, 'value', 'name', $active);
+                $output = HTMLHelper::_('select.genericlist', $defaultValues, 'K2ExtraField_' . $extraField->id . '[]', $attrs, 'value', 'name', $active);
                 break;
 
             case 'radio':
@@ -296,7 +297,7 @@ class K2ModelExtraField extends K2Model
                     $active = $defaultValues[0]->value;
                 }
                 $attrs = $arrayAttributes;
-                $output = JHTML::_('select.radiolist', $defaultValues, 'K2ExtraField_' . $extraField->id, $attrs, 'value', 'name', $active);
+                $output = HTMLHelper::_('select.radiolist', $defaultValues, 'K2ExtraField_' . $extraField->id, $attrs, 'value', 'name', $active);
                 break;
 
             case 'link':
@@ -305,11 +306,11 @@ class K2ModelExtraField extends K2Model
                     <label>' . Text::_('K2_URL') . '</label><input type="text" name="K2ExtraField_' . $extraField->id . '[]" id="K2ExtraField_' . $extraField->id . '"  value="' . htmlspecialchars($active[1], ENT_QUOTES, 'UTF-8') . '" ' . $attributes . '/>
                     <label>' . Text::_('K2_OPEN_IN') . '</label>';
 
-                $targetOptions[] = JHTML::_('select.option', 'same', Text::_('K2_SAME_WINDOW'));
-                $targetOptions[] = JHTML::_('select.option', 'new', Text::_('K2_NEW_WINDOW'));
-                $targetOptions[] = JHTML::_('select.option', 'popup', Text::_('K2_CLASSIC_JAVASCRIPT_POPUP'));
-                $targetOptions[] = JHTML::_('select.option', 'lightbox', Text::_('K2_LIGHTBOX_POPUP'));
-                $output .= JHTML::_('select.genericlist', $targetOptions, 'K2ExtraField_' . $extraField->id . '[]', '', 'value', 'text', $active[2]);
+                $targetOptions[] = HTMLHelper::_('select.option', 'same', Text::_('K2_SAME_WINDOW'));
+                $targetOptions[] = HTMLHelper::_('select.option', 'new', Text::_('K2_NEW_WINDOW'));
+                $targetOptions[] = HTMLHelper::_('select.option', 'popup', Text::_('K2_CLASSIC_JAVASCRIPT_POPUP'));
+                $targetOptions[] = HTMLHelper::_('select.option', 'lightbox', Text::_('K2_LIGHTBOX_POPUP'));
+                $output .= HTMLHelper::_('select.genericlist', $targetOptions, 'K2ExtraField_' . $extraField->id . '[]', '', 'value', 'text', $active[2]);
                 break;
 
             case 'csv':

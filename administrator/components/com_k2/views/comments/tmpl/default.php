@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Filter\OutputFilter;
@@ -96,19 +97,19 @@ $context = Factory::getApplication()->input->getCmd('context');
                                type="checkbox" name="toggle" value=""/>
                     </th>
                     <th>
-                        <?php echo JHTML::_('grid.sort', 'K2_COMMENT', 'c.commentText', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_COMMENT', 'c.commentText', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-center">
-                        <?php echo JHTML::_('grid.sort', 'K2_PUBLISHED', 'c.published', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_PUBLISHED', 'c.published', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-hide-on-mobile">
-                        <?php echo JHTML::_('grid.sort', 'K2_NAME', 'c.userName', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_NAME', 'c.userName', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-center k2ui-nowrap">
-                        <?php echo JHTML::_('grid.sort', 'K2_EMAIL', 'c.commentEmail', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_EMAIL', 'c.commentEmail', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-hide-on-mobile">
-                        <?php echo JHTML::_('grid.sort', 'K2_URL', 'c.commentURL', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_URL', 'c.commentURL', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-center k2ui-hide-on-mobile">
                         IP
@@ -117,19 +118,19 @@ $context = Factory::getApplication()->input->getCmd('context');
                         <?php echo Text::_('K2_FLAG_AS_SPAMMER'); ?>
                     </th>
                     <th class="k2ui-hide-on-mobile">
-                        <?php echo JHTML::_('grid.sort', 'K2_ITEM', 'i.title', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_ITEM', 'i.title', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-hide-on-mobile">
-                        <?php echo JHTML::_('grid.sort', 'K2_CATEGORY', 'cat.name', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_CATEGORY', 'cat.name', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-hide-on-mobile">
                         <?php echo Text::_('K2_AUTHOR'); ?>
                     </th>
                     <th class="k2ui-hide-on-mobile">
-                        <?php echo JHTML::_('grid.sort', 'K2_DATE', 'c.commentDate', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_DATE', 'c.commentDate', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-hide-on-mobile">
-                        <?php echo JHTML::_('grid.sort', 'K2_ID', 'c.id', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_ID', 'c.id', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                 </tr>
                 </thead>
@@ -154,7 +155,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                             </td>
                             <td class="k2ui-center">
                                 <?php $row->checked_out = 0;
-                                echo @JHTML::_('grid.checkedout', $row, $key); ?>
+                                echo @HTMLHelper::_('grid.checkedout', $row, $key); ?>
                             </td>
                             <td id="k2Comment<?php echo $row->id; ?>">
                                 <div class="commentText"><?php echo $row->commentText; ?></div>
@@ -226,7 +227,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                                 echo $user->name; ?>
                             </td>
                             <td class="k2ui-center k2ui-nowrap k2ui-hide-on-mobile">
-                                <?php echo JHTML::_('date', $row->commentDate, $this->dateFormat); ?>
+                                <?php echo HTMLHelper::_('date', $row->commentDate, $this->dateFormat); ?>
                             </td>
                             <td class="k2ui-hide-on-mobile">
                                 <?php echo $row->id; ?>
@@ -263,7 +264,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                 <input type="hidden" name="template" value="system"/>
             <?php endif; ?>
         <?php endif; ?>
-        <?php echo JHTML::_('form.token'); ?>
+        <?php echo HTMLHelper::_('form.token'); ?>
     </form>
 
     <?php if ($app->isClient('site') || $context == "modalselector"): ?>

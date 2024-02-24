@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
@@ -1006,7 +1007,7 @@ $app = Factory::getApplication();
         <input type="hidden" name="view" value="item"/>
         <input type="hidden" name="task" value="<?php echo Factory::getApplication()->input->getVar('task'); ?>"/>
         <input type="hidden" name="Itemid" value="<?php echo Factory::getApplication()->input->getInt('Itemid'); ?>"/>
-        <?php echo JHTML::_('form.token'); ?>
+        <?php echo HTMLHelper::_('form.token'); ?>
     </form>
 
     <?php if ($app->isClient('site')): ?>

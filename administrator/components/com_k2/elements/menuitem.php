@@ -11,6 +11,7 @@
 defined('JPATH_BASE') or die();
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Form\Field\MenuField;
 
@@ -57,11 +58,11 @@ class K2ElementMenuItem extends K2Element
         }
 
         // second pass - get an indent list of the items
-        $list = JHTML::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0);
+        $list = HTMLHelper::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0);
 
         foreach ($list as $item) {
             $item->treename = StringHelper::str_ireplace('&#160;', ' -', $item->treename);
-            $mitems[] = JHTML::_('select.option', $item->id, '   ' . $item->treename);
+            $mitems[] = HTMLHelper::_('select.option', $item->id, '   ' . $item->treename);
         }
 
         // assemble into menutype groups
@@ -73,12 +74,12 @@ class K2ElementMenuItem extends K2Element
 
         // assemble menu items to the array
         $options = array();
-        $options[] = JHTML::_('select.option', '', '- ' . Text::_('K2_SELECT_MENU_ITEM') . ' -');
+        $options[] = HTMLHelper::_('select.option', '', '- ' . Text::_('K2_SELECT_MENU_ITEM') . ' -');
 
         foreach ($menuTypes as $type) {
             if ($type != '') {
-                $options[] = JHTML::_('select.option', '0', '&nbsp;', 'value', 'text', true);
-                $options[] = JHTML::_('select.option', $type->menutype, $type->title . ' - ' . Text::_('K2_TOP'), 'value', 'text', true);
+                $options[] = HTMLHelper::_('select.option', '0', '&nbsp;', 'value', 'text', true);
+                $options[] = HTMLHelper::_('select.option', $type->menutype, $type->title . ' - ' . Text::_('K2_TOP'), 'value', 'text', true);
             }
             if (isset($groupedList[$type->menutype])) {
                 $n = count($groupedList[$type->menutype]);
@@ -104,14 +105,14 @@ class K2ElementMenuItem extends K2Element
                         $item->treename .= ' [**' . JText::_('K2_TRASHED') . '**]';
                     }
 
-                    $options[] = JHTML::_('select.option', $item->id, $item->treename, 'value', 'text', $disable);
+                    $options[] = HTMLHelper::_('select.option', $item->id, $item->treename, 'value', 'text', $disable);
                 }
             }
         }
 
         $fieldName = $name;
 
-        return JHTML::_('select.genericlist', $options, $fieldName, 'class="inputbox"', 'value', 'text', $value, $control_name . $name);
+        return HTMLHelper::_('select.genericlist', $options, $fieldName, 'class="inputbox"', 'value', 'text', $value, $control_name . $name);
     }
 }
 

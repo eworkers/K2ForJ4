@@ -315,7 +315,7 @@ class K2HelperHTML
                     $document->addStyleSheet(URI::root(true) . '/media/k2/assets/vendors/studio-42/elfinder/css/theme.css?v=' . K2_CURRENT_VERSION);
                     $document->addScript(URI::root(true) . '/media/k2/assets/vendors/studio-42/elfinder/js/elfinder.min.js?v=' . K2_CURRENT_VERSION);
                 } else {
-                    JHTML::_('bootstrap.tooltip');
+                    HTMLHelper::_('bootstrap.tooltip');
                     if ($params->get('taggingSystem') === '0' || $params->get('taggingSystem') === '1') {
                         // B/C - Convert old options
                         $whichTaggingSystem = ($params->get('taggingSystem')) ? 'free' : 'selection';

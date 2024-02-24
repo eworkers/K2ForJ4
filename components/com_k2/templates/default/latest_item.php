@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
 ?>
@@ -41,7 +42,7 @@ use Joomla\CMS\Language\Text;
     <?php if ($this->item->params->get('latestItemDateCreated')): ?>
         <!-- Date created -->
         <span class="latestItemDateCreated">
-        <?php echo JHTML::_('date', $this->item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
+        <?php echo HTMLHelper::_('date', $this->item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
     </span>
     <?php endif; ?>
 

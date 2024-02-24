@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Form\Field\MenuField;
 
@@ -26,11 +27,11 @@ class K2ElementMenus extends K2Element
         $db->setQuery($query);
         $menus = $db->loadObjectList();
         $options = array();
-        $options[] = JHTML::_('select.option', '', Text::_('K2_NONE_ONSELECTLISTS'));
+        $options[] = HTMLHelper::_('select.option', '', Text::_('K2_NONE_ONSELECTLISTS'));
         foreach ($menus as $menu) {
-            $options[] = JHTML::_('select.option', $menu->menutype, $menu->title);
+            $options[] = HTMLHelper::_('select.option', $menu->menutype, $menu->title);
         }
-        return JHTML::_('select.genericlist', $options, $fieldName, 'class="inputbox"', 'value', 'text', $value);
+        return HTMLHelper::_('select.genericlist', $options, $fieldName, 'class="inputbox"', 'value', 'text', $value);
     }
 }
 

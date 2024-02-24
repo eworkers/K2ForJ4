@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 
@@ -331,5 +332,5 @@ use Joomla\CMS\Uri\Uri;
     <input type="hidden" name="option" value="com_k2"/>
     <input type="hidden" name="view" value="category"/>
     <input type="hidden" name="task" value="<?php echo Factory::getApplication()->input->getVar('task'); ?>"/>
-    <?php echo JHTML::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

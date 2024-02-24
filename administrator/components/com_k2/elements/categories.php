@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
@@ -36,13 +37,13 @@ class K2ElementCategories extends K2Element
                 $children[$pt] = $list;
             }
         }
-        $list = JHTML::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0);
+        $list = HTMLHelper::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0);
         $mitems = array();
-        $mitems[] = JHTML::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'));
+        $mitems[] = HTMLHelper::_('select.option', '0', Text::_('K2_NONE_ONSELECTLISTS'));
 
         foreach ($list as $item) {
             $item->treename = StringHelper::str_ireplace('&#160;', ' -', $item->treename);
-            $mitems[] = JHTML::_('select.option', $item->id, $item->treename);
+            $mitems[] = HTMLHelper::_('select.option', $item->id, $item->treename);
         }
 
         $attributes = 'class="inputbox"';
@@ -53,7 +54,7 @@ class K2ElementCategories extends K2Element
 
         $fieldName = $name;
 
-        return JHTML::_('select.genericlist', $mitems, $fieldName, $attributes, 'value', 'text', $value);
+        return HTMLHelper::_('select.genericlist', $mitems, $fieldName, $attributes, 'value', 'text', $value);
     }
 }
 

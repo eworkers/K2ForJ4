@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 
 jimport('joomla.application.component.view');
 
@@ -18,7 +19,7 @@ class K2ViewSettings extends K2View
 {
     public function display($tpl = null)
     {
-        JHTML::_('bootstrap.tooltip');
+        HTMLHelper::_('bootstrap.tooltip');
 
         jimport('joomla.html.pane');
 

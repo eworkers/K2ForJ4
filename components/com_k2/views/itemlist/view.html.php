@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Router\Route;
@@ -431,7 +432,7 @@ class K2ViewItemlist extends K2View
                         $dateFromRequest = strtotime(Factory::getApplication()->input->getInt('year') . '-' . Factory::getApplication()->input->getInt('month'));
                         $dateFormat = 'F Y';
                     }
-                    $title = filter_var(JHTML::_('date', $dateFromRequest, $dateFormat), FILTER_UNSAFE_RAW);
+                    $title = filter_var(HTMLHelper::_('date', $dateFromRequest, $dateFormat), FILTER_UNSAFE_RAW);
                     $this->title = $title;
 
                     // Restore the original timezone

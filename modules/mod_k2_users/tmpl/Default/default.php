@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
 ?>
@@ -66,7 +67,7 @@ use Joomla\CMS\Language\Text;
 
                         <?php if ($userEmail): ?>
                             <span class="ubUserEmail" title="<?php echo Text::_('K2_EMAIL'); ?>">
-                    <?php echo JHTML::_('Email.cloak', $user->email); ?>
+                    <?php echo HTMLHelper::_('Email.cloak', $user->email); ?>
                 </span>
                         <?php endif; ?>
                     </div>

@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
@@ -44,8 +45,8 @@ class K2ViewItem extends K2View
         jimport('joomla.filesystem.file');
         jimport('joomla.html.pane');
 
-        JHTML::_('behavior.keepalive');
-        if (version_compare(JVERSION, '4.0.0-dev', 'lt')) JHTML::_('behavior.modal');
+        HTMLHelper::_('behavior.keepalive');
+        if (version_compare(JVERSION, '4.0.0-dev', 'lt')) HTMLHelper::_('behavior.modal');
 
         K2Model::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
         $model = K2Model::getInstance('Item', 'K2Model', array('table_path' => JPATH_COMPONENT_ADMINISTRATOR . '/tables'));
@@ -121,10 +122,10 @@ class K2ViewItem extends K2View
         $publishUp = $item->publish_up;
         $publishDown = $item->publish_down;
 
-        $created = JHTML::_('date', $item->created, $dateFormat);
-        $publishUp = JHTML::_('date', $item->publish_up, $dateFormat);
+        $created = HTMLHelper::_('date', $item->created, $dateFormat);
+        $publishUp = HTMLHelper::_('date', $item->publish_up, $dateFormat);
         if ((int)$item->publish_down) {
-            $publishDown = JHTML::_('date', $item->publish_down, $dateFormat);
+            $publishDown = HTMLHelper::_('date', $item->publish_down, $dateFormat);
         } else {
             $publishDown = '';
         }
@@ -134,7 +135,7 @@ class K2ViewItem extends K2View
         $lists['publish_down'] = $publishDown;
 
         if ($item->id) {
-            $lists['created'] = JHTML::_('date', $item->created, Text::_('DATE_FORMAT_LC2'));
+            $lists['created'] = HTMLHelper::_('date', $item->created, Text::_('DATE_FORMAT_LC2'));
         } else {
             $lists['created'] = Text::_('K2_NEW_ITEM');
         }
@@ -142,7 +143,7 @@ class K2ViewItem extends K2View
         if ($item->modified == $db->getNullDate() || !$item->id) {
             $lists['modified'] = Text::_('K2_NEVER');
         } else {
-            $lists['modified'] = JHTML::_('date', $item->modified, Text::_('DATE_FORMAT_LC2'));
+            $lists['modified'] = HTMLHelper::_('date', $item->modified, Text::_('DATE_FORMAT_LC2'));
         }
 
         // Editors
@@ -167,9 +168,9 @@ class K2ViewItem extends K2View
         }
 
         // Publishing
-        $lists['published'] = JHTML::_('select.booleanlist', 'published', 'class="inputbox"', $item->published);
-        $lists['featured'] = JHTML::_('select.booleanlist', 'featured', 'class="inputbox"', $item->featured);
-        $lists['access'] = JHTML::_('access.level', 'access', $item->access, '', false);
+        $lists['published'] = HTMLHelper::_('select.booleanlist', 'published', 'class="inputbox"', $item->published);
+        $lists['featured'] = HTMLHelper::_('select.booleanlist', 'featured', 'class="inputbox"', $item->featured);
+        $lists['access'] = HTMLHelper::_('access.level', 'access', $item->access, '', false);
 
         $query = "SELECT ordering AS value, title AS text FROM #__k2_items WHERE catid={$item->catid}";
         $lists['ordering'] = null;
@@ -181,10 +182,10 @@ class K2ViewItem extends K2View
         require_once JPATH_ADMINISTRATOR . '/components/com_k2/models/categories.php';
         $categoriesModel = K2Model::getInstance('Categories', 'K2Model');
         $categories = $categoriesModel->categoriesTree();
-        $lists['catid'] = JHTML::_('select.genericlist', $categories, 'catid', 'class="inputbox"', 'value', 'text', $item->catid);
+        $lists['catid'] = HTMLHelper::_('select.genericlist', $categories, 'catid', 'class="inputbox"', 'value', 'text', $item->catid);
 
-        $languages = JHTML::_('contentlanguage.existing', true, true);
-        $lists['language'] = JHTML::_('select.genericlist', $languages, 'language', '', 'value', 'text', $item->language);
+        $languages = HTMLHelper::_('contentlanguage.existing', true, true);
+        $lists['language'] = HTMLHelper::_('select.genericlist', $languages, 'language', '', 'value', 'text', $item->language);
 
         $lists['checkSIG'] = $model->checkSIG();
         $lists['checkAllVideos'] = $model->checkAllVideos();
@@ -209,7 +210,7 @@ class K2ViewItem extends K2View
         $providersOptions = array();
         if (count($providers)) {
             foreach ($providers as $provider) {
-                $providersOptions[] = JHTML::_('select.option', $provider, ucfirst($provider));
+                $providersOptions[] = HTMLHelper::_('select.option', $provider, ucfirst($provider));
                 if (!empty($item->video) && stristr($item->video, "{{$provider}}") !== false) {
                     $providerVideo = true;
                     $options['startOffset'] = 2;
@@ -219,7 +220,7 @@ class K2ViewItem extends K2View
         $lists['providerVideo'] = ($providerVideo) ? preg_replace('%\{[a-z0-9-_]*\}(.*)\{/[a-z0-9-_]*\}%i', '\1', $item->video) : '';
         $lists['providerVideoType'] = ($providerVideo) ? preg_replace('%\{([a-z0-9-_]*)\}.*\{/[a-z0-9-_]*\}%i', '\1', $item->video) : '';
         if (count($providersOptions)) {
-            $lists['providers'] = JHTML::_('select.genericlist', $providersOptions, 'videoProvider', '', 'value', 'text', $lists['providerVideoType']);
+            $lists['providers'] = HTMLHelper::_('select.genericlist', $providersOptions, 'videoProvider', '', 'value', 'text', $lists['providerVideoType']);
         }
 
         if (!empty($item->video) && StringHelper::substr($item->video, 0, 1) !== '{') {
@@ -301,7 +302,7 @@ class K2ViewItem extends K2View
         }
 
         // Category
-        $categories_option[] = JHTML::_('select.option', 0, Text::_('K2_SELECT_CATEGORY'));
+        $categories_option[] = HTMLHelper::_('select.option', 0, Text::_('K2_SELECT_CATEGORY'));
         $categories = $categoriesModel->categoriesTree(null, true, false);
         if ($app->isClient('site')) {
             JLoader::register('K2HelperPermissions', JPATH_SITE . '/components/com_k2/helpers/permissions.php');
@@ -317,7 +318,7 @@ class K2ViewItem extends K2View
             }
         }
         $categories_options = @array_merge($categories_option, $categories);
-        $lists['categories'] = JHTML::_('select.genericlist', $categories_options, 'catid', '', 'value', 'text', $item->catid);
+        $lists['categories'] = HTMLHelper::_('select.genericlist', $categories_options, 'catid', '', 'value', 'text', $item->catid);
 
         Table::addIncludePath(JPATH_COMPONENT . '/tables');
         $category = Table::getInstance('K2Category', 'Table');
@@ -363,11 +364,11 @@ class K2ViewItem extends K2View
         }
 
         $tags = $model->getAvailableTags($item->id);
-        $lists['tags'] = JHTML::_('select.genericlist', $tags, 'tags', 'multiple="multiple" size="10" ', 'id', 'name');
+        $lists['tags'] = HTMLHelper::_('select.genericlist', $tags, 'tags', 'multiple="multiple" size="10" ', 'id', 'name');
 
         if (isset($item->id)) {
             $item->tags = $model->getCurrentTags($item->id);
-            $lists['selectedTags'] = JHTML::_('select.genericlist', $item->tags, 'selectedTags[]', 'multiple="multiple" size="10" ', 'id', 'name');
+            $lists['selectedTags'] = HTMLHelper::_('select.genericlist', $item->tags, 'selectedTags[]', 'multiple="multiple" size="10" ', 'id', 'name');
         } else {
             $lists['selectedTags'] = '<select size="10" multiple="multiple" id="selectedTags" name="selectedTags[]"></select>';
         }
@@ -385,12 +386,12 @@ class K2ViewItem extends K2View
         );
         */
         $metaRobotsOptions = array();
-        $metaRobotsOptions[] = JHTML::_('select.option', '', Text::_('K2_USE_GLOBAL'));
-        $metaRobotsOptions[] = JHTML::_('select.option', 'index, follow', Text::_('K2_METADATA_ROBOTS_INDEX_FOLLOW'));
-        $metaRobotsOptions[] = JHTML::_('select.option', 'index, nofollow', Text::_('K2_METADATA_ROBOTS_INDEX_NOFOLLOW'));
-        $metaRobotsOptions[] = JHTML::_('select.option', 'noindex, follow', Text::_('K2_METADATA_ROBOTS_NOINDEX_FOLLOW'));
-        $metaRobotsOptions[] = JHTML::_('select.option', 'noindex, nofollow', Text::_('K2_METADATA_ROBOTS_NOINDEX_NOFOLLOW'));
-        $lists['metarobots'] = JHTML::_('select.genericlist', $metaRobotsOptions, 'meta[robots]', 'class="inputbox"', 'value', 'text', $lists['metadata']->get('robots'));
+        $metaRobotsOptions[] = HTMLHelper::_('select.option', '', Text::_('K2_USE_GLOBAL'));
+        $metaRobotsOptions[] = HTMLHelper::_('select.option', 'index, follow', Text::_('K2_METADATA_ROBOTS_INDEX_FOLLOW'));
+        $metaRobotsOptions[] = HTMLHelper::_('select.option', 'index, nofollow', Text::_('K2_METADATA_ROBOTS_INDEX_NOFOLLOW'));
+        $metaRobotsOptions[] = HTMLHelper::_('select.option', 'noindex, follow', Text::_('K2_METADATA_ROBOTS_NOINDEX_FOLLOW'));
+        $metaRobotsOptions[] = HTMLHelper::_('select.option', 'noindex, nofollow', Text::_('K2_METADATA_ROBOTS_NOINDEX_NOFOLLOW'));
+        $lists['metarobots'] = HTMLHelper::_('select.genericlist', $metaRobotsOptions, 'meta[robots]', 'class="inputbox"', 'value', 'text', $lists['metadata']->get('robots'));
 
         // Image
         $date = Factory::getDate($item->modified);

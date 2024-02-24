@@ -9,6 +9,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Router\Route;
@@ -90,7 +91,7 @@ class modK2UserHelper
             array_push($list, $item);
             $children[$index] = $list;
         }
-        $items = JHTML::_('menu.treerecurse', 1, '', array(), $children, 9999, 0, 0);
+        $items = HTMLHelper::_('menu.treerecurse', 1, '', array(), $children, 9999, 0, 0);
         $links = array();
         foreach ($items as $item) {
             $item->flink = $item->link;

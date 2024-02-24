@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
 // Define default image size (do not change)
@@ -30,7 +31,7 @@ K2HelperUtilities::setDefaultImage($this->item, 'itemlist', $this->params);
         <?php if ($this->item->params->get('catItemDateCreated')): ?>
             <!-- Date created -->
             <span class="catItemDateCreated">
-            <?php echo JHTML::_('date', $this->item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
+            <?php echo HTMLHelper::_('date', $this->item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
         </span>
         <?php endif; ?>
 
@@ -296,7 +297,7 @@ K2HelperUtilities::setDefaultImage($this->item, 'itemlist', $this->params);
         <!-- Item date modified -->
         <?php if ($this->item->modified != $this->nullDate && $this->item->modified != $this->item->created): ?>
             <span class="catItemDateModified">
-        <?php echo Text::_('K2_LAST_MODIFIED_ON'); ?><?php echo JHTML::_('date', $this->item->modified, Text::_('K2_DATE_FORMAT_LC2')); ?>
+        <?php echo Text::_('K2_LAST_MODIFIED_ON'); ?><?php echo HTMLHelper::_('date', $this->item->modified, Text::_('K2_DATE_FORMAT_LC2')); ?>
     </span>
         <?php endif; ?>
     <?php endif; ?>

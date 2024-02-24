@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Filter\OutputFilter;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\User\User;
 use Joomla\CMS\Factory;
@@ -41,13 +42,13 @@ class K2ViewUser extends K2View
         $this->editor = $editor;
 
         $lists = array();
-        $genderOptions[] = JHTML::_('select.option', 'n', Text::_('K2_NOT_SPECIFIED'));
-        $genderOptions[] = JHTML::_('select.option', 'm', Text::_('K2_MALE'));
-        $genderOptions[] = JHTML::_('select.option', 'f', Text::_('K2_FEMALE'));
-        $lists['gender'] = JHTML::_('select.radiolist', $genderOptions, 'gender', '', 'value', 'text', $user->gender);
+        $genderOptions[] = HTMLHelper::_('select.option', 'n', Text::_('K2_NOT_SPECIFIED'));
+        $genderOptions[] = HTMLHelper::_('select.option', 'm', Text::_('K2_MALE'));
+        $genderOptions[] = HTMLHelper::_('select.option', 'f', Text::_('K2_FEMALE'));
+        $lists['gender'] = HTMLHelper::_('select.radiolist', $genderOptions, 'gender', '', 'value', 'text', $user->gender);
 
         $userGroupOptions = $model->getUserGroups();
-        $lists['userGroup'] = JHTML::_('select.genericlist', $userGroupOptions, 'group', 'class="inputbox"', 'id', 'name', $user->group);
+        $lists['userGroup'] = HTMLHelper::_('select.genericlist', $userGroupOptions, 'group', 'class="inputbox"', 'id', 'name', $user->group);
 
         $this->lists = $lists;
 

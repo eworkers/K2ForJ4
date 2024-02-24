@@ -75,33 +75,33 @@ $context = Factory::getApplication()->input->getCmd('context');
                                type="checkbox" name="toggle" value=""/>
                     </th>
                     <th>
-                        <?php echo JHTML::_('grid.sort', 'K2_TITLE', 'c.name', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_TITLE', 'c.name', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-center k2ui-hide-on-mobile">
                         <?php echo Text::_('K2_PARAMETER_INHERITANCE'); ?>
                     </th>
                     <th class="k2ui-center k2ui-hide-on-mobile">
-                        <?php echo JHTML::_('grid.sort', 'K2_ASSOCIATED_EXTRA_FIELD_GROUPS', 'extra_fields_group', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_ASSOCIATED_EXTRA_FIELD_GROUPS', 'extra_fields_group', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-center k2ui-hide-on-mobile">
                         <?php echo Text::_('K2_TEMPLATE'); ?>
                     </th>
                     <th class="k2ui-center k2ui-hide-on-mobile">
-                        <?php echo JHTML::_('grid.sort', 'K2_ACCESS_LEVEL', 'c.access', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_ACCESS_LEVEL', 'c.access', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-center">
-                        <?php echo JHTML::_('grid.sort', 'K2_PUBLISHED', 'c.published', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_PUBLISHED', 'c.published', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                     <th class="k2ui-center k2ui-hide-on-mobile">
                         <?php echo Text::_('K2_IMAGE'); ?>
                     </th>
                     <?php if (isset($this->lists['language'])): ?>
                         <th class="k2ui-center k2ui-hide-on-mobile">
-                            <?php echo JHTML::_('grid.sort', 'K2_LANGUAGE', 'c.language', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                            <?php echo HTMLHelper::_('grid.sort', 'K2_LANGUAGE', 'c.language', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                         </th>
                     <?php endif; ?>
                     <th class="k2ui-center k2ui-hide-on-mobile">
-                        <?php echo JHTML::_('grid.sort', 'K2_ID', 'c.id', @$this->lists['order_Dir'], @$this->lists['order']); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'K2_ID', 'c.id', @$this->lists['order_Dir'], @$this->lists['order']); ?>
                     </th>
                 </tr>
                 </thead>
@@ -142,7 +142,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                             <td class="k2ui-center<?php echo ($context == "modalselector") ? ' k2ui-not-visible' : ''; ?>">
                                 <?php if (!$this->filter_trash || $row->trash) {
                                     $row->checked_out = 0;
-                                    echo @JHTML::_('grid.checkedout', $row, $key);
+                                    echo @HTMLHelper::_('grid.checkedout', $row, $key);
                                 } ?>
                             </td>
                             <td>
@@ -297,7 +297,7 @@ $context = Factory::getApplication()->input->getCmd('context');
             <input type="hidden" name="output"
                    value="<?php echo Factory::getApplication()->input->getCmd('output'); ?>"/>
         <?php endif; ?>
-        <?php echo JHTML::_('form.token'); ?>
+        <?php echo HTMLHelper::_('form.token'); ?>
     </form>
 
     <?php if ($app->isClient('site') || $context == "modalselector"): ?>

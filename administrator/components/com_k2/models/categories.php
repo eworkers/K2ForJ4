@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\String\StringHelper;
 use Joomla\Utilities\ArrayHelper;
 use Joomla\CMS\Table\Table;
@@ -22,8 +23,6 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.application.component.model');
-
-JTable::addIncludePath(JPATH_COMPONENT . '/tables');
 
 class K2ModelCategories extends K2Model
 {
@@ -260,7 +259,7 @@ class K2ModelCategories extends K2Model
                 $children[$pt] = $list;
             }
         }
-        $categories = JHTML::_('menu.treerecurse', $root, '', array(), $children);
+        $categories = HTMLHelper::_('menu.treerecurse', $root, '', array(), $children);
         return $categories;
     }
 
@@ -645,7 +644,7 @@ class K2ModelCategories extends K2Model
                 $children[$pt] = $list;
             }
         }
-        $list = JHTML::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0);
+        $list = HTMLHelper::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0);
         $mitems = array();
         foreach ($list as $item) {
             $item->treename = StringHelper::str_ireplace('&#160;', '- ', $item->treename);
@@ -655,7 +654,7 @@ class K2ModelCategories extends K2Model
             if ($item->trash) {
                 $item->treename .= ' [**' . JText::_('K2_TRASHED_CATEGORY') . '**]';
             }
-            $mitems[] = JHTML::_('select.option', $item->id, $item->treename);
+            $mitems[] = HTMLHelper::_('select.option', $item->id, $item->treename);
         }
         return $mitems;
     }

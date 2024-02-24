@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
@@ -46,7 +47,7 @@ use Joomla\CMS\Router\Route;
                     <tr class="row<?php echo($key % 2); ?>">
                         <td class="k2ui-center k2ui-hide-on-mobile"><?php echo $key + 1; ?></td>
                         <td class="k2ui-center"><?php $row->checked_out = 0;
-                            echo @JHTML::_('grid.checkedout', $row, $key); ?></td>
+                            echo @HTMLHelper::_('grid.checkedout', $row, $key); ?></td>
                         <td>
                             <a href="<?php echo Route::_('index.php?option=com_k2&view=extrafieldsgroup&cid=' . $row->id); ?>"><?php echo $row->name; ?></a>
                         </td>
@@ -70,5 +71,5 @@ use Joomla\CMS\Router\Route;
     <input type="hidden" name="view" value="<?php echo Factory::getApplication()->input->getVar('view'); ?>"/>
     <input type="hidden" name="task" value=""/>
     <input type="hidden" name="boxchecked" value="0"/>
-    <?php echo JHTML::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

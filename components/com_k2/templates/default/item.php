@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Filter\OutputFilter;
 use Joomla\CMS\Router\Route;
@@ -39,7 +40,7 @@ use Joomla\CMS\Factory;
         <?php if ($this->item->params->get('itemDateCreated')): ?>
             <!-- Date created -->
             <span class="itemDateCreated">
-            <?php echo JHTML::_('date', $this->item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
+            <?php echo HTMLHelper::_('date', $this->item->created, Text::_('K2_DATE_FORMAT_LC2')); ?>
         </span>
         <?php endif; ?>
 
@@ -299,7 +300,7 @@ use Joomla\CMS\Factory;
                 <?php if ($this->item->params->get('itemDateModified') && intval($this->item->modified) != 0): ?>
                     <!-- Item date modified -->
                     <span class="itemDateModified">
-                <?php echo Text::_('K2_LAST_MODIFIED_ON'); ?><?php echo JHTML::_('date', $this->item->modified, Text::_('K2_DATE_FORMAT_LC2')); ?>
+                <?php echo Text::_('K2_LAST_MODIFIED_ON'); ?><?php echo HTMLHelper::_('date', $this->item->modified, Text::_('K2_DATE_FORMAT_LC2')); ?>
             </span>
                 <?php endif; ?>
 
@@ -443,7 +444,7 @@ use Joomla\CMS\Factory;
 
                 <?php if ($this->item->params->get('itemAuthorEmail')): ?>
                     <span class="itemAuthorEmail"><i
-                                class="icon-envelope"></i> <?php echo JHTML::_('Email.cloak', $this->item->author->email); ?></span>
+                                class="icon-envelope"></i> <?php echo HTMLHelper::_('Email.cloak', $this->item->author->email); ?></span>
                 <?php endif; ?>
 
                 <div class="clr"></div>
@@ -653,7 +654,7 @@ use Joomla\CMS\Factory;
                                      width="<?php echo $this->item->params->get('commenterImgWidth'); ?>"/>
                             <?php endif; ?>
 
-                            <span class="commentDate"><?php echo JHTML::_('date', $comment->commentDate, Text::_('K2_DATE_FORMAT_LC2')); ?></span>
+                            <span class="commentDate"><?php echo HTMLHelper::_('date', $comment->commentDate, Text::_('K2_DATE_FORMAT_LC2')); ?></span>
 
                             <span class="commentAuthorName">
                     <?php echo Text::_('K2_POSTED_BY'); ?>

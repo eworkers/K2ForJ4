@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
@@ -21,8 +22,8 @@ if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
         ->useScript('form.validate');
 }
 else{
-    JHtml::_('behavior.formvalidation');
-    JHtml::_('behavior.keepalive');
+    HTMLHelper::_('behavior.formvalidation');
+    HTMLHelper::_('behavior.keepalive');
 }
 
 
@@ -206,5 +207,5 @@ else{
     <input type="hidden" name="option" value="<?php echo $this->optionValue; ?>"/>
     <input type="hidden" name="task" value="<?php echo $this->taskValue; ?>"/>
     <input type="hidden" name="K2UserForm" value="1"/>
-    <?php echo JHTML::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>
