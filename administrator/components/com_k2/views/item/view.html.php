@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Editor\Editor;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
@@ -150,7 +151,7 @@ class K2ViewItem extends K2View
         /* since J4 compatibility */
 	// get user editor
         $editor = !empty(Factory::getUser()->getParam('editor')) ? Factory::getUser()->getParam('editor') : Factory::getConfig()->get('editor');
-        $wysiwyg = JEditor::getInstance($editor);
+        $wysiwyg = Editor::getInstance($editor);
         $onSave = '';
         if ($params->get("mergeEditors")) {
             if (isset($item->fulltext) && StringHelper::strlen($item->fulltext) > 1) {
