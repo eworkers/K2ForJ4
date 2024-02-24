@@ -14,6 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 $app = Factory::getApplication();
 $context = Factory::getApplication()->input->getCmd('context');
@@ -198,7 +199,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                             </td>
                             <td class="k2ui-center k2ui-hide-on-mobile">
                                 <?php if ($row->image): ?>
-                                    <a href="<?php echo JURI::root(true) . '/media/k2/categories/' . $row->image; ?>"
+                                    <a href="<?php echo URI::root(true) . '/media/k2/categories/' . $row->image; ?>"
                                        title="<?php echo Text::_('K2_PREVIEW_IMAGE'); ?>" data-fancybox="gallery"
                                        data-caption="<?php echo $row->title; ?>">
                                         <i class="fa fa-picture-o" aria-hidden="true"

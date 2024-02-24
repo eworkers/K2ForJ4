@@ -14,6 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Filter\OutputFilter;
+use Joomla\CMS\Uri\Uri;
 
 $app = Factory::getApplication();
 $context = Factory::getApplication()->input->getCmd('context');
@@ -215,7 +216,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                             <td class="k2ui-hide-on-mobile">
                                 <?php $itemURL = K2HelperRoute::getItemRoute($row->itemID . ':' . urlencode($row->itemAlias), $row->catid . ':' . urlencode($row->catAlias)); ?>
                                 <a target="_blank"
-                                   href="<?php echo ($app->isClient('site')) ? Route::_($itemURL) : JURI::root() . $itemURL; ?>"><?php echo $row->title; ?></a>
+                                   href="<?php echo ($app->isClient('site')) ? Route::_($itemURL) : URI::root() . $itemURL; ?>"><?php echo $row->title; ?></a>
                             </td>
                             <td class="k2ui-hide-on-mobile">
                                 <?php echo $row->catName; ?>

@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
 ?>
 
@@ -28,7 +29,7 @@ use Joomla\CMS\Language\Text;
     </p>
 <?php endif; ?>
 
-<form action="<?php echo JURI::root(true); ?>/index.php" method="post" id="comment-form" class="form-validate">
+<form action="<?php echo URI::root(true); ?>/index.php" method="post" id="comment-form" class="form-validate">
     <label class="formComment" for="commentText"><?php echo JText::_('K2_MESSAGE'); ?> *</label>
     <textarea rows="20" cols="10" class="inputbox"
               onblur="if(this.value=='') this.value='<?php echo Text::_('K2_ENTER_YOUR_MESSAGE_HERE'); ?>';"

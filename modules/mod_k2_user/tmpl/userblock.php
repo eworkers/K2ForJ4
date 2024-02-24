@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 ?>
 
@@ -85,7 +86,7 @@ use Joomla\CMS\Router\Route;
                 <?php endforeach; ?>
             </ul>
 
-            <form action="<?php echo JURI::root(true); ?>/index.php" method="post">
+            <form action="<?php echo URI::root(true); ?>/index.php" method="post">
                 <input type="submit" name="Submit" class="button ubLogout" value="<?php echo Text::_('K2_LOGOUT'); ?>"/>
                 <input type="hidden" name="option" value="<?php echo $option; ?>"/>
                 <input type="hidden" name="task" value="<?php echo $task; ?>"/>

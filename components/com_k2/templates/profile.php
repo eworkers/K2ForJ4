@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 if (version_compare(JVERSION, '4.0.0-dev', 'ge')){
     $wa = $this->document->getWebAssetManager();
@@ -128,7 +129,7 @@ else{
                     <input type="file" id="image" name="image" accept="image/*"/>
                     <?php if ($this->K2User->image): ?>
                         <img class="k2AccountPageImage"
-                             src="<?php echo JURI::root(true) . '/media/k2/users/' . $this->K2User->image; ?>"
+                             src="<?php echo URI::root(true) . '/media/k2/users/' . $this->K2User->image; ?>"
                              alt="<?php echo $this->user->name; ?>"/>
                         <input type="checkbox" name="del_image" id="del_image"/>
                         <label for="del_image"><?php echo Text::_('K2_CHECK_THIS_BOX_TO_DELETE_CURRENT_IMAGE_OR_JUST_UPLOAD_A_NEW_IMAGE_TO_REPLACE_THE_EXISTING_ONE'); ?></label>

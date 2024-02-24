@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;
+use Joomla\CMS\Uri\Uri;
 
 require_once(JPATH_ADMINISTRATOR . '/components/com_k2/elements/base.php');
 
@@ -34,7 +35,7 @@ class K2ElementK2Users extends K2Element
 					minimumInputLength : 2,
 					ajax: {
 						dataType : "json",
-						url: "' . JURI::root(true) . '/administrator/index.php?option=com_k2&view=users&task=search&format=raw",
+						url: "' . URI::root(true) . '/administrator/index.php?option=com_k2&view=users&task=search&format=raw",
 						cache: "true",
 						 data: function (params) {
 						 	var queryParameters = {q: params.term};

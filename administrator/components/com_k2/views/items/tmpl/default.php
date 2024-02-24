@@ -15,6 +15,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Filesystem\File;
+use Joomla\CMS\Uri\Uri;
 
 $app = Factory::getApplication();
 $context = Factory::getApplication()->input->getCmd('context');
@@ -253,7 +254,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                             <td class="k2ui-center k2ui-hide-on-mobile"><?php echo $row->hits ?></td>
                             <td class="k2ui-center k2ui-hide-on-mobile">
                                 <?php if (File::exists(JPATH_SITE . '/media/k2/items/cache/' . md5("Image" . $row->id) . '_XL.jpg')): ?>
-                                    <a href="<?php echo JURI::root(true) . '/media/k2/items/cache/' . md5("Image" . $row->id) . '_XL.jpg'; ?>"
+                                    <a href="<?php echo URI::root(true) . '/media/k2/items/cache/' . md5("Image" . $row->id) . '_XL.jpg'; ?>"
                                        title="<?php echo Text::_('K2_PREVIEW_IMAGE'); ?>" data-fancybox="gallery"
                                        data-caption="&lt;b&gt;<?php echo $row->title; ?>&lt;/b&gt; - <?php echo Text::_('K2_PUBLISHED_IN'); ?> &lt;b&gt;<?php echo $row->category; ?>&lt;/b&gt; <?php echo Text::_('K2_BY'); ?> &lt;b&gt;<?php echo $row->author; ?>&lt;/b&gt;">
                                         <i class="fa fa-picture-o" aria-hidden="true"

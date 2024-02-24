@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Uri\Uri;
 use Joomla\Utilities\ArrayHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
@@ -486,7 +487,7 @@ class modK2ToolsHelper
 <div class="k2CategorySelectBlock ' . $params->get('moduleclass_sfx') . '">
     <form action="' . Route::_('index.php') . '" method="get">
         <select name="category" onchange="window.location=this.form.category.value;">
-            <option value="' . JURI::base(true) . '/">' . Text::_('K2_SELECT_CATEGORY') . '</option>
+            <option value="' . URI::base(true) . '/">' . Text::_('K2_SELECT_CATEGORY') . '</option>
             ';
         }
         $indent = "";
@@ -937,9 +938,9 @@ class MyCalendar extends Calendar
     {
         $itemID = Factory::getApplication()->input->getInt('Itemid');
         if ($this->category > 0) {
-            return JURI::root(true) . "/index.php?option=com_k2&amp;view=itemlist&amp;task=calendar&amp;month={$month}&amp;year={$year}&amp;catid={$this->category}&amp;Itemid={$itemID}";
+            return URI::root(true) . "/index.php?option=com_k2&amp;view=itemlist&amp;task=calendar&amp;month={$month}&amp;year={$year}&amp;catid={$this->category}&amp;Itemid={$itemID}";
         } else {
-            return JURI::root(true) . "/index.php?option=com_k2&amp;view=itemlist&amp;task=calendar&amp;month=$month&amp;year=$year&amp;Itemid={$itemID}";
+            return URI::root(true) . "/index.php?option=com_k2&amp;view=itemlist&amp;task=calendar&amp;month=$month&amp;year=$year&amp;Itemid={$itemID}";
         }
     }
 }

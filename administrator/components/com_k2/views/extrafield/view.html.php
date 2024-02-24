@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Filter\InputFilter;
+use Joomla\CMS\Uri\Uri;
 
 jimport('joomla.application.component.view');
 
@@ -25,7 +26,7 @@ class K2ViewExtraField extends K2View
 
         $document = Factory::getDocument();
         $document->addScriptDeclaration('
-            var K2BasePath = "' . JURI::base(true) . '/";
+            var K2BasePath = "' . URI::base(true) . '/";
             var K2Language = [
                 "' . Text::_('K2_REMOVE', true) . '",
                 "' . Text::_('K2_OPTIONAL', true) . '",

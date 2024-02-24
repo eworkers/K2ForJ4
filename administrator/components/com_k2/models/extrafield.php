@@ -16,6 +16,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
 jimport('joomla.application.component.model');
 
@@ -338,7 +339,7 @@ class K2ModelExtraField extends K2Model
                 $output = '<input class="' . $cssClass . '" type="text" data-k2-datetimepicker="{allowInput:true}" name="K2ExtraField_' . $extraField->id . '" id="K2ExtraField_' . $extraField->id . '" value="' . $active . '" />';
                 break;
             case 'image':
-                $output = '<input type="text" name="K2ExtraField_' . $extraField->id . '" id="K2ExtraField_' . $extraField->id . '" value="' . $active . '" ' . $attributes . ' /><a class="k2app-ef-image-button k2Button" href="' . JURI::base(true) . '/index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=K2ExtraField_' . $extraField->id . '">' . Text::_('K2_SELECT') . '</a>';
+                $output = '<input type="text" name="K2ExtraField_' . $extraField->id . '" id="K2ExtraField_' . $extraField->id . '" value="' . $active . '" ' . $attributes . ' /><a class="k2app-ef-image-button k2Button" href="' . URI::base(true) . '/index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=K2ExtraField_' . $extraField->id . '">' . Text::_('K2_SELECT') . '</a>';
                 break;
             case 'header':
                 $output = '';

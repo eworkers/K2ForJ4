@@ -120,7 +120,7 @@ class K2HelperPermissions
         $user = Factory::getUser();
         $app = Factory::getApplication();
         if ($user->guest && ($task == 'add' || $task == 'edit')) {
-            $uri = JURI::getInstance();
+            $uri = URI::getInstance();
             $return = base64_encode($uri->toString());
             $app->enqueueMessage(Text::_('K2_YOU_NEED_TO_LOGIN_FIRST'), 'notice');
             $app->redirect('index.php?option=com_users&view=login&return=' . $return . '&tmpl=component');

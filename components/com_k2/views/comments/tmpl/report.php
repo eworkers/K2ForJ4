@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
 ?>
 
@@ -24,7 +25,7 @@ use Joomla\CMS\Language\Text;
         <span class="theComment"><?php echo nl2br($this->row->commentText); ?></span>
         <span class="quoteIconRight">&rdquo;</span>
     </blockquote>
-    <form action="<?php echo JURI::root(true); ?>/index.php" name="k2ReportCommentForm" id="k2ReportCommentForm"
+    <form action="<?php echo URI::root(true); ?>/index.php" name="k2ReportCommentForm" id="k2ReportCommentForm"
           method="post">
         <label for="name"><?php echo Text::_('K2_YOUR_NAME'); ?></label>
         <input type="text" id="name" name="name" value=""/>

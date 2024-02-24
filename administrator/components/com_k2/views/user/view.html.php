@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Filter\OutputFilter;
+use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\User\User;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
@@ -75,7 +76,7 @@ class K2ViewUser extends K2View
         JToolBarHelper::save();
         JToolBarHelper::cancel();
 
-        $editJoomlaUserButtonUrl = JURI::base() . 'index.php?option=com_users&view=user&task=user.edit&id=' . $user->userID;
+        $editJoomlaUserButtonUrl = URI::base() . 'index.php?option=com_users&view=user&task=user.edit&id=' . $user->userID;
         $editJoomlaUserButton = '<a data-k2-modal="iframe" href="' . $editJoomlaUserButtonUrl . '" class="btn btn-small"><i class="icon-edit"></i>' . Text::_('K2_EDIT_JOOMLA_USER') . '</a>';
         $toolbar->prependButton('Custom', $editJoomlaUserButton);
 

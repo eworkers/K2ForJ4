@@ -95,8 +95,8 @@ class K2ControllerItem extends K2Controller
         K2HelperHTML::loadHeadIncludes(true, true, true);
 
         // CSS
-        $document->addStyleSheet(JURI::root(true) . '/templates/system/css/general.css');
-        $document->addStyleSheet(JURI::root(true) . '/templates/system/css/system.css');
+        $document->addStyleSheet(URI::root(true) . '/templates/system/css/general.css');
+        $document->addStyleSheet(URI::root(true) . '/templates/system/css/system.css');
 
         $this->addModelPath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
         $this->addViewPath(JPATH_COMPONENT_ADMINISTRATOR . '/views');
@@ -118,7 +118,7 @@ class K2ControllerItem extends K2Controller
 
     public function cancel()
     {
-        $this->setRedirect(JURI::root(true));
+        $this->setRedirect(URI::root(true));
         return false;
     }
 

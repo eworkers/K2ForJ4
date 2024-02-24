@@ -17,6 +17,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Filesystem\Path;
 use Joomla\CMS\Filesystem\File;
+use Joomla\CMS\Uri\Uri;
 
 jimport('joomla.application.component.controller');
 jimport('joomla.filesystem.file');
@@ -53,7 +54,7 @@ class K2ControllerMedia extends K2Controller
         // Disable debug
         Factory::getApplication()->input->set('debug', false);
 
-        $url = JURI::root(true) . '/' . $folder;
+        $url = URI::root(true) . '/' . $folder;
         $path = JPATH_SITE . '/' . Path::clean($folder);
 
         Path::check($path);

@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
 
 /*
  * Important note for template overrides:
@@ -32,7 +33,7 @@ use Joomla\CMS\Factory;
             <?php if ($imagebutton): ?>
                 <input type="image" alt="<?php echo $button_text; ?>" class="button"
                        onclick="this.form.searchword.focus();"
-                       src="<?php echo JURI::base(true); ?>/components/com_k2/images/search.png"/>
+                       src="<?php echo URI::base(true); ?>/components/com_k2/images/search.png"/>
             <?php else: ?>
                 <input type="submit" value="<?php echo $button_text; ?>" class="button"
                        onclick="this.form.searchword.focus();"/>

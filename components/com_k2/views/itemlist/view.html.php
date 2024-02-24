@@ -100,7 +100,7 @@ class K2ViewItemlist extends K2View
 
         if ($document->getType() == 'json') {
             // Prepare JSON output
-            $uri = JURI::getInstance();
+            $uri = URI::getInstance();
             $response = new stdClass;
             $response->site = new stdClass;
             $response->site->url = $uri->toString(array('scheme', 'host', 'port'));
@@ -942,7 +942,7 @@ class K2ViewItemlist extends K2View
                     // Common for Facebook & Twitter meta tags
                     $metaImage = '';
                     if (!empty($category->image) && strpos($category->image, 'placeholder/category.png') === false) {
-                        $metaImage = substr(JURI::root(), 0, -1) . str_replace(JURI::root(true), '', $category->image);
+                        $metaImage = substr(URI::root(), 0, -1) . str_replace(URI::root(true), '', $category->image);
                     }
 
                     // Set Facebook meta tags
@@ -1162,7 +1162,7 @@ class K2ViewItemlist extends K2View
                         if (strpos($userObject->avatar, 'http://') !== false || strpos($userObject->avatar, 'https://') !== false) {
                             $metaImage = $userObject->avatar;
                         } else {
-                            $metaImage = substr(JURI::root(), 0, -1) . str_replace(JURI::root(true), '', $userObject->avatar);
+                            $metaImage = substr(URI::root(), 0, -1) . str_replace(URI::root(true), '', $userObject->avatar);
                         }
                     }
 

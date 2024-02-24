@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
@@ -315,7 +316,7 @@ class K2ViewItems extends K2View
             if ($user->authorise('core.admin', 'com_k2') || $user->authorise('core.options', 'com_k2')) {
                 $toolbar->preferences('com_k2', 'K2_SETTINGS');
                 if ($user->gid > 23 && !$this->params->get('hideImportButton')) {
-                    $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=items&amp;task=import';
+                    $buttonUrl = URI::base() . 'index.php?option=com_k2&amp;view=items&amp;task=import';
                     $buttonText = Text::_('K2_IMPORT_JOOMLA_CONTENT');
                     $button = '<joomla-toolbar-button id="toolbar-import-content"><a id="K2ImportContentButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive"></i>' . $buttonText . '</a></joomla-toolbar-button>';
                     $toolbar->customButton('Import')->html($button);
@@ -338,7 +339,7 @@ class K2ViewItems extends K2View
                 JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
                 // Display import button for Joomla content
                 if ($user->gid > 23 && !$this->params->get('hideImportButton')) {
-                    $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=items&amp;task=import';
+                    $buttonUrl = URI::base() . 'index.php?option=com_k2&amp;view=items&amp;task=import';
                     $buttonText = Text::_('K2_IMPORT_JOOMLA_CONTENT');
                     $button = '<a id="K2ImportContentButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive"></i>' . $buttonText . '</a>';
                     $toolbar->appendButton('Custom', $button);

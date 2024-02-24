@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
 ?>
 
@@ -63,7 +64,7 @@ use Joomla\CMS\Language\Text;
                         if (file_exists($avatarFile) && filemtime($avatarFile)) {
                             $avatarTimestamp = '?t=' . date("Ymd_Hi", filemtime($avatarFile));
                         }
-                        $avatar = JURI::root(true) . '/media/k2/users/' . $this->row->image . $avatarTimestamp;
+                        $avatar = URI::root(true) . '/media/k2/users/' . $this->row->image . $avatarTimestamp;
                         ?>
                         <div class="k2ImagePreview">
                             <a href="<?php echo $avatar; ?>" title="<?php echo Text::_('K2_PREVIEW_IMAGE'); ?>"

@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 $app = Factory::getApplication();
 $context = Factory::getApplication()->input->getCmd('context');
@@ -158,7 +159,7 @@ $context = Factory::getApplication()->input->getCmd('context');
                                     if (file_exists($avatarFile) && filemtime($avatarFile)) {
                                         $avatarTimestamp = '?t=' . date("Ymd_Hi", filemtime($avatarFile));
                                     }
-                                    $avatar = JURI::root(true) . '/media/k2/users/' . $row->image . $avatarTimestamp;
+                                    $avatar = URI::root(true) . '/media/k2/users/' . $row->image . $avatarTimestamp;
                                     ?>
                                     <a href="<?php echo $avatar; ?>" title="<?php echo Text::_('K2_PREVIEW_IMAGE'); ?>"
                                        data-fancybox="gallery" data-caption="<?php echo $row->name; ?>">

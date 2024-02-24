@@ -12,10 +12,11 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
 $output = '';
 if ($params->get('home')) {
-    $output .= '<span class="bcTitle">' . Text::_('K2_YOU_ARE_HERE') . '</span><a href="' . JURI::root() . '">' . $params->get('home', Text::_('K2_HOME')) . '</a>';
+    $output .= '<span class="bcTitle">' . Text::_('K2_YOU_ARE_HERE') . '</span><a href="' . URI::root() . '">' . $params->get('home', Text::_('K2_HOME')) . '</a>';
     if (count($path)) {
         foreach ($path as $link) {
             $output .= '<span class="bcSeparator">' . $params->get('seperator', '&raquo;') . '</span>' . $link;

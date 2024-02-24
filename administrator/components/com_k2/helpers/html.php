@@ -302,18 +302,18 @@ class K2HelperHTML
                     var K2_THE_ENTRY_WAS_ADDED_IN_THE_LIST = '" . Text::_('K2_THE_ENTRY_WAS_ADDED_IN_THE_LIST', true) . "';
 
                 ");
-                $document->addScript(JURI::root(true) . '/media/k2/assets/js/k2.backend.js?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID . '&sitepath=' . JURI::root(true) . '/');
+                $document->addScript(URI::root(true) . '/media/k2/assets/js/k2.backend.js?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID . '&sitepath=' . URI::root(true) . '/');
 
                 // NicEdit
                 if ($option == 'com_k2' && $view == 'item') {
-                    $document->addScript(JURI::root(true) . '/media/k2/assets/vendors/bkirchoff/nicedit/nicEdit.js?v=' . K2_CURRENT_VERSION);
+                    $document->addScript(URI::root(true) . '/media/k2/assets/vendors/bkirchoff/nicedit/nicEdit.js?v=' . K2_CURRENT_VERSION);
                 }
 
                 // Media (elFinder)
                 if ($view == 'media') {
-                    $document->addStyleSheet(JURI::root(true) . '/media/k2/assets/vendors/studio-42/elfinder/css/elfinder.min.css?v=' . K2_CURRENT_VERSION);
-                    $document->addStyleSheet(JURI::root(true) . '/media/k2/assets/vendors/studio-42/elfinder/css/theme.css?v=' . K2_CURRENT_VERSION);
-                    $document->addScript(JURI::root(true) . '/media/k2/assets/vendors/studio-42/elfinder/js/elfinder.min.js?v=' . K2_CURRENT_VERSION);
+                    $document->addStyleSheet(URI::root(true) . '/media/k2/assets/vendors/studio-42/elfinder/css/elfinder.min.css?v=' . K2_CURRENT_VERSION);
+                    $document->addStyleSheet(URI::root(true) . '/media/k2/assets/vendors/studio-42/elfinder/css/theme.css?v=' . K2_CURRENT_VERSION);
+                    $document->addScript(URI::root(true) . '/media/k2/assets/vendors/studio-42/elfinder/js/elfinder.min.js?v=' . K2_CURRENT_VERSION);
                 } else {
                     JHTML::_('bootstrap.tooltip');
                     if ($params->get('taggingSystem') === '0' || $params->get('taggingSystem') === '1') {
@@ -370,15 +370,15 @@ class K2HelperHTML
                 }
                 if ($option == 'com_k2') {
                     $document->addStyleSheet('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
-                    $document->addStyleSheet(JURI::root(true) . '/media/k2/assets/css/k2.backend.css?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID);
+                    $document->addStyleSheet(URI::root(true) . '/media/k2/assets/css/k2.backend.css?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID);
                     if (version_compare(JVERSION, '4.0.0-dev', 'ge'))
                     {
 
-                        $document->addStyleSheet(JURI::root(true) . '/media/k2/assets/css/k2.j4.backend.css?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID);
+                        $document->addStyleSheet(URI::root(true) . '/media/k2/assets/css/k2.j4.backend.css?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID);
                     }
                 }
                 if ($adminModuleIncludes) {
-                    $document->addStyleSheet(JURI::root(true) . '/media/k2/assets/css/k2.global.css?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID);
+                    $document->addStyleSheet(URI::root(true) . '/media/k2/assets/css/k2.global.css?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID);
                 }
             }
 
@@ -397,7 +397,7 @@ class K2HelperHTML
                 }
 
                 // JS
-                $document->addScript(JURI::root(true) . '/media/k2/assets/js/k2.frontend.js?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID . '&sitepath=' . JURI::root(true) . '/');
+                $document->addScript(URI::root(true) . '/media/k2/assets/js/k2.frontend.js?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID . '&sitepath=' . URI::root(true) . '/');
 
                 // Add related CSS to the <head>
                 if ($params->get('enable_css')) {
@@ -409,21 +409,21 @@ class K2HelperHTML
 
                     // k2.css
                     if (isset($template) && File::exists(JPATH_SITE . '/templates/' . $template . '/css/k2.css')) {
-                        $document->addStyleSheet(JURI::root(true) . '/templates/' . $template . '/css/k2.css?v=' . K2_CURRENT_VERSION);
+                        $document->addStyleSheet(URI::root(true) . '/templates/' . $template . '/css/k2.css?v=' . K2_CURRENT_VERSION);
                     } elseif (File::exists(JPATH_SITE . '/templates/' . $app->getTemplate() . '/css/k2.css')) {
-                        $document->addStyleSheet(JURI::root(true) . '/templates/' . $app->getTemplate() . '/css/k2.css?v=' . K2_CURRENT_VERSION);
+                        $document->addStyleSheet(URI::root(true) . '/templates/' . $app->getTemplate() . '/css/k2.css?v=' . K2_CURRENT_VERSION);
                     } else {
-                        $document->addStyleSheet(JURI::root(true) . '/components/com_k2/css/k2.css?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID);
+                        $document->addStyleSheet(URI::root(true) . '/components/com_k2/css/k2.css?v=' . K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID);
                     }
 
                     // k2.print.css
                     if (Factory::getApplication()->input->getInt('print') == 1) {
                         if (isset($template) && File::exists(JPATH_SITE . '/templates/' . $template . '/css/k2.print.css')) {
-                            HTMLHelper::stylesheet(JURI::root() . '/templates/' . $template . '/css/k2.print.css', ['relative' => true, 'version' => K2_CURRENT_VERSION]);
+                            HTMLHelper::stylesheet(URI::root() . '/templates/' . $template . '/css/k2.print.css', ['relative' => true, 'version' => K2_CURRENT_VERSION]);
                         } elseif (File::exists(JPATH_SITE . '/templates/' . $app->getTemplate() . '/css/k2.print.css')) {
-                            HTMLHelper::stylesheet(JURI::root() . '/templates/' . $app->getTemplate() . '/css/k2.print.css', ['relative' => true, 'version' => K2_CURRENT_VERSION]);
+                            HTMLHelper::stylesheet(URI::root() . '/templates/' . $app->getTemplate() . '/css/k2.print.css', ['relative' => true, 'version' => K2_CURRENT_VERSION]);
                         } else {
-                            HTMLHelper::stylesheet(JURI::root() . 'components/com_k2/css/k2.print.css', ['relative' => true, 'version' => K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID]);
+                            HTMLHelper::stylesheet(URI::root() . 'components/com_k2/css/k2.print.css', ['relative' => true, 'version' => K2_CURRENT_VERSION . '&b=' . K2_BUILD_ID]);
                         }
                     }
                 }

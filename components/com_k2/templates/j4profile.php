@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 use Joomla\Component\Users\Administrator\Helper\Mfa;
 
 $wa = $this->document->getWebAssetManager();
@@ -129,7 +130,7 @@ $user = $this->getCurrentUser();
                 <?php if ($this->K2User->image): ?>
                     <div class="control-group">
                         <img class="k2AccountPageImage"
-                             src="<?php echo JURI::root(true) . '/media/k2/users/' . $this->K2User->image; ?>"
+                             src="<?php echo URI::root(true) . '/media/k2/users/' . $this->K2User->image; ?>"
                              alt="<?php echo $this->user->name; ?>"/>
                         <div class="controls">
                             <input type="checkbox" name="del_image" id="del_image"/>

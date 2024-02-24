@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
 ?>
 
@@ -146,9 +147,9 @@ use Joomla\CMS\Language\Text;
                             </div>
                             <div class="itemAdditionalData">
                                 <a data-fancybox="images" data-caption="<?php echo $this->row->name; ?>"
-                                   href="<?php echo JURI::root(true); ?>/media/k2/categories/<?php echo $this->row->image; ?>"
+                                   href="<?php echo URI::root(true); ?>/media/k2/categories/<?php echo $this->row->image; ?>"
                                    title="<?php echo Text::_('K2_CLICK_ON_IMAGE_TO_PREVIEW_IN_ORIGINAL_SIZE'); ?>">
-                                    <img src="<?php echo JURI::root(true); ?>/media/k2/categories/<?php echo $this->row->image; ?>"
+                                    <img src="<?php echo URI::root(true); ?>/media/k2/categories/<?php echo $this->row->image; ?>"
                                          alt="<?php echo $this->row->name; ?>" class="k2AdminImage"/>
                                 </a>
                                 <br/>

@@ -200,7 +200,7 @@ class K2ModelItem extends K2Model
         if (!empty($item->created_by_alias)) {
             $item->author = new stdClass;
             $item->author->name = $item->created_by_alias;
-            $item->author->link = JURI::root();
+            $item->author->link = URI::root();
             $item->author->avatar = K2HelperUtilities::getAvatar('alias');
         } else {
             $author = Factory::getUser($item->created_by);
@@ -272,11 +272,11 @@ class K2ModelItem extends K2Model
         // Item image
         if ($params->get('feedItemImage') && File::exists(JPATH_SITE . '/media/k2/items/cache/' . md5("Image" . $item->id) . '_' . $params->get('feedImgSize') . '.jpg')) {
             $altText = ($item->image_caption) ? $item->image_caption : $item->title;
-            $item->description .= '<div class="K2FeedImage"><img src="' . JURI::root() . 'media/k2/items/cache/' . md5('Image' . $item->id) . '_' . $params->get('feedImgSize') . '.jpg" alt="' . K2HelperUtilities::cleanHtml($altText) . '" /></div>';
+            $item->description .= '<div class="K2FeedImage"><img src="' . URI::root() . 'media/k2/items/cache/' . md5('Image' . $item->id) . '_' . $params->get('feedImgSize') . '.jpg" alt="' . K2HelperUtilities::cleanHtml($altText) . '" /></div>';
 
             // Set an image enclosure object
             $item->enclosure = new FeedEnclosure();
-            $item->enclosure->url = JURI::root() . 'media/k2/items/cache/' . md5('Image' . $item->id) . '_' . $params->get('feedImgSize') . '.jpg';
+            $item->enclosure->url = URI::root() . 'media/k2/items/cache/' . md5('Image' . $item->id) . '_' . $params->get('feedImgSize') . '.jpg';
             $item->enclosure->length = filesize(JPATH_SITE . '/media/k2/items/cache/' . md5("Image" . $item->id) . '_' . $params->get('feedImgSize') . '.jpg');
             $item->enclosure->type = 'image/jpeg';
         }
@@ -1044,12 +1044,12 @@ class K2ModelItem extends K2Model
                     if ($params->get('akismetApiKey')) {
                         require_once(JPATH_SITE . '/media/k2/assets/vendors/achingbrain/php5-akismet/akismet.class.php');
                         $akismetApiKey = trim($params->get('akismetApiKey'));
-                        $akismet = new Akismet(JURI::root(false), $akismetApiKey);
+                        $akismet = new Akismet(URI::root(false), $akismetApiKey);
                         $akismet->setCommentAuthor($userName);
                         $akismet->setCommentAuthorEmail($commentEmail);
                         $akismet->setCommentAuthorURL($commentURL);
                         $akismet->setCommentContent($commentText);
-                        $akismet->setPermalink(JURI::root(false) . 'index.php?option=com_k2&view=item&id=' . Factory::getApplication()->input->getInt('itemID'));
+                        $akismet->setPermalink(URI::root(false) . 'index.php?option=com_k2&view=item&id=' . Factory::getApplication()->input->getInt('itemID'));
                         try {
                             if ($akismet->isCommentSpam()) {
                                 $response->message = Text::_('K2_SPAM_ATTEMPT_HAS_BEEN_DETECTED_THE_COMMENT_HAS_BEEN_REJECTED');
@@ -1189,7 +1189,7 @@ class K2ModelItem extends K2Model
                         if ($object->value) {
                             $src = '';
                             if (strpos($object->value, '://') === false) {
-                                $src .= JURI::root(true) . '/' . $object->value;
+                                $src .= URI::root(true) . '/' . $object->value;
                                 $src = str_replace('//', '/', $src); // Merge duplicate forward slashes
                             } else {
                                 $src .= $object->value;

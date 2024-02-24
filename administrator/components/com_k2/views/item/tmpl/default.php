@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 $app = Factory::getApplication();
 
@@ -721,7 +722,7 @@ $app = Factory::getApplication();
                                                     </a>
                                                     <a class="deleteAttachmentButton"
                                                        title="<?php echo Text::_('K2_DELETE'); ?>"
-                                                       href="<?php echo JURI::base(true); ?>/index.php?option=com_k2&amp;view=item&amp;task=deleteAttachment&amp;id=<?php echo $attachment->id ?>&amp;cid=<?php echo $this->row->id; ?>">
+                                                       href="<?php echo URI::base(true); ?>/index.php?option=com_k2&amp;view=item&amp;task=deleteAttachment&amp;id=<?php echo $attachment->id ?>&amp;cid=<?php echo $this->row->id; ?>">
                                                         <i class="fa fa-remove"></i>
                                                         <span class="hidden"><?php echo Text::_('K2_DELETE'); ?></span>
                                                     </a>

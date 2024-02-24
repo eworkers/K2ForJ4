@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\File;
@@ -38,12 +39,12 @@ class K2HelperUtilities
 
         // Continue with default K2 avatar determination
         if ($userID == 'alias') {
-            $avatar = JURI::root(true) . '/' . $avatarPath;
+            $avatar = URI::root(true) . '/' . $avatarPath;
         } elseif ($userID == 0) {
             if ($params->get('gravatar') && !is_null($email)) {
-                $avatar = 'https://secure.gravatar.com/avatar/' . md5($email) . '?s=' . $width . '&amp;default=' . urlencode(JURI::root() . $avatarPath);
+                $avatar = 'https://secure.gravatar.com/avatar/' . md5($email) . '?s=' . $width . '&amp;default=' . urlencode(URI::root() . $avatarPath);
             } else {
-                $avatar = JURI::root(true) . '/' . $avatarPath;
+                $avatar = URI::root(true) . '/' . $avatarPath;
             }
         } elseif (is_numeric($userID) && $userID > 0) {
             K2Model::addIncludePath(JPATH_SITE . '/components/com_k2/models');
@@ -52,9 +53,9 @@ class K2HelperUtilities
             $avatar = (is_null($profile)) ? '' : $profile->image;
             if (empty($avatar)) {
                 if ($params->get('gravatar') && !is_null($email)) {
-                    $avatar = 'https://secure.gravatar.com/avatar/' . md5($email) . '?s=' . $width . '&amp;default=' . urlencode(JURI::root() . $avatarPath);
+                    $avatar = 'https://secure.gravatar.com/avatar/' . md5($email) . '?s=' . $width . '&amp;default=' . urlencode(URI::root() . $avatarPath);
                 } else {
-                    $avatar = JURI::root(true) . '/' . $avatarPath;
+                    $avatar = URI::root(true) . '/' . $avatarPath;
                 }
             } else {
                 $avatarTimestamp = '';
@@ -62,11 +63,11 @@ class K2HelperUtilities
                 if (file_exists($avatarFile) && filemtime($avatarFile)) {
                     $avatarTimestamp = '?t=' . date("Ymd_Hi", filemtime($avatarFile));
                 }
-                $avatar = JURI::root(true) . '/media/k2/users/' . $avatar . $avatarTimestamp;
+                $avatar = URI::root(true) . '/media/k2/users/' . $avatar . $avatarTimestamp;
             }
         }
 
-        if (!$params->get('userImageDefault') && $avatar == JURI::root(true) . '/' . $avatarPath) {
+        if (!$params->get('userImageDefault') && $avatar == URI::root(true) . '/' . $avatarPath) {
             $avatar = '';
         }
 
@@ -79,13 +80,13 @@ class K2HelperUtilities
         $app = Factory::getApplication();
         $categoryImage = null;
         if (!empty($image)) {
-            $categoryImage = JURI::root(true) . '/media/k2/categories/' . $image;
+            $categoryImage = URI::root(true) . '/media/k2/categories/' . $image;
         } else {
             if ($params->get('catImageDefault')) {
                 if (File::exists(JPATH_SITE . '/templates/' . $app->getTemplate() . '/images/placeholder/category.png')) {
-                    $categoryImage = JURI::root(true) . '/templates/' . $app->getTemplate() . '/images/placeholder/category.png';
+                    $categoryImage = URI::root(true) . '/templates/' . $app->getTemplate() . '/images/placeholder/category.png';
                 } else {
-                    $categoryImage = JURI::root(true) . '/components/com_k2/images/placeholder/category.png';
+                    $categoryImage = URI::root(true) . '/components/com_k2/images/placeholder/category.png';
                 }
             }
         }

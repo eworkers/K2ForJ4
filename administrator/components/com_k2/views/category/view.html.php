@@ -16,6 +16,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Form\Form;
+use Joomla\CMS\Uri\Uri;
 
 jimport('joomla.application.component.view');
 
@@ -48,7 +49,7 @@ class K2ViewCategory extends K2View
 
         // JS
         $document->addScriptDeclaration("
-            var K2BasePath = '" . JURI::base(true) . "/';
+            var K2BasePath = '" . URI::base(true) . "/';
             Joomla.submitbutton = function(pressbutton) {
                 if (pressbutton == 'cancel') {
                     Joomla.submitform(pressbutton);

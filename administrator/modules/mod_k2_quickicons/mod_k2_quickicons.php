@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\CMS\Uri\Uri;
 
 $user = Factory::getUser();
 
@@ -47,7 +48,7 @@ $componentParams = ComponentHelper::getParams('com_k2');
 // Load CSS & JS
 K2HelperHTML::loadHeadIncludes(true, false, true, false);
 if ($modCSSStyling) {
-    $document->addStyleSheet(JURI::base(true).'/modules/'.$mod_name.'/tmpl/css/style.css?v='.K2_CURRENT_VERSION);
+    $document->addStyleSheet(URI::base(true).'/modules/'.$mod_name.'/tmpl/css/style.css?v='.K2_CURRENT_VERSION);
 }
 
 // Output content with template

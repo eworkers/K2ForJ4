@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
@@ -192,7 +193,7 @@ class K2ViewComments extends K2View
             JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
             K2HelperHTML::subMenu();
 
-            $userEditLink = JURI::base() . 'index.php?option=com_k2&view=user&cid=';
+            $userEditLink = URI::base() . 'index.php?option=com_k2&view=user&cid=';
             $this->userEditLink = $userEditLink;
         }
 
@@ -201,8 +202,8 @@ class K2ViewComments extends K2View
             Factory::getApplication()->input->set('template', 'system');
 
             // CSS
-            $document->addStyleSheet(JURI::root(true) . '/templates/system/css/general.css');
-            $document->addStyleSheet(JURI::root(true) . '/templates/system/css/system.css');
+            $document->addStyleSheet(URI::root(true) . '/templates/system/css/general.css');
+            $document->addStyleSheet(URI::root(true) . '/templates/system/css/system.css');
         }
 
         parent::display($tpl);

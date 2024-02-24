@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
 use Joomla\Utilities\ArrayHelper;
 use Joomla\CMS\Factory;
@@ -152,8 +153,8 @@ class K2ViewUsers extends K2View
         K2HelperHTML::loadHeadIncludes(true, false, true, true);
         if ($app->isClient('site')) {
             // CSS
-            $document->addStyleSheet(JURI::root(true) . '/templates/system/css/general.css');
-            $document->addStyleSheet(JURI::root(true) . '/templates/system/css/system.css');
+            $document->addStyleSheet(URI::root(true) . '/templates/system/css/general.css');
+            $document->addStyleSheet(URI::root(true) . '/templates/system/css/system.css');
         }
 
         $this->addUsersToolbar();
@@ -225,7 +226,7 @@ class K2ViewUsers extends K2View
             if ($user->authorise('core.admin', 'com_k2')) {
                 $toolbar->preferences('com_k2', 'K2_SETTINGS');
                 if (!$this->params->get('hideImportButton')) {
-                    $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=users&amp;task=import';
+                    $buttonUrl = URI::base() . 'index.php?option=com_k2&amp;view=users&amp;task=import';
                     $buttonText = Text::_('K2_IMPORT_JOOMLA_USERS');
                     $button = '<joomla-toolbar-button id="toolbar-import-content"><a id="K2ImportUsersButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive"></i>' . $buttonText . '</a></joomla-toolbar-button>';
                     $toolbar->customButton('Import')->html($button);
@@ -242,7 +243,7 @@ class K2ViewUsers extends K2View
             if ($user->authorise('core.admin', 'com_k2')) {
                 JToolBarHelper::preferences('com_k2', '(window.innerHeight) * 0.9', '(window.innerWidth) * 0.7', 'K2_SETTINGS');
                 if (!$this->params->get('hideImportButton')) {
-                    $buttonUrl = JURI::base() . 'index.php?option=com_k2&amp;view=users&amp;task=import';
+                    $buttonUrl = URI::base() . 'index.php?option=com_k2&amp;view=users&amp;task=import';
                     $buttonText = Text::_('K2_IMPORT_JOOMLA_USERS');
                     $button = '<joomla-toolbar-button id="toolbar-import-content"><a id="K2ImportUsersButton" class="btn btn-small" href="' . $buttonUrl . '"><i class="icon-archive"></i>' . $buttonText . '</a></joomla-toolbar-button>';
                     $toolbar->appendButton('Custom', $button);

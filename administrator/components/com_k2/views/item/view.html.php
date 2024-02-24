@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Uri\Uri;
 use Joomla\String\StringHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
@@ -266,7 +267,7 @@ class K2ViewItem extends K2View
             if (isset($item->video) && StringHelper::strpos($item->video, 'remote}')) {
                 preg_match("#}(.*?){/#s", $item->video, $matches);
                 if (StringHelper::substr($matches[1], 0, 7) != 'http://' || StringHelper::substr($matches[1], 0, 8) != 'https://') {
-                    $item->video = str_replace($matches[1], JURI::root() . $matches[1], $item->video);
+                    $item->video = str_replace($matches[1], URI::root() . $matches[1], $item->video);
                 }
             }
             $item->text = $item->video;
@@ -396,10 +397,10 @@ class K2ViewItem extends K2View
         $timestamp = '?t=' . $date->toUnix();
 
         if (File::exists(JPATH_SITE . '/media/k2/items/cache/' . md5("Image" . $item->id) . '_Generic.jpg')) {
-            $item->thumb = JURI::root() . 'media/k2/items/cache/' . md5("Image" . $item->id) . '_Generic.jpg' . $timestamp;
+            $item->thumb = URI::root() . 'media/k2/items/cache/' . md5("Image" . $item->id) . '_Generic.jpg' . $timestamp;
         }
         if (File::exists(JPATH_SITE . '/media/k2/items/cache/' . md5("Image" . $item->id) . '_XL.jpg')) {
-            $item->image = JURI::root() . 'media/k2/items/cache/' . md5("Image" . $item->id) . '_XL.jpg' . $timestamp;
+            $item->image = URI::root() . 'media/k2/items/cache/' . md5("Image" . $item->id) . '_XL.jpg' . $timestamp;
         }
 
         // Plugin Events
@@ -504,7 +505,7 @@ class K2ViewItem extends K2View
 
         // JS
         $document->addScriptDeclaration("
-            var K2BasePath = '" . JURI::base(true) . "/';
+            var K2BasePath = '" . URI::base(true) . "/';
             var K2Language = [
                 '" . Text::_('K2_REMOVE', true) . "',
                 '" . Text::_('K2_LINK_TITLE_OPTIONAL', true) . "',

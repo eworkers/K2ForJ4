@@ -11,13 +11,14 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
 
 ?>
 <script type="text/javascript">
     (function ($) {
         $(document).ready(function () {
             $('#elfinder').elfinder({
-                url: '<?php echo JURI::base(true); ?>/index.php?option=com_k2&view=media&task=connector',
+                url: '<?php echo URI::base(true); ?>/index.php?option=com_k2&view=media&task=connector',
                 customData: {
                     '<?php echo $this->token; ?>': 1
                 },
@@ -26,7 +27,7 @@ use Joomla\CMS\Factory;
                 <?php endif; ?>
                 <?php if($this->fieldID): ?>
                 getFileCallback: function (image) {
-                    var basePath = '<?php echo JURI::root(true); ?>';
+                    var basePath = '<?php echo URI::root(true); ?>';
                     var imgPath = image.path;
                     var newImgPath = imgPath.replace(basePath, '');
                     parent.elFinderUpdate('<?php echo $this->fieldID; ?>', newImgPath);

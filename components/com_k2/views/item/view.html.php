@@ -381,7 +381,7 @@ class K2ViewItem extends K2View
         }
 
         // Absolute URL
-        $uri = JURI::getInstance();
+        $uri = URI::getInstance();
         $item->absoluteURL = $uri->toString();
 
         // Get the frontend's language for use in social media buttons - use explicit variable references for future update flexibility
@@ -431,7 +431,7 @@ class K2ViewItem extends K2View
 
         // --- JSON Output [start] ---
         if ($document->getType() == 'json') {
-            $uri = JURI::getInstance();
+            $uri = URI::getInstance();
 
             // Build the output object
             $row = $model->prepareJSONItem($item);
@@ -606,7 +606,7 @@ class K2ViewItem extends K2View
                         $basenameWithNoTimestamp = $basename;
                     }
                     if (File::exists(JPATH_SITE . '/media/k2/items/cache/' . $basenameWithNoTimestamp)) {
-                        $image = JURI::root() . 'media/k2/items/cache/' . $basename;
+                        $image = URI::root() . 'media/k2/items/cache/' . $basename;
                         $document->setMetaData('og:image', $image);
                         $document->setMetaData('image', $image); // Generic meta
                     }
@@ -631,7 +631,7 @@ class K2ViewItem extends K2View
                         $basenameWithNoTimestamp = $basename;
                     }
                     if (File::exists(JPATH_SITE . '/media/k2/items/cache/' . $basenameWithNoTimestamp)) {
-                        $image = JURI::root() . 'media/k2/items/cache/' . $basename;
+                        $image = URI::root() . 'media/k2/items/cache/' . $basename;
                         $document->setMetaData('twitter:image', $image);
                         $document->setMetaData('twitter:image:alt', (!empty($item->image_caption)) ? filter_var($item->image_caption, FILTER_UNSAFE_RAW) : filter_var($item->title, FILTER_UNSAFE_RAW));
                         if (!$params->get('facebookMetatags')) {
@@ -655,7 +655,7 @@ class K2ViewItem extends K2View
                 // Prepare content snippets
                 $itemSD_SiteName = $config->get('sitename');
                 $itemSD_SiteName = ($params->get('k2SeoGsdOrgName')) ? $params->get('k2SeoGsdOrgName') : $itemSD_SiteName;
-                $itemSD_SiteLogo = !empty($params->get('k2SeoGsdOrgLogo')) ? JURI::root().trim($params->get('k2SeoGsdOrgLogo')) : '';
+                $itemSD_SiteLogo = !empty($params->get('k2SeoGsdOrgLogo')) ? URI::root().trim($params->get('k2SeoGsdOrgLogo')) : '';
 
                 $itemSD_Description = str_replace($sdStrSearch, $sdStrReplace, strip_tags($item->introtext, $allowedTags));
                 $itemSD_ArticleBody = str_replace($sdStrSearch, $sdStrReplace, strip_tags($item->text, $allowedTags));
@@ -664,7 +664,7 @@ class K2ViewItem extends K2View
                 $itemSD_ArticleBody = preg_replace($sdPregSearch, $sdPregReplace, $itemSD_ArticleBody);
 
                 $itemSD_AuthorName = (!empty($item->created_by_alias)) ? $item->created_by_alias : $item->author->name;
-                $itemSD_AuthorURL = (!empty($item->created_by_alias)) ? JURI::root() : $this->absUrl($item->author->link);
+                $itemSD_AuthorURL = (!empty($item->created_by_alias)) ? URI::root() : $this->absUrl($item->author->link);
 
                 $itemSD_Modified = ((int)$item->modified) ? $item->modified : $item->created;
 
@@ -703,7 +703,7 @@ class K2ViewItem extends K2View
                     "publisher": {
                         "@type": "Organization",
                         "name": "' . $itemSD_SiteName . '",
-                        "url": "' . JURI::root() . '",
+                        "url": "' . URI::root() . '",
                         "logo": {
                             "@type": "ImageObject",
                             "name": "' . $itemSD_SiteName . '",
@@ -770,7 +770,7 @@ class K2ViewItem extends K2View
     private function absUrl($relUrl)
     {
         if (substr($relUrl, 0, 4) != 'http') {
-            return substr(JURI::root(), 0, -1) . str_replace(JURI::root(true), '', $relUrl);
+            return substr(URI::root(), 0, -1) . str_replace(URI::root(true), '', $relUrl);
         } else {
             return $relUrl;
         }

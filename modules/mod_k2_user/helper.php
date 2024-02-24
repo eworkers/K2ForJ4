@@ -51,7 +51,7 @@ class modK2UserHelper
 
         if ($profile) {
             if ($profile->image != '') {
-                $profile->avatar = JURI::root() . 'media/k2/users/' . $profile->image;
+                $profile->avatar = URI::root() . 'media/k2/users/' . $profile->image;
             }
             require_once(JPATH_SITE . '/components/com_k2/helpers/permissions.php');
             if (Factory::getApplication()->input->getCmd('option') != 'com_k2') {
