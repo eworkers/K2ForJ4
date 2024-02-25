@@ -10,6 +10,8 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Editor\Editor;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Factory;
@@ -193,7 +195,7 @@ class plgSystemK2 extends CMSPlugin
 
             if (!$user->guest) {
                 $app->enqueueMessage(Text::_('K2_YOU_ARE_ALREADY_REGISTERED_AS_A_MEMBER'), 'notice');
-                $app->redirect(JURI::root());
+                $app->redirect(URI::root());
                 $app->close();
             }
             if (version_compare(JVERSION, '4.0.0-dev', 'ge'))
@@ -233,7 +235,7 @@ class plgSystemK2 extends CMSPlugin
                 /* since J4 compatibility */
 // get user editor
                 $editor = Factory::getUser()->getParam('editor', 'tinymce');
-                $wysiwyg = JEditor::getInstance($editor);
+                $wysiwyg = Editor::getInstance($editor);
                 $editor = $wysiwyg->display('description', $K2User->description, '100%', '250px', '', '', false);
             } else {
                 $editor = '<textarea id="description" class="k2-plain-text-editor" name="description"></textarea>';
@@ -241,10 +243,10 @@ class plgSystemK2 extends CMSPlugin
             $view->editor = $editor;
 
             $lists = array();
-            $genderOptions[] = JHTML::_('select.option', 'n', Text::_('K2_NOT_SPECIFIED'));
-            $genderOptions[] = JHTML::_('select.option', 'm', Text::_('K2_MALE'));
-            $genderOptions[] = JHTML::_('select.option', 'f', Text::_('K2_FEMALE'));
-            $lists['gender'] = JHTML::_('select.radiolist', $genderOptions, 'gender', '', 'value', 'text', $K2User->gender);
+            $genderOptions[] = HTMLHelper::_('select.option', 'n', Text::_('K2_NOT_SPECIFIED'));
+            $genderOptions[] = HTMLHelper::_('select.option', 'm', Text::_('K2_MALE'));
+            $genderOptions[] = HTMLHelper::_('select.option', 'f', Text::_('K2_FEMALE'));
+            $lists['gender'] = HTMLHelper::_('select.radiolist', $genderOptions, 'gender', '', 'value', 'text', $K2User->gender);
 
             $view->lists = $lists;
             $view->K2Params = $params;
@@ -335,7 +337,7 @@ class plgSystemK2 extends CMSPlugin
                 /* since J4 compatibility */
                 // get user editor
                 $editor = !empty(Factory::getUser()->getParam('editor')) ? Factory::getUser()->getParam('editor') : Factory::getConfig()->get('editor');
-                $wysiwyg = JEditor::getInstance($editor);
+                $wysiwyg = Editor::getInstance($editor);
                 $editor = $wysiwyg->display('description', $K2User->description, '100%', '250px', '', '', false);
             } else {
                 $editor = '<textarea id="description" class="k2-plain-text-editor" name="description">'.$K2User->description.'</textarea>';
@@ -343,10 +345,10 @@ class plgSystemK2 extends CMSPlugin
             $view->editor = $editor;
 
             $lists = array();
-            $genderOptions[] = JHTML::_('select.option', 'n', Text::_('K2_NOT_SPECIFIED'));
-            $genderOptions[] = JHTML::_('select.option', 'm', Text::_('K2_MALE'));
-            $genderOptions[] = JHTML::_('select.option', 'f', Text::_('K2_FEMALE'));
-            $lists['gender'] = JHTML::_('select.radiolist', $genderOptions, 'gender', '', 'value', 'text', $K2User->gender);
+            $genderOptions[] = HTMLHelper::_('select.option', 'n', Text::_('K2_NOT_SPECIFIED'));
+            $genderOptions[] = HTMLHelper::_('select.option', 'm', Text::_('K2_MALE'));
+            $genderOptions[] = HTMLHelper::_('select.option', 'f', Text::_('K2_FEMALE'));
+            $lists['gender'] = HTMLHelper::_('select.radiolist', $genderOptions, 'gender', '', 'value', 'text', $K2User->gender);
 
             $view->lists = $lists;
 
@@ -409,7 +411,7 @@ class plgSystemK2 extends CMSPlugin
             $document = Factory::getDocument();
             $user = Factory::getUser();
             $params = ComponentHelper::getParams('com_k2');
-            $response = JFactory::getApplication()->getBody();
+            $response = Factory::getApplication()->getBody();
 
             // Use proper headers for JSON/JSONP
             if (Factory::getApplication()->input->getCmd('format') == 'json') {
@@ -428,16 +430,16 @@ class plgSystemK2 extends CMSPlugin
             // Set caching HTTP headers
             if ($user->guest) {
                 if ($caching) {
-                    JFactory::getApplication()->allowCache(true);
-                    JFactory::getApplication()->setHeader('Cache-Control', 'public, max-age=' . $cacheTTL . ', stale-while-revalidate=' . ($cacheTTL * 2) . ', stale-if-error=' . ($cacheTTL * 5), true);
-                    JFactory::getApplication()->setHeader('Expires', gmdate('D, d M Y H:i:s', time() + $cacheTTL) . ' GMT', true);
-                    JFactory::getApplication()->setHeader('Pragma', 'public', true);
+                    Factory::getApplication()->allowCache(true);
+                    Factory::getApplication()->setHeader('Cache-Control', 'public, max-age=' . $cacheTTL . ', stale-while-revalidate=' . ($cacheTTL * 2) . ', stale-if-error=' . ($cacheTTL * 5), true);
+                    Factory::getApplication()->setHeader('Expires', gmdate('D, d M Y H:i:s', time() + $cacheTTL) . ' GMT', true);
+                    Factory::getApplication()->setHeader('Pragma', 'public', true);
                 }
-                JFactory::getApplication()->setHeader('X-Logged-In', 'False', true);
+                Factory::getApplication()->setHeader('X-Logged-In', 'False', true);
             } else {
-                JFactory::getApplication()->setHeader('X-Logged-In', 'True', true);
+                Factory::getApplication()->setHeader('X-Logged-In', 'True', true);
             }
-            JFactory::getApplication()->setHeader('X-Content-Powered-By', 'K2 v' . K2_CURRENT_VERSION . ' (by JoomlaWorks)', true);
+            Factory::getApplication()->setHeader('X-Content-Powered-By', 'K2 v' . K2_CURRENT_VERSION . ' (by JoomlaWorks)', true);
 
             // Set additional caching HTTP headers defined as custom script tag in the <head>
             if ($caching) {
@@ -445,9 +447,9 @@ class plgSystemK2 extends CMSPlugin
                 if (is_array($getK2CacheHeaders) && !empty($getK2CacheHeaders[1])) {
                     $getK2CacheHeaders = json_decode(trim($getK2CacheHeaders[1]));
                     if (is_object($getK2CacheHeaders)) {
-                        JFactory::getApplication()->allowCache(true);
+                        Factory::getApplication()->allowCache(true);
                         foreach ($getK2CacheHeaders as $type => $value) {
-                            JFactory::getApplication()->setHeader($type, $value, true);
+                            Factory::getApplication()->setHeader($type, $value, true);
                         }
                     }
                 }
@@ -476,7 +478,7 @@ class plgSystemK2 extends CMSPlugin
                     $replacements[] = '<html prefix="og: http://ogp.me/ns#">';
                 }
                 $response = str_ireplace($searches, $replacements, $response);
-                JFactory::getApplication()->setBody($response);
+                Factory::getApplication()->setBody($response);
             }
         }
     }
