@@ -104,7 +104,7 @@ class K2ViewExtraField extends K2View
                 $extraField->displayInFrontEnd = 0;
             }
         }
-        $extraField->name = htmlspecialchars($extraField->name, ENT_QUOTES, 'UTF-8');
+        $extraField->name = isset($extraField->name) ? htmlspecialchars($extraField->name, ENT_QUOTES, 'UTF-8') : '';
         $this->row = $extraField;
 
         $lists = array();
