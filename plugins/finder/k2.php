@@ -11,15 +11,15 @@ defined('JPATH_BASE') or die;
 
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\Component\Finder\Administrator\Indexer\Adapter;
+use Joomla\Component\Finder\Administrator\Indexer\Helper;
+use Joomla\Component\Finder\Administrator\Indexer\Indexer;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Factory;
-
+use \Joomla\Component\Finder\Administrator\Indexer\Result;
 jimport('joomla.application.component.helper');
 
-// Load the base adapter.
-require_once JPATH_ADMINISTRATOR . '/components/com_finder/helpers/indexer/adapter.php';
-
-class plgFinderK2 extends FinderIndexerAdapter
+class plgFinderK2 extends Adapter
 {
     protected $context = 'K2';
     protected $extension = 'com_k2';
@@ -33,7 +33,17 @@ class plgFinderK2 extends FinderIndexerAdapter
         parent::__construct($subject, $config);
         if (PHP_SAPI === 'cli') {
             PluginHelper::importPlugin('system', 'k2');
-            JEventDispatcher::getInstance()->trigger('onAfterInitialise');
+
+	        if (version_compare(JVERSION, '4.0.0-dev', 'lt'))
+	        {
+		        JEventDispatcher::getInstance()->trigger('onAfterInitialise');
+
+			}
+			else{
+				$dispatcher = Joomla\CMS\Factory::getApplication()->getDispatcher();
+				$event = new Joomla\Event\Event('onAfterInitialise');
+				$dispatcher->dispatch('onAfterInitialise', $event);
+			}
         }
         $this->loadLanguage();
     }
@@ -112,7 +122,7 @@ class plgFinderK2 extends FinderIndexerAdapter
         }
     }
 
-    protected function index(FinderIndexerResult $item, $format = 'html')
+    protected function index(Result $item, $format = 'html')
     {
         // Check if the extension is enabled
         if (ComponentHelper::isEnabled($this->extension) == false) {
@@ -130,8 +140,8 @@ class plgFinderK2 extends FinderIndexerAdapter
         $item->metadata = $registry;
 
         // Trigger the onContentPrepare event.
-        $item->summary = FinderIndexerHelper::prepareContent($item->summary, $item->params);
-        $item->body = FinderIndexerHelper::prepareContent($item->body, $item->params);
+        $item->summary = Helper::prepareContent($item->summary, $item->params);
+        $item->body = Helper::prepareContent($item->body, $item->params);
 
         // Build the necessary route and path information.
         $item->url = $this->getURL($item->id, $this->extension, $this->layout);
@@ -139,7 +149,7 @@ class plgFinderK2 extends FinderIndexerAdapter
 
         if (version_compare(JVERSION, '4.0.0-dev', 'lt'))
         {
-            $item->path = FinderIndexerHelper::getContentPath($item->route);
+            $item->path = Helper::getContentPath($item->route);
         }
 
         // Get the menu title if it exists.
@@ -154,12 +164,12 @@ class plgFinderK2 extends FinderIndexerAdapter
         $item->metaauthor = $item->metadata->get('author');
 
         // Add the meta-data processing instructions.
-        $item->addInstruction(FinderIndexer::META_CONTEXT, 'metakey');
-        $item->addInstruction(FinderIndexer::META_CONTEXT, 'metadesc');
-        $item->addInstruction(FinderIndexer::META_CONTEXT, 'metaauthor');
-        $item->addInstruction(FinderIndexer::META_CONTEXT, 'author');
-        $item->addInstruction(FinderIndexer::META_CONTEXT, 'created_by_alias');
-        $item->addInstruction(FinderIndexer::META_CONTEXT, 'extra_fields_search');
+        $item->addInstruction(Indexer::META_CONTEXT, 'metakey');
+        $item->addInstruction(Indexer::META_CONTEXT, 'metadesc');
+        $item->addInstruction(Indexer::META_CONTEXT, 'metaauthor');
+        $item->addInstruction(Indexer::META_CONTEXT, 'author');
+        $item->addInstruction(Indexer::META_CONTEXT, 'created_by_alias');
+        $item->addInstruction(Indexer::META_CONTEXT, 'extra_fields_search');
 
         // Translate the state. Items should only be published if the category is published.
         $item->state = $this->translateState($item->state, $item->cat_state);
@@ -187,9 +197,9 @@ class plgFinderK2 extends FinderIndexerAdapter
         $item->addTaxonomy('Extra fields', $item->extra_fields);
 
         // Get content extras.
-        FinderIndexerHelper::getContentExtras($item);
+        Helper::getContentExtras($item);
 
-        if (method_exists('FinderIndexer', 'getInstance')) {
+        if (method_exists('Indexer', 'getInstance')) {
             $this->indexer->getInstance()->index($item);
         } else {
             //Indexer::index($item);
