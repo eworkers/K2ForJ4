@@ -507,6 +507,7 @@ $K2(document).ready(function() {
                         type: 'get',
                         success: function(response) {
                             $K2('#extraFieldsContainer').html(response);
+                            $K2('#extraFieldsContainer').fadeIn('slow');
                             initExtraFieldsEditor();
 
                             // Load Flatpickr
