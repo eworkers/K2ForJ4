@@ -1282,7 +1282,6 @@ function initExtraFieldsEditor() {
             }
             if (tinymce.majorVersion >= 4) {
                 tinymce.init(editorOptions);
-                tinymce.editors[id].show();
             } else {
                 tinyMCE.execCommand('mceAddControl', false, id);
             }
