@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version    2.11.x
  * @package    K2
@@ -9,140 +10,225 @@
 
 // no direct access
 defined('_JEXEC') or die;
+
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
 ?>
 
-<div class="clr"></div>
 
-<?php if($modLogo): ?>
-<div id="k2QuickIconsTitle">
-    <a class="dashicon k2logo" href="<?php echo Route::_('index.php?option=com_k2&amp;view=items&amp;filter_featured=-1&amp;filter_trash=0'); ?>" title="<?php echo Text::_('K2_DASHBOARD'); ?>">
-        <span>K2</span>
-    </a>
-</div>
-<?php endif; ?>
+<nav class="quick-icons px-3 pb-3" aria-label="Liens rapides System">
+    <ul class="nav flex-wrap">
+        <li class="quickicon quickicon-single">
 
-<div id="k2QuickIcons" <?php if(!$modLogo): ?> class="k2NoLogo" <?php endif; ?>>
-    <div class="icon-wrapper">
-        <div class="icon">
             <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=item'); ?>">
-                <i class="dashicon item-new"></i>
-                <span><?php echo Text::_('K2_ADD_NEW_ITEM'); ?></span>
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"><i class="dashicon item-new"></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_ADD_NEW_ITEM'); ?>
+                </div>
             </a>
-        </div>
-    </div>
-    <div class="icon-wrapper">
-        <div class="icon">
+        </li>
+
+        <li class="quickicon quickicon-single">
+            <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=item'); ?>">
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"><i class="dashicon item-new"></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_ADD_NEW_ITEM'); ?>
+                </div>
+            </a>
+        </li>
+
+        <li class="quickicon quickicon-single">
             <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=items&amp;filter_featured=-1&amp;filter_trash=0'); ?>">
-                <i class="dashicon items"></i>
-                <span><?php echo Text::_('K2_ITEMS'); ?></span>
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"><i class="dashicon items"></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_ITEMS'); ?>
+                </div>
             </a>
-        </div>
-    </div>
-    <div class="icon-wrapper">
-        <div class="icon">
+        </li>
+
+        <li class="quickicon quickicon-single">
             <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=items&amp;filter_featured=1&amp;filter_trash=0'); ?>">
-                <i class="dashicon items-featured"></i>
-                <span><?php echo Text::_('K2_FEATURED_ITEMS'); ?></span>
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"><i class="dashicon items-featured"></i></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_FEATURED_ITEMS'); ?>
+                </div>
             </a>
-        </div>
-    </div>
-    <div class="icon-wrapper">
-        <div class="icon">
+        </li>
+
+        <li class="quickicon quickicon-single">
             <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=items&amp;filter_featured=-1&amp;filter_trash=1'); ?>">
-                <i class="dashicon items-trashed"></i>
-                <span><?php echo Text::_('K2_TRASHED_ITEMS'); ?></span>
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"><i class="dashicon items-trashed"></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_TRASHED_ITEMS'); ?>
+                </div>
             </a>
-        </div>
-    </div>
-    <div class="icon-wrapper">
-        <div class="icon">
+        </li>
+
+        <li class="quickicon quickicon-single">
             <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=categories&amp;filter_trash=0'); ?>">
-                <i class="dashicon categories"></i>
-                <span><?php echo Text::_('K2_CATEGORIES'); ?></span>
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"><i class="dashicon categories"></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_CATEGORIES'); ?>
+                </div>
             </a>
-        </div>
-    </div>
-    <div class="icon-wrapper">
-        <div class="icon">
+        </li>
+
+        <li class="quickicon quickicon-single">
             <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=categories&amp;filter_trash=1'); ?>">
-                <i class="dashicon categories-trashed"></i>
-                <span><?php echo Text::_('K2_TRASHED_CATEGORIES'); ?></span>
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"> <i class="dashicon categories-trashed"></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_TRASHED_CATEGORIES'); ?>
+                </div>
             </a>
-        </div>
-    </div>
-    <?php if(!$componentParams->get('lockTags') || $user->gid>23): ?>
-    <div class="icon-wrapper">
-        <div class="icon">
-            <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=tags'); ?>">
-                <i class="dashicon tags"></i>
-                <span><?php echo Text::_('K2_TAGS'); ?></span>
-            </a>
-        </div>
-    </div>
-    <?php endif; ?>
-    <div class="icon-wrapper">
-        <div class="icon">
+        </li>
+
+        <?php if (!$componentParams->get('lockTags') || $user->gid > 23) : ?>
+            <li class="quickicon quickicon-single">
+                <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=tags'); ?>">
+                    <div class="quickicon-info">
+                        <div class="quickicon-icon">
+                            <div class="" aria-hidden="true"> <i class="dashicon tags"></i></div>
+                        </div>
+                    </div>
+                    <div class="quickicon-name d-flex align-items-end">
+                        <?php echo Text::_('K2_TAGS'); ?>
+                    </div>
+                </a>
+            </li>
+
+        <?php endif; ?>
+
+        <li class="quickicon quickicon-single">
             <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=comments'); ?>">
-                <i class="dashicon comments"></i>
-                <span><?php echo Text::_('K2_COMMENTS'); ?></span>
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"> <i class="dashicon comments"></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_COMMENTS'); ?>
+                </div>
             </a>
-        </div>
-    </div>
-    <?php if ($user->gid>23): ?>
-    <div class="icon-wrapper">
-        <div class="icon">
-            <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=extrafields'); ?>">
-                <i class="dashicon extra-fields"></i>
-                <span><?php echo Text::_('K2_EXTRA_FIELDS'); ?></span>
-            </a>
-        </div>
-    </div>
-    <div class="icon-wrapper">
-        <div class="icon">
-            <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=extrafieldsgroups'); ?>">
-                <i class="dashicon extra-field-groups"></i>
-                <span><?php echo Text::_('K2_EXTRA_FIELD_GROUPS'); ?></span>
-            </a>
-        </div>
-    </div>
-    <?php endif; ?>
-    <div class="icon-wrapper">
-        <div class="icon">
+        </li>
+
+
+        <?php if ($user->gid > 23) : ?>
+
+            <li class="quickicon quickicon-single">
+                <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=extrafields'); ?>">
+                    <div class="quickicon-info">
+                        <div class="quickicon-icon">
+                            <div class="" aria-hidden="true"> <i class="dashicon extra-fields"></i></div>
+                        </div>
+                    </div>
+                    <div class="quickicon-name d-flex align-items-end">
+                        <?php echo Text::_('K2_EXTRA_FIELDS'); ?>
+                    </div>
+                </a>
+            </li>
+
+            <li class="quickicon quickicon-single">
+                <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=extrafieldsgroups'); ?>">
+                    <div class="quickicon-info">
+                        <div class="quickicon-icon">
+                            <div class="" aria-hidden="true"> <i class="dashicon extra-fields-groups"></i></div>
+                        </div>
+                    </div>
+                    <div class="quickicon-name d-flex align-items-end">
+                        <?php echo Text::_('K2_EXTRA_FIELDS_GROUPS'); ?>
+                    </div>
+                </a>
+            </li>
+
+        <?php endif; ?>
+
+
+        <li class="quickicon quickicon-single">
             <a href="<?php echo Route::_('index.php?option=com_k2&amp;view=media'); ?>">
-                <i class="dashicon mediamanager"></i>
-                <span><?php echo Text::_('K2_MEDIA_MANAGER'); ?></span>
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"> <i class="dashicon mediamanager"></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_MEDIA_MANAGER'); ?>
+                </div>
             </a>
-        </div>
-    </div>
-    <div class="icon-wrapper">
-        <div class="icon">
+        </li>
+
+
+        <li class="quickicon quickicon-single">
             <a data-k2-modal="iframe" target="_blank" href="https://getk2.org/documentation/">
-                <i class="dashicon documentation"></i>
-                <span><?php echo Text::_('K2_DOCS_AND_TUTORIALS'); ?></span>
+                <div class="quickicon-info">
+                    <div class="quickicon-icon">
+                        <div class="" aria-hidden="true"> <i class="dashicon documentation"></i></div>
+                    </div>
+                </div>
+                <div class="quickicon-name d-flex align-items-end">
+                    <?php echo Text::_('K2_DOCS_AND_TUTORIALS'); ?>
+                </div>
             </a>
-        </div>
-    </div>
-    <?php if ($user->gid>23): ?>
-    <div class="icon-wrapper">
-        <div class="icon">
-            <a data-k2-modal="iframe" target="_blank" href="https://getk2.org/extend/">
-                <i class="dashicon extend"></i>
-                <span><?php echo Text::_('K2_EXTEND'); ?></span>
-            </a>
-        </div>
-    </div>
-    <div class="icon-wrapper">
-        <div class="icon">
-            <a data-k2-modal="iframe" target="_blank" href="https://www.joomlaworks.net/forum/k2">
-                <i class="dashicon help"></i>
-                <span><?php echo Text::_('K2_COMMUNITY'); ?></span>
-            </a>
-        </div>
-    </div>
-    <?php endif; ?>
-    <div style="clear: both;"></div>
-</div>
+        </li>
+
+
+        <?php if ($user->gid > 23) : ?>
+
+            <li class="quickicon quickicon-single">
+                <a data-k2-modal="iframe" target="_blank" href="https://getk2.org/extend/">
+                    <div class="quickicon-info">
+                        <div class="quickicon-icon">
+                            <div class="" aria-hidden="true"> <i class="dashicon extend"></i></div>
+                        </div>
+                    </div>
+                    <div class="quickicon-name d-flex align-items-end">
+                        <?php echo Text::_('K2_EXTEND'); ?>
+                    </div>
+                </a>
+            </li>
+
+            <li class="quickicon quickicon-single">
+                <a data-k2-modal="iframe" target="_blank" href="https://www.joomlaworks.net/forum/k2">
+                    <div class="quickicon-info">
+                        <div class="quickicon-icon">
+                            <div class="" aria-hidden="true"> <i class="dashicon help"></i></div>
+                        </div>
+                    </div>
+                    <div class="quickicon-name d-flex align-items-end">
+                        <?php echo Text::_('K2_COMMUNITY'); ?>
+                    </div>
+                </a>
+            </li>
+
+        <?php endif; ?>
+    </ul>
+</nav>
