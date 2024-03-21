@@ -59,7 +59,7 @@ use Joomla\CMS\Router\Route;
                 <?php if ($params->get('commentDateFormat') == 'relative'): ?>
                     <?php echo $comment->commentDate; ?>
                 <?php else: ?>
-                    <?php echo Text::_('K2_ON'); ?><?php echo HTMLHelper::_('date', $comment->commentDate, Text::_('K2_DATE_FORMAT_LC2')); ?>
+                    <?php echo Text::_('K2_ON') .' '. HTMLHelper::_('date', $comment->commentDate, Text::_('K2_DATE_FORMAT_LC2')); ?>
                 <?php endif; ?>
             </span>
                     <?php endif; ?>

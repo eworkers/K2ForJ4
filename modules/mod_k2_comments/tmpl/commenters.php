@@ -48,7 +48,7 @@ use Joomla\CMS\Language\Text;
                         <a class="tcLatestComment" href="<?php echo $commenter->latestCommentLink; ?>">
                             <?php echo $commenter->latestCommentText; ?>
                         </a>
-                        <span class="tcLatestCommentDate"><?php echo Text::_('K2_POSTED_ON'); ?><?php echo HTMLHelper::_('date', $commenter->latestCommentDate, Text::_('K2_DATE_FORMAT_LC2')); ?></span>
+                        <span class="tcLatestCommentDate"><?php echo Text::_('K2_POSTED_ON') .' '. HTMLHelper::_('date', $commenter->latestCommentDate, Text::_('K2_DATE_FORMAT_LC2')); ?></span>
                     <?php endif; ?>
 
                     <div class="clr"></div>
