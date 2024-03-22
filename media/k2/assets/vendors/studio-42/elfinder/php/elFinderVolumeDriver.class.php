@@ -280,6 +280,8 @@ abstract class elFinderVolumeDriver
             'php4:*' => 'text/x-php',
             'php5:*' => 'text/x-php',
             'php7:*' => 'text/x-php',
+            'php8:*' => 'text/x-php',
+            'php9:*' => 'text/x-php',
             'phtml:*' => 'text/x-php',
             'phar:*' => 'text/x-php',
             'cgi:*' => 'text/x-httpd-cgi',
@@ -352,7 +354,7 @@ abstract class elFinderVolumeDriver
         // directory for thumbnails
         'tmbPath' => '.tmb',
         // mode to create thumbnails dir
-        'tmbPathMode' => 0755,
+        'tmbPathMode' => 0777,
         // thumbnails dir URL. Set it if store thumbnails outside root directory
         'tmbURL' => '',
         // thumbnails size (px)
@@ -4917,7 +4919,13 @@ abstract class elFinderVolumeDriver
             $pinfo = pathinfo($path);
             $ext = isset($pinfo['extension']) ? strtolower($pinfo['extension']) : '';
         }
-        return ($ext && isset(elFinderVolumeDriver::$mimetypes[$ext])) ? elFinderVolumeDriver::$mimetypes[$ext] : 'unknown';
+        $res = ($ext && isset(elFinderVolumeDriver::$mimetypes[$ext])) ? elFinderVolumeDriver::$mimetypes[$ext] : 'unknown';
+        // Recursive check if MIME type is unknown with multiple extensions
+        if ($res === 'unknown' && strpos($pinfo['filename'], '.')) {
+            return elFinderVolumeDriver::mimetypeInternalDetect($pinfo['filename']);
+        } else {
+            return $res;
+        }
     }
 
     /**
@@ -7130,7 +7138,7 @@ abstract class elFinderVolumeDriver
             }
         }
         if (!is_link($dir) && is_dir($dir)) {
-            chmod($dir, 0755);
+            chmod($dir, 0777);
             if ($handle = opendir($dir)) {
                 while (false !== ($file = readdir($handle))) {
                     if ($file === '.' || $file === '..') {
@@ -7141,7 +7149,7 @@ abstract class elFinderVolumeDriver
                     if (!is_link($dir) && is_dir($path)) {
                         self::localRmdirRecursive($path);
                     } else {
-                        chmod($path, 0644);
+                        chmod($path, 0666);
                         unlink($path);
                     }
                 }
@@ -7149,7 +7157,7 @@ abstract class elFinderVolumeDriver
             }
             return rmdir($dir);
         } else {
-            chmod($dir, 0644);
+            chmod($dir, 0666);
             return unlink($dir);
         }
     }
