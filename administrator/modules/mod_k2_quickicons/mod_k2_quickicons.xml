@@ -19,9 +19,148 @@
                     <option value="1">K2_ENABLED</option>
                     <option value="0">K2_DISABLED</option>
                 </field>
-                <field name="modLogo" type="radio" default="1" label="K2_MODULE_LOGO" description="" class="btn-group btn-group-yesno">
+                <field name="modLogo" type="radio" default="1" label="K2_MODULE_LOGO" description="" class="btn-group btn-group-yesno" showon="layout:_:default">
                     <option value="1">K2_SHOW</option>
                     <option value="0">K2_HIDE</option>
+                </field>
+                <field
+                        name="layout"
+                        type="modulelayout"
+                        label="JFIELD_ALT_LAYOUT_LABEL"
+                        class="form-select"
+                        validate="moduleLayout"
+                />
+                <field
+                        name="show_items"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_ITEMS"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_featured"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_FEATURED_ITEMS"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_trashed"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_TRASHED_ITEMS"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_categories"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_CATEGORIES"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_tags"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_TAGS"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_comments"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_COMMENTS"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_extra_fields"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_EXTRA_FIELDS"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_extra_field_groups"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_EXTRA_FIELD_GROUPS"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_media_manager"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_MEDIA_MANAGER"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_documentation"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_DOCS_AND_TUTORIALS"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_extension"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_EXTEND"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_community"
+                        type="radio"
+                        label="MOD_K2_QUICKICON_SHOW_COMMUNITY"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        showon="layout:_:joomla-native"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
                 </field>
             </fieldset>
             <fieldset name="advanced">

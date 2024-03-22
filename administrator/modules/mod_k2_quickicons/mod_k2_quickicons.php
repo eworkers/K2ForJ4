@@ -53,5 +53,10 @@ if ($modCSSStyling) {
 
 // Output content with template
 echo $mod_copyrights_start;
-require(ModuleHelper::getLayoutPath($mod_name, 'default'));
+$layout = 'default';
+if (version_compare(JVERSION, '4.0.0-dev', 'ge'))
+{
+	$layout = $params->get('layout', 'default');
+}
+require(ModuleHelper::getLayoutPath($mod_name, $layout));
 echo $mod_copyrights_end;

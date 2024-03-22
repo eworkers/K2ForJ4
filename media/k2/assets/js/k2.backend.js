@@ -1417,3 +1417,16 @@ function k2ModalSelector(id, name, fid, fname, output) {
     }
     return false;
 }
+
+function K2Popup(src, type = 'iframe') {
+    $K2.magnificPopup.open(
+        {
+            type: type,
+            items: {
+                src: src,
+            },
+            overflowY:'hidden',
+            mainClass:'k2-j4-iframe-scaler',
+            iframe: {markup: '<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe name="k2Popup" class="mfp-iframe" frameborder="0" allowfullscreen></iframe></div>'}}
+    );
+}
