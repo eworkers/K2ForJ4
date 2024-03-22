@@ -24,7 +24,7 @@ require_once JPATH_ADMINISTRATOR . '/components/com_k2/tables/table.php';
 class TableK2Item extends K2Table
 {
     /* since J4 compatibility */
-    /* dirty fix fix non NULL field with no default value since MySQL drivers in 4.0 use STRICT_TRANS_TABLES */
+    /* dirty fix non NULL field with no default value since MySQL drivers in 4.0 use STRICT_TRANS_TABLES */
     /* todo */
     /* init $image_caption, $image_credits, $video_caption, $video_credits,
        $extra_fields, $extra_fields_search, $plugins at relevant model
@@ -62,7 +62,7 @@ class TableK2Item extends K2Table
     public $metadata = null;
     public $metadesc = null;
     public $metakey = null;
-    public $params = null;
+    public $params = '';
     public $plugins = '';
     public $language = null;
 
