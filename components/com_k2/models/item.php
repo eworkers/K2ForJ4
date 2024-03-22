@@ -198,7 +198,8 @@ class K2ModelItem extends K2Model
 	        }
         }
 
-        if ($item->params->get('catItemIntroTextWordLimit') && $task == 'category') {
+		// @todo : Check why in rare cases task is set to category within on an item view
+        if ($view != 'item' && $item->params->get('catItemIntroTextWordLimit') && $task == 'category') {
             $item->introtext = K2HelperUtilities::wordLimit($item->introtext, $item->params->get('catItemIntroTextWordLimit'));
         }
 
