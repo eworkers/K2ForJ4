@@ -37,7 +37,7 @@ use Joomla\CMS\Router\Route;
                         <a href="<?php echo $comment->link; ?>"><span
                                     class="lcComment"><?php echo HTMLHelper::_('string.truncate', $comment->commentText, 0,true, false );?></span></a>
                     <?php else: ?>
-                        <span class="lcComment"><?php echo $comment->commentText; ?></span>
+                        <span class="lcComment"><?php echo HTMLHelper::_('string.truncate', $comment->commentText, 0,true, false ); ?></span>
                     <?php endif; ?>
 
                     <?php if ($params->get('commenterName')): ?>
