@@ -1,4 +1,6 @@
-# unofficial version of K2 for J39+ & Joomla4
+# unofficial version of K2 for J39+, Joomla4 & Joomla5
+
+> **_NOTE:_** K2ForJ4 is now compatible with Joomla5 without using B/C plugin. If you're still on Joomla3 and need to upgrade to joomla5, please follow the instructions below to upgrade to J4.4 then you can upgrade to J5. 
 
 ### Instructions
 ***
