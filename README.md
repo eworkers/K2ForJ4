@@ -4,7 +4,7 @@
 
 ### Instructions
 ***
-1. Update K2 to the latest official version
+1. Update K2 to https://github.com/getk2/k2/tree/7ec1dbdb1283fb6134a1ed83c0886e3fd8e253db
 2. Update Joomla to the latest J3 version (Joomla! 3.10.11)
 3. Take a full backup (it is always a good idea).
 4. Download and install this K2 version.
