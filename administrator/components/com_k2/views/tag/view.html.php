@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Editor\Editor;
 use Joomla\CMS\Filter\OutputFilter;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
@@ -29,6 +30,11 @@ class K2ViewTag extends K2View
             $tag->published = 1;
         }
         $this->row = $tag;
+
+	    $editor = Factory::getApplication()->getIdentity()->getParam('editor', 'tinymce');
+	    $wysiwyg = Editor::getInstance($editor);
+	    $editor = $wysiwyg->display('description', $tag->description, '100%', '350px', '', '', false);
+	    $this->editor = $editor;
 
         $lists = array();
         $lists['published'] = HTMLHelper::_('select.booleanlist', 'published', 'class="inputbox"', $tag->published);

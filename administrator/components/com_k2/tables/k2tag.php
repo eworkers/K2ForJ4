@@ -19,9 +19,10 @@ require_once JPATH_ADMINISTRATOR . '/components/com_k2/tables/table.php';
 
 class TableK2Tag extends K2Table
 {
-    var $id = null;
-    var $name = null;
-    var $published = null;
+	public $id = null;
+	public $name = null;
+	public $description = '';
+	public $published = null;
 
     function __construct(&$db)
     {

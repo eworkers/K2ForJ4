@@ -44,6 +44,14 @@ use Joomla\CMS\Language\Text;
                     <?php echo $this->lists['published']; ?>
                 </div>
             </li>
+            <li>
+                <div class="paramLabel">
+                    <label><?php echo Text::_('K2_DESCRIPTION'); ?></label>
+                </div>
+                <div class="paramValue">
+			        <?php echo $this->editor; ?>
+                </div>
+            </li>
         </ul>
     </div>
 

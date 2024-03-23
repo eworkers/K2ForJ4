@@ -345,6 +345,14 @@ class Com_K2InstallerScript
 			$db->execute();
 		}
 
+		// Tags - add description
+		$fields = $db->getTableColumns('#__k2_tags');
+		if (!array_key_exists('description', $fields)) {
+			$query = "ALTER TABLE #__k2_tags ADD `description` text NOT NULL";
+			$db->setQuery($query);
+			$db->execute();
+		}
+
 		// User groups (set first 2 user groups)
 		$query = "SELECT COUNT(*) FROM #__k2_user_groups";
 		$db->setQuery($query);

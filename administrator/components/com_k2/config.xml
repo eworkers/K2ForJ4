@@ -599,6 +599,10 @@
             <option value="0">K2_HIDE</option>
             <option value="1">K2_SHOW</option>
         </field>
+        <field menu="hide" name="tagDescription" type="radio" default="1" label="K2_TAG_DESCRIPTION" description="">
+            <option value="0">K2_HIDE</option>
+            <option value="1">K2_SHOW</option>
+        </field>
         <field menu="hide" name="tagItemCount" type="text" default="10" size="4" label="K2_ITEM_COUNT_FOR_TAG_LISTINGS" description=""/>
         <field menu="hide" name="tagItemTitle" type="radio" default="1" label="K2_ITEM_TITLE" description="">
             <option value="0">K2_HIDE</option>

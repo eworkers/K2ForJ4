@@ -276,7 +276,7 @@ class K2ViewItemlist extends K2View
                 case 'tag':
                     // Prevent spammers from using the tag view
                     $tag = Factory::getApplication()->input->getString('tag');
-                    $db->setQuery('SELECT id, name FROM #__k2_tags WHERE name = ' . $db->quote($tag));
+                    $db->setQuery('SELECT id, name, description FROM #__k2_tags WHERE name = ' . $db->quote($tag));
                     $tag = $db->loadObject();
                     if (!$tag || !$tag->id) {
                         jimport('joomla.filesystem.file');
@@ -314,6 +314,10 @@ class K2ViewItemlist extends K2View
                         $title = $params->get('page_title');
                     }
                     $this->title = $title;
+
+		    // set description
+	            $description = $tag->description;
+                    $this->description = $description;
 
                     // Link
                     $link = K2HelperRoute::getTagRoute($tag->name);
@@ -895,6 +899,10 @@ class K2ViewItemlist extends K2View
                             $metaDesc = $params->get('menu-meta_description');
                         }
                     }
+
+	            if (!empty($tag->description)) {
+		            $metaDesc = $tag->description;
+	            }
 
                     $metaDesc = isset($metaDesc) ? trim($metaDesc) : '';
                     $document->setDescription(K2HelperUtilities::characterLimit($metaDesc, $params->get('metaDescLimit', 150)));

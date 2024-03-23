@@ -31,6 +31,11 @@ use Joomla\CMS\Language\Text;
         <h1><?php echo Text::_('K2_DISPLAYING_ITEMS_BY_TAG'); ?><?php echo $this->title; ?></h1>
     <?php endif; ?>
 
+	<?php if ($this->params->get('tagDescription', 1)): ?>
+        <!-- Desciption for tag listings -->
+        <div><?php echo $this->description; ?></div>
+	<?php endif; ?>
+
     <?php if ($this->params->get('tagFeedIcon', 1)): ?>
         <!-- RSS feed icon -->
         <div class="k2FeedIcon">
