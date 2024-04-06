@@ -1430,3 +1430,14 @@ function K2Popup(src, type = 'iframe') {
             iframe: {markup: '<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe name="k2Popup" class="mfp-iframe" frameborder="0" allowfullscreen></iframe></div>'}}
     );
 }
+
+// fix problems caused by JW allvideos using old jQuery version for J5
+$K2.browser = {};
+(function () {
+    $K2.browser.msie = false;
+    $K2.browser.version = 0;
+    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        $K2.browser.msie = true;
+        $K2.browser.version = RegExp.$1;
+    }
+})();
