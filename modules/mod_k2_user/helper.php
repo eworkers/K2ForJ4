@@ -13,7 +13,6 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Router\Route;
-use Joomla\Registry\Registry;
 
 JLoader::register('K2HelperRoute', JPATH_SITE . '/components/com_k2/helpers/route.php');
 JLoader::register('K2HelperUtilities', JPATH_SITE . '/components/com_k2/helpers/utilities.php');
@@ -107,20 +106,16 @@ class modK2UserHelper
                     $item->flink = 'index.php?Itemid=' . $item->params->get('aliasoptions');
                     break;
                 default:
-                    $router = JSite::getRouter();
-                    if ($router->getMode() == JROUTER_MODE_SEF) {
+	                $jconfig = Factory::getApplication()->getConfig();
+	                $isSEF = (int) $jconfig->get('sef');
+                    if ($isSEF) {
                         $item->flink = 'index.php?Itemid=' . $item->id;
                     } else {
                         $item->flink .= '&Itemid=' . $item->id;
                     }
                     break;
             }
-            if (strcasecmp(substr($item->flink, 0, 4), 'http') && (strpos($item->flink, 'index.php?') !== false)) {
-                $item->flink = Route::_($item->flink, true, $item->params->get('secure'));
-            } else {
-                $item->flink = Route::_($item->flink);
-            }
-            $item->route = $item->flink;
+            $item->route = Route::_($item->flink);
             $links[] = $item;
         }
         return $links;
