@@ -24,9 +24,15 @@ class K2Router extends RouterBase
     public function __construct(SiteApplication $app, AbstractMenu $menu)
     {
 
-	    parent::__construct($app, $menu);
+        parent::__construct($app, $menu);
 
-        $router = Factory::getContainer()->get(SiteRouter::class);
+        if (version_compare(JVERSION, '4.0.0-dev', 'ge'))
+        {
+            $router = Factory::getContainer()->get(SiteRouter::class);
+        }
+        else{
+            $router = $app->getRouter();
+        }
         $router->attachParseRule(array($this, 'parseRule'), Router::PROCESS_AFTER);
     }
 
