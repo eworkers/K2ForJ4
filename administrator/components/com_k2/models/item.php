@@ -33,7 +33,7 @@ class K2ModelItem extends K2Model
 {
     public function getData()
     {
-        $cid = Factory::getApplication()->input->getVar('cid');
+        $cid = Factory::getApplication()->input->get('cid');
         $row = Table::getInstance('K2Item', 'Table');
         $row->load($cid);
         return $row;
@@ -160,7 +160,7 @@ class K2ModelItem extends K2Model
             $row->publish_down = $date->toSql();
         }
 
-        $metadata = Factory::getApplication()->input->getVar('meta', null, 'post', 'array');
+        $metadata = Factory::getApplication()->input->get('meta', null, 'post');
         if (is_array($metadata)) {
             $txt = array();
             foreach ($metadata as $k => $v) {
@@ -225,7 +225,7 @@ class K2ModelItem extends K2Model
                 throw new \Exception(Text::_('K2_ALERTNOTAUTH'), 403);
             }
 
-            $tags = Factory::getApplication()->input->getVar('tags', null, 'POST', 'array');
+            $tags = Factory::getApplication()->input->get('tags', null, 'POST', 'array');
             if (is_array($tags) && count($tags)) {
                 $tags = array_unique($tags);
                 foreach ($tags as $tag) {
@@ -253,7 +253,7 @@ class K2ModelItem extends K2Model
                 }
             }
         } else {
-            $tags = Factory::getApplication()->input->getVar('selectedTags', null, 'POST', 'array');
+            $tags = Factory::getApplication()->input->get('selectedTags', null, 'POST', 'array');
             if (is_array($tags) && count($tags)) {
                 foreach ($tags as $tagID) {
                     $db->setQuery("INSERT INTO #__k2_tags_xref (`id`, `tagID`, `itemID`) VALUES (NULL, " . (int)$tagID . ", " . (int)$row->id . ")");
@@ -270,7 +270,7 @@ class K2ModelItem extends K2Model
             ini_set('memory_limit', (int)$params->get('imageMemoryLimit') . 'M');
         }
 
-        $existingImage = Factory::getApplication()->input->getVar('existingImage');
+        $existingImage = Factory::getApplication()->input->get('existingImage');
 
         if (($files['image']['error'] == 0 || $existingImage) && !Factory::getApplication()->input->getBool('del_image')) {
             if ($files['image']['error'] == 0) {
@@ -450,7 +450,7 @@ class K2ModelItem extends K2Model
             $row->gallery = '';
         }
 
-        $flickrGallery = Factory::getApplication()->input->getVar('flickrGallery');
+        $flickrGallery = Factory::getApplication()->input->getString('flickrGallery');
         if ($flickrGallery) {
             $row->gallery = '{gallery}' . $flickrGallery . '{/gallery}';
         }
@@ -535,7 +535,7 @@ class K2ModelItem extends K2Model
         $validExtensions = array_merge($videoExtensions, $audioExtensions);
 
         // No stored media & form fields empty for media
-        if (empty($savedRow->video) && !Factory::getApplication()->input->getVar('embedVideo') && !Factory::getApplication()->input->getVar('videoID') && !Factory::getApplication()->input->getVar('remoteVideo') && !Factory::getApplication()->input->getVar('uploadedVideo')) {
+        if (empty($savedRow->video) && !Factory::getApplication()->input->getString('embedVideo') && !Factory::getApplication()->input->getString('videoID') && !Factory::getApplication()->input->getString('remoteVideo') && !Factory::getApplication()->input->get('uploadedVideo')) {
             $row->video = '';
         }
 
@@ -550,15 +550,15 @@ class K2ModelItem extends K2Model
         }
 
         // Third-party Media Service
-        if (Factory::getApplication()->input->getVar('videoID')) {
+        if (Factory::getApplication()->input->getString('videoID')) {
             $provider = Factory::getApplication()->input->getWord('videoProvider');
-            $videoID = Factory::getApplication()->input->getVar('videoID');
+            $videoID = Factory::getApplication()->input->getString('videoID');
             $row->video = '{' . $provider . '}' . $videoID . '{/' . $provider . '}';
         }
 
         // Browse server or remote media
-        if (Factory::getApplication()->input->getVar('remoteVideo')) {
-            $fileurl = Factory::getApplication()->input->getVar('remoteVideo');
+        if (Factory::getApplication()->input->getString('remoteVideo')) {
+            $fileurl = Factory::getApplication()->input->getString('remoteVideo');
             $filetype = File::getExt($fileurl);
             $allVideosTagSuffix = 'remote';
             $row->video = '{' . $filetype . $allVideosTagSuffix . '}' . $fileurl . '{/' . $filetype . $allVideosTagSuffix . '}';
@@ -642,7 +642,7 @@ class K2ModelItem extends K2Model
                         fclose($handle);
                         $object->value = $csvData;
                     } else {
-                        $object->value = json_decode(Factory::getApplication()->input->getVar('K2CSV_' . $object->id));
+                        $object->value = json_decode(Factory::getApplication()->input->get('K2CSV_' . $object->id));
                         if (Factory::getApplication()->input->getBool('K2ResetCSV_' . $object->id)) {
                             $object->value = null;
                         }
@@ -866,7 +866,7 @@ class K2ModelItem extends K2Model
 
         $attachment = Table::getInstance('K2Attachment', 'Table');
         if ($app->isClient('site')) {
-            $token = Factory::getApplication()->input->getVar('id');
+            $token = Factory::getApplication()->input->get('id');
             $check = StringHelper::substr($token, StringHelper::strpos($token, '_') + 1);
             $hash = ApplicationHelper::getHash($id);
             if ($check != $hash) {
