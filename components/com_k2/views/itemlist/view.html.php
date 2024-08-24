@@ -1486,6 +1486,8 @@ class K2ViewItemlist extends K2View
 
             $this->params = $params;
             $this->pagination = $pagination;
+            // temp fix #90		
+            $this->pagination->setAdditionalUrlParam('option', 'com_k2');
 
             // K2 Plugins
             /* since J4 compatibility */
