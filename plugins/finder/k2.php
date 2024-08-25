@@ -194,7 +194,13 @@ class plgFinderK2 extends Adapter
         $item->addTaxonomy('Language', $item->language);
 
         // Add the extra_fields data.
-        $item->addTaxonomy('Extra fields', $item->extra_fields);
+        if (strlen($item->extra_fields) > 255) {
+            throw new \RuntimeException($item->extra_fields);
+            $item->addTaxonomy('Extra fields', substr($item->extra_fields, 0, 255));
+        }
+        else {
+            $item->addTaxonomy('Extra fields', $item->extra_fields);
+        }
 
         // Get content extras.
         Helper::getContentExtras($item);
