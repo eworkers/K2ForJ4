@@ -1486,8 +1486,15 @@ class K2ViewItemlist extends K2View
 
             $this->params = $params;
             $this->pagination = $pagination;
-            // temp fix #90		
-            $this->pagination->setAdditionalUrlParam('option', 'com_k2');
+            // temp fix #90
+            // Joomla is stripping '2' from option value => 'com_k instead of com_k2'
+            $jversion = new JVersion();
+            $version = $jversion->getShortVersion();
+            if (version_compare($version, '5.1.3', '>=')) {
+            	$this->pagination->setAdditionalUrlParam('option', 'com_k2');
+            	$this->pagination->setAdditionalUrlParam('task', Factory::getApplication()->input->getCmd('task'));
+            	$this->pagination->setAdditionalUrlParam('tag', Factory::getApplication()->input->getString('tag'));
+            }
 
             // K2 Plugins
             /* since J4 compatibility */
