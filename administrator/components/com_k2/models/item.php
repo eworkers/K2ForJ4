@@ -270,7 +270,7 @@ class K2ModelItem extends K2Model
             ini_set('memory_limit', (int)$params->get('imageMemoryLimit') . 'M');
         }
 
-        $existingImage = Factory::getApplication()->input->get('existingImage');
+        $existingImage = Factory::getApplication()->input->getPath('existingImage');
 
         if (($files['image']['error'] == 0 || $existingImage) && !Factory::getApplication()->input->getBool('del_image')) {
             if ($files['image']['error'] == 0) {
