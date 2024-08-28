@@ -195,7 +195,6 @@ class plgFinderK2 extends Adapter
 
         // Add the extra_fields data.
         if (strlen($item->extra_fields) > 255) {
-            throw new \RuntimeException($item->extra_fields);
             $item->addTaxonomy('Extra fields', substr($item->extra_fields, 0, 255));
         }
         else {
